@@ -1,0 +1,10 @@
+html, body { margin: 0; padding: 0; }
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+@media (max-width: 760px) {
+  body { cursor: auto !important; }
+}

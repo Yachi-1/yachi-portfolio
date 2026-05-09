@@ -1,0 +1,29 @@
+import { useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+
+export default function Reveal({ children, delay = 0, y = 30, className, style }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
+  const reduced = useReducedMotion();
+
+  if (reduced) {
+    return (
+      <div ref={ref} className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}
+      style={style}
+    >
+      {children}
+    </motion.div>
+  );
+}
