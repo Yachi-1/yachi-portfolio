@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
 import ProjectVisual from "../components/ProjectVisual.jsx";
 import { projects } from "../data/projects.js";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 const STORY = [
   { h: "The challenge", t: "Users were dropping off mid-funnel. The data said one thing, but qualitative interviews surfaced a different story - one we couldn't have caught with analytics alone." },
@@ -24,6 +25,7 @@ const STATS = [
 ];
 
 export default function ProjectDetail({ id, theme, setRoute }) {
+  const { isMobile, isMobileOrTablet } = useBreakpoint();
   const project = projects.find(p => p.id === id);
   if (!project) {
     return (
@@ -36,8 +38,8 @@ export default function ProjectDetail({ id, theme, setRoute }) {
   const next = projects[(idx + 1) % projects.length];
 
   return (
-    <div style={{ paddingTop: 130 }}>
-      <section style={{ padding: "0 6vw 60px" }}>
+    <div style={{ paddingTop: isMobile ? 100 : 130 }}>
+      <section style={{ padding: isMobile ? "0 4vw 40px" : "0 6vw 60px" }}>
         <div style={{ maxWidth: 1300, margin: "0 auto" }}>
           <Reveal>
             <button
@@ -78,10 +80,12 @@ export default function ProjectDetail({ id, theme, setRoute }) {
       </section>
 
       <Reveal delay={0.3}>
-        <section style={{ padding: "0 6vw 60px" }}>
+        <section style={{ padding: isMobile ? "0 4vw 40px" : "0 6vw 60px" }}>
           <div style={{ maxWidth: 1300, margin: "0 auto" }}>
             <div style={{
-              height: 540, borderRadius: 24, overflow: "hidden",
+              height: isMobile ? 280 : 540,
+              borderRadius: isMobile ? 16 : 24,
+              overflow: "hidden",
               background: `linear-gradient(135deg, ${theme[project.color1]}, ${theme[project.color2]})`,
               position: "relative",
             }}>
@@ -91,10 +95,14 @@ export default function ProjectDetail({ id, theme, setRoute }) {
         </section>
       </Reveal>
 
-      <section style={{ padding: "60px 6vw" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "minmax(220px, 280px) 1fr", gap: 60 }}>
+      <section style={{ padding: isMobile ? "30px 4vw" : "60px 6vw" }}>
+        <div style={{
+          maxWidth: 1100, margin: "0 auto", display: "grid",
+          gridTemplateColumns: isMobileOrTablet ? "1fr" : "minmax(220px, 280px) 1fr",
+          gap: isMobile ? 30 : 60,
+        }}>
           <Reveal>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 18 : 24 }}>
               {META(project.year, project.domain).map(d => (
                 <div key={d.k}>
                   <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: theme.inkMute, textTransform: "uppercase", marginBottom: 4 }}>{d.k}</div>
@@ -105,17 +113,19 @@ export default function ProjectDetail({ id, theme, setRoute }) {
           </Reveal>
           <Reveal delay={0.1}>
             <p style={{
-              fontFamily: "Inter", fontSize: "clamp(20px, 1.8vw, 26px)",
+              fontFamily: "Inter", fontSize: "clamp(18px, 1.8vw, 26px)",
               lineHeight: 1.5, color: theme.ink, fontWeight: 400, margin: 0,
               letterSpacing: "-0.015em",
             }}>
               {project.description}
             </p>
-            <div style={{ marginTop: 30, display: "flex", gap: 24, flexWrap: "wrap" }}>
+            <div style={{ marginTop: isMobile ? 24 : 30, display: "flex", gap: isMobile ? 18 : 24, flexWrap: "wrap" }}>
               {STATS.map(s => (
                 <div key={s.k}>
                   <div style={{
-                    fontFamily: "Inter", fontSize: 44, fontWeight: 500,
+                    fontFamily: "Inter",
+                    fontSize: isMobile ? 32 : 44,
+                    fontWeight: 500,
                     letterSpacing: "-0.04em", color: theme.ink, lineHeight: 1,
                   }}>{s.k}</div>
                   <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginTop: 4 }}>{s.v}</div>
@@ -126,25 +136,25 @@ export default function ProjectDetail({ id, theme, setRoute }) {
         </div>
       </section>
 
-      <section style={{ padding: "60px 6vw 100px" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: 60 }}>
+      <section style={{ padding: isMobile ? "30px 4vw 60px" : "60px 6vw 100px" }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: isMobile ? 36 : 60 }}>
           {STORY.map((s, i) => (
             <Reveal key={i} delay={0.05}>
               <div>
                 <div style={{ fontFamily: "'Caveat', cursive", fontSize: 22, color: theme.accent, marginBottom: 8 }}>0{i + 1}</div>
                 <h2 style={{
-                  fontFamily: "Inter", fontSize: "clamp(28px, 3vw, 40px)",
+                  fontFamily: "Inter", fontSize: "clamp(26px, 3vw, 40px)",
                   fontWeight: 500, letterSpacing: "-0.03em", color: theme.ink,
-                  margin: 0, marginBottom: 16, lineHeight: 1.1,
+                  margin: 0, marginBottom: 14, lineHeight: 1.1,
                 }}>{s.h}</h2>
-                <p style={{ fontFamily: "Inter", fontSize: 17.5, lineHeight: 1.65, color: theme.inkSoft, margin: 0, letterSpacing: "-0.005em" }}>{s.t}</p>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 17.5, lineHeight: 1.65, color: theme.inkSoft, margin: 0, letterSpacing: "-0.005em" }}>{s.t}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section style={{ padding: "0 6vw 100px" }}>
+      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px" }}>
         <div
           onClick={() => setRoute(`project:${next.id}`)}
           data-magnet="0.05"
@@ -152,10 +162,11 @@ export default function ProjectDetail({ id, theme, setRoute }) {
           data-cursor-label="Next"
           style={{
             maxWidth: 1300, margin: "0 auto",
-            padding: "60px 50px", borderRadius: 24,
+            padding: isMobile ? "32px 24px" : "60px 50px",
+            borderRadius: isMobile ? 18 : 24,
             background: `linear-gradient(135deg, ${theme[next.color1]}, ${theme[next.color2]})`,
             display: "flex", alignItems: "center", justifyContent: "space-between",
-            gap: 30, flexWrap: "wrap", cursor: "pointer",
+            gap: 24, flexWrap: "wrap", cursor: "pointer",
           }}
         >
           <div>
@@ -166,11 +177,14 @@ export default function ProjectDetail({ id, theme, setRoute }) {
             <div style={{ fontFamily: "'Caveat', cursive", fontSize: 22, color: "rgba(0,0,0,0.6)", marginTop: 6 }}>{next.subtitle}</div>
           </div>
           <div style={{
-            width: 70, height: 70, borderRadius: 999,
+            width: isMobile ? 56 : 70,
+            height: isMobile ? 56 : 70,
+            borderRadius: 999,
             background: "rgba(0,0,0,0.85)", color: "white",
             display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0,
           }}>
-            <ArrowRight size={26} />
+            <ArrowRight size={isMobile ? 22 : 26} />
           </div>
         </div>
       </section>

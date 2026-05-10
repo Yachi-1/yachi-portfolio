@@ -6,12 +6,14 @@ import MagneticButton from "../components/MagneticButton.jsx";
 import SectionDivider from "../components/SectionDivider.jsx";
 import FolderProjects from "../components/FolderProjects.jsx";
 import ApproachSection from "../components/ApproachSection.jsx";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 export default function Home({ theme, mode, setRoute }) {
   const reduced = useReducedMotion();
+  const { isMobile, isTablet } = useBreakpoint();
   return (
-    <div style={{ position: "relative", paddingTop: 110 }}>
-      <section style={{ position: "relative", minHeight: "100vh", padding: "0 6vw", overflow: "hidden" }}>
+    <div style={{ position: "relative", paddingTop: isMobile ? 90 : 110 }}>
+      <section style={{ position: "relative", minHeight: isMobile ? "108vh" : "100vh", padding: isMobile ? "0 4vw" : "0 6vw", overflow: "hidden" }}>
         <GridPaper theme={theme} />
         <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
 
@@ -20,24 +22,35 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, y: 40, rotate: 4 }}
             animate={{ opacity: 1, y: 0, rotate: 4 }}
             transition={{ delay: 0.6, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            drag dragMomentum dragElastic={0.18}
-            whileHover={{ scale: 1.04, zIndex: 20 }}
+            drag={!isMobile} dragMomentum dragElastic={0.18}
+            whileHover={isMobile ? undefined : { scale: 1.04, zIndex: 20 }}
+            whileTap={isMobile ? { scale: 0.97, rotate: 5 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
             style={{
-              position: "absolute", right: "4%", top: 30, zIndex: 6, cursor: "grab",
-              width: 280, background: mode === "dark" ? "#1E1E26" : "#2A2A2A",
+              position: "absolute",
+              right: isMobile ? "-1%" : "4%",
+              top: isMobile ? 6 : 30,
+              zIndex: 6, cursor: isMobile ? "default" : "grab",
+              width: isMobile ? 150 : 280,
+              background: mode === "dark" ? "#1E1E26" : "#2A2A2A",
               borderRadius: 12, overflow: "hidden",
               boxShadow: mode === "dark" ? "0 20px 60px rgba(0,0,0,0.5)" : "0 20px 60px rgba(0,0,0,0.12)",
             }}
           >
-            <div style={{ padding: "8px 12px", display: "flex", gap: 6, alignItems: "center" }}>
-              <div style={{ width: 10, height: 10, borderRadius: 999, background: "#FF5F56" }} />
-              <div style={{ width: 10, height: 10, borderRadius: 999, background: "#FFBD2E" }} />
-              <div style={{ width: 10, height: 10, borderRadius: 999, background: "#28C940" }} />
-              <span style={{ fontFamily: "SF Mono, monospace", fontSize: 10, color: "#888", marginLeft: "auto" }}>yachi ~</span>
+            <div style={{ padding: isMobile ? "6px 10px" : "8px 12px", display: "flex", gap: isMobile ? 4 : 6, alignItems: "center" }}>
+              <div style={{ width: isMobile ? 7 : 10, height: isMobile ? 7 : 10, borderRadius: 999, background: "#FF5F56" }} />
+              <div style={{ width: isMobile ? 7 : 10, height: isMobile ? 7 : 10, borderRadius: 999, background: "#FFBD2E" }} />
+              <div style={{ width: isMobile ? 7 : 10, height: isMobile ? 7 : 10, borderRadius: 999, background: "#28C940" }} />
+              <span style={{ fontFamily: "SF Mono, monospace", fontSize: isMobile ? 8 : 10, color: "#888", marginLeft: "auto" }}>yachi ~</span>
             </div>
-            <div style={{ padding: "10px 16px 16px", fontFamily: "'SF Mono', 'Fira Code', monospace", fontSize: 12, lineHeight: 1.7, color: "#CCCCCC" }}>
+            <div style={{
+              padding: isMobile ? "6px 10px 10px" : "10px 16px 16px",
+              fontFamily: "'SF Mono', 'Fira Code', monospace",
+              fontSize: isMobile ? 9.5 : 12,
+              lineHeight: 1.6,
+              color: "#CCCCCC"
+            }}>
               <div><span style={{ color: "#50FA7B" }}>~</span> <span style={{ color: "#8BE9FD" }}>whoami</span></div>
               <div style={{ color: "#F8F8F2" }}>yachi</div>
               <div style={{ marginTop: 6 }}><span style={{ color: "#50FA7B" }}>~</span> <span style={{ color: "#8BE9FD" }}>interestedin</span></div>
@@ -50,23 +63,28 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, y: 40, rotate: -6 }}
             animate={{ opacity: 1, y: 0, rotate: -6 }}
             transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            drag dragMomentum dragElastic={0.18}
-            whileHover={{ scale: 1.04, zIndex: 20, rotate: -3 }}
+            drag={!isMobile} dragMomentum dragElastic={0.18}
+            whileHover={isMobile ? undefined : { scale: 1.04, zIndex: 20, rotate: -3 }}
+            whileTap={isMobile ? { scale: 0.97, rotate: -5 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
             style={{
-              position: "absolute", left: "-2%", top: 10, zIndex: 5, cursor: "grab",
-              width: 260,
+              position: "absolute",
+              left: isMobile ? "-2%" : "-2%",
+              top: isMobile ? 4 : 10,
+              zIndex: 5, cursor: isMobile ? "default" : "grab",
+              width: isMobile ? 170 : 260,
               background: mode === "dark" ? "#1A110D" : "#FFE8D8",
-              borderRadius: 18, overflow: "hidden", padding: "16px 16px 18px",
+              borderRadius: isMobile ? 14 : 18, overflow: "hidden",
+              padding: isMobile ? "10px 10px 12px" : "16px 16px 18px",
               boxShadow: mode === "dark"
                 ? "0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,180,130,0.06)"
                 : "0 24px 60px rgba(200,100,50,0.12), inset 0 1px 0 rgba(255,255,255,0.8)",
               border: `1px solid ${mode === "dark" ? "rgba(255,180,130,0.12)" : "rgba(255,160,100,0.25)"}`,
             }}
           >
-            <div style={{ marginBottom: 12 }}>
-              <div style={{ fontFamily: "'Caveat', cursive", fontSize: 22, color: theme.inkMute, opacity: 0.8, lineHeight: 1 }}>education</div>
+            <div style={{ marginBottom: isMobile ? 8 : 12 }}>
+              <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 17 : 22, color: theme.inkMute, opacity: 0.8, lineHeight: 1 }}>education</div>
             </div>
 
             <motion.div
@@ -155,13 +173,18 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, scale: 0.8, rotate: -3 }}
             animate={{ opacity: 1, scale: 1, rotate: -3 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            drag dragMomentum dragElastic={0.18}
-            whileHover={{ scale: 1.05, zIndex: 20, rotate: -1 }}
+            drag={!isMobile} dragMomentum dragElastic={0.18}
+            whileHover={isMobile ? undefined : { scale: 1.05, zIndex: 20, rotate: -1 }}
+            whileTap={isMobile ? { scale: 0.97, rotate: -2 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
             style={{
-              position: "absolute", right: "8%", bottom: 100, zIndex: 7, cursor: "grab",
-              width: 260, padding: "16px 16px 14px",
+              position: "absolute",
+              right: isMobile ? "-1%" : "8%",
+              bottom: isMobile ? 110 : 100,
+              zIndex: 7, cursor: isMobile ? "default" : "grab",
+              width: isMobile ? 170 : 260,
+              padding: isMobile ? "10px 10px 8px" : "16px 16px 14px",
               background: `linear-gradient(170deg, ${theme.pastel3} 0%, #FFDFA0 100%)`,
               borderRadius: 4,
               boxShadow: "0 14px 30px rgba(120,80,0,0.18), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.04)",
@@ -175,8 +198,8 @@ export default function Home({ theme, mode, setRoute }) {
               boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
             }} />
 
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontFamily: "'Caveat', cursive", fontSize: 18, color: "#5A4500", opacity: 0.85, lineHeight: 1 }}>experience</div>
+            <div style={{ marginBottom: isMobile ? 6 : 10 }}>
+              <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 15 : 18, color: "#5A4500", opacity: 0.85, lineHeight: 1 }}>experience</div>
             </div>
 
             {[
@@ -219,19 +242,24 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, y: 30, rotate: 5 }}
             animate={{ opacity: 1, y: 0, rotate: 5 }}
             transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            drag dragMomentum dragElastic={0.18}
-            whileHover={{ scale: 1.04, zIndex: 20 }}
+            drag={!isMobile} dragMomentum dragElastic={0.18}
+            whileHover={isMobile ? undefined : { scale: 1.04, zIndex: 20 }}
+            whileTap={isMobile ? { scale: 0.97, rotate: 6 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
             style={{
-              position: "absolute", left: "2%", bottom: 60, zIndex: 4, cursor: "grab",
-              width: 200, padding: 14,
+              position: "absolute",
+              left: isMobile ? "1%" : "2%",
+              bottom: isMobile ? 90 : 60,
+              zIndex: 4, cursor: isMobile ? "default" : "grab",
+              width: isMobile ? 130 : 200,
+              padding: isMobile ? 8 : 14,
               background: mode === "dark" ? "#1E1E26" : "#FFFFFF",
-              borderRadius: 14, border: `1px solid ${theme.line}`,
+              borderRadius: isMobile ? 12 : 14, border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 16px 50px rgba(0,0,0,0.4)" : "0 16px 50px rgba(0,0,0,0.08)",
             }}
           >
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: isMobile ? 4 : 6 }}>
               {[
                 { emoji: "🎨", label: "Design", bg: theme.pastel1 },
                 { emoji: "✈️", label: "Travel", bg: theme.pastel2 },
@@ -239,17 +267,17 @@ export default function Home({ theme, mode, setRoute }) {
                 { emoji: "☕", label: "Tea & Coffee", bg: theme.pastel6 },
               ].map((item, i) => (
                 <div key={i} style={{
-                  aspectRatio: "1/1", borderRadius: 8,
+                  aspectRatio: "1/1", borderRadius: isMobile ? 6 : 8,
                   background: `linear-gradient(135deg, ${item.bg}, ${theme.pastel4})`,
                   display: "flex", flexDirection: "column",
-                  alignItems: "center", justifyContent: "center", gap: 2,
+                  alignItems: "center", justifyContent: "center", gap: 1,
                 }}>
-                  <span style={{ fontSize: 22 }}>{item.emoji}</span>
-                  <span style={{ fontFamily: "Inter", fontSize: 9, fontWeight: 600, color: theme.ink, opacity: 0.7 }}>{item.label}</span>
+                  <span style={{ fontSize: isMobile ? 16 : 22 }}>{item.emoji}</span>
+                  <span style={{ fontFamily: "Inter", fontSize: isMobile ? 7.5 : 9, fontWeight: 600, color: theme.ink, opacity: 0.7 }}>{item.label}</span>
                 </div>
               ))}
             </div>
-            <div style={{ fontFamily: "'Caveat', cursive", fontSize: 14, color: theme.inkMute, marginTop: 8, textAlign: "center" }}>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 12 : 14, color: theme.inkMute, marginTop: isMobile ? 6 : 8, textAlign: "center" }}>
               what I love
             </div>
           </motion.div>
@@ -258,7 +286,7 @@ export default function Home({ theme, mode, setRoute }) {
           <div style={{
             position: "relative", zIndex: 10,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-            minHeight: "85vh", textAlign: "center",
+            minHeight: isMobile ? "92vh" : "85vh", textAlign: "center",
           }}>
             <Reveal delay={0.1}>
               <div style={{
@@ -276,11 +304,11 @@ export default function Home({ theme, mode, setRoute }) {
                 fontSize: "clamp(48px, 8vw, 130px)",
                 lineHeight: 1.05,
                 fontWeight: 700,
-                letterSpacing: "-0.05em",
+                letterSpacing: isMobile ? "-0.03em" : "-0.05em",
                 color: theme.ink,
                 margin: 0,
                 textAlign: "center",
-                maxWidth: 1100,
+                maxWidth: "min(1100px, 92vw)",
               }}>
                 <span style={{ display: "block" }}>
                   <em style={{
@@ -353,8 +381,9 @@ export default function Home({ theme, mode, setRoute }) {
 
           <Reveal delay={0.8}>
             <div style={{
+              position: "relative", zIndex: 15,
               display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
-              padding: "20px 0 40px",
+              padding: isMobile ? "30px 0 24px" : "20px 0 40px",
             }}>
               <div style={{ fontFamily: "Inter", fontSize: 11, letterSpacing: "0.2em", color: theme.inkMute, textTransform: "uppercase" }}>
                 Scroll

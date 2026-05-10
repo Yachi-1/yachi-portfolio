@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
 
@@ -12,20 +13,29 @@ const NAV_ITEMS = [
 
 export default function Nav({ theme, mode, setMode, route, setRoute }) {
   const reduced = useReducedMotion();
+  const { isMobile, isTablet } = useBreakpoint();
+
+  const padding = isMobile ? "6px 6px 6px 14px" : isTablet ? "7px 7px 7px 18px" : "8px 8px 8px 22px";
+  const top = isMobile ? 14 : 22;
+  const itemPadding = isMobile ? "6px 10px" : "8px 14px";
+  const itemFontSize = isMobile ? 12 : isTablet ? 13 : 13.5;
+  const logoFontSize = isMobile ? 22 : 24;
+
   return (
     <motion.nav
       initial={reduced ? false : { y: -40, opacity: 0 }}
       animate={reduced ? undefined : { y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       style={{
-        position: "fixed", top: 22, left: "50%", translateX: "-50%",
-        zIndex: 100, display: "flex", alignItems: "center", gap: 8,
-        padding: "8px 8px 8px 22px",
+        position: "fixed", top, left: "50%", translateX: "-50%",
+        zIndex: 100, display: "flex", alignItems: "center", gap: isMobile ? 4 : 8,
+        padding,
         background: theme.glass,
         backdropFilter: "blur(12px) saturate(140%)",
         WebkitBackdropFilter: "blur(12px) saturate(140%)",
         border: `1px solid ${theme.line}`,
         borderRadius: 999,
+        maxWidth: "calc(100vw - 16px)",
         boxShadow: mode === "dark"
           ? "0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)"
           : "0 8px 32px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6)",
@@ -38,7 +48,7 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
           display: "flex", alignItems: "center", gap: 8,
           background: "transparent", border: "none", cursor: "pointer",
           fontFamily: "'Caveat', cursive", fontSize: 22, fontWeight: 700,
-          color: theme.ink, paddingRight: 8,
+          color: theme.ink, paddingRight: isMobile ? 4 : 8,
         }}
       >
         <span style={{
@@ -48,7 +58,7 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
           color: "transparent",
           WebkitTextFillColor: "transparent",
           fontWeight: 800,
-          fontSize: 24,
+          fontSize: logoFontSize,
           fontFamily: "'Caveat', cursive",
           letterSpacing: "-0.02em",
           display: "inline-block",
@@ -58,7 +68,7 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
           overflow: "visible",
         }}>YP</span>
       </button>
-      <div style={{ width: 1, height: 22, background: theme.line }} />
+      {!isMobile && <div style={{ width: 1, height: 22, background: theme.line }} />}
       {NAV_ITEMS.map((it) => {
         const active = route === it.id;
         return (
@@ -68,10 +78,10 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
             data-magnet="0.25"
             style={{
               position: "relative",
-              padding: "8px 14px", borderRadius: 999, border: "none",
+              padding: itemPadding, borderRadius: 999, border: "none",
               background: active ? theme.ink : "transparent",
               color: active ? theme.bg : theme.inkSoft,
-              fontFamily: "Inter, sans-serif", fontSize: 13.5, fontWeight: 500,
+              fontFamily: "Inter, sans-serif", fontSize: itemFontSize, fontWeight: 500,
               cursor: "pointer", letterSpacing: "-0.01em",
               transition: "color .25s ease",
             }}
@@ -80,12 +90,17 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
           </button>
         );
       })}
-      <ThemeToggle theme={theme} mode={mode} setMode={setMode} />
+      <ThemeToggle theme={theme} mode={mode} setMode={setMode} isMobile={isMobile} />
     </motion.nav>
   );
 }
 
-function ThemeToggle({ theme, mode, setMode }) {
+function ThemeToggle({ theme, mode, setMode, isMobile }) {
+  const W = isMobile ? 44 : 56;
+  const H = isMobile ? 26 : 32;
+  const thumb = isMobile ? 22 : 28;
+  const xLight = 2;
+  const xDark = W - thumb - 2;
   return (
     <button
       onClick={() => setMode(mode === "light" ? "dark" : "light")}
@@ -94,21 +109,22 @@ function ThemeToggle({ theme, mode, setMode }) {
       aria-label="Toggle theme"
       style={{
         position: "relative",
-        width: 56, height: 32, borderRadius: 999,
+        width: W, height: H, borderRadius: 999,
         border: `1px solid ${theme.line}`,
         background: mode === "light"
           ? `linear-gradient(135deg, ${theme.pastel2}, ${theme.pastel3})`
           : `linear-gradient(135deg, #1a1a2e, #16161d)`,
         cursor: "pointer", padding: 0, overflow: "hidden",
+        flexShrink: 0,
         boxShadow: `inset 0 2px 6px ${mode === "light" ? "rgba(0,0,0,0.06)" : "rgba(0,0,0,0.5)"}`,
       }}
     >
       <motion.div
-        animate={{ x: mode === "light" ? 2 : 26, rotate: mode === "light" ? 0 : 360 }}
+        animate={{ x: mode === "light" ? xLight : xDark, rotate: mode === "light" ? 0 : 360 }}
         transition={{ type: "spring", stiffness: 400, damping: 22 }}
         style={{
-          position: "absolute", top: 2, left: 0,
-          width: 28, height: 28, borderRadius: 999,
+          position: "absolute", top: (H - thumb) / 2, left: 0,
+          width: thumb, height: thumb, borderRadius: 999,
           background: mode === "light"
             ? `radial-gradient(circle at 30% 30%, #FFF8C4, #FFD66B)`
             : `radial-gradient(circle at 30% 30%, #E8E5DC, #B8B5AC)`,
@@ -118,7 +134,7 @@ function ThemeToggle({ theme, mode, setMode }) {
           display: "flex", alignItems: "center", justifyContent: "center",
         }}
       >
-        {mode === "light" ? <Sun size={14} color="#8B5E00" /> : <Moon size={14} color="#2A2A35" />}
+        {mode === "light" ? <Sun size={isMobile ? 12 : 14} color="#8B5E00" /> : <Moon size={isMobile ? 12 : 14} color="#2A2A35" />}
       </motion.div>
     </button>
   );

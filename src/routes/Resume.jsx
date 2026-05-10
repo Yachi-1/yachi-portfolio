@@ -1,34 +1,39 @@
 import { Download, Eye } from "lucide-react";
 import FloatingBlobs from "../components/FloatingBlobs.jsx";
 import Reveal from "../components/Reveal.jsx";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
 const RESUME_PREVIEW_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/preview";
 
 export default function Resume({ theme, mode }) {
+  const { isMobile } = useBreakpoint();
   return (
     <div style={{
       minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center",
-      paddingTop: 130, paddingBottom: 100, padding: "130px 6vw 100px",
+      padding: isMobile ? "100px 4vw 60px" : "130px 6vw 100px",
       position: "relative", overflow: "hidden",
     }}>
       <FloatingBlobs theme={theme} />
 
       <div style={{ position: "relative", maxWidth: 1000, margin: "0 auto", zIndex: 1, width: "100%" }}>
         <Reveal>
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <div style={{ fontFamily: "'Caveat', cursive", fontSize: 28, color: theme.accent, marginBottom: 8 }}>
+          <div style={{ textAlign: "center", marginBottom: isMobile ? 24 : 32 }}>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 22 : 28, color: theme.accent, marginBottom: 8 }}>
               the takeaway ✦
             </div>
             <h1 style={{
-              fontFamily: "Inter", fontSize: "clamp(40px, 5.5vw, 72px)",
-              fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink,
+              fontFamily: "Inter", fontSize: "clamp(36px, 5.5vw, 72px)",
+              fontWeight: 500, letterSpacing: isMobile ? "-0.03em" : "-0.04em",
+              color: theme.ink,
               margin: 0, lineHeight: 1, marginBottom: 16,
             }}>
               Want the full details?
             </h1>
             <p style={{
-              fontFamily: "Inter", fontSize: 19, color: theme.inkSoft,
+              fontFamily: "Inter",
+              fontSize: isMobile ? 16 : 19,
+              color: theme.inkSoft,
               lineHeight: 1.5, margin: 0,
             }}>
               Preview my resume below or download a copy.
@@ -38,7 +43,7 @@ export default function Resume({ theme, mode }) {
 
         <Reveal delay={0.2}>
           <div style={{
-            borderRadius: 20, overflow: "hidden",
+            borderRadius: isMobile ? 14 : 20, overflow: "hidden",
             border: `1px solid ${theme.line}`,
             background: theme.card,
             boxShadow: mode === "dark"
@@ -46,7 +51,8 @@ export default function Resume({ theme, mode }) {
               : "0 30px 80px rgba(0,0,0,0.08)",
           }}>
             <div style={{
-              padding: "12px 18px", display: "flex", alignItems: "center", gap: 8,
+              padding: isMobile ? "10px 12px" : "12px 18px",
+              display: "flex", alignItems: "center", gap: 8,
               borderBottom: `1px solid ${theme.line}`,
               background: mode === "dark" ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
             }}>
@@ -57,25 +63,35 @@ export default function Resume({ theme, mode }) {
                 flex: 1, textAlign: "center",
                 fontFamily: "Inter", fontSize: 11, color: theme.inkMute,
                 letterSpacing: "0.02em",
+                whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
               }}>
-                Yachi-Patel-Resume.pdf
+                {isMobile ? "Resume.pdf" : "Yachi-Patel-Resume.pdf"}
               </div>
-              <Eye size={14} color={theme.inkMute} />
+              {!isMobile && <Eye size={14} color={theme.inkMute} />}
               <button
                 onClick={() => window.open(RESUME_URL, "_blank")}
                 title="Download PDF"
+                aria-label="Download resume PDF"
                 style={{
                   background: `linear-gradient(135deg, ${theme.pastel1}, ${theme.pastel5})`,
                   border: "none", cursor: "pointer",
-                  width: 28, height: 28, borderRadius: 8,
+                  width: isMobile ? 36 : 28,
+                  height: isMobile ? 36 : 28,
+                  borderRadius: isMobile ? 10 : 8,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   marginLeft: 4,
+                  flexShrink: 0,
                 }}
               >
-                <Download size={14} color={theme.ink} />
+                <Download size={isMobile ? 16 : 14} color={theme.ink} />
               </button>
             </div>
-            <div style={{ aspectRatio: "8.5/11", position: "relative", background: mode === "dark" ? "#1a1a22" : "#f5f5f5" }}>
+            <div style={{
+              aspectRatio: isMobile ? undefined : "8.5/11",
+              height: isMobile ? "70vh" : undefined,
+              position: "relative",
+              background: mode === "dark" ? "#1a1a22" : "#f5f5f5"
+            }}>
               <iframe
                 src={RESUME_PREVIEW_URL}
                 style={{ width: "100%", height: "100%", border: "none", borderRadius: 0 }}

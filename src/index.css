@@ -3,8 +3,12 @@ html, body { margin: 0; padding: 0; }
 
 body {
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
 }
 
-@media (max-width: 760px) {
-  body { cursor: auto !important; }
+@media (max-width: 639px) {
+  body {
+    cursor: auto !important;
+    font-size: 15px;
+  }
 }

@@ -4,25 +4,28 @@ import { GraduationCap, Briefcase, FlaskConical } from "lucide-react";
 import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
 import SectionDivider from "../components/SectionDivider.jsx";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import heroImg from "../assets/IMG_1670.jpg?w=320;640;960&format=avif;webp;jpg&as=picture";
 import yachiImg1 from "../assets/Yachi_Image_1.jpeg?w=160;320&format=avif;webp;jpg&as=picture";
 import yachiImg2 from "../assets/Yachi_Image_2.jpg?w=160;320&format=avif;webp;jpg&as=picture";
 
 export default function About({ theme, mode }) {
+  const { isMobile, isMobileOrTablet } = useBreakpoint();
   return (
-    <div style={{ paddingTop: 130, position: "relative" }}>
-      <section style={{ padding: "0 6vw 100px", position: "relative" }}>
+    <div style={{ paddingTop: isMobile ? 100 : 130, position: "relative" }}>
+      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", position: "relative" }}>
         <GridPaper theme={theme} />
         <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
           <Reveal>
-            <div style={{ fontFamily: "'Caveat', cursive", fontSize: 28, color: theme.accent }}>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 22 : 28, color: theme.accent }}>
               hi, I'm Yachi ✿
             </div>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 style={{
-              fontFamily: "Inter", fontSize: "clamp(48px, 8vw, 120px)",
-              fontWeight: 500, letterSpacing: "-0.045em", color: theme.ink,
+              fontFamily: "Inter", fontSize: "clamp(44px, 8vw, 120px)",
+              fontWeight: 500, letterSpacing: isMobile ? "-0.03em" : "-0.045em",
+              color: theme.ink,
               margin: "10px 0 0", lineHeight: 0.95,
             }}>
               Designer.<br />
@@ -31,12 +34,12 @@ export default function About({ theme, mode }) {
           </Reveal>
 
           <div style={{
-            marginTop: 80, display: "grid",
-            gridTemplateColumns: "minmax(280px, 1fr) minmax(320px, 1.4fr)",
-            gap: 60, alignItems: "start",
+            marginTop: isMobile ? 50 : 80, display: "grid",
+            gridTemplateColumns: isMobileOrTablet ? "1fr" : "minmax(280px, 1fr) minmax(320px, 1.4fr)",
+            gap: isMobile ? 50 : 60, alignItems: "start",
           }}>
             <Reveal delay={0.2}>
-              <PortraitFrame theme={theme} mode={mode} />
+              <PortraitFrame theme={theme} mode={mode} isMobile={isMobile} />
             </Reveal>
             <Reveal delay={0.3}>
               <div>
@@ -71,14 +74,14 @@ export default function About({ theme, mode }) {
 
       <SectionDivider theme={theme} />
 
-      <section style={{ padding: "120px 6vw", position: "relative", textAlign: "center" }}>
+      <section style={{ padding: isMobile ? "70px 4vw" : "120px 6vw", position: "relative", textAlign: "center" }}>
         <div style={{ maxWidth: 1000, margin: "0 auto" }}>
           <Reveal>
-            <div style={{ fontFamily: "'Caveat', cursive", fontSize: 26, color: theme.accent, marginBottom: 4 }}>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 22 : 26, color: theme.accent, marginBottom: 4 }}>
               tools of the trade ✦
             </div>
             <h2 style={{
-              fontFamily: "Inter", fontSize: "clamp(36px, 5vw, 64px)",
+              fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)",
               fontWeight: 500, letterSpacing: "-0.035em", color: theme.ink,
               margin: 0, lineHeight: 1,
             }}>
@@ -86,14 +89,14 @@ export default function About({ theme, mode }) {
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
-            <SkillJar theme={theme} />
+            <SkillJar theme={theme} isMobile={isMobile} />
           </Reveal>
         </div>
       </section>
 
       <SectionDivider theme={theme} />
 
-      <JourneyRoadmap theme={theme} />
+      <JourneyRoadmap theme={theme} isMobileOrTablet={isMobileOrTablet} isMobile={isMobile} />
     </div>
   );
 }
@@ -126,9 +129,22 @@ function ResponsiveImage({ source, alt, style, loading, fetchPriority, width, he
   );
 }
 
-function PortraitFrame({ theme, mode }) {
+function PortraitFrame({ theme, mode, isMobile }) {
+  const sideImg1 = isMobile
+    ? { width: 90, height: 110, top: "12%", left: -16 }
+    : { width: 120, height: 145, top: "15%", left: -60 };
+  const sideImg2 = isMobile
+    ? { width: 110, height: 85, bottom: "6%", right: -20 }
+    : { width: 145, height: 110, bottom: "5%", right: -70 };
+
   return (
-    <div style={{ position: "relative", width: "100%", maxWidth: 320, aspectRatio: "4/5", margin: "0 auto" }}>
+    <div style={{
+      position: "relative",
+      width: "100%",
+      maxWidth: isMobile ? 260 : 320,
+      aspectRatio: "4/5",
+      margin: "0 auto"
+    }}>
       <div style={{
         position: "absolute", top: -20, left: 40, width: 90, height: 32,
         background: theme.pastel3, transform: "rotate(-8deg)", zIndex: 3,
@@ -165,9 +181,11 @@ function PortraitFrame({ theme, mode }) {
       </div>
 
       <motion.div
-        whileHover={{ scale: 1.1, rotate: -5, zIndex: 10 }}
+        whileHover={isMobile ? undefined : { scale: 1.1, rotate: -5, zIndex: 10 }}
         style={{
-          position: "absolute", top: "15%", left: -60, width: 120, height: 145,
+          position: "absolute",
+          top: sideImg1.top, left: sideImg1.left,
+          width: sideImg1.width, height: sideImg1.height,
           background: theme.card, border: `1px solid ${theme.ink}`, borderRadius: 4,
           padding: 8, transform: "rotate(-12deg)", zIndex: 2,
           boxShadow: "0 12px 30px rgba(0,0,0,0.15)",
@@ -182,9 +200,11 @@ function PortraitFrame({ theme, mode }) {
       </motion.div>
 
       <motion.div
-        whileHover={{ scale: 1.1, rotate: 5, zIndex: 10 }}
+        whileHover={isMobile ? undefined : { scale: 1.1, rotate: 5, zIndex: 10 }}
         style={{
-          position: "absolute", bottom: "5%", right: -70, width: 145, height: 110,
+          position: "absolute",
+          bottom: sideImg2.bottom, right: sideImg2.right,
+          width: sideImg2.width, height: sideImg2.height,
           background: theme.card, border: `1px solid ${theme.ink}`, borderRadius: 4,
           padding: 8, transform: "rotate(15deg)", zIndex: 2,
           boxShadow: "0 12px 30px rgba(0,0,0,0.15)",
@@ -199,8 +219,12 @@ function PortraitFrame({ theme, mode }) {
       </motion.div>
 
       <div style={{
-        position: "absolute", bottom: -64, left: 0,
-        fontFamily: "'Caveat', cursive", fontSize: 26, color: theme.inkSoft,
+        position: "absolute",
+        bottom: isMobile ? -50 : -64,
+        left: isMobile ? 8 : 0,
+        fontFamily: "'Caveat', cursive",
+        fontSize: isMobile ? 22 : 26,
+        color: theme.inkSoft,
       }}>
         ↳ that's me, in pixels ✿
       </div>
@@ -208,7 +232,7 @@ function PortraitFrame({ theme, mode }) {
   );
 }
 
-function SkillJar({ theme }) {
+function SkillJar({ theme, isMobile }) {
   const [isSpilled, setIsSpilled] = useState(false);
 
   const categories = [
@@ -252,8 +276,8 @@ function SkillJar({ theme }) {
       <div
         spellCheck={false}
         style={{
-          height: 400, width: "100%",
-          background: theme.card, borderRadius: 32,
+          height: isMobile ? 460 : 400, width: "100%",
+          background: theme.card, borderRadius: isMobile ? 24 : 32,
           border: `1px solid ${theme.line}`,
           position: "relative", overflow: "hidden",
           display: "flex", alignItems: "center", justifyContent: "center",
@@ -262,16 +286,20 @@ function SkillJar({ theme }) {
       >
         <motion.div
           onClick={() => setIsSpilled(true)}
-          animate={isSpilled ? { rotate: -100, x: -220, y: 0, opacity: 0, scale: 0 } : { rotate: 0, x: 0, y: 0, opacity: 1, scale: 1 }}
+          animate={isSpilled
+            ? { rotate: -100, x: isMobile ? -160 : -220, y: 0, opacity: 0, scale: 0 }
+            : { rotate: 0, x: 0, y: 0, opacity: 1, scale: 1 }
+          }
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
           style={{
-            width: 140, height: 180,
+            width: isMobile ? 110 : 140,
+            height: isMobile ? 140 : 180,
             background: "rgba(255,255,255,0.18)",
             border: `2px solid rgba(255,255,255,0.4)`,
             borderRadius: "20px 20px 60px 60px",
             position: "relative",
             zIndex: isSpilled ? 0 : 10,
-            marginBottom: 40,
+            marginBottom: isMobile ? 30 : 40,
             cursor: isSpilled ? "default" : "pointer",
             pointerEvents: isSpilled ? "none" : "auto",
             boxShadow: "inset 0 0 20px rgba(255,255,255,0.2), 0 10px 30px rgba(0,0,0,0.05)"
@@ -309,8 +337,11 @@ function SkillJar({ theme }) {
         <AnimatePresence>
           {isSpilled && (
             <div style={{
-              position: "absolute", inset: 0, padding: "30px 40px 40px",
-              display: "flex", flexWrap: "wrap", justifyContent: "center", alignContent: "flex-start", gap: "10px 8px",
+              position: "absolute", inset: 0,
+              padding: isMobile ? "20px 16px 24px" : "30px 40px 40px",
+              display: "flex", flexWrap: "wrap", justifyContent: "center", alignContent: "flex-start",
+              gap: isMobile ? "6px 6px" : "10px 8px",
+              overflowY: isMobile ? "auto" : "visible",
               zIndex: 5
             }}>
               {allSkills.map((skill) => (
@@ -324,10 +355,12 @@ function SkillJar({ theme }) {
                   }}
                   style={{
                     position: "relative",
-                    padding: "6px 14px", borderRadius: 999,
+                    padding: isMobile ? "5px 10px" : "6px 14px", borderRadius: 999,
                     background: theme[skill.catColor],
                     border: `1px solid ${theme.line}`,
-                    fontFamily: "Inter", fontSize: 13, fontWeight: 500,
+                    fontFamily: "Inter",
+                    fontSize: isMobile ? 11.5 : 13,
+                    fontWeight: 500,
                     color: "rgba(0,0,0,0.8)",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
                     whiteSpace: "nowrap"
@@ -351,7 +384,7 @@ function SkillJar({ theme }) {
   );
 }
 
-function JourneyRoadmap({ theme }) {
+function JourneyRoadmap({ theme, isMobileOrTablet, isMobile }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const pathLen = useTransform(scrollYProgress, [0.1, 0.9], [0, 1]);
@@ -393,6 +426,76 @@ function JourneyRoadmap({ theme }) {
       icon: FlaskConical, color: "pastel4",
     },
   ];
+
+  if (isMobileOrTablet) {
+    return (
+      <section ref={ref} style={{
+        padding: isMobile ? "60px 4vw 80px" : "80px 5vw 100px",
+        background: theme.bgAlt, position: "relative"
+      }}>
+        <div style={{ maxWidth: 720, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ marginBottom: isMobile ? 50 : 70, textAlign: "center" }}>
+              <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 22 : 26, color: theme.accent, marginBottom: 4 }}>
+                the path so far ✦
+              </div>
+              <h2 style={{
+                fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 56px)",
+                fontWeight: 500, letterSpacing: "-0.035em", color: theme.ink,
+                margin: 0, lineHeight: 1,
+              }}>
+                A scrolling roadmap.
+              </h2>
+            </div>
+          </Reveal>
+
+          <div style={{ position: "relative", paddingLeft: 4 }}>
+            <svg
+              style={{ position: "absolute", left: 24, top: 0, width: 4, height: "100%", pointerEvents: "none", zIndex: 0 }}
+              viewBox="0 0 4 1800" preserveAspectRatio="none"
+            >
+              <motion.path
+                d="M 2 0 L 2 1800"
+                stroke={theme.accent}
+                strokeWidth="2"
+                strokeDasharray="6 8"
+                fill="none"
+                strokeLinecap="round"
+                style={{ pathLength: pathLen }}
+              />
+            </svg>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 40 : 50, position: "relative", zIndex: 1 }}>
+              {nodes.map((n, i) => {
+                const Icon = n.icon;
+                return (
+                  <Reveal key={i} delay={0.1}>
+                    <div style={{
+                      display: "flex", alignItems: "flex-start", gap: 18,
+                    }}>
+                      <div style={{
+                        width: 48, height: 48, borderRadius: 999,
+                        background: theme[n.color],
+                        border: `2px solid ${theme.ink}`,
+                        display: "flex", alignItems: "center", justifyContent: "center",
+                        flexShrink: 0,
+                        boxShadow: `0 0 0 5px ${theme.bgAlt}`,
+                      }}>
+                        <Icon size={20} color={theme.ink} />
+                      </div>
+                      <div style={{ flex: 1, minWidth: 0 }}>
+                        <RoadmapCard n={n} theme={theme} compact />
+                      </div>
+                    </div>
+                  </Reveal>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section ref={ref} style={{ padding: "100px 6vw 120px", background: theme.bgAlt, position: "relative" }}>
@@ -465,14 +568,15 @@ function JourneyRoadmap({ theme }) {
   );
 }
 
-function RoadmapCard({ n, theme }) {
+function RoadmapCard({ n, theme, compact }) {
   return (
     <div style={{
-      display: "inline-block",
-      padding: 22, borderRadius: 16,
+      display: compact ? "block" : "inline-block",
+      padding: compact ? 16 : 22, borderRadius: 16,
       background: theme.card,
       border: `1px solid ${theme.line}`,
-      maxWidth: 380,
+      maxWidth: compact ? "none" : 380,
+      width: compact ? "100%" : "auto",
       textAlign: "left",
       boxShadow: "0 12px 40px rgba(0,0,0,0.06)",
     }}>

@@ -1,31 +1,46 @@
 import { useMemo, useRef } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 export default function HeroCollage({ theme, mode }) {
-  const cardDefs = useMemo(() => ([
-    { id: "wave", x: -270, y: -140, rot: -8, w: 220, h: 140, z: 3, kind: "annotation" },
-    { id: "thumb1", x: 240, y: -160, rot: 6, w: 240, h: 170, z: 4, kind: "thumb", color: theme.pastel2, label: "Nellis · Auction" },
-    { id: "thumb2", x: -340, y: 90, rot: -5, w: 230, h: 160, z: 5, kind: "thumb", color: theme.pastel1, label: "Contrarian · Dashboard" },
-    { id: "blob3d", x: 320, y: 110, rot: 0, w: 160, h: 160, z: 2, kind: "blob" },
-    { id: "ui", x: 90, y: 180, rot: 4, w: 230, h: 90, z: 4, kind: "ui" },
-    { id: "note", x: -120, y: -210, rot: -3, w: 170, h: 90, z: 5, kind: "note" },
-  ]), [theme]);
+  const { isMobile } = useBreakpoint();
+
+  const cardDefs = useMemo(() => (
+    isMobile ? [
+      { id: "wave",   x: -110, y: -110, rot: -8, w: 150, h: 90,  z: 3, kind: "annotation" },
+      { id: "thumb1", x:  90,  y: -100, rot: 6,  w: 150, h: 110, z: 4, kind: "thumb", color: theme.pastel2, label: "Nellis" },
+      { id: "thumb2", x: -110, y:  70,  rot: -5, w: 140, h: 100, z: 5, kind: "thumb", color: theme.pastel1, label: "Contrarian" },
+      { id: "blob3d", x:  100, y:  80,  rot: 0,  w: 100, h: 100, z: 2, kind: "blob" },
+      { id: "ui",     x:  20,  y:  140, rot: 4,  w: 170, h: 70,  z: 4, kind: "ui" },
+      { id: "note",   x: -50,  y: -180, rot: -3, w: 130, h: 70,  z: 5, kind: "note" },
+    ] : [
+      { id: "wave",   x: -270, y: -140, rot: -8, w: 220, h: 140, z: 3, kind: "annotation" },
+      { id: "thumb1", x:  240, y: -160, rot: 6,  w: 240, h: 170, z: 4, kind: "thumb", color: theme.pastel2, label: "Nellis · Auction" },
+      { id: "thumb2", x: -340, y:  90,  rot: -5, w: 230, h: 160, z: 5, kind: "thumb", color: theme.pastel1, label: "Contrarian · Dashboard" },
+      { id: "blob3d", x:  320, y:  110, rot: 0,  w: 160, h: 160, z: 2, kind: "blob" },
+      { id: "ui",     x:  90,  y:  180, rot: 4,  w: 230, h: 90,  z: 4, kind: "ui" },
+      { id: "note",   x: -120, y: -210, rot: -3, w: 170, h: 90,  z: 5, kind: "note" },
+    ]
+  ), [theme, isMobile]);
 
   return (
     <div style={{
-      position: "relative", width: "100%", height: 520,
+      position: "relative",
+      width: isMobile ? "min(340px, 92vw)" : "100%",
+      height: isMobile ? 380 : 520,
+      margin: "0 auto",
       display: "flex", alignItems: "center", justifyContent: "center",
       pointerEvents: "auto",
     }}>
       {cardDefs.map((c, i) => (
-        <DraggableCard key={c.id} def={c} theme={theme} mode={mode} delay={0.6 + i * 0.08} />
+        <DraggableCard key={c.id} def={c} theme={theme} mode={mode} delay={0.6 + i * 0.08} disableDrag={isMobile} />
       ))}
     </div>
   );
 }
 
-function DraggableCard({ def, theme, mode, delay }) {
+function DraggableCard({ def, theme, mode, delay, disableDrag }) {
   const x = useMotionValue(def.x);
   const y = useMotionValue(def.y);
   const rot = useMotionValue(def.rot);
@@ -35,13 +50,14 @@ function DraggableCard({ def, theme, mode, delay }) {
 
   return (
     <motion.div
-      drag
+      drag={!disableDrag}
       dragMomentum={true}
       dragElastic={0.2}
       dragTransition={{ bounceStiffness: 220, bounceDamping: 16 }}
       onDragStart={() => { dragging.current = true; }}
       onDragEnd={() => { dragging.current = false; }}
-      whileHover={{ scale: 1.04, zIndex: 20 }}
+      whileHover={disableDrag ? undefined : { scale: 1.04, zIndex: 20 }}
+      whileTap={disableDrag ? { scale: 0.97, rotate: def.rot + 2 } : undefined}
       whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
       initial={{ opacity: 0, scale: 0.6, x: def.x, y: def.y, rotate: def.rot }}
       animate={{ opacity: 1, scale: 1, x: def.x, y: def.y, rotate: def.rot }}
@@ -50,7 +66,7 @@ function DraggableCard({ def, theme, mode, delay }) {
         position: "absolute",
         width: def.w, height: def.h,
         zIndex: def.z,
-        cursor: "grab",
+        cursor: disableDrag ? "default" : "grab",
         x, y, rotate: rot,
       }}
       data-magnet="0.15"

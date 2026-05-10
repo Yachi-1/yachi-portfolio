@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Heart } from "lucide-react";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
 
@@ -11,18 +12,19 @@ const QUICK_LINKS = [
 ];
 
 export default function Footer({ theme, setRoute }) {
+  const { isMobile, isTablet } = useBreakpoint();
   return (
     <footer style={{
-      padding: "100px 6vw 50px",
+      padding: isMobile ? "60px 4vw 40px" : "100px 6vw 50px",
       borderTop: `1px solid ${theme.line}`,
       background: theme.bg,
       position: "relative", overflow: "hidden",
     }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
         <div style={{
-          marginTop: 60, display: "grid",
-          gridTemplateColumns: "1.4fr 1fr 1fr",
-          gap: 40, alignItems: "start",
+          marginTop: isMobile ? 30 : 60, display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1.4fr 1fr 1fr" : "1.4fr 1fr 1fr",
+          gap: isMobile ? 32 : 40, alignItems: "start",
         }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
@@ -87,9 +89,13 @@ export default function Footer({ theme, setRoute }) {
         </div>
 
         <div style={{
-          marginTop: 80, paddingTop: 24,
+          marginTop: isMobile ? 50 : 80, paddingTop: 24,
           borderTop: `1px solid ${theme.line}`,
-          display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12,
+          display: "flex",
+          flexDirection: isMobile ? "column" : "row",
+          justifyContent: "space-between",
+          alignItems: isMobile ? "flex-start" : "center",
+          flexWrap: "wrap", gap: 12,
         }}>
           <div style={{ fontFamily: "'Caveat', cursive", fontSize: 20, color: theme.inkSoft, display: "inline-flex", alignItems: "center", gap: 8 }}>
             Made with <Heart size={16} fill={theme.accent} color={theme.accent} /> by Yachi
