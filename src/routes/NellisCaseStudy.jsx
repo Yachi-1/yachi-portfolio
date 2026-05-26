@@ -270,8 +270,8 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
           <Reveal delay={0.15}>
             <div style={{ marginTop: 48, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: isMobile ? 20 : 24 }}>
               {[
-                { label: "After Redesign", href: "https://redesign-by-yachi.vercel.app/", img: nellisRedesignImg, alt: "Nellis Auction homepage redesign" },
                 { label: "Before Redesign", href: "https://www.nellisauction.com/", img: nellisOriginalImg, alt: "Original Nellis Auction homepage" },
+                { label: "After Redesign", href: "https://redesign-by-yachi.vercel.app/", img: nellisRedesignImg, alt: "Nellis Auction homepage redesign" },
               ].map(l => (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" style={{
                   display: "flex", flexDirection: "column", gap: 0,
