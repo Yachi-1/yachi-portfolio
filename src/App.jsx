@@ -95,7 +95,7 @@ function useHideCursor() {
   }, []);
 }
 
-export default function YachiPortfolio() {
+export default function App() {
   const [mode, setMode] = useState("light");
   const [route, setRoute] = useState("home");
   const theme = themes[mode];
