@@ -240,7 +240,7 @@ function SkillJar({ theme, isMobile }) {
     { label: "Design", color: "pastel1", skills: ["Wireframing", "Mockups", "Interactive Prototyping", "Responsive Design", "Accessible Design", "Component Libraries", "Typography", "Color Theory", "Iconography", "Grid Systems"] },
     { label: "Testing", color: "pastel4", skills: ["Usability Testing", "User Testing", "Observational Studies", "Cognitive Walkthroughs", "A/B Testing"] },
     { label: "Tools", color: "pastel3", skills: ["Figma", "Webflow", "WordPress", "Wix", "Framer", "Adobe XD", "Sketch", "InVision", "Balsamiq", "Proto.io", "Maze", "Miro", "Adobe Creative Suite", "Cvent", "Hotjar", "Google Analytics", "HTML", "CSS", "JavaScript", "Jira", "Notion", "Slack"] },
-    { label: "AI", color: "pastel5", skills: ["ChatGPT", "Claude", "Gemini", "Relume", "UX Pilot", "Magic Patterns", "Builder.io", "Figma Make", "Lovable", "Windsurf", "Antigravity", "Replit", "n8n", "Zapier", "Google Stitch", "Pomelli", "NotebookLM", "Gamma AI"] },
+    { label: "AI", color: "pastel5", skills: ["ChatGPT", "Claude", "Gemini", "Relume", "UX Pilot", "Magic Patterns", "Builder.io", "Figma Make", "Lovable", "Antigravity", "Google Stitch", "Pomelli", "Gamma AI"] },
   ];
 
   const allSkills = categories.flatMap((cat, ci) =>
@@ -330,7 +330,8 @@ function SkillJar({ theme, isMobile }) {
           {!isSpilled && (
             <div style={{
               position: "absolute", inset: 10, display: "flex",
-              flexWrap: "wrap", gap: 4, justifyContent: "center", alignItems: "flex-end"
+              flexWrap: "wrap", gap: 4, justifyContent: "center", alignItems: "flex-end",
+              overflow: "hidden", borderRadius: "10px 10px 50px 50px", paddingBottom: 6
             }}>
               {allSkills.map((s) => (
                 <div key={s.id} style={{
@@ -346,9 +347,9 @@ function SkillJar({ theme, isMobile }) {
           {isSpilled && (
             <div style={{
               position: "absolute", inset: 0,
-              padding: isMobile ? "20px 16px 24px" : "30px 40px 40px",
-              display: "flex", flexWrap: "wrap", justifyContent: "center", alignContent: "flex-start",
-              gap: isMobile ? "6px 6px" : "10px 8px",
+              padding: isMobile ? "24px" : "40px",
+              display: "flex", flexWrap: "wrap", justifyContent: "center", alignContent: "center",
+              gap: isMobile ? "8px" : "12px",
               overflowY: isMobile ? "auto" : "visible",
               zIndex: 5
             }}>
