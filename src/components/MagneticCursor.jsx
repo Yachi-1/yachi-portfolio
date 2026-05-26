@@ -168,13 +168,15 @@ function CursorImpl({ theme, reduced }) {
           transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 25 }}
           style={{
             borderRadius: 999,
-            border: `1.5px solid ${theme.ink}`,
-            background: variant === "view" ? theme.ink : "transparent",
-            color: theme.bg,
+            border: variant === "view" ? "1px solid rgba(0,0,0,0.08)" : `1.5px solid ${theme.ink}`,
+            background: variant === "view" ? "rgba(255, 255, 255, 0.9)" : "transparent",
+            color: variant === "view" ? "#111" : theme.bg,
             display: "flex", alignItems: "center", justifyContent: "center",
             fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 600,
             letterSpacing: "0.05em", textTransform: "uppercase",
             mixBlendMode: variant === "default" ? "difference" : "normal",
+            backdropFilter: variant === "view" ? "blur(4px)" : "none",
+            WebkitBackdropFilter: variant === "view" ? "blur(4px)" : "none",
           }}
         >
           {label}

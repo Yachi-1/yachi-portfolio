@@ -4,7 +4,7 @@ import Reveal from "./Reveal.jsx";
 const ITEMS = [
   { icon: Search, title: "Research", text: "Defining user and business requirements through qualitative and quantitative research.", color: "pastel2" },
   { icon: Lightbulb, title: "Synthesize", text: "Translating research findings into clear, actionable insights.", color: "pastel3" },
-  { icon: Palette, title: "Design", text: "Prototyping solutions based on identified needs, with a focus on user-centered design.", color: "pastel1" },
+  { icon: Palette, title: "Design", text: "Prototyping solutions based on identified needs.", color: "pastel1" },
   { icon: Code2, title: "Test", text: "Validating concepts with real users to confirm usability and meet business goals.", color: "pastel4" },
 ];
 
@@ -40,7 +40,7 @@ export default function ApproachSection({ theme }) {
                   border: `1px solid ${theme.line}`,
                   height: "100%",
                   position: "relative", overflow: "hidden",
-                }} data-magnet="0.05">
+                }} >
                   <div style={{
                     width: 48, height: 48, borderRadius: 14,
                     background: theme[it.color],

@@ -3,29 +3,40 @@ import Reveal from "../components/Reveal.jsx";
 import ProjectVisual from "../components/ProjectVisual.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import KineticCaseStudy from "./KineticCaseStudy.jsx";
+import ContrairanCaseStudy from "./ContrairanCaseStudy.jsx";
 
-const STORY = [
+const DEFAULT_STORY = [
   { h: "The challenge", t: "Users were dropping off mid-funnel. The data said one thing, but qualitative interviews surfaced a different story - one we couldn't have caught with analytics alone." },
   { h: "Research & synthesis", t: "I led a mixed-methods study: 24 user interviews, 3 usability rounds, and behavioral analytics over 6 weeks. The core insight reframed our entire roadmap." },
   { h: "The design", t: "Iterated through 4 concepts before landing on a flow that felt obvious in hindsight. Built a component system that engineering could ship in sprints, not quarters." },
   { h: "Outcome", t: "Shipped to 100% of users in Q4. The KPI we cared about moved 38% in our direction; secondary metrics held steady or improved. Most importantly, support tickets in the relevant flow dropped by half." },
 ];
 
-const META = (year, domain) => ([
+const DEFAULT_META = (year, domain) => ([
   { k: "Role", v: "Lead UI/UX Designer" },
   { k: "Timeline", v: year },
   { k: "Domain", v: domain },
   { k: "Tools", v: "Figma · Framer · FigJam" },
 ]);
 
-const STATS = [
+const DEFAULT_STATS = [
   { k: "+38%", v: "Faster bid conversion" },
   { k: "24", v: "User interviews" },
   { k: "12wk", v: "Sprint to ship" },
 ];
 
-export default function ProjectDetail({ id, theme, setRoute }) {
+export default function ProjectDetail({ id, theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
+
+  if (id === "kinetic") {
+    return <KineticCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  }
+
+  if (id === "contrarian") {
+    return <ContrairanCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  }
+
   const project = projects.find(p => p.id === id);
   if (!project) {
     return (
@@ -36,6 +47,9 @@ export default function ProjectDetail({ id, theme, setRoute }) {
   }
   const idx = projects.findIndex(p => p.id === id);
   const next = projects[(idx + 1) % projects.length];
+  const story = project.story || DEFAULT_STORY;
+  const meta = project.meta || DEFAULT_META(project.year, project.domain);
+  const stats = project.stats || DEFAULT_STATS;
 
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
@@ -50,6 +64,21 @@ export default function ProjectDetail({ id, theme, setRoute }) {
                 background: "transparent", border: "none",
                 fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft,
                 cursor: "pointer", marginBottom: 30,
+                transition: "color 0.2s ease, transform 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = theme.accent;
+                e.currentTarget.style.transform = "translateX(-4px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = theme.inkSoft;
+                e.currentTarget.style.transform = "translateX(0)";
+              }}
+              onMouseDown={(e) => {
+                e.currentTarget.style.color = theme.pastel1;
+              }}
+              onMouseUp={(e) => {
+                e.currentTarget.style.color = theme.accent;
               }}
             >
               <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
@@ -90,6 +119,14 @@ export default function ProjectDetail({ id, theme, setRoute }) {
               position: "relative",
             }}>
               <ProjectVisual project={project} theme={theme} hover={true} />
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                borderRadius: isMobile ? 16 : 24,
+                border: `1px solid ${theme.line}`,
+                pointerEvents: "none",
+                zIndex: 10,
+              }} />
             </div>
           </div>
         </section>
@@ -103,10 +140,14 @@ export default function ProjectDetail({ id, theme, setRoute }) {
         }}>
           <Reveal>
             <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 18 : 24 }}>
-              {META(project.year, project.domain).map(d => (
+              {meta.map(d => (
                 <div key={d.k}>
                   <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", color: theme.inkMute, textTransform: "uppercase", marginBottom: 4 }}>{d.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.ink }}>{d.v}</div>
+                  {d.link ? (
+                    <a href={d.link} target="_blank" rel="noopener noreferrer" style={{ fontFamily: "Inter", fontSize: 15, color: theme.accent, textDecoration: "none" }}>{d.v}</a>
+                  ) : (
+                    <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.ink }}>{d.v}</div>
+                  )}
                 </div>
               ))}
             </div>
@@ -120,7 +161,7 @@ export default function ProjectDetail({ id, theme, setRoute }) {
               {project.description}
             </p>
             <div style={{ marginTop: isMobile ? 24 : 30, display: "flex", gap: isMobile ? 18 : 24, flexWrap: "wrap" }}>
-              {STATS.map(s => (
+              {stats.map(s => (
                 <div key={s.k}>
                   <div style={{
                     fontFamily: "Inter",
@@ -138,7 +179,7 @@ export default function ProjectDetail({ id, theme, setRoute }) {
 
       <section style={{ padding: isMobile ? "30px 4vw 60px" : "60px 6vw 100px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: isMobile ? 36 : 60 }}>
-          {STORY.map((s, i) => (
+          {story.map((s, i) => (
             <Reveal key={i} delay={0.05}>
               <div>
                 <div style={{ fontFamily: "'Caveat', cursive", fontSize: 22, color: theme.accent, marginBottom: 8 }}>0{i + 1}</div>
@@ -147,7 +188,7 @@ export default function ProjectDetail({ id, theme, setRoute }) {
                   fontWeight: 500, letterSpacing: "-0.03em", color: theme.ink,
                   margin: 0, marginBottom: 14, lineHeight: 1.1,
                 }}>{s.h}</h2>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 17.5, lineHeight: 1.65, color: theme.inkSoft, margin: 0, letterSpacing: "-0.005em" }}>{s.t}</p>
+                <p style={{ whiteSpace: "pre-wrap", fontFamily: "Inter", fontSize: isMobile ? 16 : 17.5, lineHeight: 1.65, color: theme.inkSoft, margin: 0, letterSpacing: "-0.005em" }}>{s.t}</p>
               </div>
             </Reveal>
           ))}
@@ -156,7 +197,14 @@ export default function ProjectDetail({ id, theme, setRoute }) {
 
       <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px" }}>
         <div
-          onClick={() => setRoute(`project:${next.id}`)}
+          onClick={() => {
+            if (next.pdfLink) {
+              window.open(next.pdfLink, "_blank");
+            } else {
+              setRoute(`project:${next.id}`);
+              window.lenis?.scrollTo(0);
+            }
+          }}
           data-magnet="0.05"
           data-cursor="view"
           data-cursor-label="Next"

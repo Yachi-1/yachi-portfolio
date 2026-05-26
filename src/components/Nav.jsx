@@ -1,6 +1,8 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { Sun, Moon } from "lucide-react";
+import { useState } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import { projects } from "../data/projects.js";
 
 const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
 
@@ -69,29 +71,155 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
         }}>YP</span>
       </button>
       {!isMobile && <div style={{ width: 1, height: 22, background: theme.line }} />}
-      {NAV_ITEMS.map((it) => {
-        const active = route === it.id;
-        return (
-          <button
-            key={it.id}
-            onClick={() => it.id === "resume" ? window.open(RESUME_URL, "_blank") : setRoute(it.id)}
-            data-magnet="0.25"
-            style={{
-              position: "relative",
-              padding: itemPadding, borderRadius: 999, border: "none",
-              background: active ? theme.ink : "transparent",
-              color: active ? theme.bg : theme.inkSoft,
-              fontFamily: "Inter, sans-serif", fontSize: itemFontSize, fontWeight: 500,
-              cursor: "pointer", letterSpacing: "-0.01em",
-              transition: "color .25s ease",
-            }}
-          >
-            {it.label}
-          </button>
-        );
-      })}
+      {NAV_ITEMS.map((it) => (
+        <NavItem 
+          key={it.id} 
+          it={it} 
+          route={route} 
+          setRoute={setRoute} 
+          theme={theme} 
+          mode={mode} 
+          isMobile={isMobile} 
+          itemPadding={itemPadding} 
+          itemFontSize={itemFontSize} 
+        />
+      ))}
       <ThemeToggle theme={theme} mode={mode} setMode={setMode} isMobile={isMobile} />
     </motion.nav>
+  );
+}
+
+function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, itemFontSize }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const active = route === it.id || (it.id === "projects" && route.startsWith("project:"));
+
+  return (
+    <div 
+      style={{ position: "relative" }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <button
+        onClick={() => {
+          if (it.id === "resume") {
+            window.open(RESUME_URL, "_blank");
+          } else if (route === it.id) {
+            window.lenis?.scrollTo(0);
+          } else {
+            setRoute(it.id);
+          }
+        }}
+        data-magnet="0.25"
+        style={{
+          position: "relative",
+          padding: itemPadding, borderRadius: 999, border: "none",
+          background: active ? theme.ink : "transparent",
+          color: active ? theme.bg : theme.inkSoft,
+          fontFamily: "Inter, sans-serif", fontSize: itemFontSize, fontWeight: 500,
+          cursor: "pointer", letterSpacing: "-0.01em",
+          transition: "color .25s ease, background .25s ease",
+          zIndex: 10,
+        }}
+      >
+        {it.label}
+      </button>
+
+      {it.id === "projects" && !isMobile && (
+        <AnimatePresence>
+          {isHovered && (
+            <motion.div
+              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 5, scale: 0.95 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                marginTop: 12,
+                padding: "8px",
+                background: theme.bg,
+                border: `1px solid ${theme.line}`,
+                borderRadius: 16,
+                boxShadow: mode === "dark" 
+                  ? "0 10px 40px rgba(0,0,0,0.6)"
+                  : "0 10px 40px rgba(0,0,0,0.08)",
+                display: "flex",
+                flexDirection: "column",
+                gap: 4,
+                minWidth: 200,
+                zIndex: 5,
+              }}
+            >
+              {projects.map(p => (
+                <DropdownItem
+                  key={p.id}
+                  p={p}
+                  route={route}
+                  setRoute={setRoute}
+                  setIsHovered={setIsHovered}
+                  theme={theme}
+                  mode={mode}
+                />
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      )}
+    </div>
+  );
+}
+
+function DropdownItem({ p, route, setRoute, setIsHovered, theme, mode }) {
+  const [hover, setHover] = useState(false);
+  const isActive = route === `project:${p.id}`;
+
+  return (
+    <button
+      onClick={() => {
+        if (p.pdfLink) {
+          window.open(p.pdfLink, "_blank");
+        } else {
+          setRoute(`project:${p.id}`);
+          setIsHovered(false);
+        }
+      }}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{
+        background: hover || isActive ? theme.ink : "transparent",
+        border: "none",
+        padding: "10px 14px",
+        borderRadius: 10,
+        textAlign: "left",
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        transition: "all 0.2s ease",
+      }}
+    >
+      <span style={{
+        fontFamily: "Inter, sans-serif",
+        fontSize: 13,
+        color: hover || isActive ? theme.bg : theme.ink,
+        fontWeight: isActive ? 600 : 500,
+        transition: "color 0.2s ease",
+      }}>
+        {p.title}
+      </span>
+      <span style={{
+        fontFamily: "Inter, sans-serif",
+        fontSize: 11,
+        color: hover || isActive 
+          ? (mode === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.7)") 
+          : theme.inkMute,
+        transition: "color 0.2s ease",
+      }}>
+        {p.domain}
+      </span>
+    </button>
   );
 }
 

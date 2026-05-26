@@ -11,8 +11,52 @@ const QUICK_LINKS = [
   { id: "resume", label: "Resume" },
 ];
 
+function makeHoverHandlers(theme) {
+  return {
+    onMouseEnter: (e) => {
+      e.currentTarget.style.color = theme.accent;
+      e.currentTarget.style.transform = "translateX(4px)";
+    },
+    onMouseLeave: (e) => {
+      e.currentTarget.style.color = theme.ink;
+      e.currentTarget.style.transform = "translateX(0)";
+    },
+    onMouseDown: (e) => {
+      e.currentTarget.style.color = theme.pastel1;
+    },
+    onMouseUp: (e) => {
+      e.currentTarget.style.color = theme.accent;
+    },
+  };
+}
+
 export default function Footer({ theme, setRoute }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const hoverHandlers = makeHoverHandlers(theme);
+
+  const linkBaseStyle = {
+    fontFamily: "Inter",
+    fontSize: 15,
+    color: theme.ink,
+    textDecoration: "none",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: 8,
+    transition: "color 0.2s ease, transform 0.2s ease",
+  };
+
+  const buttonBaseStyle = {
+    background: "none",
+    border: "none",
+    padding: 0,
+    fontFamily: "Inter",
+    fontSize: 15,
+    color: theme.ink,
+    textAlign: "left",
+    cursor: "pointer",
+    transition: "color 0.2s ease, transform 0.2s ease",
+  };
+
   return (
     <footer style={{
       padding: isMobile ? "60px 4vw 40px" : "100px 6vw 50px",
@@ -59,13 +103,18 @@ export default function Footer({ theme, setRoute }) {
               {QUICK_LINKS.map(l => (
                 <button
                   key={l.id}
-                  onClick={() => l.id === "resume" ? window.open(RESUME_URL, "_blank") : setRoute(l.id)}
-                  data-magnet="0.2"
-                  style={{
-                    background: "none", border: "none", padding: 0,
-                    fontFamily: "Inter", fontSize: 15, color: theme.ink,
-                    textAlign: "left", cursor: "pointer",
+                  onClick={() => {
+                    if (l.id === "resume") {
+                      window.open(RESUME_URL, "_blank");
+                    } else {
+                      setRoute(l.id);
+                      // In case we are already on that route, setRoute won't trigger the effect
+                      window.lenis?.scrollTo(0);
+                    }
                   }}
+                  data-magnet="0.2"
+                  style={buttonBaseStyle}
+                  {...hoverHandlers}
                 >
                   {l.label}
                 </button>
@@ -78,10 +127,22 @@ export default function Footer({ theme, setRoute }) {
               Connect
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              <a href="mailto:yachi883@gmail.com" data-magnet="0.2" style={{ fontFamily: "Inter", fontSize: 15, color: theme.ink, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <a
+                href="mailto:yachi883@gmail.com"
+                data-magnet="0.2"
+                style={linkBaseStyle}
+                {...hoverHandlers}
+              >
                 <Mail size={14} /> Email
               </a>
-              <a href="https://linkedin.com/in/yachi-patel/" target="_blank" rel="noopener noreferrer" data-magnet="0.2" style={{ fontFamily: "Inter", fontSize: 15, color: theme.ink, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8 }}>
+              <a
+                href="https://linkedin.com/in/yachi-patel/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-magnet="0.2"
+                style={linkBaseStyle}
+                {...hoverHandlers}
+              >
                 <Linkedin size={14} /> LinkedIn
               </a>
             </div>

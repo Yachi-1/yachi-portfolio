@@ -5,7 +5,7 @@ import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
 import SectionDivider from "../components/SectionDivider.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
-import heroImg from "../assets/IMG_1670.jpg?w=320;640;960&format=avif;webp;jpg&as=picture";
+import heroImg from "../assets/Yachi_Main_Image.jpg?w=320;640;960&format=avif;webp;jpg&as=picture";
 import yachiImg1 from "../assets/Yachi_Image_1.jpeg?w=160;320&format=avif;webp;jpg&as=picture";
 import yachiImg2 from "../assets/Yachi_Image_2.jpg?w=160;320&format=avif;webp;jpg&as=picture";
 
@@ -18,7 +18,7 @@ export default function About({ theme, mode }) {
         <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
           <Reveal>
             <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 22 : 28, color: theme.accent }}>
-              hi, I'm Yachi ✿
+              Hi, I'm Yachi ✿
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -48,7 +48,7 @@ export default function About({ theme, mode }) {
                   lineHeight: 1.65, color: theme.inkSoft, marginTop: 0,
                   letterSpacing: "-0.01em",
                 }}>
-                  Four years in, I've designed across <span style={{ background: theme.pastel2, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>healthcare</span>, <span style={{ background: theme.pastel3, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>e-commerce</span>, <span style={{ background: theme.pastel5, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>enterprise</span>, and <span style={{ background: theme.pastel4, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>AI</span>. Each one taught me that the hardest part of design isn't the pixels, it's the listening (to both users and the business). I move through the full arc: research, prototype, test, ship. Creating intuitive, high-impact experiences that improve usability, boost engagement, and drive measurable business value.
+                  Four years in, I've designed across <span style={{ background: theme.pastel2, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>healthcare</span>, <span style={{ background: theme.pastel3, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>e-commerce</span>, <span style={{ background: theme.pastel5, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>enterprise</span>, and <span style={{ background: theme.pastel4, padding: "1px 8px", borderRadius: 6, color: theme.ink }}>AI</span>. Each one taught me that the hardest part of design isn't the pixels; it's the listening (to both users and the business). I move through the full arc: research, prototype, test, ship. Along the way, I create intuitive, high-impact experiences that improve usability, boost engagement, and drive measurable business value.
                 </p>
 
                 <p style={{
@@ -56,7 +56,7 @@ export default function About({ theme, mode }) {
                   lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
                   letterSpacing: "-0.01em",
                 }}>
-                  I've worked across both ends of the spectrum. Fast-paced startups like <span style={{ fontWeight: 600, color: theme.ink }}>Kinetic Potential</span>, where I juggled multiple projects at once, and larger companies like <span style={{ fontWeight: 600, color: theme.ink }}>Topline Switchgear</span>, where I went deep on a single domain. I'm comfortable in both worlds.
+                  I've worked across both ends of the spectrum: fast-paced startups like <span style={{ fontWeight: 600, color: theme.ink }}>Kinetic Potential</span>, where I juggled multiple projects at once, and larger companies like <span style={{ fontWeight: 600, color: theme.ink }}>Topline Switchgear</span>, where I went deep on a single domain. I'm comfortable in both worlds.
                 </p>
 
                 <p style={{
@@ -64,7 +64,7 @@ export default function About({ theme, mode }) {
                   lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
                   letterSpacing: "-0.01em",
                 }}>
-                  Right now, I'm a <span style={{ fontWeight: 600, color: theme.ink }}>UX Researcher at UMBC</span>, studying how generative AI can help underserved communities understand their medical records.
+                  Right now, I'm a <span style={{ fontWeight: 600, color: theme.ink }}>UX Researcher at University of Maryland, Baltimore County</span>, studying how generative AI can help underserved communities understand their medical records.
                 </p>
               </div>
             </Reveal>
@@ -267,6 +267,9 @@ function SkillJar({ theme, isMobile }) {
               border: `1px solid ${theme.line}`, color: theme.ink,
               fontFamily: "Inter", fontSize: 11, cursor: "pointer"
             }}
+            data-magnet="0.2"
+            data-cursor="hover"
+            data-cursor-label=""
           >
             Refill Jar
           </button>
@@ -277,13 +280,15 @@ function SkillJar({ theme, isMobile }) {
         spellCheck={false}
         style={{
           height: isMobile ? 460 : 400, width: "100%",
-          background: theme.card, borderRadius: isMobile ? 24 : 32,
+          background: `radial-gradient(circle at 20% 20%, ${theme.pastel2}28 0%, transparent 50%), radial-gradient(circle at 80% 80%, ${theme.pastel1}22 0%, transparent 50%), ${theme.card}`,
+          borderRadius: isMobile ? 24 : 32,
           border: `1px solid ${theme.line}`,
           position: "relative", overflow: "hidden",
           display: "flex", alignItems: "center", justifyContent: "center",
           boxShadow: "0 20px 40px rgba(0,0,0,0.04)"
         }}
       >
+        <GridPaper theme={theme} noMask={true} />
         <motion.div
           onClick={() => setIsSpilled(true)}
           animate={isSpilled
@@ -304,6 +309,9 @@ function SkillJar({ theme, isMobile }) {
             pointerEvents: isSpilled ? "none" : "auto",
             boxShadow: "inset 0 0 20px rgba(255,255,255,0.2), 0 10px 30px rgba(0,0,0,0.05)"
           }}
+          data-magnet="0.1"
+          data-cursor="view"
+          data-cursor-label="Spill"
         >
           <div style={{
             position: "absolute", top: -10, left: "15%",
@@ -391,37 +399,37 @@ function JourneyRoadmap({ theme, isMobileOrTablet, isMobile }) {
 
   const nodes = [
     {
-      stage: "Education", year: "June 2019 — May 2023",
+      stage: "Education", year: "June 2019 - May 2023",
       title: "B.Tech Information Technology",
       org: "Indus University · India",
       text: "Built a foundation in software engineering, databases, and web technologies. First exposure to user-centered thinking.",
       icon: GraduationCap, color: "pastel2",
     },
     {
-      stage: "Industry", year: "Jan 2021 — July 2023",
+      stage: "Industry", year: "Jan 2021 - July 2023",
       title: "Product Designer",
       org: "Topline Switchgear Pvt. Ltd. · India",
       text: "Designed an end-to-end ERP experience unifying 30+ manufacturing processes, improving workflow efficiency by 45% and reducing manual effort by 50%. Led 15 stakeholder discovery sessions and created 30+ high-fidelity prototypes.",
       icon: Briefcase, color: "pastel3",
     },
     {
-      stage: "Education", year: "Aug 2023 — May 2025",
+      stage: "Education", year: "Aug 2023 - May 2025",
       title: "M.S. Human-Centered Computing",
-      org: "UMBC · Maryland",
-      text: "Deep dove into mixed-methods research, accessibility, and the ethics of designing with AI.",
+      org: "University of Maryland, Baltimore County · USA",
+      text: "Deep dove into mixed-methods research, user psychology, accessibility, and the ethics of designing with AI and AR/VR.",
       icon: GraduationCap, color: "pastel5",
     },
     {
-      stage: "Industry", year: "Oct 2024 — Sept 2025",
+      stage: "Industry", year: "Oct 2024 - Sept 2025",
       title: "UI/UX Designer",
       org: "Kinetic Potential · USA",
       text: "Designed end-to-end user experiences across 4 brand touchpoints. Led UX research spanning stakeholder interviews, competitive analysis, and surveys. Achieved a 60% improvement in task completion rates.",
       icon: Briefcase, color: "pastel1",
     },
     {
-      stage: "Research", year: "Jan 2025 — Present",
+      stage: "Research", year: "Jan 2025 - Present",
       title: "UX Researcher",
-      org: "University of Maryland, Baltimore County (UMBC)",
+      org: "University of Maryland, Baltimore County · USA",
       text: "Conducting informant interviews with underserved populations in Baltimore. Designed high-fidelity prototypes for 3 generative AI tool concepts. Presented prototypes across 6 focus group sessions.",
       icon: FlaskConical, color: "pastel4",
     },
@@ -444,7 +452,7 @@ function JourneyRoadmap({ theme, isMobileOrTablet, isMobile }) {
                 fontWeight: 500, letterSpacing: "-0.035em", color: theme.ink,
                 margin: 0, lineHeight: 1,
               }}>
-                A scrolling roadmap.
+                Yachi's journey.
               </h2>
             </div>
           </Reveal>
@@ -510,7 +518,7 @@ function JourneyRoadmap({ theme, isMobileOrTablet, isMobile }) {
               fontWeight: 500, letterSpacing: "-0.035em", color: theme.ink,
               margin: 0, lineHeight: 1,
             }}>
-              A scrolling roadmap.
+              Yachi's journey.
             </h2>
           </div>
         </Reveal>

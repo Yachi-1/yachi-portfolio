@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Lenis from "lenis";
 
@@ -23,7 +23,7 @@ function isTouchDevice() {
   );
 }
 
-function useLenis() {
+function useLenis(lenisRef) {
   useEffect(() => {
     if (isTouchDevice()) return;
 
@@ -37,6 +37,9 @@ function useLenis() {
       smoothTouch: false,
       touchMultiplier: 2,
     });
+
+    lenisRef.current = lenis;
+    window.lenis = lenis; // Also expose to window for easier access if needed
 
     let rafId = 0;
     let running = true;
@@ -64,8 +67,10 @@ function useLenis() {
       cancelAnimationFrame(rafId);
       document.removeEventListener("visibilitychange", onVisibility);
       lenis.destroy();
+      lenisRef.current = null;
+      window.lenis = null;
     };
-  }, []);
+  }, [lenisRef]);
 }
 
 function useFonts() {
@@ -95,12 +100,17 @@ export default function YachiPortfolio() {
   const [route, setRoute] = useState("home");
   const theme = themes[mode];
 
-  useLenis();
+  const lenisRef = useRef(null);
+  useLenis(lenisRef);
   useFonts();
   useHideCursor();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    // Immediate scroll reset
+    window.scrollTo(0, 0);
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
   }, [route]);
 
   const isProjectDetail = route.startsWith("project:");
@@ -114,7 +124,7 @@ export default function YachiPortfolio() {
         color: theme.ink,
         fontFamily: "Inter, sans-serif",
         transition: "background .6s ease, color .6s ease",
-        overflow: "hidden",
+        overflowX: "hidden",
       }}
     >
       <style>{`
@@ -127,7 +137,7 @@ export default function YachiPortfolio() {
         theme={theme}
         mode={mode}
         setMode={setMode}
-        route={isProjectDetail ? "projects" : route}
+        route={route}
         setRoute={setRoute}
       />
 
