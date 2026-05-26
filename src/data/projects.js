@@ -8,7 +8,7 @@ export const projects = [
     tag: "Website",
     color1: "pastel1",
     color2: "pastel5",
-    description: "Reimagined the bidding experience for a fast-growing live-auction platform. Cut bid friction by 38% and lifted return-bidder rate.",
+    description: "A homepage redesign of Nellis Auction, turning a wall of warehouse links into a focused, scannable entry point for new bidders.",
   },
   {
     id: "contrarian",

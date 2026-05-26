@@ -112,7 +112,7 @@ function ProblemBlock({ num, problemHeading, problemBody, solutionName, solution
 }
 
 /* ─── Main export ─── */
-export default function ContrairanCaseStudy({ theme, mode, setRoute }) {
+export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const project = projects.find(p => p.id === "contrarian");
   const idx = projects.findIndex(p => p.id === "contrarian");

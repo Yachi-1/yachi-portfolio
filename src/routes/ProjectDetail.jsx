@@ -4,7 +4,8 @@ import ProjectVisual from "../components/ProjectVisual.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import KineticCaseStudy from "./KineticCaseStudy.jsx";
-import ContrairanCaseStudy from "./ContrairanCaseStudy.jsx";
+import ContrarianCaseStudy from "./ContrarianCaseStudy.jsx";
+import NellisCaseStudy from "./NellisCaseStudy.jsx";
 
 const DEFAULT_STORY = [
   { h: "The challenge", t: "Users were dropping off mid-funnel. The data said one thing, but qualitative interviews surfaced a different story - one we couldn't have caught with analytics alone." },
@@ -29,12 +30,16 @@ const DEFAULT_STATS = [
 export default function ProjectDetail({ id, theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
 
+  if (id === "nellis") {
+    return <NellisCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  }
+
   if (id === "kinetic") {
     return <KineticCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
   }
 
   if (id === "contrarian") {
-    return <ContrairanCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+    return <ContrarianCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
   }
 
   const project = projects.find(p => p.id === id);
