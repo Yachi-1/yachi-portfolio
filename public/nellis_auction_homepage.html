@@ -1,0 +1,3685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nellis Auction | Redesigned Homepage</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --crimson: #7b0003;
+      --crimson-dark: #5c0002;
+      --crimson-hover: #950004;
+      --crimson-subtle: rgba(123, 0, 3, 0.06);
+      --crimson-glow: rgba(123, 0, 3, 0.12);
+      --cream: #f9f5ef;
+      --warm: #fffcf7;
+      --charcoal: #141414;
+      --ink: #2a2a2a;
+      --smoke: #636363;
+      --ash: #9a9a9a;
+      --mist: #e5dfd6;
+      --bone: #f0ebe3;
+      --emerald: #1a7a4c;
+      --emerald-bg: #edf7f1;
+      --amber: #b8860b;
+      --amber-bg: #fdf4e3;
+      --coral: #dc3545;
+      --star: #22c55e;
+      --ff: 'Outfit', sans-serif;
+      --fd: 'Playfair Display', serif;
+      --nav-h: 68px;
+      --max-w: 1280px;
+      --radius-sm: 8px;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --radius-full: 100px;
+      --spacing-sm: 8px;
+      --spacing-md: 16px;
+      --spacing-lg: 24px;
+      --spacing-xl: 32px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+      --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.1);
+      --h2-size: clamp(28px, 4vw, 40px);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--ff);
+      background: var(--warm);
+      color: var(--charcoal);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ═══ NAV ═══ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(255, 252, 247, 0.92);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border-bottom: 1px solid rgba(123, 0, 3, 0.06);
+    }
+
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      height: 30px;
+    }
+
+    .nav-search {
+      flex: 1;
+      max-width: 440px;
+      position: relative;
+    }
+
+    .nav-search input {
+      width: 100%;
+      height: 40px;
+      border: 1.5px solid var(--mist);
+      border-radius: var(--radius-full);
+      padding: 0 44px 0 16px;
+      font-family: var(--ff);
+      font-size: 13px;
+      background: var(--cream);
+      color: var(--charcoal);
+      outline: none;
+      transition: all 0.25s;
+    }
+
+    .nav-search input::placeholder {
+      color: var(--ash);
+    }
+
+    .nav-search input:focus {
+      border-color: var(--crimson);
+      background: #fff;
+      box-shadow: 0 0 0 3px var(--crimson-subtle);
+    }
+
+    .nav-search-icon {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--crimson);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .nav-search-icon:hover {
+      background: var(--crimson-hover);
+    }
+
+    .nav-search-icon svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+    }
+
+    .nav-icon-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      padding: 6px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--smoke);
+      font-size: 10px;
+      font-weight: 500;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .nav-icon-link:hover {
+      color: var(--crimson);
+      background: var(--crimson-subtle);
+    }
+
+    .nav-icon-link svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-icon-link.loc-active {
+      color: var(--crimson);
+    }
+
+    .nav-text-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: var(--radius-full);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-text-link:hover {
+      color: var(--crimson);
+      background: var(--crimson-subtle);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 28px;
+      background: var(--mist);
+      margin: 0 4px;
+    }
+
+    .nav-signup {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      background: var(--crimson);
+      padding: 8px 22px;
+      border-radius: var(--radius-full);
+      border: none;
+      cursor: pointer;
+      font-family: var(--ff);
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+
+    .nav-signup:hover {
+      background: var(--crimson-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(123, 0, 3, 0.2);
+    }
+
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      margin-left: auto;
+    }
+
+    .nav-hamburger:hover {
+      background: var(--crimson-subtle);
+    }
+
+    .nav-hamburger span {
+      display: block;
+      height: 2px;
+      background: var(--charcoal);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* Mobile drawer */
+    .nav-drawer {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--warm);
+      z-index: 999;
+      overflow-y: auto;
+      padding: 24px 40px 48px;
+      flex-direction: column;
+      gap: 6px;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .nav-drawer.open {
+      display: flex;
+    }
+
+    .nav-drawer .mob-search {
+      width: 100%;
+      position: relative;
+      margin-bottom: 12px;
+    }
+
+    .nav-drawer .mob-search input {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--mist);
+      border-radius: var(--radius-full);
+      padding: 0 48px 0 18px;
+      font-family: var(--ff);
+      font-size: 14px;
+      background: var(--cream);
+      color: var(--charcoal);
+      outline: none;
+    }
+
+    .nav-drawer .mob-search input:focus {
+      border-color: var(--crimson);
+      background: #fff;
+    }
+
+    .nav-drawer .mob-search button {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--crimson);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .nav-drawer .mob-search button svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .nav-drawer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 12px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .nav-drawer-link:hover {
+      background: var(--crimson-subtle);
+    }
+
+    .nav-drawer-link svg {
+      width: 20px;
+      height: 20px;
+      color: var(--smoke);
+      flex-shrink: 0;
+    }
+
+    .nav-drawer-divider {
+      height: 1px;
+      background: var(--mist);
+      margin: 8px 0;
+    }
+
+    .nav-drawer .nav-signup {
+      width: 100%;
+      text-align: center;
+      padding: 14px;
+      font-size: 15px;
+      margin-top: 8px;
+    }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: calc(var(--nav-h) + 88px) 0 128px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: var(--crimson);
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 30%;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--amber);
+      opacity: 0.03;
+      z-index: 0;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    /* Hero left - enhanced */
+    .hero-left {
+      max-width: 580px;
+      position: relative;
+    }
+
+    .hero-live-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber-bg);
+      border: 1px solid rgba(184, 134, 11, 0.15);
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--amber);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeIn 0.6s ease-out;
+      box-shadow: 0 2px 8px rgba(184, 134, 11, 0.06);
+    }
+
+    .hero-live-tag .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--amber);
+      animation: pulse 1.8s ease-in-out infinite;
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.12);
+    }
+
+    .hero h1 {
+      font-family: var(--fd);
+      font-size: clamp(38px, 4.6vw, 60px);
+      font-weight: 700;
+      line-height: 1.06;
+      color: var(--charcoal);
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+      animation: fadeUp 0.7s ease-out;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--crimson);
+      font-weight: 600;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero h1 em::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--crimson);
+      opacity: 0.12;
+      border-radius: 2px;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--smoke);
+      margin-bottom: 36px;
+      max-width: 440px;
+      animation: fadeUp 0.7s ease-out 0.1s both;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 48px;
+      animation: fadeUp 0.7s ease-out 0.2s both;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--crimson);
+      color: #fff;
+      border: none;
+      padding: 16px 36px;
+      border-radius: var(--radius-full);
+      font-family: var(--ff);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 20px rgba(123, 0, 3, 0.15);
+    }
+
+    .btn-primary:hover {
+      background: var(--crimson-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(123, 0, 3, 0.25);
+    }
+
+    .btn-ghost {
+      background: none;
+      border: 1.5px solid var(--mist);
+      color: var(--ink);
+      padding: 15px 28px;
+      border-radius: var(--radius-full);
+      font-family: var(--ff);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+      background: var(--crimson-subtle);
+    }
+
+    .btn-ghost svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Proof bar - card style */
+    .hero-proof {
+      display: flex;
+      gap: 0;
+      animation: fadeUp 0.7s ease-out 0.3s both;
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+      flex-wrap: wrap;
+    }
+
+    .hero-proof-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 20px 22px;
+      text-align: center;
+      position: relative;
+      transition: background 0.25s;
+    }
+
+    .hero-proof-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 18%;
+      height: 64%;
+      width: 1px;
+      background: var(--mist);
+    }
+
+    .hero-proof-item:hover {
+      background: var(--crimson-subtle);
+    }
+
+    .hero-proof-val {
+      font-family: var(--fd);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--crimson);
+      line-height: 1.1;
+    }
+
+    .hero-proof-label {
+      font-size: 11.5px;
+      color: var(--ash);
+      margin-top: 5px;
+      letter-spacing: 0.02em;
+      font-weight: 500;
+    }
+
+    /* Hero right - Bento grid inspired by Commurz */
+    .hero-right {
+      animation: fadeIn 0.8s ease-out 0.2s both;
+    }
+
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: var(--spacing-md);
+    }
+
+    .bento-card {
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Product card - subtle warm tint to separate from background */
+    .bento-product {
+      background: #fff;
+      border: 1.5px solid rgba(123, 0, 3, 0.1);
+      box-shadow: 0 6px 28px rgba(123, 0, 3, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .bento-product:hover {
+      border-color: rgba(123, 0, 3, 0.18);
+      box-shadow: 0 14px 44px rgba(123, 0, 3, 0.1);
+    }
+
+    /* Stats card - light crimson tinted background */
+    .bento-stats-card {
+      background: #fff;
+      border: 1.5px solid rgba(123, 0, 3, 0.08);
+      box-shadow: 0 6px 28px rgba(123, 0, 3, 0.05), 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .bento-stats-card:hover {
+      border-color: rgba(123, 0, 3, 0.15);
+      box-shadow: 0 14px 44px rgba(123, 0, 3, 0.08);
+    }
+
+    /* Product card - spans left column */
+    .bento-product {
+      grid-row: 1/3;
+      align-self: start;
+    }
+
+    .bento-product-img {
+      height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bento-product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .bento-product-badge .ldot {
+      width: 5px;
+      height: 5px;
+      background: #ff4444;
+      border-radius: 50%;
+      animation: pulse 1.2s infinite;
+    }
+
+    .bento-product-body {
+      padding: 14px 16px;
+    }
+
+    .bento-product-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+
+    .bento-product-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .bento-product-price {
+      font-family: var(--fd);
+      font-size: 22px;
+      color: var(--crimson);
+      font-weight: 700;
+    }
+
+    .bento-product-retail {
+      font-size: 12px;
+      color: var(--ash);
+      text-decoration: line-through;
+    }
+
+    .bento-product-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--emerald);
+      background: var(--emerald-bg);
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .bento-product-tag .tdot {
+      width: 4px;
+      height: 4px;
+      background: var(--emerald);
+      border-radius: 50%;
+      animation: pulse 1.4s infinite;
+    }
+
+    /* Stats mini card */
+    .bento-stats {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .bento-stats-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ash);
+    }
+
+    .bento-stats-big {
+      font-family: var(--fd);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .bento-stats-sub {
+      font-size: 11px;
+      color: var(--ash);
+    }
+
+    .bento-stats-bar {
+      height: 4px;
+      background: var(--bone);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .bento-stats-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: var(--crimson);
+    }
+
+    /* Category list mini card */
+    .bento-cats {
+      padding: 16px;
+    }
+
+    .bento-cats-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--ash);
+      margin-bottom: 10px;
+    }
+
+    .bento-cat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--bone);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .bento-cat-item:last-child {
+      border-bottom: none;
+    }
+
+    .bento-cat-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-sm);
+      background: var(--bone);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .bento-cat-count {
+      margin-left: auto;
+      font-size: 11px;
+      color: var(--ash);
+      font-weight: 400;
+    }
+
+    /* Photo card */
+    .bento-photo {
+      grid-column: 1/-1;
+      height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bento-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bento-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(123, 0, 3, 0.7), rgba(123, 0, 3, 0.3));
+    }
+
+    .bento-photo-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 16px;
+    }
+
+    .bento-photo-stat {
+      color: #fff;
+    }
+
+    .bento-photo-stat-val {
+      font-family: var(--fd);
+      font-size: 28px;
+      font-weight: 700;
+    }
+
+    .bento-photo-stat-label {
+      font-size: 11px;
+      opacity: 0.7;
+    }
+
+    .bento-photo-divider {
+      width: 1px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Partners mini */
+    .bento-partners {
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .bento-partners-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ash);
+      width: 100%;
+      margin-bottom: 2px;
+    }
+
+    .bento-partner-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* ═══ HOW IT WORKS ═══ */
+    .how {
+      padding: 120px 0;
+      background: #fff;
+    }
+
+    .section-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 10px;
+    }
+
+    .section-heading {
+      font-family: var(--fd);
+      font-size: var(--h2-size);
+      font-weight: 700;
+      color: var(--charcoal);
+      letter-spacing: -0.015em;
+      margin-bottom: 48px;
+    }
+
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-lg);
+      position: relative;
+    }
+
+    .how-grid::before {
+      content: '';
+      position: absolute;
+      top: 44px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--mist) 0, var(--mist) 8px, transparent 8px, transparent 16px);
+      z-index: 0;
+    }
+
+    .how-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      padding: 0 16px;
+    }
+
+    .how-num {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--crimson);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--fd);
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 16px rgba(123, 0, 3, 0.18);
+    }
+
+    .how-step h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 8px;
+    }
+
+    .how-step p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--smoke);
+    }
+
+    .how-tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--emerald);
+      background: var(--emerald-bg);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+    }
+
+    /* ═══ LIVE AUCTIONS ═══ */
+    .auctions {
+      padding: 120px 0;
+    }
+
+    .auctions-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .auctions-top-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 7px 18px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--mist);
+      background: none;
+      font-family: var(--ff);
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--smoke);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chip:hover {
+      border-color: var(--crimson);
+      color: var(--crimson);
+    }
+
+    .chip.on {
+      background: var(--crimson);
+      color: #fff;
+      border-color: var(--crimson);
+    }
+
+    .view-all {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--crimson);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+      white-space: nowrap;
+    }
+
+    .view-all:hover {
+      gap: 8px;
+    }
+
+    .view-all svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .auction-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .p-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      cursor: pointer;
+    }
+
+    .p-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--crimson-glow);
+    }
+
+    .p-card-header {
+      padding: 14px 18px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .p-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--charcoal);
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .p-card-actions {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .p-card-action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--bone);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .p-card-action-btn:hover {
+      background: var(--crimson-subtle);
+    }
+
+    .p-card-action-btn svg {
+      width: 15px;
+      height: 15px;
+      color: var(--smoke);
+    }
+
+    .p-card-img {
+      width: 100%;
+      height: 240px;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .p-card-img-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 4px 11px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.05em;
+    }
+
+    .p-card-img-badge .ldot {
+      width: 5px;
+      height: 5px;
+      background: #ff4444;
+      border-radius: 50%;
+      animation: pulse 1.2s infinite;
+    }
+
+    .p-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .p-card-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--bone);
+    }
+
+    .p-card-stat {
+      padding: 12px 18px;
+      text-align: center;
+    }
+
+    .p-card-stat:first-child {
+      border-right: 1px solid var(--bone);
+    }
+
+    .p-card-stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ash);
+      margin-bottom: 3px;
+    }
+
+    .p-card-stat-val {
+      font-family: var(--fd);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .p-card-stat-val.price {
+      color: var(--crimson);
+    }
+
+    .p-card-stat-total {
+      font-size: 10px;
+      color: var(--ash);
+      margin-top: 1px;
+    }
+
+    .p-card-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-top: 1px solid var(--bone);
+      background: var(--cream);
+    }
+
+    .p-card-meta-item {
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .p-card-meta-item:not(:last-child) {
+      border-right: 1px solid var(--bone);
+    }
+
+    .p-card-meta-label {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ash);
+      margin-bottom: 2px;
+    }
+
+    .p-card-meta-val {
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .p-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      border-top: 1px solid var(--bone);
+    }
+
+    .p-card-seller {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--smoke);
+    }
+
+    .p-card-seller svg {
+      width: 13px;
+      height: 13px;
+      color: var(--crimson);
+    }
+
+    .p-card-stars {
+      display: flex;
+      gap: 1px;
+    }
+
+    .p-card-stars svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--star);
+      stroke: none;
+    }
+
+    /* ═══ CATEGORIES ═══ */
+    .categories {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--spacing-md);
+    }
+
+    .cat-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px 14px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1.5px solid transparent;
+    }
+
+    .cat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--crimson);
+    }
+
+    .cat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius);
+      background: var(--crimson-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 24px;
+      transition: all 0.3s;
+    }
+
+    .cat-card:hover .cat-icon {
+      background: var(--crimson-glow);
+      transform: scale(1.1);
+    }
+
+    .cat-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 3px;
+    }
+
+    .cat-count {
+      font-size: 11.5px;
+      color: var(--ash);
+    }
+
+    /* ═══ TRUST BAR ═══ */
+    .trust {
+      padding: 80px 0;
+      border-top: 1px solid var(--mist);
+      border-bottom: 1px solid var(--mist);
+      background: #fff;
+    }
+
+    .trust-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .trust-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--crimson-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .trust-icon svg {
+      width: 18px;
+      height: 18px;
+      color: var(--crimson);
+    }
+
+    .trust-item h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .trust-item p {
+      font-size: 12px;
+      color: var(--smoke);
+      margin-top: 1px;
+    }
+
+    .trust-sep {
+      width: 1px;
+      height: 36px;
+      background: var(--mist);
+    }
+
+    /* ═══ LOCATIONS ═══ */
+    .locations {
+      padding: 120px 0;
+    }
+
+    .loc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .loc-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      height: 280px;
+      cursor: pointer;
+      transition: all 0.35s;
+    }
+
+    .loc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .loc-card:hover .loc-link {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .loc-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .loc-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.15) 100%);
+    }
+
+    .loc-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      z-index: 2;
+    }
+
+    .loc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 10px;
+    }
+
+    .loc-name {
+      font-family: var(--fd);
+      font-size: 22px;
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .loc-addr {
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.55);
+    }
+
+    .loc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: all 0.3s;
+    }
+
+    .loc-link svg {
+      width: 13px;
+      height: 13px;
+      transition: transform 0.2s;
+    }
+
+    .loc-link:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ═══ SOCIAL PROOF ═══ */
+    .proof {
+      padding: 120px 0;
+      background: var(--cream);
+    }
+
+    .proof-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 36px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .proof-rating {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .proof-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--amber);
+      font-size: 18px;
+    }
+
+    .proof-avg {
+      font-family: var(--fd);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--charcoal);
+    }
+
+    .proof-count {
+      font-size: 13px;
+      color: var(--ash);
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+      margin-bottom: 64px;
+    }
+
+    .proof-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .proof-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .proof-card-stars {
+      color: var(--star);
+      font-size: 14px;
+      display: flex;
+      gap: 1px;
+    }
+
+    .proof-card-date {
+      font-size: 11px;
+      color: var(--ash);
+    }
+
+    .proof-card-text {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--smoke);
+      margin-bottom: 14px;
+    }
+
+    .proof-card-author {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--charcoal);
+    }
+
+    .proof-card-loc {
+      font-size: 12px;
+      color: var(--ash);
+    }
+
+    .stories-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--crimson);
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .stories-heading {
+      font-family: var(--fd);
+      font-size: var(--h2-size);
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 36px;
+      text-align: left;
+    }
+
+    .stories-featured {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      height: 380px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: all 0.35s;
+    }
+
+    .stories-featured:hover {
+      box-shadow: var(--shadow-xl);
+    }
+
+    .stories-featured-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #2c1a10, #1a0c05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stories-featured-bg-img {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&w=1200') center/cover;
+      opacity: 0.35;
+    }
+
+    .stories-featured-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.3) 60%, transparent);
+    }
+
+    .stories-featured-content {
+      position: relative;
+      z-index: 2;
+      padding: 48px;
+      max-width: 520px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stories-featured-quote {
+      font-family: var(--fd);
+      font-size: var(--h2-size);
+      color: #fff;
+      font-weight: 700;
+      font-style: italic;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .stories-featured-desc {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .btn-watch {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--crimson);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: var(--radius-full);
+      font-family: var(--ff);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-watch:hover {
+      background: var(--crimson-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(123, 0, 3, 0.3);
+    }
+
+    .btn-watch svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-lg);
+    }
+
+    .story-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      height: 200px;
+      cursor: pointer;
+      transition: all 0.35s;
+      background: var(--charcoal);
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .story-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+      transition: opacity 0.35s;
+    }
+
+    .story-card:hover .story-card-bg {
+      opacity: 0.4;
+    }
+
+    .story-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent 70%);
+    }
+
+    .story-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .story-card:hover .story-play {
+      background: var(--crimson);
+      border-color: var(--crimson);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .story-play svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+      margin-left: 2px;
+    }
+
+    .story-card-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 14px 16px;
+      z-index: 2;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+    }
+
+    /* ═══ CTA ═══ */
+    .cta {
+      padding: 120px 0;
+    }
+
+    .cta-box {
+      background: var(--charcoal);
+      border-radius: var(--radius-lg);
+      padding: 88px 72px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -80px;
+      right: -80px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: var(--crimson);
+      opacity: 0.08;
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      left: 30%;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--crimson);
+      opacity: 0.05;
+    }
+
+    .cta-text h2 {
+      font-family: var(--fd);
+      font-size: var(--h2-size);
+      color: #fff;
+      font-weight: 700;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-text p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.55);
+      line-height: 1.6;
+      max-width: 480px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--crimson);
+      border: none;
+      padding: 16px 40px;
+      border-radius: var(--radius-full);
+      font-family: var(--ff);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      background: var(--charcoal);
+      padding: 88px 40px 44px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    footer .container {
+      max-width: var(--max-w);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 56px;
+    }
+
+    .footer-brand-logo {
+      height: 36px;
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .footer-brand p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-app-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+
+    .footer-app-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-app-btn svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    .footer-app-btn-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .footer-app-btn-text small {
+      font-size: 9px;
+      opacity: 0.6;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-app-btn-text span {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .footer-col h5 {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a {
+      display: block;
+      color: rgba(255, 255, 255, 0.45);
+      text-decoration: none;
+      font-size: 13.5px;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bottom {
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom a {
+      color: rgba(255, 255, 255, 0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-bottom a:hover {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .footer-cities {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.35;
+      }
+    }
+
+    @keyframes cardFloat1 {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes cardFloat2 {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes cardFloat3 {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* ═══════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ═══════════════════════════════════════ */
+
+    /* Large tablets / small laptops */
+    @media(max-width:1080px) {
+      .hero .container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .hero::before {
+        display: none;
+      }
+
+      .hero-left {
+        max-width: 100%;
+      }
+
+      .auction-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .loc-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      }
+
+      .footer-grid .footer-col:last-child {
+        grid-column: span 1;
+      }
+
+      .trust-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .trust-sep {
+        display: none;
+      }
+    }
+
+    /* Tablets */
+    @media(max-width:900px) {
+      .nav-search {
+        display: none;
+      }
+
+      .nav-text-link {
+        display: none;
+      }
+
+      .nav-divider:first-of-type {
+        display: none;
+      }
+
+      .nav-icon-link span {
+        display: none;
+      }
+
+      .nav-icon-link {
+        padding: 6px 8px;
+      }
+
+      .how-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .how-grid::before {
+        display: none;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    /* Mobile landscape / large phones */
+    @media(max-width:768px) {
+      :root {
+        --nav-h: 60px;
+      }
+
+      .container {
+        padding: 0 24px;
+      }
+
+      .nav-inner {
+        padding: 0 20px;
+      }
+
+      .nav-drawer {
+        padding: 20px 24px 40px;
+      }
+
+      footer {
+        padding: 72px 24px 36px;
+      }
+
+      /* Show hamburger, hide desktop nav items */
+      .nav-hamburger {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav-signup-mobile {
+        display: block;
+      }
+
+      .hero {
+        padding: calc(var(--nav-h) + 48px) 0 80px;
+      }
+
+      .hero-sub {
+        font-size: 15px;
+      }
+
+      .hero-proof {
+        flex-direction: row;
+      }
+
+      .hero-proof-item {
+        padding: 20px 22px;
+      }
+
+      .hero-proof-val {
+        font-size: 22px;
+      }
+
+      .hero-actions {
+        gap: 10px;
+      }
+
+      .btn-primary {
+        padding: 13px 28px;
+        font-size: 14px;
+      }
+
+      .btn-ghost {
+        padding: 12px 22px;
+        font-size: 14px;
+      }
+
+      .how {
+        padding: 88px 0;
+      }
+
+      .section-heading {
+        margin-bottom: 32px;
+      }
+
+      .auctions {
+        padding: 40px 0 88px;
+      }
+
+      .auctions-top {
+        flex-wrap: wrap;
+      }
+
+      .auctions-top-right {
+        width: 100%;
+      }
+
+      .auction-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .p-card-img {
+        height: 220px;
+      }
+
+      .categories {
+        padding: 88px 0;
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .cat-card {
+        padding: 18px 10px;
+      }
+
+      .cat-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 20px;
+      }
+
+      .cat-name {
+        font-size: 12.5px;
+      }
+
+      .trust {
+        padding: 56px 0;
+      }
+
+      .trust-row {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .locations {
+        padding: 88px 0;
+      }
+
+      .loc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .loc-card {
+        height: 240px;
+      }
+
+      .proof {
+        padding: 88px 0;
+      }
+
+      .proof-grid {
+        grid-template-columns: 1fr;
+        margin-bottom: 48px;
+      }
+
+      .stories-featured {
+        height: 320px;
+      }
+
+      .stories-featured-content {
+        padding: 32px;
+      }
+
+      .stories-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card {
+        height: 180px;
+      }
+
+      .cta {
+        padding: 48px 0 96px;
+      }
+
+      .cta-box {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 56px 32px;
+      }
+
+      .cta-text p {
+        max-width: 100%;
+      }
+
+      .btn-white {
+        width: 100%;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .footer-brand {
+        grid-column: 1/-1;
+      }
+    }
+
+    /* Small phones */
+    @media(max-width:480px) {
+      .container {
+        padding: 0 18px;
+      }
+
+      .nav-inner {
+        padding: 0 14px;
+        gap: 10px;
+      }
+
+      .nav-logo svg {
+        height: 24px;
+      }
+
+      .nav-drawer {
+        padding: 16px 18px 32px;
+      }
+
+      footer {
+        padding: 56px 18px 28px;
+      }
+
+      .hero {
+        padding: calc(var(--nav-h) + 32px) 0 64px;
+      }
+
+      .hero-live-tag {
+        font-size: 11px;
+        padding: 5px 12px;
+        margin-bottom: 18px;
+      }
+
+      .hero h1 {
+        font-size: clamp(28px, 8vw, 36px);
+        margin-bottom: 14px;
+      }
+
+      .hero-sub {
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn-primary,
+      .btn-ghost {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .hero-proof {
+        flex-direction: column;
+        border-radius: var(--radius-sm);
+      }
+
+      .hero-proof-item:not(:last-child)::after {
+        display: none;
+      }
+
+      .hero-proof-item {
+        border-bottom: 1px solid var(--mist);
+        padding: 16px 20px;
+      }
+
+      .hero-proof-item:last-child {
+        border-bottom: none;
+      }
+
+      .hero-proof-val {
+        font-size: 22px;
+      }
+
+      .hero-proof-label {
+        font-size: 11px;
+      }
+
+      .how {
+        padding: 72px 0;
+      }
+
+      .how-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .how-step {
+        padding: 0;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 52px 1fr;
+        gap: 0 16px;
+        align-items: start;
+      }
+
+      .how-num {
+        margin: 0;
+        grid-row: 1/3;
+      }
+
+      .how-step h3 {
+        align-self: end;
+        margin-bottom: 4px;
+      }
+
+      .how-step p {
+        grid-column: 2;
+      }
+
+      .how-tag {
+        grid-column: 2;
+        justify-self: start;
+      }
+
+      .auctions {
+        padding: 32px 0 72px;
+      }
+
+      .auctions-top {
+        gap: 12px;
+      }
+
+      .filters {
+        gap: 5px;
+      }
+
+      .chip {
+        padding: 6px 14px;
+        font-size: 11.5px;
+      }
+
+      .p-card-img {
+        height: 180px;
+      }
+
+      .categories {
+        padding: 72px 0;
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+      }
+
+      .trust {
+        padding: 48px 0;
+      }
+
+      .locations {
+        padding: 72px 0;
+      }
+
+      .loc-card {
+        height: 220px;
+      }
+
+      .loc-content {
+        padding: 18px;
+      }
+
+      .loc-name {
+        font-size: 19px;
+      }
+
+      .proof {
+        padding: 72px 0;
+      }
+
+      .proof-card {
+        padding: 22px;
+      }
+
+      .stories-featured {
+        height: 280px;
+      }
+
+      .stories-featured-content {
+        padding: 24px;
+      }
+
+      .stories-featured-quote {
+        font-size: 22px;
+      }
+
+      .stories-featured-desc {
+        font-size: 13px;
+        margin-bottom: 18px;
+      }
+
+      .story-card {
+        height: 160px;
+      }
+
+      .cta {
+        padding: 32px 0 64px;
+      }
+
+      .cta-box {
+        padding: 40px 22px;
+        border-radius: 20px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .footer-brand {
+        grid-column: auto;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .footer-cities {
+        justify-content: center;
+      }
+    }
+
+    /* Ultrawide */
+    @media(min-width:1600px) {
+      :root {
+        --max-w: 1400px;
+      }
+
+      .auction-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .cat-grid {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224.3994 67.8348">
+          <defs>
+            <style>
+              .cls-1,
+              .cls-2 {
+                fill: #7b0003;
+              }
+
+              .cls-1 {
+                fill-rule: evenodd;
+              }
+            </style>
+          </defs>
+          <path class="cls-1"
+            d="M35.9846,1.3571A33.9183,33.9183,0,0,1,63.87,54.4866l.0011.0028-.0226.0284a34.0459,34.0459,0,0,1-3.0218,3.774l-.0022-.0051-.0644.08L48.0071,28.43,40.1144,47.0136H35.918L46.1754,23.5348h3.7967l12.426,27.6738A30.9055,30.9055,0,0,0,35.9846,4.3729V1.3571ZM11.6066,23.7012V47.0136H15.67V30.4287L28.4969,47.0136h3.4248V1.5918a33.9182,33.9182,0,1,0,25.5475,59.874L56.2316,58.56A30.9038,30.9038,0,1,1,27.8588,5.4353V39.82L15.3977,23.7012Z"
+            transform="translate(-2.0003 -1.3571)" />
+          <path class="cls-1"
+            d="M102.9367,9.2805V25.6767L89.918,9.2805H88.1572V29.487h2.1359V13.0908l12.99,16.3962h1.7609V9.2805ZM113.762,27.64V20.1341h10.45V18.3157h-10.45V11.1279h11.72V9.2805h-13.856V29.487h14.2888V27.64Zm17.1756,1.8473h13.4518V27.64H133.0738V9.2805h-2.1362V29.487Zm17.0025,0h13.4518V27.64H150.0763V9.2805H147.94V29.487Zm17.0025,0h2.1362V9.2805h-2.1362V29.487Zm14.2892.1732c5.167,0,7.5339-2.54,7.5339-5.5134,0-7.361-12.4413-4.0127-12.4413-9.555,0-2.02,1.6453-3.6661,5.34-3.6661A10.401,10.401,0,0,1,185.2069,12.6l.7217-1.7034a11.4072,11.4072,0,0,0-6.264-1.79c-5.1383,0-7.4477,2.5694-7.4477,5.5426,0,7.4764,12.4415,4.07,12.4415,9.6126,0,1.9919-1.6452,3.58-5.4266,3.58a9.9225,9.9225,0,0,1-6.6682-2.4537l-.8374,1.6452C173.2274,28.5921,176.2007,29.66,179.2318,29.66Z"
+            transform="translate(-2.0003 -1.3571)" />
+          <path class="cls-1"
+            d="M105.91,61.4714h4.907l-9.0351-20.2067H97.1637L88.1572,61.4714h4.7917l1.79-4.33h9.3816l1.79,4.33Zm-9.67-7.8806,3.204-7.7363,3.2043,7.7363Zm25.2295,8.227c5.7444,0,9.1508-3.2907,9.1508-9.2372V41.2647h-4.6188V52.4074c0,3.8392-1.6455,5.4269-4.5031,5.4269-2.829,0-4.5034-1.5877-4.5034-5.4269V41.2647h-4.6763V52.5806c0,5.9465,3.4063,9.2372,9.1508,9.2372Zm23.44,0a10.3827,10.3827,0,0,0,8.3424-3.6082L150.25,55.4385a6.4405,6.4405,0,0,1-5.0805,2.3958,6.199,6.199,0,0,1-6.4664-6.4661,6.1991,6.1991,0,0,1,6.4664-6.4664A6.5017,6.5017,0,0,1,150.25,47.269l3.0019-2.7711a10.4313,10.4313,0,0,0-8.3134-3.58c-6.293,0-10.97,4.3591-10.97,10.45s4.6766,10.45,10.9406,10.45Zm15.4727-.3464h4.6763V45.0753h6.4661V41.2647H153.9156v3.8106h6.4661V61.4714Zm13.6539,0h4.6763V41.2647h-4.6763V61.4714Zm19.254.3464c6.3508,0,11.056-4.4166,11.056-10.45s-4.7052-10.45-11.056-10.45c-6.38,0-11.0559,4.4456-11.0559,10.45s4.6763,10.45,11.0559,10.45Zm0-3.9835a6.164,6.164,0,0,1-6.3218-6.4661,6.3235,6.3235,0,1,1,12.6437,0,6.1642,6.1642,0,0,1-6.3219,6.4661Zm28.4913-16.57V53.5333L211.7355,41.2647h-3.8681V61.4714h4.6185V49.2031l10.0746,12.2683H226.4V41.2647Z"
+            transform="translate(-2.0003 -1.3571)" />
+          <rect class="cls-2" x="75.5095" y="8.0046" width="1.5815" height="52.4561" />
+        </svg>
+      </a>
+
+      <div class="nav-search">
+        <input type="text" placeholder="Explore all items...">
+        <button class="nav-search-icon"><svg fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m20 20-3.5-3.5" />
+          </svg></button>
+      </div>
+
+      <div class="nav-links">
+        <a href="#" class="nav-text-link">About Us</a>
+        <a href="#" class="nav-text-link">Careers</a>
+        <a href="#" class="nav-text-link">Contact Us</a>
+        <div class="nav-divider"></div>
+        <div class="nav-icon-link" title="Spotlight"><svg fill="none" stroke="currentColor" stroke-width="1.8"
+            viewBox="0 0 24 24">
+            <path
+              d="M15 10l4.553-2.276A1 1 0 0 1 21 8.618v6.764a1 1 0 0 1-1.447.894L15 14M5 18h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z" />
+          </svg><span>Spotlight</span></div>
+        <div class="nav-icon-link loc-active" title="Las Vegas, NV"><svg fill="none" stroke="currentColor"
+            stroke-width="1.8" viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+            <circle cx="12" cy="9" r="2.5" />
+          </svg><span>Las Vegas, NV</span></div>
+        <div class="nav-icon-link" title="Pick Ups"><svg fill="none" stroke="currentColor" stroke-width="1.8"
+            viewBox="0 0 24 24">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <path d="M16 10a4 4 0 0 1-8 0" />
+          </svg><span>Pick Ups</span></div>
+        <div class="nav-icon-link" title="Notifications"><svg fill="none" stroke="currentColor" stroke-width="1.8"
+            viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 5a2 2 0 1 1 4 0 7 7 0 0 1 4 6v3a4 4 0 0 0 2 3H4a4 4 0 0 0 2-3v-3a7 7 0 0 1 4-6" />
+            <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+          </svg><span>Notifications</span></div>
+        <div class="nav-icon-link" title="Account"><svg fill="none" stroke="currentColor" stroke-width="1.8"
+            viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+            <circle cx="12" cy="7" r="4" />
+          </svg><span>Account</span></div>
+        <div class="nav-divider"></div>
+        <button class="nav-signup">Sign Up Free</button>
+      </div>
+
+      <!-- Hamburger (mobile only) -->
+      <button class="nav-hamburger" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" id="navDrawer">
+    <div class="mob-search">
+      <input type="text" placeholder="Explore all items...">
+      <button><svg fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="7" />
+          <path d="m20 20-3.5-3.5" />
+        </svg></button>
+    </div>
+    <a href="#" class="nav-drawer-link"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path
+          d="M15 10l4.553-2.276A1 1 0 0 1 21 8.618v6.764a1 1 0 0 1-1.447.894L15 14M5 18h8a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z" />
+      </svg> Spotlight</a>
+    <a href="#" class="nav-drawer-link"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+        <circle cx="12" cy="9" r="2.5" />
+      </svg> Las Vegas, NV</a>
+    <a href="#" class="nav-drawer-link"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10a4 4 0 0 1-8 0" />
+      </svg> Pick Ups</a>
+    <a href="#" class="nav-drawer-link"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 5a2 2 0 1 1 4 0 7 7 0 0 1 4 6v3a4 4 0 0 0 2 3H4a4 4 0 0 0 2-3v-3a7 7 0 0 1 4-6" />
+        <path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+      </svg> Notifications</a>
+    <a href="#" class="nav-drawer-link"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg> Account</a>
+    <div class="nav-drawer-divider"></div>
+    <a href="#" class="nav-drawer-link">About Us</a>
+    <a href="#" class="nav-drawer-link">Careers</a>
+    <a href="#" class="nav-drawer-link">Contact Us</a>
+    <button class="nav-signup">Sign Up Free</button>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-left">
+        <div class="hero-live-tag"><span class="pulse-dot"></span> 0000 auctions closing tonight</div>
+        <h1>Bid on brand-name items. <em>Pay a fraction.</em></h1>
+        <p class="hero-sub">Thousands of products from top retailers auctioned daily, starting at $1. Win online, pick
+          up locally in under 2 minutes, return hassle-free within 7 days.</p>
+        <div class="hero-actions">
+          <button class="btn-primary">Start Bidding, It's Free</button>
+          <button class="btn-ghost"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg> Watch How It Works</button>
+        </div>
+        <div class="hero-proof">
+          <div class="hero-proof-item">
+            <div class="hero-proof-val">00+</div>
+            <div class="hero-proof-label">Items listed daily</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-val">00+</div>
+            <div class="hero-proof-label">Registered bidders</div>
+          </div>
+          <div class="hero-proof-item">
+            <div class="hero-proof-val">00%</div>
+            <div class="hero-proof-label">Avg. savings vs retail</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="bento">
+          <!-- Product card - left column, spans 2 rows, matches Closing Tonight cards -->
+          <div class="bento-card bento-product" style="padding:0;">
+            <div class="p-card-header" style="padding:10px 14px 6px;">
+              <div class="p-card-title" style="font-size:12px;">Raquel Welch AHEAD OF THE CURVE Sophisticated Mid-Length
+                Layered Wig by...</div>
+              <div class="p-card-actions"><button class="p-card-action-btn" style="width:26px;height:26px;"><svg
+                    fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                    style="width:12px;height:12px;">
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                  </svg></button><button class="p-card-action-btn" style="width:26px;height:26px;"><svg fill="none"
+                    stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="width:12px;height:12px;">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                    <polyline points="16 6 12 2 8 6" />
+                    <line x1="12" y1="2" x2="12" y2="15" />
+                  </svg></button></div>
+            </div>
+            <div class="p-card-img" style="height:140px;background:#f7f4f0;">
+              <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+                src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&w=400" alt="Wig">
+            </div>
+            <div class="p-card-stats">
+              <div class="p-card-stat" style="padding:8px 12px;">
+                <div class="p-card-stat-label" style="font-size:9px;">Time Left</div>
+                <div class="p-card-stat-val" style="font-size:16px;">10 hours</div>
+              </div>
+              <div class="p-card-stat" style="padding:8px 12px;">
+                <div class="p-card-stat-label" style="font-size:9px;">Current Price</div>
+                <div class="p-card-stat-val price" style="font-size:16px;">$21</div>
+                <div class="p-card-stat-total">~$26 total</div>
+              </div>
+            </div>
+            <div class="p-card-meta">
+              <div class="p-card-meta-item" style="padding:6px 8px;">
+                <div class="p-card-meta-label" style="font-size:8px;">Est. Retail</div>
+                <div class="p-card-meta-val" style="font-size:10px;">$233.54</div>
+              </div>
+              <div class="p-card-meta-item" style="padding:6px 8px;">
+                <div class="p-card-meta-label" style="font-size:8px;">Bids</div>
+                <div class="p-card-meta-val" style="font-size:10px;">8</div>
+              </div>
+              <div class="p-card-meta-item" style="padding:6px 8px;">
+                <div class="p-card-meta-label" style="font-size:8px;">Buyer's Prem.</div>
+                <div class="p-card-meta-val" style="font-size:10px;">15%</div>
+              </div>
+            </div>
+            <div class="p-card-footer" style="padding:6px 14px;">
+              <div class="p-card-seller" style="font-size:10px;"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24" style="width:11px;height:11px;">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg> Legacy Bids</div>
+              <div class="p-card-stars"><svg viewBox="0 0 20 20" style="width:10px;height:10px;">
+                  <path
+                    d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+                </svg><svg viewBox="0 0 20 20" style="width:10px;height:10px;">
+                  <path
+                    d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+                </svg><svg viewBox="0 0 20 20" style="width:10px;height:10px;">
+                  <path
+                    d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+                </svg><svg viewBox="0 0 20 20" style="width:10px;height:10px;">
+                  <path
+                    d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+                </svg><svg viewBox="0 0 20 20" style="width:10px;height:10px;">
+                  <path
+                    d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+                </svg></div>
+            </div>
+          </div>
+
+          <!-- Stats card - right top -->
+          <div class="bento-card bento-stats-card bento-stats">
+            <div class="bento-stats-title">Total Savings This Week</div>
+            <div class="bento-stats-big">$0,000</div>
+            <div class="bento-stats-sub">Avg. 00% off retail across 000 items</div>
+            <div class="bento-stats-bar">
+              <div class="bento-stats-fill" style="width:74%;"></div>
+            </div>
+          </div>
+
+          <!-- Category list - right bottom -->
+          <div class="bento-card bento-cats">
+            <div class="bento-cats-title">Top Categories</div>
+            <div class="bento-cat-item">
+              <div class="bento-cat-icon">📱</div> Electronics <span class="bento-cat-count">0000</span>
+            </div>
+            <div class="bento-cat-item">
+              <div class="bento-cat-icon">🛋️</div> Furniture <span class="bento-cat-count">0000</span>
+            </div>
+            <div class="bento-cat-item">
+              <div class="bento-cat-icon">👕</div> Clothing <span class="bento-cat-count">0000</span>
+            </div>
+
+          </div>
+
+          <!-- Photo banner - full width -->
+          <div class="bento-card bento-photo">
+            <img src="https://images.pexels.com/photos/1797428/pexels-photo-1797428.jpeg?auto=compress&w=800"
+              alt="Warehouse">
+            <div class="bento-photo-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how" id="how">
+    <div class="container">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-heading">Bid to doorstep in four steps</h2>
+      <div class="how-grid">
+        <div class="how-step">
+          <div class="how-num">1</div>
+          <h3>Discover</h3>
+          <p>Browse thousands of items from top retailers. Filter by category, price, condition, ratings, event name,
+            event time, or adult content.</p>
+        </div>
+        <div class="how-step">
+          <div class="how-num">2</div>
+          <h3>Bid & Win</h3>
+          <p>Set your minimum bid, see total cost before you commit. No surprises.</p><span class="how-tag">Bids start
+            at $1</span>
+        </div>
+        <div class="how-step">
+          <div class="how-num">3</div>
+          <h3>Schedule Pickup</h3>
+          <p>Pick a time within 7 days. Items are packed, labeled, and brought curbside to your vehicle.</p><span
+            class="how-tag">Avg. 2 min pickup</span>
+        </div>
+        <div class="how-step">
+          <div class="how-num">4</div>
+          <h3>Love It or Return It</h3>
+          <p>Not as described? Return hassle-free within 7 days for a full refund. Zero risk.</p><span
+            class="how-tag">7-day guarantee</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE AUCTIONS -->
+  <section class="auctions">
+    <div class="container">
+      <div class="auctions-top">
+        <div>
+          <div class="section-label">Closing Tonight</div>
+          <h2 class="section-heading" style="margin-bottom:0;">Live auctions near you</h2>
+        </div>
+        <div class="auctions-top-right">
+          <div class="filters"><button class="chip on">All</button><button class="chip">Electronics</button><button
+              class="chip">Home</button><button class="chip">Furniture</button><button class="chip">Sports</button>
+          </div>
+          <a href="#" class="view-all">View all auctions <svg fill="none" stroke="currentColor" stroke-width="2.5"
+              viewBox="0 0 24 24">
+              <path d="M5 12h14m-7-7 7 7-7 7" />
+            </svg></a>
+        </div>
+      </div>
+      <div class="auction-grid">
+        <!-- Card 1 -->
+        <div class="p-card">
+          <div class="p-card-header">
+            <div class="p-card-title">Raquel Welch AHEAD OF THE CURVE Sophisticated Mid-Length Layered Wig by...</div>
+            <div class="p-card-actions"><button class="p-card-action-btn"><svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button><button class="p-card-action-btn"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg></button></div>
+          </div>
+          <div class="p-card-img" style="background:#f7f4f0;">
+            <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+              src="https://images.pexels.com/photos/3993449/pexels-photo-3993449.jpeg?auto=compress&w=400" alt="Wig">
+          </div>
+          <div class="p-card-stats">
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Time Left</div>
+              <div class="p-card-stat-val">10 hours</div>
+            </div>
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Current Price</div>
+              <div class="p-card-stat-val price">$21</div>
+              <div class="p-card-stat-total">~$26 total</div>
+            </div>
+          </div>
+          <div class="p-card-meta">
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Est. Retail</div>
+              <div class="p-card-meta-val">$233.54</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Bids</div>
+              <div class="p-card-meta-val">8</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Buyer's Prem.</div>
+              <div class="p-card-meta-val">15%</div>
+            </div>
+          </div>
+          <div class="p-card-footer">
+            <div class="p-card-seller"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg> Legacy Bids</div>
+            <div class="p-card-stars"><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg></div>
+          </div>
+        </div>
+        <!-- Card 4 -->
+        <div class="p-card">
+          <div class="p-card-header">
+            <div class="p-card-title">Dyson V15 Detect Cordless Vacuum Cleaner</div>
+            <div class="p-card-actions"><button class="p-card-action-btn"><svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button><button class="p-card-action-btn"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg></button></div>
+          </div>
+          <div class="p-card-img" style="background:#f4f3f7;">
+            <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+              src="https://images.pexels.com/photos/4108715/pexels-photo-4108715.jpeg?auto=compress&w=400"
+              alt="Dyson Vacuum">
+          </div>
+          <div class="p-card-stats">
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Time Left</div>
+              <div class="p-card-stat-val">5 hours</div>
+            </div>
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Current Price</div>
+              <div class="p-card-stat-val price">$196</div>
+              <div class="p-card-stat-total">~$225 total</div>
+            </div>
+          </div>
+          <div class="p-card-meta">
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Est. Retail</div>
+              <div class="p-card-meta-val">$749.99</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Bids</div>
+              <div class="p-card-meta-val">22</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Buyer's Prem.</div>
+              <div class="p-card-meta-val">15%</div>
+            </div>
+          </div>
+          <div class="p-card-footer">
+            <div class="p-card-seller"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg> Dean Martin</div>
+            <div class="p-card-stars"><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg></div>
+          </div>
+        </div>
+        <!-- Card 5 -->
+        <div class="p-card">
+          <div class="p-card-header">
+            <div class="p-card-title">KitchenAid Artisan 5-Quart Stand Mixer - Empire Red</div>
+            <div class="p-card-actions"><button class="p-card-action-btn"><svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button><button class="p-card-action-btn"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg></button></div>
+          </div>
+          <div class="p-card-img" style="background:#faf5f0;">
+            <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+              src="https://images.pexels.com/photos/4226896/pexels-photo-4226896.jpeg?auto=compress&w=400"
+              alt="KitchenAid Mixer">
+          </div>
+          <div class="p-card-stats">
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Time Left</div>
+              <div class="p-card-stat-val">3 hours</div>
+            </div>
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Current Price</div>
+              <div class="p-card-stat-val price">$118</div>
+              <div class="p-card-stat-total">~$136 total</div>
+            </div>
+          </div>
+          <div class="p-card-meta">
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Est. Retail</div>
+              <div class="p-card-meta-val">$449.99</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Bids</div>
+              <div class="p-card-meta-val">15</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Buyer's Prem.</div>
+              <div class="p-card-meta-val">15%</div>
+            </div>
+          </div>
+          <div class="p-card-footer">
+            <div class="p-card-seller"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg> N. Las Vegas</div>
+            <div class="p-card-stars"><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg></div>
+          </div>
+        </div>
+        <!-- Card 6 -->
+        <div class="p-card">
+          <div class="p-card-header">
+            <div class="p-card-title">Samsung 65" Class QLED 4K Smart TV (2024 Model)</div>
+            <div class="p-card-actions"><button class="p-card-action-btn"><svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button><button class="p-card-action-btn"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg></button></div>
+          </div>
+          <div class="p-card-img" style="background:#f3f4f6;">
+            <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+              src="https://images.pexels.com/photos/6976103/pexels-photo-6976103.jpeg?auto=compress&w=400"
+              alt="Samsung TV">
+          </div>
+          <div class="p-card-stats">
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Time Left</div>
+              <div class="p-card-stat-val">7 hours</div>
+            </div>
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Current Price</div>
+              <div class="p-card-stat-val price">$340</div>
+              <div class="p-card-stat-total">~$391 total</div>
+            </div>
+          </div>
+          <div class="p-card-meta">
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Est. Retail</div>
+              <div class="p-card-meta-val">$997.99</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Bids</div>
+              <div class="p-card-meta-val">31</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Buyer's Prem.</div>
+              <div class="p-card-meta-val">15%</div>
+            </div>
+          </div>
+          <div class="p-card-footer">
+            <div class="p-card-seller"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg> Legacy Bids</div>
+            <div class="p-card-stars"><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg></div>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div class="p-card">
+          <div class="p-card-header">
+            <div class="p-card-title">Brass Battery Wall Sconces Battery Operated</div>
+            <div class="p-card-actions"><button class="p-card-action-btn"><svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button><button class="p-card-action-btn"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg></button></div>
+          </div>
+          <div class="p-card-img" style="background:#f5f3ef;">
+            <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+              src="https://images.pexels.com/photos/1123262/pexels-photo-1123262.jpeg?auto=compress&w=400"
+              alt="Wall Sconces">
+          </div>
+          <div class="p-card-stats">
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Time Left</div>
+              <div class="p-card-stat-val">12 hours</div>
+            </div>
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Current Price</div>
+              <div class="p-card-stat-val price">$10</div>
+              <div class="p-card-stat-total">~$13 total</div>
+            </div>
+          </div>
+          <div class="p-card-meta">
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Est. Retail</div>
+              <div class="p-card-meta-val">$90.00</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Bids</div>
+              <div class="p-card-meta-val">4</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Buyer's Prem.</div>
+              <div class="p-card-meta-val">15%</div>
+            </div>
+          </div>
+          <div class="p-card-footer">
+            <div class="p-card-seller"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg> Legacy Bids</div>
+            <div class="p-card-stars"><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg></div>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div class="p-card">
+          <div class="p-card-header">
+            <div class="p-card-title">Portable Baby Bouncer Seat with 8 Melodies, 3 Vibration Levels & Adjustable Volume
+            </div>
+            <div class="p-card-actions"><button class="p-card-action-btn"><svg fill="none" stroke="currentColor"
+                  stroke-width="2" viewBox="0 0 24 24">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg></button><button class="p-card-action-btn"><svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24">
+                  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+                  <polyline points="16 6 12 2 8 6" />
+                  <line x1="12" y1="2" x2="12" y2="15" />
+                </svg></button></div>
+          </div>
+          <div class="p-card-img" style="background:#faf5f8;">
+            <div class="p-card-img-badge"><span class="ldot"></span>LIVE</div><img
+              src="https://images.pexels.com/photos/3661263/pexels-photo-3661263.jpeg?auto=compress&w=400"
+              alt="Baby Bouncer">
+          </div>
+          <div class="p-card-stats">
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Time Left</div>
+              <div class="p-card-stat-val">9 hours</div>
+            </div>
+            <div class="p-card-stat">
+              <div class="p-card-stat-label">Current Price</div>
+              <div class="p-card-stat-val price">$7</div>
+              <div class="p-card-stat-total">~$9 total</div>
+            </div>
+          </div>
+          <div class="p-card-meta">
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Est. Retail</div>
+              <div class="p-card-meta-val">$34.80</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Bids</div>
+              <div class="p-card-meta-val">7</div>
+            </div>
+            <div class="p-card-meta-item">
+              <div class="p-card-meta-label">Buyer's Prem.</div>
+              <div class="p-card-meta-val">15%</div>
+            </div>
+          </div>
+          <div class="p-card-footer">
+            <div class="p-card-seller"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                <circle cx="12" cy="9" r="2.5" />
+              </svg> Legacy Bids</div>
+            <div class="p-card-stars"><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg><svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.33L10 13.28l-4.77 2.51.91-5.33L2.27 6.69l5.34-.78L10 1z" />
+              </svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="categories">
+    <div class="container">
+      <div class="section-label">Browse Categories</div>
+      <h2 class="section-heading">Find exactly what you need</h2>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <div class="cat-icon">📱</div>
+          <div class="cat-name">Electronics</div>
+          <div class="cat-count">0000 items</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon">🏠</div>
+          <div class="cat-name">Home & Household</div>
+          <div class="cat-count">0000 items</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon">🛋️</div>
+          <div class="cat-name">Furniture</div>
+          <div class="cat-count">0000 items</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon">👕</div>
+          <div class="cat-name">Clothing & Shoes</div>
+          <div class="cat-count">0000 items</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon">🌿</div>
+          <div class="cat-name">Patio & Garden</div>
+          <div class="cat-count">0000 items</div>
+        </div>
+        <div class="cat-card">
+          <div class="cat-icon">💄</div>
+          <div class="cat-name">Beauty & Care</div>
+          <div class="cat-count">0000 items</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust">
+    <div class="container">
+      <div class="trust-row">
+        <div class="trust-item">
+          <div class="trust-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg></div>
+          <div>
+            <h4>7-Day Hassle-Free Returns</h4>
+            <p>Full refund if item isn't as described</p>
+          </div>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg></div>
+          <div>
+            <h4>2-Minute Curbside Pickup</h4>
+            <p>Items brought directly to your vehicle</p>
+          </div>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path
+                d="M12 1v4m0 14v4M5.64 5.64l2.83 2.83m7.07 7.07 2.83 2.83M1 12h4m14 0h4M5.64 18.36l2.83-2.83m7.07-7.07 2.83-2.83" />
+            </svg></div>
+          <div>
+            <h4>Transparent Total Pricing</h4>
+            <p>See full cost before you bid</p>
+          </div>
+        </div>
+        <div class="trust-sep"></div>
+        <div class="trust-item">
+          <div class="trust-icon"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg></div>
+          <div>
+            <h4>9 Pickup Locations</h4>
+            <p>Across 6 U.S. metro areas</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATIONS -->
+  <section class="locations">
+    <div class="container">
+      <div class="section-label">Pickup Locations</div>
+      <h2 class="section-heading">Always stocked, always close</h2>
+      <div class="loc-grid">
+        <div class="loc-card">
+          <div class="loc-bg"
+            style="background-image:url('https://images.pexels.com/photos/1797428/pexels-photo-1797428.jpeg?auto=compress&w=600');">
+          </div>
+          <div class="loc-overlay"></div>
+          <div class="loc-content">
+            <div class="loc-badge">🔥 20,592 items</div>
+            <div class="loc-name">Dean Martin</div>
+            <div class="loc-addr">7440 Dean Martin Dr Suite 204, Las Vegas</div><a href="#" class="loc-link">Explore
+              auctions <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="loc-card">
+          <div class="loc-bg"
+            style="background-image:url('https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&w=600');">
+          </div>
+          <div class="loc-overlay"></div>
+          <div class="loc-content">
+            <div class="loc-badge">🔥 27,775 items</div>
+            <div class="loc-name">North Las Vegas</div>
+            <div class="loc-addr">4031 Market Center Dr Suite 303</div><a href="#" class="loc-link">Explore auctions
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+        <div class="loc-card">
+          <div class="loc-bg"
+            style="background-image:url('https://images.pexels.com/photos/2091166/pexels-photo-2091166.jpeg?auto=compress&w=600');">
+          </div>
+          <div class="loc-overlay"></div>
+          <div class="loc-content">
+            <div class="loc-badge">🔥 5,094 items</div>
+            <div class="loc-name">Nellis Outlet</div>
+            <div class="loc-addr">4000 Meadows Ln, Las Vegas</div><a href="#" class="loc-link">Explore auctions <svg
+                fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <path d="M5 12h14m-7-7 7 7-7 7" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS + STORIES -->
+  <section class="proof">
+    <div class="container">
+      <div class="proof-header">
+        <div>
+          <div class="section-label">What Customers Say</div>
+          <h2 class="section-heading" style="margin-bottom:0;">Trusted by bidders nationwide</h2>
+        </div>
+        <div class="proof-rating">
+          <div class="proof-stars">★★★★★</div>
+          <div class="proof-avg">4.8</div>
+          <div class="proof-count">on Google</div>
+        </div>
+      </div>
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="proof-card-top">
+            <div class="proof-card-stars">★★★★★</div>
+            <div class="proof-card-date">Mesa, AZ</div>
+          </div>
+          <div class="proof-card-text">Nellis Auction in Mesa is a well-oiled machine! The website works well, & pickup
+            is always quick & easy! Great job!</div>
+          <div class="proof-card-author">Aaron S.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-card-top">
+            <div class="proof-card-stars">★★★★★</div>
+            <div class="proof-card-date">SW Houston, TX</div>
+          </div>
+          <div class="proof-card-text">Great experience! The service was fast and efficient. Pickup was smooth and well
+            organized. I would definitely use Nellis Auction again!</div>
+          <div class="proof-card-author">Michelle C.</div>
+        </div>
+        <div class="proof-card">
+          <div class="proof-card-top">
+            <div class="proof-card-stars">★★★★★</div>
+            <div class="proof-card-date">Katy, TX</div>
+          </div>
+          <div class="proof-card-text">This Nellis location is first class with helpful employees across the board. I
+            have never experienced such an organized operation such that when I pull up in my car and provide
+            confirmation of arrival, it has been MAX 5 minutes and I am on the road with as many as 10 items. All are
+            very helpful!</div>
+          <div class="proof-card-author">Rick P.</div>
+        </div>
+      </div>
+      <div class="stories-label">Watch Our Customer Stories</div>
+      <h3 class="stories-heading">Real savings from real people</h3>
+      <div class="stories-featured">
+        <div class="stories-featured-bg">
+          <div class="stories-featured-bg-img"></div>
+        </div>
+        <div class="stories-featured-overlay"></div>
+        <div class="stories-featured-content">
+          <div class="stories-featured-quote">"We saved thousands furnishing our house"</div>
+          <div class="stories-featured-desc">See how the Moura Family saved several thousand dollars decorating and
+            furnishing their gorgeous home with items they won at Nellis Auction.</div>
+          <button class="btn-watch"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" fill="#fff" />
+            </svg> Watch Video</button>
+        </div>
+      </div>
+      <div class="stories-grid">
+        <div class="story-card">
+          <div class="story-card-bg"
+            style="background-image:url('https://images.pexels.com/photos/2102587/pexels-photo-2102587.jpeg?auto=compress&w=400');">
+          </div>
+          <div class="story-card-overlay"></div>
+          <div class="story-play"><svg viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg></div>
+          <div class="story-card-title">Las Vegas Tiny Home Builder Spends $3,500 for $19,000 Worth of Stuff</div>
+        </div>
+        <div class="story-card">
+          <div class="story-card-bg"
+            style="background-image:url('https://images.pexels.com/photos/1267338/pexels-photo-1267338.jpeg?auto=compress&w=400');">
+          </div>
+          <div class="story-card-overlay"></div>
+          <div class="story-play"><svg viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg></div>
+          <div class="story-card-title">Introduction to Nellis Auction & Our Retail Return Liquidations!</div>
+        </div>
+        <div class="story-card">
+          <div class="story-card-bg"
+            style="background-image:url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&w=400');">
+          </div>
+          <div class="story-card-overlay"></div>
+          <div class="story-play"><svg viewBox="0 0 24 24">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg></div>
+          <div class="story-card-title">Full Home Tour with Mary's Ultimate Tips & Hacks on How to Get Deals</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-text">
+          <h2>Ready to stop paying retail?</h2>
+          <p>Join smart shoppers who save up to 80% on brand-name items every day. Free to sign up, $1 to start bidding.
+          </p>
+        </div>
+        <button class="btn-white">Create Free Account</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <svg class="footer-brand-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224.3994 67.8348">
+            <defs>
+              <style>
+                .ftr-1,
+                .ftr-2 {
+                  fill: #ffffff;
+                }
+
+                .ftr-1 {
+                  fill-rule: evenodd;
+                }
+              </style>
+            </defs>
+            <path class="ftr-1"
+              d="M35.9846,1.3571A33.9183,33.9183,0,0,1,63.87,54.4866l.0011.0028-.0226.0284a34.0459,34.0459,0,0,1-3.0218,3.774l-.0022-.0051-.0644.08L48.0071,28.43,40.1144,47.0136H35.918L46.1754,23.5348h3.7967l12.426,27.6738A30.9055,30.9055,0,0,0,35.9846,4.3729V1.3571ZM11.6066,23.7012V47.0136H15.67V30.4287L28.4969,47.0136h3.4248V1.5918a33.9182,33.9182,0,1,0,25.5475,59.874L56.2316,58.56A30.9038,30.9038,0,1,1,27.8588,5.4353V39.82L15.3977,23.7012Z"
+              transform="translate(-2.0003 -1.3571)" />
+            <path class="ftr-1"
+              d="M102.9367,9.2805V25.6767L89.918,9.2805H88.1572V29.487h2.1359V13.0908l12.99,16.3962h1.7609V9.2805ZM113.762,27.64V20.1341h10.45V18.3157h-10.45V11.1279h11.72V9.2805h-13.856V29.487h14.2888V27.64Zm17.1756,1.8473h13.4518V27.64H133.0738V9.2805h-2.1362V29.487Zm17.0025,0h13.4518V27.64H150.0763V9.2805H147.94V29.487Zm17.0025,0h2.1362V9.2805h-2.1362V29.487Zm14.2892.1732c5.167,0,7.5339-2.54,7.5339-5.5134,0-7.361-12.4413-4.0127-12.4413-9.555,0-2.02,1.6453-3.6661,5.34-3.6661A10.401,10.401,0,0,1,185.2069,12.6l.7217-1.7034a11.4072,11.4072,0,0,0-6.264-1.79c-5.1383,0-7.4477,2.5694-7.4477,5.5426,0,7.4764,12.4415,4.07,12.4415,9.6126,0,1.9919-1.6452,3.58-5.4266,3.58a9.9225,9.9225,0,0,1-6.6682-2.4537l-.8374,1.6452C173.2274,28.5921,176.2007,29.66,179.2318,29.66Z"
+              transform="translate(-2.0003 -1.3571)" />
+            <path class="ftr-1"
+              d="M105.91,61.4714h4.907l-9.0351-20.2067H97.1637L88.1572,61.4714h4.7917l1.79-4.33h9.3816l1.79,4.33Zm-9.67-7.8806,3.204-7.7363,3.2043,7.7363Zm25.2295,8.227c5.7444,0,9.1508-3.2907,9.1508-9.2372V41.2647h-4.6188V52.4074c0,3.8392-1.6455,5.4269-4.5031,5.4269-2.829,0-4.5034-1.5877-4.5034-5.4269V41.2647h-4.6763V52.5806c0,5.9465,3.4063,9.2372,9.1508,9.2372Zm23.44,0a10.3827,10.3827,0,0,0,8.3424-3.6082L150.25,55.4385a6.4405,6.4405,0,0,1-5.0805,2.3958,6.199,6.199,0,0,1-6.4664-6.4661,6.1991,6.1991,0,0,1,6.4664-6.4664A6.5017,6.5017,0,0,1,150.25,47.269l3.0019-2.7711a10.4313,10.4313,0,0,0-8.3134-3.58c-6.293,0-10.97,4.3591-10.97,10.45s4.6766,10.45,10.9406,10.45Zm15.4727-.3464h4.6763V45.0753h6.4661V41.2647H153.9156v3.8106h6.4661V61.4714Zm13.6539,0h4.6763V41.2647h-4.6763V61.4714Zm19.254.3464c6.3508,0,11.056-4.4166,11.056-10.45s-4.7052-10.45-11.056-10.45c-6.38,0-11.0559,4.4456-11.0559,10.45s4.6763,10.45,11.0559,10.45Zm0-3.9835a6.164,6.164,0,0,1-6.3218-6.4661,6.3235,6.3235,0,1,1,12.6437,0,6.1642,6.1642,0,0,1-6.3219,6.4661Zm28.4913-16.57V53.5333L211.7355,41.2647h-3.8681V61.4714h4.6185V49.2031l10.0746,12.2683H226.4V41.2647Z"
+              transform="translate(-2.0003 -1.3571)" />
+            <rect class="ftr-2" x="75.5095" y="8.0046" width="1.5815" height="52.4561" />
+          </svg>
+          <p>Your source for overstock and retail returns. Bid, win, and pick up locally at a fraction of retail.</p>
+          <div class="footer-app-links">
+            <a href="#" class="footer-app-btn"><svg viewBox="0 0 24 24" fill="#fff">
+                <path
+                  d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+              </svg>
+              <div class="footer-app-btn-text"><small>Download on the</small><span>App Store</span></div>
+            </a>
+            <a href="#" class="footer-app-btn"><svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M3.18 2.15a1.46 1.46 0 0 0-.43 1.08v17.54c0 .42.16.8.43 1.08l.06.05L13.3 12V11.9L3.24 2.1l-.06.05z"
+                  fill="#fff" />
+                <path
+                  d="M16.66 15.36l-3.36-3.37v-.1l3.36-3.36.08.04 3.98 2.26c1.14.64 1.14 1.7 0 2.35l-3.98 2.26-.08-.08z"
+                  fill="#fff" />
+                <path d="M16.74 15.44L13.3 12 3.18 22.15c.37.4.99.45 1.68.06l11.88-6.77" fill="#fff" />
+                <path d="M16.74 8.56L4.86 1.8c-.69-.4-1.3-.34-1.68.05L13.3 12l3.44-3.44z" fill="#fff" />
+              </svg>
+              <div class="footer-app-btn-text"><small>Get it on</small><span>Google Play</span></div>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5><a href="#">About Us</a><a href="#">Careers</a><a href="#">Locations & Hours</a><a
+            href="#">Estate Sales</a>
+        </div>
+        <div class="footer-col">
+          <h5>Support</h5><a href="#">Help Center</a><a href="#">FAQ</a><a href="#">Video Tutorials</a><a
+            href="#">Contact Us</a>
+        </div>
+        <div class="footer-col">
+          <h5>Community</h5><a href="#">Customer Stories</a><a href="#">Blog</a><a href="#">Facebook</a><a
+            href="#">Instagram</a>
+        </div>
+        <div class="footer-col">
+          <h5>Legal</h5><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Accessibility</a><a
+            href="#">Mobile App Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Nellis Auction. All rights reserved.</span>
+        <div class="footer-cities"><a href="#">Las Vegas</a><a href="#">Phoenix</a><a href="#">Mesa</a><a
+            href="#">Houston</a><a href="#">Dallas</a><a href="#">Philadelphia</a><a href="#">Denver</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const toggle = document.getElementById('menuToggle');
+    const drawer = document.getElementById('navDrawer');
+    toggle.addEventListener('click', () => {
+      drawer.classList.toggle('open');
+      document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+    });
+    // Close drawer on link click
+    drawer.querySelectorAll('a, button.nav-signup').forEach(el => {
+      el.addEventListener('click', () => {
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+
+</html>

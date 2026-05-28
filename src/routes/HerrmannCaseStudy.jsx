@@ -4,6 +4,9 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import herrmannCoverImg from "../assets/Herrmann_Cover.png";
 import herrmannWireframeImg from "../assets/herrmann_wireframe.png";
+import herrmannOriginalImg from "../assets/herrmann_original.png";
+import herrmannRedesignImg from "../assets/herrmann_redesign.png";
+import wireframeHtml from "../../wireframe_squared.html?raw";
 
 /* ─── Shared section-header style ─── */
 const SectionLabel = ({ children, theme }) => (
@@ -17,7 +20,7 @@ const Callout = ({ children, theme, isMobile }) => (
   <div style={{
     borderLeft: `3px solid ${theme.accent}`,
     paddingLeft: isMobile ? 16 : 24,
-    margin: isMobile ? "28px 0" : "40px 0",
+    margin: isMobile ? "28px 0 16px 0" : "40px 0 16px 0",
   }}>
     <p style={{
       fontFamily: "Inter", fontSize: isMobile ? 17 : 20,
@@ -117,11 +120,10 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
 
   if (!project) return null;
 
-  /* ── data ── */
   const meta = [
-    { k: "Type", v: "Self-initiated concept" },
-    { k: "Role", v: "Brand & Web Design (solo)" },
-    { k: "Scope", v: "Brand system + homepage redesign" },
+    { k: "Role", v: "Brand & Web Designer" },
+    { k: "Timeline", v: "1 week" },
+    { k: "Tools", v: "Figma, Claude Design" },
     { k: "Year", v: "2026" },
   ];
 
@@ -242,21 +244,70 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
               </div>
               <div>
                 <Callout theme={theme} isMobile={isMobile}>
-                  A studio with that much craft and history caught my attention, and it made me wonder how their own digital presence could be brought up to the same standard as the work they produce for clients.
+                  A studio with that much craft and history caught my attention, and it made me wonder how their digital presence could be brought to the same standard as the work they produce for clients.
                 </Callout>
-                <p style={{
-                  fontFamily: "Inter", fontSize: isMobile ? 14.5 : 15.5, lineHeight: 1.6, color: theme.inkMute, margin: 0,
-                  fontStyle: "italic", padding: isMobile ? "16px" : "20px", borderRadius: 12,
-                  background: theme.card, border: `1px solid ${theme.line}`,
-                }}>
-                  Nobody asked me to do this. It was a personal exercise to stretch my skills across brand systems and web design, and to practice working with a real, established brand rather than an invented one.
-                </p>
               </div>
             </div>
           </Reveal>
 
-          {/* Metadata strip */}
+          {/* Links with images */}
           <Reveal delay={0.15}>
+            <div style={{ marginTop: 48, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: isMobile ? 20 : 24 }}>
+              {[
+                { label: "Before Redesign", href: "https://www.herrmann.com/", img: herrmannOriginalImg, alt: "Original Herrmann homepage" },
+                { label: "After Redesign", href: "/herrmann_homepage.html", img: herrmannRedesignImg, alt: "Herrmann homepage redesign" },
+              ].map(l => (
+                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" style={{
+                  display: "flex", flexDirection: "column", gap: 0,
+                  borderRadius: 14, overflow: "hidden",
+                  background: theme.card, border: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
+                  textDecoration: "none",
+                  transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s",
+                  cursor: "pointer",
+                }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = theme.accent;
+                    e.currentTarget.style.boxShadow = mode === "dark" ? "0 12px 32px rgba(0,0,0,0.25)" : "0 12px 32px rgba(0,0,0,0.06)";
+                    e.currentTarget.style.transform = "translateY(-2px)";
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = "scale(1.02)";
+                    const text = e.currentTarget.querySelector('.hover-text');
+                    if (text) { text.style.color = theme.accent; text.style.opacity = "1"; }
+                    const icon = e.currentTarget.querySelector('.hover-icon');
+                    if (icon) icon.style.color = theme.accent;
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = mode === "dark" ? theme.line : "rgba(0,0,0,0.15)";
+                    e.currentTarget.style.boxShadow = "none";
+                    e.currentTarget.style.transform = "translateY(0)";
+                    const img = e.currentTarget.querySelector('img');
+                    if (img) img.style.transform = "scale(1)";
+                    const text = e.currentTarget.querySelector('.hover-text');
+                    if (text) { text.style.color = theme.inkMute; text.style.opacity = "0.7"; }
+                    const icon = e.currentTarget.querySelector('.hover-icon');
+                    if (icon) icon.style.color = theme.inkMute;
+                  }}
+                >
+                  <div style={{
+                    overflow: "hidden",
+                    background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
+                  }}>
+                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.4s ease" }} />
+                  </div>
+                  <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                    <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                      <span className="hover-text" style={{ fontFamily: "Inter", fontSize: 12, fontWeight: 500, color: theme.inkMute, opacity: 0.7, transition: "color 0.2s, opacity 0.2s" }}>View Site</span>
+                      <ExternalLink className="hover-icon" size={14} color={theme.inkMute} style={{ transition: "color 0.2s" }} />
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </Reveal>
+
+          {/* Metadata strip */}
+          <Reveal delay={0.2}>
             <div style={{
               marginTop: 48, paddingTop: 32, borderTop: `1px solid ${theme.line}`,
               display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4,1fr)", gap: isMobile ? 24 : 32,
@@ -276,19 +327,106 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
       </section>
 
       {/* ── WHY HERRMANN ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Why Herrmann</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                Choosing a real, respected studio raised the bar for me. <strong style={{ color: theme.ink }}>It is easy to redesign a bad website.</strong> It is harder, and more useful, to modernize the digital presence of a place that already does great work and has real brand equity worth protecting.
-              </p>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                The goal was never to suggest the existing brand was wrong. It was to ask a narrower question: <strong style={{ color: theme.ink }}>if Herrmann were rethinking its own website and brand expression today, what could that look like?</strong>
-              </p>
-            </div>
-          </Reveal>
+      <section style={{
+        padding: isMobile ? "60px 4vw" : "100px 6vw",
+        borderTop: `1px solid ${theme.line}`,
+        background: "transparent",
+        position: "relative",
+        overflow: "hidden"
+      }}>
+        {/* Subtle decorative background gradient */}
+        <div style={{
+          position: "absolute",
+          top: 0,
+          left: "0%",
+          width: "60%",
+          height: "100%",
+          background: `radial-gradient(circle at top left, ${theme.accent}05, transparent 70%)`,
+          pointerEvents: "none"
+        }} />
+
+        <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative", zIndex: 1 }}>
+          <div style={{ marginBottom: isMobile ? 24 : 32 }}>
+            <Reveal>
+              <div style={{ display: "inline-block", marginBottom: 0 }}>
+                <SectionLabel theme={theme}>Why Herrmann</SectionLabel>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.05}>
+              <h2 style={{
+                fontFamily: "Inter",
+                fontSize: isMobile ? "clamp(28px, 4.5vw, 36px)" : "48px",
+                fontWeight: 600,
+                letterSpacing: "-0.03em",
+                color: theme.ink,
+                lineHeight: 1.15,
+                margin: 0,
+                maxWidth: 700
+              }}>
+                Rethinking a <span style={{ color: theme.accent }}>brand</span>.
+              </h2>
+            </Reveal>
+          </div>
+
+          {/* Simple text layout side-by-side on desktop */}
+          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: isMobile ? 40 : 64 }}>
+
+            {/* The challenge of quality */}
+            <Reveal delay={0.15}>
+              <div style={{ paddingRight: isMobileOrTablet ? 0 : 32 }}>
+                <div style={{
+                  fontFamily: "Inter",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: theme.inkMute,
+                  marginBottom: 16
+                }}>
+                  The Core Challenge
+                </div>
+
+                <p style={{
+                  fontFamily: "Inter",
+                  fontSize: isMobile ? 18 : 20,
+                  lineHeight: 1.6,
+                  color: theme.inkSoft,
+                  margin: 0
+                }}>
+                  Choosing a real, respected studio raised the bar for me. <strong style={{ color: theme.ink, fontWeight: 600 }}>It is easy to redesign a bad website.</strong> It is harder, and more useful, to modernize the digital presence of a place that already does great work and has real brand equity worth protecting.
+                </p>
+              </div>
+            </Reveal>
+
+            {/* The design question */}
+            <Reveal delay={0.2}>
+              <div>
+                <div style={{
+                  fontFamily: "Inter",
+                  fontSize: 12,
+                  fontWeight: 700,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  color: theme.inkMute,
+                  marginBottom: 16
+                }}>
+                  The Objective
+                </div>
+
+                <p style={{
+                  fontFamily: "Inter",
+                  fontSize: isMobile ? 18 : 20,
+                  lineHeight: 1.6,
+                  color: theme.inkSoft,
+                  margin: 0
+                }}>
+                  The goal was never to suggest the existing brand was wrong. It was to ask a narrower question: <strong style={{ color: theme.ink, fontWeight: 600 }}>if Herrmann were rethinking its own website and brand expression today, what could that look like?</strong>
+                </p>
+              </div>
+            </Reveal>
+
+          </div>
         </div>
       </section>
 
@@ -297,9 +435,9 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>The Diagnosis</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
+            <div style={{ maxWidth: "100%" }}>
               <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px" }}>
-                Before designing anything, I spent time with the current site and noted the areas where I felt an update could help. These were my observations as an outside designer, not criticisms of the team behind it.
+                Before designing, I reviewed the current site to identify areas for improvement. These are objective observations, not criticisms.
               </p>
             </div>
           </Reveal>
@@ -384,7 +522,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>Wireframe</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px", maxWidth: 900 }}>
-              Before moving into high fidelity, I mapped out the page structure in a wireframe — organizing hierarchy, section flow, and content density to make sure the story felt right before committing to pixels.
+              Before moving into high fidelity, I mapped out the page structure in a wireframe organizing hierarchy, section flow, and content density to make sure the story felt right before committing to pixels.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
@@ -392,11 +530,13 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
               borderRadius: 14, overflow: "hidden",
               background: theme.card, border: `1px solid ${theme.line}`,
               maxWidth: 900, margin: "0 auto",
+              position: "relative",
+              height: isMobile ? 400 : 700,
             }}>
-              <img
-                src={herrmannWireframeImg}
-                alt="Herrmann redesign wireframe showing page structure and content flow"
-                style={{ width: "100%", height: "auto", display: "block" }}
+              <iframe
+                srcDoc={wireframeHtml}
+                title="Herrmann Wireframe"
+                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
               />
             </div>
             <div style={{ fontFamily: "Inter", fontSize: 12.5, color: theme.inkMute, marginTop: 10, textAlign: "center", letterSpacing: "0.01em" }}>

@@ -25,7 +25,7 @@ export default function ApproachSection({ theme }) {
               A loop, not a line.
             </h2>
             <p style={{ fontFamily: "Inter", fontSize: 17, color: theme.inkSoft, lineHeight: 1.55, marginTop: 18 }}>
-              Every project comes back to the same four moves - but the order, the depth, and the tools change every time.
+              Every project comes back to the same four moves but the order, the depth, and the tools change every time.
             </p>
           </div>
         </Reveal>
