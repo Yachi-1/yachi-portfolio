@@ -6,6 +6,7 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import KineticCaseStudy from "./KineticCaseStudy.jsx";
 import ContrarianCaseStudy from "./ContrarianCaseStudy.jsx";
 import NellisCaseStudy from "./NellisCaseStudy.jsx";
+import HerrmannCaseStudy from "./HerrmannCaseStudy.jsx";
 
 const DEFAULT_STORY = [
   { h: "The challenge", t: "Users were dropping off mid-funnel. The data said one thing, but qualitative interviews surfaced a different story - one we couldn't have caught with analytics alone." },
@@ -41,6 +42,11 @@ export default function ProjectDetail({ id, theme, mode, setRoute }) {
   if (id === "contrarian") {
     return <ContrarianCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
   }
+
+  if (id === "herrmann") {
+    return <HerrmannCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  }
+
 
   const project = projects.find(p => p.id === id);
   if (!project) {

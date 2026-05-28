@@ -1,0 +1,2908 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Herrmann Advertising — Brand Book v1.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Fraunces:opsz,ital,wght@9..144,0,400;9..144,0,500;9..144,0,600;9..144,1,400;9..144,1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --vermilion: #E54B1B;
+      --vermilion-deep: #B83A14;
+      --ink: #131310;
+      --paper: #F2EFE7;
+      --paper-warm: #E8E2D0;
+      --rule: rgba(19, 19, 16, 0.18);
+      --rule-2: rgba(19, 19, 16, 0.08);
+      --rule-paper: rgba(242, 239, 231, 0.18);
+      --muted: #8A857A;
+      --accent-clay: #6B3A1F;
+      --accent-stone: #B8B3A3;
+
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --radius: 6px;
+      --shadow-sm: 0 2px 8px rgba(19, 19, 16, 0.06);
+      --shadow-md: 0 4px 16px rgba(19, 19, 16, 0.08), 0 8px 24px rgba(19, 19, 16, 0.04);
+      --shadow-lg: 0 12px 32px rgba(19, 19, 16, 0.12), 0 20px 48px rgba(19, 19, 16, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+     LAYOUT — sticky sidebar nav + scrollable content
+     ========================================================= */
+    .book {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 32px 24px;
+      overflow-y: auto;
+      border-right: 1px solid var(--ink);
+      z-index: 100;
+      box-shadow: 4px 0 24px rgba(19, 19, 16, 0.15);
+    }
+
+    .sidebar-stamp {
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--paper);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+    }
+
+    .sidebar-stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 28px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    .sidebar-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 36px;
+      color: var(--vermilion);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      color: var(--paper);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--rule-paper);
+      line-height: 1.7;
+    }
+
+    .sidebar-tagline span {
+      color: var(--vermilion);
+    }
+
+    .sidebar-section {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin: 18px 0 8px;
+    }
+
+    .sidebar-section:first-of-type {
+      margin-top: 0;
+    }
+
+    .sidebar-link {
+      display: flex;
+      gap: 10px;
+      align-items: baseline;
+      padding: 7px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--paper);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      transition: color 120ms ease;
+    }
+
+    .sidebar-link:hover {
+      color: var(--vermilion);
+    }
+
+    .sidebar-link .num {
+      color: var(--vermilion);
+      font-weight: 600;
+      flex-shrink: 0;
+      width: 20px;
+    }
+
+    .sidebar-foot {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule-paper);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.8;
+    }
+
+    .content {
+      padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+     COVER PAGE
+     ========================================================= */
+    .cover {
+      min-height: 100vh;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 56px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .cover-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .cover-stamp {
+      width: 64px;
+      height: 64px;
+      border: 2px solid var(--paper);
+      display: grid;
+      place-items: center;
+    }
+
+    .cover-stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 48px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-top: -3px;
+    }
+
+    .cover-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      line-height: 1.9;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .cover-meta .num {
+      color: var(--vermilion);
+    }
+
+    .cover-mid {
+      margin-top: 96px;
+      margin-bottom: 96px;
+    }
+
+    .cover-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--vermilion);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .cover-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 128px;
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+      max-width: 90%;
+    }
+
+    .cover-title em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .cover-lede {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 24px;
+      line-height: 1.4;
+      color: var(--paper);
+      opacity: 0.92;
+      max-width: 600px;
+    }
+
+    .cover-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid var(--rule-paper);
+      padding-top: 18px;
+    }
+
+    .cover-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 96px;
+      color: var(--vermilion);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+    }
+
+    .cover-toc {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      line-height: 1.9;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cover-toc .num {
+      color: var(--vermilion);
+      margin-right: 6px;
+    }
+
+    /* =========================================================
+     CHAPTER + SECTION CHROME
+     ========================================================= */
+    .chapter {
+      padding: 80px 64px 96px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .chapter:nth-child(odd) {
+      background: var(--paper);
+    }
+
+    .chapter:nth-child(even) {
+      background: var(--paper-warm);
+    }
+
+    .chapter-head {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 32px;
+      margin-bottom: 48px;
+      padding-bottom: 20px;
+      border-bottom: 1.5px solid var(--ink);
+      align-items: baseline;
+    }
+
+    .chapter-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--vermilion);
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .chapter-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 0.95;
+      letter-spacing: -0.022em;
+    }
+
+    .chapter-title em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .chapter-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .chapter-lede {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.4;
+      color: var(--ink);
+      max-width: 720px;
+      margin-bottom: 56px;
+    }
+
+    .subsection {
+      margin-bottom: 56px;
+    }
+
+    .subsection-head {
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      gap: 32px;
+      margin-bottom: 24px;
+      align-items: baseline;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .subsection-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--vermilion);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+    }
+
+    .subsection-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.018em;
+    }
+
+    .subsection-dim {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .specimen-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .specimen-label strong {
+      color: var(--ink);
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* =========================================================
+     SPEC PANEL — used everywhere
+     ========================================================= */
+    .spec-panel {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 28px 32px;
+      margin-top: 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .chapter:nth-child(even) .spec-panel {
+      background: var(--paper);
+    }
+
+    .spec-panel h4 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--vermilion);
+      font-weight: 600;
+      margin-bottom: 12px;
+      margin-top: 22px;
+    }
+
+    .spec-panel h4:first-child {
+      margin-top: 0;
+    }
+
+    .spec-panel .row {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 16px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--rule-2);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+    }
+
+    .spec-panel .row:last-child {
+      border-bottom: none;
+    }
+
+    .spec-panel .row .k {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .spec-panel .row .v {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .specs-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* =========================================================
+     CHAPTER 01 — LOGO
+     ========================================================= */
+    .logo-canvas {
+      background: var(--paper);
+      border: 1px solid var(--rule);
+      padding: 56px 64px;
+      margin-bottom: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .logo-canvas-dark {
+      background: var(--ink);
+    }
+
+    .logo-block {
+      display: inline-block;
+    }
+
+    .wordmark-primary {
+      font-family: 'Caveat Brush', cursive;
+      color: var(--vermilion);
+      font-size: 96px;
+      line-height: 0.92;
+      letter-spacing: -0.01em;
+      display: block;
+      margin-bottom: 14px;
+    }
+
+    .tagline-primary {
+      display: flex;
+      gap: 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border-top: 1px solid var(--ink);
+      padding-top: 12px;
+      width: fit-content;
+    }
+
+    .logo-canvas-dark .tagline-primary {
+      color: var(--paper);
+      border-top-color: var(--paper);
+    }
+
+    .tagline-primary .num {
+      color: var(--vermilion);
+      margin-right: 6px;
+      font-weight: 500;
+    }
+
+    .stamp {
+      border: 2px solid var(--ink);
+      display: inline-grid;
+      place-items: center;
+      background: transparent;
+    }
+
+    .stamp.on-dark {
+      border-color: var(--paper);
+    }
+
+    .stamp.vermilion {
+      background: var(--vermilion);
+      border-color: var(--vermilion);
+    }
+
+    .stamp.ink {
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      color: var(--vermilion);
+      line-height: 1;
+    }
+
+    .stamp.vermilion .stamp-h {
+      color: var(--paper);
+    }
+
+    .stamp-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .stamp-item {
+      text-align: center;
+    }
+
+    .stamp-size-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      margin-top: 12px;
+      letter-spacing: 0.08em;
+    }
+
+    .lockup-h {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* =========================================================
+     CHAPTER 02 — COLOR
+     ========================================================= */
+    .color-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .swatch {
+      padding: 24px;
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: transform 300ms var(--ease-bounce), box-shadow 300ms var(--ease-bounce);
+    }
+
+    .swatch:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .sw-vermilion {
+      background: var(--vermilion);
+      color: var(--paper);
+      aspect-ratio: 2/1;
+    }
+
+    .sw-ink {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .sw-paper {
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+
+    .sw-deep {
+      background: var(--vermilion-deep);
+      color: var(--paper);
+      aspect-ratio: 1;
+    }
+
+    .sw-warm {
+      background: var(--paper-warm);
+      color: var(--ink);
+      aspect-ratio: 1;
+      border: 1px solid var(--rule);
+    }
+
+    .sw-clay {
+      background: var(--accent-clay);
+      color: var(--paper);
+      aspect-ratio: 1;
+    }
+
+    .sw-stone {
+      background: var(--accent-stone);
+      color: var(--ink);
+      aspect-ratio: 1;
+    }
+
+    .sw-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+
+    .sw-data {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      line-height: 1.7;
+      letter-spacing: 0.02em;
+    }
+
+    .sw-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.75;
+    }
+
+    .secondary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .a11y-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: var(--paper);
+    }
+
+    .a11y-table th,
+    .a11y-table td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .a11y-table th {
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      font-weight: 600;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .pass {
+      color: var(--vermilion);
+      font-weight: 600;
+    }
+
+    .fail {
+      color: #888;
+    }
+
+    /* =========================================================
+     CHAPTER 03 — TYPE
+     ========================================================= */
+    .type-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .type-card {
+      padding: 32px;
+      border: 1px solid var(--rule);
+      background: var(--paper);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .type-card-name {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.015em;
+    }
+
+    .type-card-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .type-card-specimen {
+      font-size: 64px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .specimen-fraunces {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+    }
+
+    .specimen-jetbrains {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 48px;
+      letter-spacing: 0;
+    }
+
+    .type-card-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule-2);
+    }
+
+    .type-scale {
+      display: grid;
+      grid-template-columns: 80px 80px 130px 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--rule-2);
+    }
+
+    .type-scale:first-of-type {
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+
+    .type-scale .ts-label,
+    .type-scale .ts-size,
+    .type-scale .ts-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      color: var(--muted);
+    }
+
+    .type-scale .ts-label {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .ts-d1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 72px;
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+    }
+
+    .ts-d2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 1.0;
+      letter-spacing: -0.022em;
+    }
+
+    .ts-h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 1.05;
+      letter-spacing: -0.018em;
+    }
+
+    .ts-h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.012em;
+    }
+
+    .ts-h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 1.3;
+      letter-spacing: -0.005em;
+    }
+
+    .ts-body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .ts-small {
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .ts-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      font-size: 11px;
+      line-height: 1.6;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+     CHAPTER 04 — SPACING + GRID
+     ========================================================= */
+    .spacing-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .spacing-card {
+      border: 1px solid var(--rule);
+      padding: 16px;
+      background: var(--paper);
+    }
+
+    .spacing-bar {
+      height: 60px;
+      background: var(--vermilion);
+      margin-bottom: 14px;
+    }
+
+    .spacing-token {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .spacing-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .grid-demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .grid-canvas {
+      aspect-ratio: 16/10;
+      background: var(--paper-warm);
+      position: relative;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+    }
+
+    .chapter:nth-child(even) .grid-canvas {
+      background: var(--paper);
+    }
+
+    .grid-canvas-mobile {
+      aspect-ratio: 9/16;
+      max-width: 240px;
+      margin: 0 auto;
+    }
+
+    .grid-cols {
+      position: absolute;
+      inset: 24px 32px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .grid-canvas-mobile .grid-cols {
+      inset: 16px 16px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .grid-col {
+      background: rgba(229, 75, 27, 0.12);
+      border: 1px solid rgba(229, 75, 27, 0.3);
+    }
+
+    /* =========================================================
+     CHAPTER 05 — ICONS
+     ========================================================= */
+    .icon-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .icon-card {
+      border: 1px solid var(--rule);
+      padding: 32px;
+      text-align: center;
+      background: var(--paper);
+    }
+
+    .icon-svg {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+
+    .icon-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+
+    .icon-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* =========================================================
+     CHAPTER 06 — BUSINESS CARD
+     ========================================================= */
+    .card {
+      width: 600px;
+      height: 343px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+      border-radius: var(--radius);
+    }
+
+    .card-front {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .card-back {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .card-front-content {
+      position: absolute;
+      inset: 0;
+      padding: 42px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-front-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 88px;
+      color: var(--vermilion);
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+    }
+
+    .card-front-tagline {
+      display: flex;
+      gap: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--paper);
+      border-top: 1px solid var(--paper);
+      padding-top: 10px;
+      width: fit-content;
+      margin-top: 12px;
+    }
+
+    .card-front-tagline .num {
+      color: var(--vermilion);
+      margin-right: 6px;
+      font-weight: 500;
+    }
+
+    .card-back-content {
+      position: absolute;
+      inset: 0;
+      padding: 42px 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: end;
+      gap: 24px;
+    }
+
+    .card-name {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.018em;
+      margin-bottom: 4px;
+    }
+
+    .card-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--vermilion);
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .card-meta-block {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    .card-meta-block .k {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    .card-corner-stamp {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid var(--ink);
+      display: grid;
+      place-items: center;
+    }
+
+    .card-corner-stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 22px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-top: -1px;
+    }
+
+    .card-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    /* =========================================================
+     CHAPTER 07 — LETTERHEAD
+     ========================================================= */
+    .letterhead {
+      width: 560px;
+      aspect-ratio: 8.5 / 11;
+      background: var(--paper);
+      color: var(--ink);
+      position: relative;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+      border-radius: var(--radius);
+    }
+
+    .lh-header {
+      padding: 44px 52px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .lh-stamp {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--ink);
+      display: grid;
+      place-items: center;
+    }
+
+    .lh-stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 32px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    .lh-meta {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      line-height: 1.8;
+      letter-spacing: 0.06em;
+    }
+
+    .lh-meta .k {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .lh-body {
+      padding: 0 52px;
+    }
+
+    .lh-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--vermilion);
+      font-weight: 600;
+      margin-bottom: 28px;
+    }
+
+    .lh-recipient {
+      font-size: 10.5px;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .lh-recipient strong {
+      font-weight: 600;
+    }
+
+    .lh-greeting {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -0.012em;
+      margin-bottom: 18px;
+    }
+
+    .lh-greeting em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .lh-paragraph {
+      font-size: 10.5px;
+      line-height: 1.65;
+      margin-bottom: 14px;
+      max-width: 92%;
+    }
+
+    .lh-signatures {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 36px;
+    }
+
+    .lh-signoff {
+      margin-top: 22px;
+    }
+
+    .lh-signoff-name {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 30px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .lh-signoff-role {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .lh-footer {
+      position: absolute;
+      bottom: 28px;
+      left: 52px;
+      right: 52px;
+      padding-top: 12px;
+      border-top: 1px solid var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .lh-footer .lh-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 22px;
+      color: var(--vermilion);
+      text-transform: none;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    /* =========================================================
+     CHAPTER 08 — POWERPOINT
+     ========================================================= */
+    .slide-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .slide {
+      width: 100%;
+      aspect-ratio: 16/9;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+      border-radius: var(--radius);
+    }
+
+    .slide-ink {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .slide-paper {
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .slide-vermilion {
+      background: var(--vermilion);
+      color: var(--paper);
+    }
+
+    .slide-content {
+      position: absolute;
+      inset: 0;
+      padding: 32px 40px;
+    }
+
+    .slide-title-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      gap: 14px;
+    }
+
+    .slide-stamp {
+      width: 32px;
+      height: 32px;
+      border: 1.5px solid currentColor;
+      display: grid;
+      place-items: center;
+    }
+
+    .slide-stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 24px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    .slide-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      line-height: 1.8;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .slide-meta .num {
+      color: var(--vermilion);
+    }
+
+    .slide-title {
+      grid-column: 1 / 3;
+      align-self: end;
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 44px;
+      line-height: 0.95;
+      letter-spacing: -0.022em;
+    }
+
+    .slide-title em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .slide-title-foot {
+      grid-column: 1 / 3;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid currentColor;
+      padding-top: 12px;
+    }
+
+    .slide-title-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 30px;
+      color: var(--vermilion);
+      line-height: 0.9;
+    }
+
+    .slide-title-tagline {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .slide-divider-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .slide-divider-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--ink);
+      opacity: 0.7;
+    }
+
+    .slide-divider-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 64px;
+      line-height: 0.92;
+      letter-spacing: -0.026em;
+      color: var(--ink);
+    }
+
+    .slide-divider-title em {
+      font-style: italic;
+    }
+
+    .slide-divider-foot {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1.5px solid var(--ink);
+      padding-top: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .slide-content-grid {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      gap: 16px;
+    }
+
+    .slide-content-head {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 9px;
+    }
+
+    .slide-content-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      color: var(--vermilion);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .slide-content-pageno {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .slide-content-pageno .num {
+      color: var(--vermilion);
+    }
+
+    .slide-content-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .slide-content-h {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -0.018em;
+      margin-bottom: 14px;
+    }
+
+    .slide-content-h em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .slide-content-p {
+      font-family: 'Inter', sans-serif;
+      font-size: 11.5px;
+      line-height: 1.55;
+    }
+
+    .slide-content-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid currentColor;
+      padding-top: 9px;
+    }
+
+    .slide-content-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 20px;
+      color: var(--vermilion);
+      line-height: 0.9;
+    }
+
+    .slide-content-foot-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .slide-data-grid {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      gap: 12px;
+    }
+
+    .slide-data-stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      align-items: end;
+    }
+
+    .slide-data-stat .num {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 76px;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--vermilion);
+      margin-bottom: 12px;
+    }
+
+    .slide-data-stat .num em {
+      font-size: 40px;
+      font-style: normal;
+      vertical-align: super;
+      margin-left: 4px;
+    }
+
+    .slide-data-stat .lab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.6;
+    }
+
+    .slide-data-stat .lab span {
+      color: var(--muted);
+      display: block;
+    }
+
+    .slide-close-grid {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .slide-close-headline {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 52px;
+      line-height: 0.95;
+      letter-spacing: -0.024em;
+    }
+
+    .slide-close-headline em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .slide-close-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid currentColor;
+      padding-top: 12px;
+    }
+
+    .slide-close-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 44px;
+      color: var(--vermilion);
+      line-height: 0.9;
+    }
+
+    .slide-close-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .slide-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--vermilion);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 12px;
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .slide-label span {
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    /* IMAGE SLIDE */
+    .slide-image-grid {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+    }
+
+    .slide-image-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-image-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(229, 75, 27, 0.08) 0%, rgba(19, 19, 16, 0.04) 100%);
+      display: grid;
+      place-items: center;
+      border: 1px dashed var(--rule);
+    }
+
+    .slide-image-placeholder-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .slide-image-caption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    /* PARAGRAPH SLIDE */
+    .slide-paragraph-grid {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      height: 100%;
+      gap: 12px;
+    }
+
+    .slide-paragraph-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: start;
+    }
+
+    .slide-paragraph-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+
+    .slide-paragraph-title em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .slide-paragraph-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+
+    .slide-paragraph-text+.slide-paragraph-text {
+      margin-top: 14px;
+    }
+
+    .slide-paragraph-pullquote {
+      border-left: 2px solid var(--vermilion);
+      padding-left: 16px;
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-top: 8px;
+    }
+
+    /* RESULT SLIDE */
+    .slide-result-grid {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      height: 100%;
+      gap: 10px;
+    }
+
+    .slide-result-banner {
+      background: var(--vermilion);
+      color: var(--paper);
+      padding: 16px 20px;
+      margin: -28px -32px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slide-result-banner-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .slide-result-headline {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-top: 4px;
+    }
+
+    .slide-result-headline em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .slide-result-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: end;
+    }
+
+    .slide-result-metric {
+      border-top: 2px solid var(--vermilion);
+      padding-top: 10px;
+    }
+
+    .slide-result-metric .num {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 42px;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      color: var(--vermilion);
+      margin-bottom: 6px;
+    }
+
+    .slide-result-metric .num em {
+      font-style: italic;
+    }
+
+    .slide-result-metric .lab {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .slide-result-metric .lab span {
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* =========================================================
+     CHAPTER 09 — EMAIL TEMPLATE
+     ========================================================= */
+    .email-frame {
+      width: 600px;
+      background: var(--paper);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .email-client-bar {
+      background: #C7C2B5;
+      padding: 12px 18px;
+      display: flex;
+      gap: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    .email-client-bar .row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .email-client-bar .k {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* =========================================================
+     CHAPTER 10 + 11 — E-CARDS
+     ========================================================= */
+    .ecard {
+      width: 600px;
+      aspect-ratio: 4/3;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      border-radius: var(--radius);
+    }
+
+    .ecard-content {
+      position: absolute;
+      inset: 0;
+      padding: 44px 52px;
+    }
+
+    .ecard-holiday {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .ecard-holiday-grid {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .ecard-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .ecard-stamp {
+      width: 44px;
+      height: 44px;
+      border: 1.5px solid var(--paper);
+      display: grid;
+      place-items: center;
+    }
+
+    .ecard-stamp .stamp-h {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 32px;
+      color: var(--vermilion);
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    .ecard-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      line-height: 1.8;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    .ecard-meta .num {
+      color: var(--vermilion);
+    }
+
+    .ecard-holiday-message {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 60px;
+      line-height: 0.95;
+      letter-spacing: -0.024em;
+      max-width: 92%;
+    }
+
+    .ecard-holiday-message em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .ecard-holiday-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid var(--paper);
+      padding-top: 12px;
+    }
+
+    .ecard-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 52px;
+      color: var(--vermilion);
+      line-height: 0.9;
+    }
+
+    .ecard-foot-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    .ecard-event {
+      background: var(--paper);
+      color: var(--ink);
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+    }
+
+    .ecard-event-left {
+      background: var(--vermilion);
+      color: var(--paper);
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ecard-event-right {
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .ecard-event-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .ecard-event-date {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 52px;
+      line-height: 0.92;
+      letter-spacing: -0.022em;
+    }
+
+    .ecard-event-date em {
+      font-style: italic;
+    }
+
+    .ecard-event-day {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      border-top: 1px solid var(--paper);
+      padding-top: 10px;
+      margin-top: 14px;
+    }
+
+    .ecard-event-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -0.018em;
+      margin-bottom: 6px;
+    }
+
+    .ecard-event-title em {
+      font-style: italic;
+      color: var(--vermilion);
+    }
+
+    .ecard-event-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .ecard-event-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
+    }
+
+    .ecard-event-meta .k {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      font-size: 8.5px;
+    }
+
+    .ecard-event-cta {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      font-weight: 600;
+      padding: 11px 16px;
+      text-decoration: none;
+      margin-top: 14px;
+      border-radius: var(--radius);
+    }
+
+    .ecard-event-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-top: 14px;
+      border-top: 1px solid var(--ink);
+      padding-top: 10px;
+    }
+
+    .ecard-event-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 32px;
+      color: var(--vermilion);
+      line-height: 0.9;
+    }
+
+    /* End of book */
+    .book-foot {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 64px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      border-top: 1px solid var(--ink);
+    }
+
+    .book-foot-wordmark {
+      font-family: 'Caveat Brush', cursive;
+      font-size: 96px;
+      color: var(--vermilion);
+      line-height: 0.9;
+    }
+
+    .book-foot-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: right;
+      line-height: 1.9;
+      color: var(--paper);
+    }
+
+    .book-foot-meta .muted {
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="book">
+
+    <!-- ============================================ -->
+    <!-- STICKY SIDEBAR NAVIGATION                    -->
+    <!-- ============================================ -->
+    <aside class="sidebar">
+      <div class="sidebar-stamp"><span class="stamp-h">h</span></div>
+      <div class="sidebar-wordmark">Herrmann</div>
+      <div class="sidebar-tagline">
+        Brand Book
+      </div>
+
+      <div class="sidebar-section">— Foundation</div>
+      <a href="#color" class="sidebar-link"><span class="num">01</span>Color</a>
+      <a href="#type" class="sidebar-link"><span class="num">02</span>Type</a>
+      <a href="#scale" class="sidebar-link"><span class="num">03</span>Type Scale</a>
+
+
+      <div class="sidebar-section">— Identity</div>
+      <a href="#logo" class="sidebar-link"><span class="num">07</span>Logo</a>
+      <a href="#card" class="sidebar-link"><span class="num">08</span>Business Card</a>
+      <a href="#letterhead" class="sidebar-link"><span class="num">09</span>Letterhead</a>
+
+      <div class="sidebar-section">— Digital</div>
+      <a href="#deck" class="sidebar-link"><span class="num">10</span>PowerPoint</a>
+      <a href="#email" class="sidebar-link"><span class="num">11</span>Email</a>
+      <a href="#holiday" class="sidebar-link"><span class="num">12</span>Holiday Card</a>
+      <a href="#event" class="sidebar-link"><span class="num">13</span>Event Card</a>
+
+
+    </aside>
+
+    <!-- ============================================ -->
+    <!-- CONTENT                                      -->
+    <!-- ============================================ -->
+    <main class="content">
+
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 01 — COLOR                           -->
+      <!-- ============================================ -->
+      <section class="chapter" id="color">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 01</div>
+          <div class="chapter-title">Color</div>
+
+        </div>
+
+
+        <div class="subsection">
+          <div class="subsection-head">
+            <div class="subsection-num">01.1</div>
+            <div class="subsection-title">Primary palette</div>
+
+          </div>
+          <div class="color-grid">
+            <div class="swatch sw-vermilion">
+              <div class="sw-role">Primary</div>
+              <div>
+                <div class="sw-name">Vermilion</div>
+                <div class="sw-data" style="margin-top:8px;">
+                  HEX #E54B1B<br>
+                  RGB 229 · 75 · 27<br>
+                  CMYK 0 · 78 · 92 · 0<br>
+                  PMS Pantone 1665 C
+                </div>
+              </div>
+            </div>
+            <div class="swatch sw-ink">
+              <div class="sw-role">Ground</div>
+              <div>
+                <div class="sw-name">Ink</div>
+                <div class="sw-data" style="margin-top:8px;">
+                  HEX #131310<br>
+                  RGB 19 · 19 · 16<br>
+                  CMYK 70 · 65 · 65 · 90<br>
+                  PMS Black 6 C
+                </div>
+              </div>
+            </div>
+            <div class="swatch sw-paper">
+              <div class="sw-role">Breath</div>
+              <div>
+                <div class="sw-name">Paper</div>
+                <div class="sw-data" style="margin-top:8px;">
+                  HEX #F2EFE7<br>
+                  RGB 242 · 239 · 231<br>
+                  CMYK 3 · 3 · 8 · 0<br>
+                  PMS Warm Gray 1 C
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-head">
+            <div class="subsection-num">01.2</div>
+            <div class="subsection-title">Secondary palette</div>
+
+          </div>
+          <div class="secondary-grid">
+            <div class="swatch sw-deep">
+              <div class="sw-role">Print backup</div>
+              <div>
+                <div class="sw-name" style="font-size:18px;">Deep</div>
+                <div class="sw-data" style="margin-top:6px;">#B83A14<br>184·58·20</div>
+              </div>
+            </div>
+            <div class="swatch sw-warm">
+              <div class="sw-role">Soft ground</div>
+              <div>
+                <div class="sw-name" style="font-size:18px;">Paper Warm</div>
+                <div class="sw-data" style="margin-top:6px;">#E8E2D0<br>232·226·208</div>
+              </div>
+            </div>
+            <div class="swatch sw-clay">
+              <div class="sw-role">Editorial accent</div>
+              <div>
+                <div class="sw-name" style="font-size:18px;">Clay</div>
+                <div class="sw-data" style="margin-top:6px;">#6B3A1F<br>107·58·31</div>
+              </div>
+            </div>
+            <div class="swatch sw-stone">
+              <div class="sw-role">Quiet rule</div>
+              <div>
+                <div class="sw-name" style="font-size:18px;">Stone</div>
+                <div class="sw-data" style="margin-top:6px;">#B8B3A3<br>184·179·163</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 02 — TYPE                            -->
+      <!-- ============================================ -->
+      <section class="chapter" id="type">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 02</div>
+          <div class="chapter-title">Type</div>
+
+        </div>
+
+
+        <div class="type-pair">
+          <div class="type-card">
+            <div class="type-card-name">Caveat Brush</div>
+            <div class="type-card-role">Brand mark — wordmark only</div>
+            <div class="type-card-specimen"
+              style="font-family: 'Caveat Brush', cursive; color: var(--vermilion); font-size: 92px;">Herrmann</div>
+
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">Fraunces</div>
+            <div class="type-card-role">Display — headlines, hero, titles</div>
+            <div class="type-card-specimen specimen-fraunces">Display.</div>
+
+          </div>
+        </div>
+
+        <div class="type-pair">
+          <div class="type-card">
+            <div class="type-card-name">Inter</div>
+            <div class="type-card-role">Body — paragraphs, UI, captions</div>
+            <div class="type-card-specimen"
+              style="font-family: 'Inter', sans-serif; font-weight: 500; font-size: 56px;">Body 16/24.</div>
+
+          </div>
+          <div class="type-card">
+            <div class="type-card-name">JetBrains Mono</div>
+            <div class="type-card-role">Mono — labels, numerals, signage</div>
+            <div class="type-card-specimen specimen-jetbrains">01 / TECH.</div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 03 — TYPE SCALE                      -->
+      <!-- ============================================ -->
+      <section class="chapter" id="scale">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 03</div>
+          <div class="chapter-title">Type Scale</div>
+
+        </div>
+
+
+        <div class="type-scale">
+          <div class="ts-label">Display 1</div>
+          <div class="ts-size">72 / 68</div>
+          <div class="ts-meta">Fraunces · 500</div>
+          <div class="ts-d1">A workshop where craft meets code.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">Display 2</div>
+          <div class="ts-size">56 / 56</div>
+          <div class="ts-meta">Fraunces · 500</div>
+          <div class="ts-d2">Section opener.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">H1</div>
+          <div class="ts-size">40 / 42</div>
+          <div class="ts-meta">Fraunces · 500</div>
+          <div class="ts-h1">Page title or article head.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">H2</div>
+          <div class="ts-size">28 / 32</div>
+          <div class="ts-meta">Fraunces · 500</div>
+          <div class="ts-h2">Section heading inside a layout.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">H3</div>
+          <div class="ts-size">18 / 24</div>
+          <div class="ts-meta">Inter · 600</div>
+          <div class="ts-h3">Subhead, card title, intro lede.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">Body</div>
+          <div class="ts-size">16 / 25</div>
+          <div class="ts-meta">Inter · 400</div>
+          <div class="ts-body">Default body. Used for paragraphs, descriptions, longer reading. Comfortable line length
+            is 60–75 characters.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">Small</div>
+          <div class="ts-size">13 / 19</div>
+          <div class="ts-meta">Inter · 400</div>
+          <div class="ts-small">Captions, footnotes, secondary metadata, form labels.</div>
+        </div>
+        <div class="type-scale">
+          <div class="ts-label">Mono</div>
+          <div class="ts-size">11 / 18</div>
+          <div class="ts-meta">JetBrains · 500</div>
+          <div class="ts-mono">SECTION LABEL · METADATA · NUMERALS</div>
+        </div>
+      </section>
+
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 07 — LOGO                            -->
+      <!-- ============================================ -->
+      <section class="chapter" id="logo">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 07</div>
+          <div class="chapter-title">Logo</div>
+
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-head">
+            <div class="subsection-num">07.1</div>
+            <div class="subsection-title">Primary signature</div>
+
+          </div>
+          <div class="logo-canvas">
+            <div class="logo-block">
+              <span class="wordmark-primary">Herrmann</span>
+              <div class="tagline-primary">
+                <span><span class="num">01</span>Advertising</span>
+                <span><span class="num">02</span>Branding</span>
+                <span><span class="num">03</span>Technology</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-head">
+            <div class="subsection-num">07.2</div>
+            <div class="subsection-title">Dark ground</div>
+
+          </div>
+          <div class="logo-canvas logo-canvas-dark">
+            <div class="logo-block">
+              <span class="wordmark-primary">Herrmann</span>
+              <div class="tagline-primary">
+                <span><span class="num">01</span>Advertising</span>
+                <span><span class="num">02</span>Branding</span>
+                <span><span class="num">03</span>Technology</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <div class="subsection-head">
+            <div class="subsection-num">07.3</div>
+            <div class="subsection-title">Stamp · responsive monogram</div>
+
+          </div>
+          <div class="logo-canvas">
+            <div class="stamp-row">
+              <div class="stamp-item">
+                <div class="stamp" style="width:96px;height:96px;"><span class="stamp-h"
+                    style="font-size:72px;margin-top:-4px;">h</span></div>
+                <div class="stamp-size-label">96 PX</div>
+              </div>
+              <div class="stamp-item">
+                <div class="stamp" style="width:64px;height:64px;"><span class="stamp-h"
+                    style="font-size:48px;margin-top:-3px;">h</span></div>
+                <div class="stamp-size-label">64 PX</div>
+              </div>
+              <div class="stamp-item">
+                <div class="stamp vermilion" style="width:48px;height:48px;"><span class="stamp-h"
+                    style="font-size:36px;margin-top:-2px;">h</span></div>
+                <div class="stamp-size-label">48 PX</div>
+              </div>
+              <div class="stamp-item">
+                <div class="stamp ink" style="width:32px;height:32px;border-width:1px;"><span class="stamp-h"
+                    style="font-size:24px;margin-top:-1px;">h</span></div>
+                <div class="stamp-size-label">32 PX</div>
+              </div>
+              <div class="stamp-item">
+                <div class="stamp ink" style="width:16px;height:16px;border-width:1px;"><span class="stamp-h"
+                    style="font-size:13px;line-height:1;margin-top:-2px;">h</span></div>
+                <div class="stamp-size-label">16 PX</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 08 — BUSINESS CARD                   -->
+      <!-- ============================================ -->
+      <section class="chapter" id="card">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 08</div>
+          <div class="chapter-title">Business Card</div>
+
+        </div>
+
+
+        <div class="card-row">
+          <div>
+            <div class="specimen-label"><strong>Front · Ink ground</strong></div>
+            <div class="card card-front">
+              <div class="card-front-content">
+                <div class="stamp" style="width:56px;height:56px;border-color:var(--paper);">
+                  <span class="stamp-h" style="font-size:42px;margin-top:-3px;">h</span>
+                </div>
+                <div>
+                  <div class="card-front-wordmark">Herrmann</div>
+                  <div class="card-front-tagline">
+                    <span><span class="num">01</span>Advertising</span>
+                    <span><span class="num">02</span>Branding</span>
+                    <span><span class="num">03</span>Technology</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="specimen-label"><strong>Back · Paper</strong></div>
+            <div class="card card-back">
+              <div class="card-corner-stamp"><span class="stamp-h">h</span></div>
+              <div class="card-back-content">
+                <div>
+                  <div class="card-role">Creative Director</div>
+                  <div class="card-name">Judi Herrmann</div>
+                </div>
+                <div class="card-meta-block">
+                  <div><span class="k">E</span>info@herrmann.com</div>
+                  <div><span class="k">M</span>(410) 267-6522</div>
+                  <div><span class="k">W</span>herrmann.com</div>
+                  <div style="margin-top:14px;">30 West Street</div>
+                  <div>Annapolis, MD 21401</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 09 — LETTERHEAD                      -->
+      <!-- ============================================ -->
+      <section class="chapter" id="letterhead">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 09</div>
+          <div class="chapter-title">Letterhead</div>
+
+        </div>
+
+
+        <div style="display:flex;justify-content:center;">
+          <div class="letterhead">
+            <div class="lh-header">
+              <div class="lh-stamp"><span class="stamp-h">h</span></div>
+              <div class="lh-meta">
+                <div><span class="k">STUDIO</span> &nbsp; Baltimore, MD</div>
+                <div><span class="k">PHONE</span> &nbsp; (410) 267-6522</div>
+                <div><span class="k">WEB</span> &nbsp;&nbsp;&nbsp; herrmann.com</div>
+              </div>
+            </div>
+            <div class="lh-body">
+              <div class="lh-date">28 · Apr · 2026</div>
+              <div class="lh-recipient">
+                <strong>Valued Client</strong><br>
+                Client Organization<br>
+                123 Main Street<br>
+                Annapolis, MD 21401
+              </div>
+              <div class="lh-greeting">Dear <em>Client,</em></div>
+              <div class="lh-paragraph">
+                Please accept this formal proposal from Herrmann Advertising | Branding | Technology regarding the
+                comprehensive website redesign and brand identity update for your organization.
+              </div>
+              <div class="lh-paragraph">
+                Drawing on over 40 years of experience, our team has developed a strategic approach that encompasses
+                marketing strategy, stunning photography, and cutting-edge e-communications. This proposal outlines the
+                project scope, deliverables, and a tailored timeline designed to elevate your brand to new levels.
+              </div>
+              <div class="lh-paragraph">
+                We have enclosed the formal agreement for your review. Please sign and return the documents by the
+                specified deadline to officially initiate the project.
+              </div>
+              <div class="lh-signatures">
+                <div class="lh-signoff" style="margin-top: 0;">
+                  <div class="lh-signoff-name">Judi</div>
+                  <div class="lh-signoff-role">Judi Herrmann · Creative Director</div>
+                </div>
+                <div class="lh-signoff" style="margin-top: 0; text-align: right;">
+                  <div
+                    style="border-bottom: 1px solid var(--ink); width: 140px; height: 30px; margin-bottom: 6px; display: inline-block;">
+                  </div>
+                  <div class="lh-signoff-role">Client Signature / Date</div>
+                </div>
+              </div>
+            </div>
+            <div class="lh-footer">
+              <span class="lh-wordmark">Herrmann</span>
+              <span>01 / 01</span>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+      <!-- ============================================ -->
+      <!-- CHAPTER 10 — POWERPOINT TEMPLATE             -->
+      <!-- ============================================ -->
+      <section class="chapter" id="deck">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 10</div>
+          <div class="chapter-title">PowerPoint Template</div>
+
+        </div>
+
+
+        <div class="slide-row">
+          <div>
+            <div class="slide-label">01 / HERO</div>
+            <div class="slide slide-ink">
+              <div class="slide-content">
+                <div class="slide-title-grid">
+                  <div class="slide-stamp"><span class="stamp-h">h</span></div>
+                  <div class="slide-meta">
+                    <div><span class="num">DOC</span> · CAPABILITIES</div>
+                    <div><span class="num">No.</span> 2026 · 001</div>
+                    <div><span class="num">FOR</span> · NEW CLIENTS</div>
+                  </div>
+                  <div class="slide-title">Charting <em>New</em> Adventures.</div>
+                  <div class="slide-title-foot">
+                    <div class="slide-title-wordmark">Herrmann</div>
+                    <div class="slide-title-tagline">
+                      <div>40 · YRS · EXP</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="slide-label">02 / KEY METRICS</div>
+            <div class="slide slide-paper">
+              <div class="slide-content">
+                <div class="slide-data-grid">
+                  <div class="slide-content-head">
+                    <div class="slide-content-eyebrow">— 02 / KEY METRICS</div>
+                  </div>
+                  <div class="slide-data-stat-row">
+                    <div class="slide-data-stat">
+                      <div class="num">40<em>+</em></div>
+                      <div class="lab">Years Experience<br><span>Since 1980</span></div>
+                    </div>
+                    <div class="slide-data-stat">
+                      <div class="num">100<em>%</em></div>
+                      <div class="lab">Client Satisfaction<br><span>Award-winning</span></div>
+                    </div>
+                    <div class="slide-data-stat">
+                      <div class="num">3</div>
+                      <div class="lab">Core Services<br><span>Ads · Brand · Tech</span></div>
+                    </div>
+                  </div>
+                  <div class="slide-content-foot">
+                    <div class="slide-content-wordmark">Herrmann</div>
+                    <div class="slide-content-foot-meta">ADVERTISING · BRANDING · TECHNOLOGY</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="slide-row">
+          <div>
+            <div class="slide-label">03 / IMAGE</div>
+            <div class="slide slide-paper">
+              <div class="slide-content">
+                <div class="slide-data-grid">
+                  <div class="slide-content-head">
+                    <div class="slide-content-eyebrow">— 03 / OUR WORK</div>
+                  </div>
+
+                  <div class="slide-content-body" style="align-items: stretch; gap: 24px;">
+                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                      <div class="slide-content-h" style="margin-bottom: 12px; font-size: 24px;">Visit
+                        <br><em>Annapolis.</em>
+                      </div>
+                      <div class="slide-content-p" style="margin-bottom: 0;">Our work for Visit Annapolis resulted in a
+                        significant increase in tourism inquiries. We combined stunning photography with compelling
+                        messaging to capture the essence of the Chesapeake Bay.</div>
+                    </div>
+                    <div class="slide-image-visual" style="border-radius: 4px; overflow: hidden;">
+                      <div class="slide-image-placeholder"
+                        style="background: linear-gradient(135deg, rgba(229,75,27,0.15) 0%, rgba(229,75,27,0.04) 50%, rgba(19,19,16,0.06) 100%); border-color: rgba(19,19,16,0.2);">
+                        <div>
+                          <div
+                            style="font-family: 'Fraunces', serif; font-size: 16px; color: var(--ink); opacity: 0.3; text-align: center;">
+                            Placeholder</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    style="display: flex; justify-content: space-between; align-items: end; border-top: 1px solid rgba(19,19,16,0.15); padding-top: 9px; margin-top: 10px;">
+                    <div class="slide-content-wordmark">Herrmann</div>
+                    <div class="slide-image-caption" style="color: rgba(19,19,16,0.4);">Visit Annapolis · Advertising
+                      Campaign</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="slide-label">04 / CLOSING</div>
+            <div class="slide slide-ink">
+              <div class="slide-content">
+                <div class="slide-close-grid">
+                  <div class="slide-stamp"><span class="stamp-h">h</span></div>
+                  <div class="slide-close-headline">Taking a Brand <em>Beyond.</em></div>
+                  <div class="slide-close-foot">
+                    <div class="slide-close-wordmark">Herrmann</div>
+                    <div class="slide-close-meta">
+                      <div>info@herrmann.com</div>
+                      <div>(410) 267-6522</div>
+                      <div style="color: var(--vermilion);">HERRMANN.COM</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 11 — EMAIL TEMPLATE                  -->
+      <!-- ============================================ -->
+      <section class="chapter" id="email">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 11</div>
+          <div class="chapter-title">Email Template</div>
+
+        </div>
+
+
+        <div style="display:flex;justify-content:center;">
+          <div class="email-frame">
+            <div class="email-client-bar">
+              <div class="row"><span class="k">From:</span> Herrmann &lt;info@herrmann.com&gt;</div>
+              <div class="row"><span class="k">Subject:</span> Taking your brand to new levels</div>
+            </div>
+            <table cellpadding="0" cellspacing="0" border="0" width="600"
+              style="background:#F2EFE7;font-family:'Inter',sans-serif;color:#131310;">
+              <tr>
+                <td style="padding:28px 40px;border-bottom:1px solid #131310;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td valign="middle" width="50">
+                        <div
+                          style="width:40px;height:40px;border:1.5px solid #131310;display:flex;align-items:center;justify-content:center;">
+                          <span
+                            style="font-family:'Caveat Brush',cursive;font-size:30px;color:#E54B1B;line-height:1;margin-top:-2px;">h</span>
+                        </div>
+                      </td>
+                      <td valign="middle" align="right"
+                        style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#8A857A;letter-spacing:0.12em;text-transform:uppercase;line-height:1.8;">
+                        <span style="color:#E54B1B;">No.</span> 001 · May 2026<br>
+                        Herrmann Newsletter
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="background:#131310;padding:48px 40px;color:#F2EFE7;">
+                  <div
+                    style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#E54B1B;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;margin-bottom:18px;">
+                    — Our Story</div>
+                  <div
+                    style="font-family:'Fraunces',serif;font-weight:500;font-size:42px;line-height:0.95;letter-spacing:-0.022em;margin-bottom:20px;">
+                    Building great brands <em style="font-style:italic;color:#E54B1B;">for 40 years.</em></div>
+                  <div
+                    style="font-family:'Inter',sans-serif;font-size:14px;line-height:1.55;color:#F2EFE7;opacity:0.85;max-width:90%;">
+                    From our home base in Annapolis, Maryland, Herrmann's been building great brands for clients around
+                    the world.</div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:40px 40px 28px;">
+                  <div
+                    style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8A857A;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:14px;">
+                    — What We Do</div>
+                  <div
+                    style="font-family:'Fraunces',serif;font-weight:500;font-size:24px;line-height:1.05;letter-spacing:-0.014em;margin-bottom:16px;">
+                    All in a Day's <em style="font-style:italic;color:#E54B1B;">Work.</em></div>
+                  <div
+                    style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;color:#131310;margin-bottom:14px;">
+                    From marketing strategy, website development and memorable ad campaigns to stunning photography,
+                    animation and e-communications, we have what it takes to take your brand to new levels.
+                  </div>
+                  <div style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.65;color:#131310;">
+                    We look forward to helping you build your brand.
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td style="padding:0 40px 40px;">
+                  <table cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td style="background:#E54B1B; border-radius: 6px; overflow: hidden;">
+                        <a href="#"
+                          style="display:inline-block;padding:14px 24px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:#F2EFE7;text-decoration:none;">Read
+                          Our Story →</a>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td style="background:#131310;color:#F2EFE7;padding:40px 40px 28px;">
+                  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td valign="bottom">
+                        <div
+                          style="font-family:'Caveat Brush',cursive;font-size:56px;color:#E54B1B;line-height:0.9;letter-spacing:-0.01em;">
+                          Herrmann</div>
+                        <div
+                          style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#F2EFE7;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;border-top:1px solid #F2EFE7;padding-top:8px;margin-top:8px;display:inline-block;">
+                          <span style="color:#E54B1B;">01</span> Advertising · <span style="color:#E54B1B;">02</span>
+                          Branding · <span style="color:#E54B1B;">03</span> Technology
+                        </div>
+                      </td>
+                      <td valign="bottom" align="right"
+                        style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#8A857A;letter-spacing:0.1em;text-transform:uppercase;line-height:1.8;">
+                        <div>info@herrmann.com</div>
+                        <div>(410) 267-6522</div>
+                        <div>Annapolis, MD</div>
+                      </td>
+                    </tr>
+                  </table>
+                  <div
+                    style="margin-top:28px;padding-top:14px;border-top:1px solid rgba(242,239,231,0.18);font-family:'JetBrains Mono',monospace;font-size:8.5px;color:#8A857A;letter-spacing:0.08em;text-transform:uppercase;line-height:1.6;">
+                    <a href="#" style="color:#8A857A;text-decoration:none;">View in browser</a> · <a href="#"
+                      style="color:#8A857A;text-decoration:none;">Unsubscribe</a> · <a href="#"
+                      style="color:#8A857A;text-decoration:none;">Forward</a><br>
+                    © 2026 Herrmann Advertising · Annapolis MD 21401
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 12 — HOLIDAY E-CARD                  -->
+      <!-- ============================================ -->
+      <section class="chapter" id="holiday">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 12</div>
+          <div class="chapter-title">Holiday E-Card</div>
+
+        </div>
+
+
+        <div style="display:flex;justify-content:center;">
+          <div class="ecard ecard-holiday">
+            <div class="ecard-content">
+              <div class="ecard-holiday-grid">
+                <div class="ecard-top">
+                  <div class="ecard-stamp"><span class="stamp-h">h</span></div>
+                  <div class="ecard-meta">
+                    <div><span class="num">No.</span> 12 · 2026</div>
+                    <div>Happy Holidays</div>
+                  </div>
+                </div>
+                <div class="ecard-holiday-message"
+                  style="display: flex; flex-direction: column; justify-content: center;">
+                  <div
+                    style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--paper); opacity: 0.6; margin-bottom: 24px;">
+                    Wishing you</div>
+                  <div
+                    style="font-family: 'Fraunces', serif; font-size: 88px; line-height: 0.85; letter-spacing: -0.02em; color: var(--vermilion); font-style: italic;">
+                    Joy &amp; <br>Success</div>
+                  <div
+                    style="font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 300; color: var(--paper); opacity: 0.8; margin-top: 36px; letter-spacing: -0.01em;">
+                    in the coming new year.</div>
+                </div>
+                <div class="ecard-holiday-foot">
+                  <div class="ecard-wordmark">Herrmann</div>
+                  <div class="ecard-foot-meta">
+                    <div>Happy Holidays — From Herrmann</div>
+                    <div style="color: var(--vermilion);">CHEERS TO 2027</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- CHAPTER 13 — EVENT E-CARD                    -->
+      <!-- ============================================ -->
+      <section class="chapter" id="event">
+        <div class="chapter-head">
+          <div class="chapter-num">CH 13</div>
+          <div class="chapter-title">Event E-Card</div>
+
+        </div>
+
+
+        <div style="display:flex;justify-content:center;">
+          <div class="ecard ecard-event">
+            <div class="ecard-event-left">
+              <div class="ecard-event-eyebrow">— You're Invited</div>
+              <div>
+                <div class="ecard-event-date">10 <em>·</em> 24</div>
+                <div class="ecard-event-day">October · Open House</div>
+              </div>
+            </div>
+            <div class="ecard-event-right">
+              <div>
+                <div class="ecard-event-title">Celebrate <em>with us.</em></div>
+                <div class="ecard-event-sub" style="margin-bottom: 24px;">— 40 Years of Building Great Brands.</div>
+                <div class="ecard-event-meta">
+                  <div><span class="k">EVENT</span></div>
+                  <div style="margin-bottom: 12px; font-weight: 500; color: var(--ink);">40th Anniversary Open House
+                  </div>
+                  <div><span class="k">WHERE</span></div>
+                  <div>30 West Street</div>
+                  <div>Annapolis, MD</div>
+                  <div style="margin-top:14px;"><span class="k">RSVP</span></div>
+                  <div>info@herrmann.com</div>
+                </div>
+                <a href="#" class="ecard-event-cta">RSVP →</a>
+              </div>
+              <div class="ecard-event-foot">
+                <div class="ecard-event-wordmark">Herrmann</div>
+                <div
+                  style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;text-align:right;line-height:1.7;">
+                  <div>HERRMANN · ANNAPOLIS</div>
+                  <div>EST. 1980</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ============================================ -->
+      <!-- BOOK FOOT                                    -->
+      <!-- ============================================ -->
+      <footer class="book-foot">
+        <div class="book-foot-wordmark">Herrmann</div>
+        <div class="book-foot-meta">
+          <div>By Yachi</div>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+</body>
+
+</html>

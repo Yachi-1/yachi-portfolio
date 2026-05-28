@@ -151,7 +151,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
     { k: "Role", v: "UI/UX Designer (self-initiated)" },
     { k: "Timeline", v: "2 weeks" },
     { k: "Tools", v: "Figma · Claude Design · Maze" },
-    { k: "Year", v: "2026" },
+    { k: "Year", v: "2025" },
   ];
 
   const competitors = [
@@ -209,8 +209,23 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
           {/* Text zone */}
           <div>
             <Reveal delay={0.05}>
-              <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: theme.accent, marginBottom: 20 }}>
-                Case Study · 2026
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
+                {["E-Commerce", "UX Homepage Redesign", "2025"].map((tag, i) => (
+                  <div key={i} style={{
+                    padding: "4px 12px",
+                    borderRadius: 100,
+                    background: mode === "dark" ? `${theme.accent}20` : `${theme.accent}12`,
+                    border: `1px solid ${theme.accent}30`,
+                    color: theme.accent,
+                    fontFamily: "Inter",
+                    fontSize: 10.5,
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase"
+                  }}>
+                    {tag}
+                  </div>
+                ))}
               </div>
             </Reveal>
             <Reveal delay={0.1}>

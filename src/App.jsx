@@ -9,6 +9,7 @@ import Footer from "./components/Footer.jsx";
 import SectionDivider from "./components/SectionDivider.jsx";
 import Home from "./routes/Home.jsx";
 
+
 const About = lazy(() => import("./routes/About.jsx"));
 const Projects = lazy(() => import("./routes/Projects.jsx"));
 const Resume = lazy(() => import("./routes/Resume.jsx"));
@@ -127,6 +128,7 @@ export default function App() {
         overflowX: "hidden",
       }}
     >
+
       <style>{`
         ::selection { background: ${theme.accent}; color: white; }
         button:focus-visible, a:focus-visible { outline: 2px solid ${theme.accent}; outline-offset: 3px; border-radius: 6px; }
