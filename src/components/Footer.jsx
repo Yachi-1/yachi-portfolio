@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { Mail, Linkedin, Heart } from "lucide-react";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import ParticleLogo from "./ParticleLogo.jsx";
 
 const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
 
@@ -30,9 +32,10 @@ function makeHoverHandlers(theme) {
   };
 }
 
-export default function Footer({ theme, setRoute }) {
+export default function Footer({ theme, mode, setRoute }) {
   const { isMobile, isTablet } = useBreakpoint();
   const hoverHandlers = makeHoverHandlers(theme);
+  const [logoHovered, setLogoHovered] = useState(false);
 
   const linkBaseStyle = {
     fontFamily: "Inter",
@@ -71,24 +74,16 @@ export default function Footer({ theme, setRoute }) {
           gap: isMobile ? 32 : 40, alignItems: "start",
         }}>
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-              <div style={{ fontFamily: "'Caveat', cursive", fontSize: 28, fontWeight: 700, color: theme.ink }}>
-                <span style={{
-                  backgroundImage: `linear-gradient(135deg, ${theme.pastel1}, ${theme.accent})`,
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                  WebkitTextFillColor: "transparent",
-                  fontWeight: 800,
-                  fontSize: 28,
-                  fontFamily: "'Caveat', cursive",
-                  letterSpacing: "-0.02em",
-                  display: "inline-block",
-                  padding: "0.2em 0.5em",
-                  margin: "-0.2em -0.5em",
-                  overflow: "visible",
-                }}>YP</span>
-              </div>
+            <div 
+              style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, cursor: "pointer" }}
+              onMouseEnter={() => setLogoHovered(true)}
+              onMouseLeave={() => setLogoHovered(false)}
+              onClick={() => {
+                setRoute("home");
+                window.lenis?.scrollTo(0);
+              }}
+            >
+              <ParticleLogo mode={mode || "light"} size={48} playOnHover={true} isHovered={logoHovered} />
             </div>
             <p style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft, lineHeight: 1.6, maxWidth: 360, margin: 0 }}>
               Product designer. Currently shaping the next chapter of human-centered AI.

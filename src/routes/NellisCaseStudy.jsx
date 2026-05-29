@@ -300,8 +300,6 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
                     e.currentTarget.style.borderColor = theme.accent;
                     e.currentTarget.style.boxShadow = mode === "dark" ? "0 12px 32px rgba(0,0,0,0.25)" : "0 12px 32px rgba(0,0,0,0.06)";
                     e.currentTarget.style.transform = "translateY(-2px)";
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = "scale(1.02)";
                     const text = e.currentTarget.querySelector('.hover-text');
                     if (text) { text.style.color = theme.accent; text.style.opacity = "1"; }
                     const icon = e.currentTarget.querySelector('.hover-icon');
@@ -311,8 +309,6 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
                     e.currentTarget.style.borderColor = mode === "dark" ? theme.line : "rgba(0,0,0,0.15)";
                     e.currentTarget.style.boxShadow = "none";
                     e.currentTarget.style.transform = "translateY(0)";
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = "scale(1)";
                     const text = e.currentTarget.querySelector('.hover-text');
                     if (text) { text.style.color = theme.inkMute; text.style.opacity = "0.7"; }
                     const icon = e.currentTarget.querySelector('.hover-icon');
@@ -320,10 +316,10 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
                   }}
                 >
                   <div style={{
-                    overflow: "hidden",
+                    height: 350, overflow: "hidden",
                     background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
                   }}>
-                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.4s ease" }} />
+                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
                   </div>
                   <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
@@ -792,6 +788,42 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               />
             ))}
           </div>
+
+          {/* Nellis Homepage iframe */}
+          <Reveal delay={0.2}>
+            <div style={{ maxWidth: "100%", margin: "48px auto 12px", textAlign: "center" }}>
+              <span style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute, fontStyle: "italic", letterSpacing: "0.01em" }}>
+                Scroll to view full homepage design
+              </span>
+            </div>
+            <div className="homepage-box"
+              style={{
+                borderRadius: 14, overflow: "hidden",
+                background: theme.card, border: `1px solid ${theme.line}`,
+                boxShadow: "0 8px 30px -6px rgba(0,0,0,0.06)",
+                maxWidth: "100%", margin: "0 auto",
+                position: "relative",
+                height: isMobile ? 400 : 700,
+                transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = theme.accent;
+                e.currentTarget.style.boxShadow = "0 24px 60px -12px rgba(0,0,0,0.15)";
+                e.currentTarget.style.transform = "translateY(-4px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = theme.line;
+                e.currentTarget.style.boxShadow = "0 8px 30px -6px rgba(0,0,0,0.06)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <iframe
+                src="/nellis_auction_homepage.html"
+                title="Nellis Auction Homepage Design"
+                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+              />
+            </div>
+          </Reveal>
         </div>
       </section>
 

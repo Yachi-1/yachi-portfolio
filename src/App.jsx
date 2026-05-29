@@ -165,7 +165,7 @@ export default function App() {
 
       <SectionDivider theme={theme} />
 
-      <Footer theme={theme} setRoute={setRoute} />
+      <Footer theme={theme} mode={mode} setRoute={setRoute} />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
+import ParticleLogo from "./ParticleLogo.jsx";
 
 const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
 
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
 export default function Nav({ theme, mode, setMode, route, setRoute }) {
   const reduced = useReducedMotion();
   const { isMobile, isTablet } = useBreakpoint();
+  const [logoHovered, setLogoHovered] = useState(false);
 
   const padding = isMobile ? "6px 6px 6px 14px" : isTablet ? "7px 7px 7px 18px" : "8px 8px 8px 22px";
   const top = isMobile ? 14 : 22;
@@ -45,43 +47,29 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
     >
       <button
         onClick={() => setRoute("home")}
+        onMouseEnter={() => setLogoHovered(true)}
+        onMouseLeave={() => setLogoHovered(false)}
         data-magnet="0.2"
         style={{
           display: "flex", alignItems: "center", gap: 8,
           background: "transparent", border: "none", cursor: "pointer",
-          fontFamily: "'Caveat', cursive", fontSize: 22, fontWeight: 700,
-          color: theme.ink, paddingRight: isMobile ? 4 : 8,
+          paddingRight: isMobile ? 4 : 8,
         }}
       >
-        <span style={{
-          backgroundImage: `linear-gradient(135deg, ${theme.pastel1}, ${theme.accent})`,
-          WebkitBackgroundClip: "text",
-          backgroundClip: "text",
-          color: "transparent",
-          WebkitTextFillColor: "transparent",
-          fontWeight: 800,
-          fontSize: logoFontSize,
-          fontFamily: "'Caveat', cursive",
-          letterSpacing: "-0.02em",
-          display: "inline-block",
-          verticalAlign: "middle",
-          padding: "0.2em 0.5em",
-          margin: "-0.2em -0.5em",
-          overflow: "visible",
-        }}>YP</span>
+        <ParticleLogo mode={mode} size={isMobile ? 32 : 40} playOnHover={true} playOnFirstVisit={true} isHovered={logoHovered} />
       </button>
       {!isMobile && <div style={{ width: 1, height: 22, background: theme.line }} />}
       {NAV_ITEMS.map((it) => (
-        <NavItem 
-          key={it.id} 
-          it={it} 
-          route={route} 
-          setRoute={setRoute} 
-          theme={theme} 
-          mode={mode} 
-          isMobile={isMobile} 
-          itemPadding={itemPadding} 
-          itemFontSize={itemFontSize} 
+        <NavItem
+          key={it.id}
+          it={it}
+          route={route}
+          setRoute={setRoute}
+          theme={theme}
+          mode={mode}
+          isMobile={isMobile}
+          itemPadding={itemPadding}
+          itemFontSize={itemFontSize}
         />
       ))}
       <ThemeToggle theme={theme} mode={mode} setMode={setMode} isMobile={isMobile} />
@@ -94,7 +82,7 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
   const active = route === it.id || (it.id === "projects" && route.startsWith("project:"));
 
   return (
-    <div 
+    <div
       style={{ position: "relative" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -142,7 +130,7 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
                 background: theme.bg,
                 border: `1px solid ${theme.line}`,
                 borderRadius: 16,
-                boxShadow: mode === "dark" 
+                boxShadow: mode === "dark"
                   ? "0 10px 40px rgba(0,0,0,0.6)"
                   : "0 10px 40px rgba(0,0,0,0.08)",
                 display: "flex",
@@ -212,8 +200,8 @@ function DropdownItem({ p, route, setRoute, setIsHovered, theme, mode }) {
       <span style={{
         fontFamily: "Inter, sans-serif",
         fontSize: 11,
-        color: hover || isActive 
-          ? (mode === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.7)") 
+        color: hover || isActive
+          ? (mode === "dark" ? "rgba(0,0,0,0.6)" : "rgba(255,255,255,0.7)")
           : theme.inkMute,
         transition: "color 0.2s ease",
       }}>

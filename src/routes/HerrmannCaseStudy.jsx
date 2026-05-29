@@ -147,7 +147,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
     { title: "Color Palette", body: "Built around a warm, confident vermilion paired with a deep ink and a soft paper neutral, with supporting clay and stone tones.", icon: Palette },
     { title: "Typography", body: "An expressive serif for display moments with a clean, highly legible sans for interface and body text, plus a monospace accent for labels and metadata.", icon: Type },
     { title: "Spacing & Grid", body: "Rules to keep layouts consistent across screen sizes. An 8px base unit with documented breakpoints and container widths.", icon: Grid3X3 },
-    { title: "Iconography", body: "Guidance for a unified visual vocabulary — stroke weights, corner radii, and optical sizing rules that keep icons feeling part of the family.", icon: FileText },
+    { title: "Iconography", body: "Guidance for a unified visual vocabulary, stroke weights, corner radii, and optical sizing rules that keep icons feeling part of the family.", icon: FileText },
     { title: "Applied Materials", body: "Business card, letterhead, and a presentation template to show the system working beyond the screen.", icon: BookOpen },
   ];
 
@@ -269,8 +269,6 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                     e.currentTarget.style.borderColor = theme.accent;
                     e.currentTarget.style.boxShadow = mode === "dark" ? "0 12px 32px rgba(0,0,0,0.25)" : "0 12px 32px rgba(0,0,0,0.06)";
                     e.currentTarget.style.transform = "translateY(-2px)";
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = "scale(1.02)";
                     const text = e.currentTarget.querySelector('.hover-text');
                     if (text) { text.style.color = theme.accent; text.style.opacity = "1"; }
                     const icon = e.currentTarget.querySelector('.hover-icon');
@@ -280,8 +278,6 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                     e.currentTarget.style.borderColor = mode === "dark" ? theme.line : "rgba(0,0,0,0.15)";
                     e.currentTarget.style.boxShadow = "none";
                     e.currentTarget.style.transform = "translateY(0)";
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = "scale(1)";
                     const text = e.currentTarget.querySelector('.hover-text');
                     if (text) { text.style.color = theme.inkMute; text.style.opacity = "0.7"; }
                     const icon = e.currentTarget.querySelector('.hover-icon');
@@ -289,10 +285,10 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                   }}
                 >
                   <div style={{
-                    overflow: "hidden",
+                    height: 350, overflow: "hidden",
                     background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
                   }}>
-                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.4s ease" }} />
+                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
                   </div>
                   <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
@@ -483,7 +479,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>My Approach</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px", maxWidth: 900 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px", maxWidth: "100%" }}>
               I set a few self-imposed constraints to keep the project honest and focused:
             </p>
           </Reveal>
@@ -519,28 +515,99 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
       {/* ── WIREFRAME ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Wireframe</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Wireframe & High Fidelity</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px", maxWidth: 900 }}>
-              Before moving into high fidelity, I mapped out the page structure in a wireframe organizing hierarchy, section flow, and content density to make sure the story felt right before committing to pixels.
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px", maxWidth: "100%" }}>
+              Before high-fidelity design, I created a wireframe to define the layout, hierarchy, and content flow. Here is a side-by-side look at the structural wireframe alongside the final design.
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <div style={{
-              borderRadius: 14, overflow: "hidden",
-              background: theme.card, border: `1px solid ${theme.line}`,
-              maxWidth: 900, margin: "0 auto",
-              position: "relative",
-              height: isMobile ? 400 : 700,
-            }}>
-              <iframe
-                srcDoc={wireframeHtml}
-                title="Herrmann Wireframe"
-                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
-              />
-            </div>
-            <div style={{ fontFamily: "Inter", fontSize: 12.5, color: theme.inkMute, marginTop: 10, textAlign: "center", letterSpacing: "0.01em" }}>
-              Wireframe — mapping the page structure before moving to high-fidelity design.
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 32 }}>
+              {/* Wireframe Side */}
+              <div>
+                <div style={{ maxWidth: "100%", margin: "0 auto 12px", textAlign: "center" }}>
+                  <span style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute, fontStyle: "italic", letterSpacing: "0.01em" }}>
+                    Scroll to view full wireframe
+                  </span>
+                </div>
+                <div className="wireframe-box"
+                  style={{
+                    borderRadius: 14, overflow: "hidden",
+                    background: theme.card, border: `1px solid ${theme.line}`,
+                    boxShadow: "0 8px 30px -6px rgba(0,0,0,0.06)",
+                    maxWidth: "100%", margin: "0 auto",
+                    position: "relative",
+                    height: isMobile ? 400 : 500,
+                    transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = theme.accent;
+                    e.currentTarget.style.boxShadow = "0 24px 60px -12px rgba(0,0,0,0.15)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = theme.line;
+                    e.currentTarget.style.boxShadow = "0 8px 30px -6px rgba(0,0,0,0.06)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  <iframe
+                    srcDoc={wireframeHtml}
+                    title="Herrmann Wireframe"
+                    style={{
+                      width: isMobile ? "100%" : "200%",
+                      height: isMobile ? "100%" : "200%",
+                      transform: isMobile ? "none" : "scale(0.5)",
+                      transformOrigin: "top left",
+                      border: "none",
+                      display: "block"
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* High Fidelity Side */}
+              <div>
+                <div style={{ maxWidth: "100%", margin: "0 auto 12px", textAlign: "center" }}>
+                  <span style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute, fontStyle: "italic", letterSpacing: "0.01em" }}>
+                    Scroll to view high fidelity
+                  </span>
+                </div>
+                <div className="hifi-box"
+                  style={{
+                    borderRadius: 14, overflow: "hidden",
+                    background: theme.card, border: `1px solid ${theme.line}`,
+                    boxShadow: "0 8px 30px -6px rgba(0,0,0,0.06)",
+                    maxWidth: "100%", margin: "0 auto",
+                    position: "relative",
+                    height: isMobile ? 400 : 500,
+                    transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = theme.accent;
+                    e.currentTarget.style.boxShadow = "0 24px 60px -12px rgba(0,0,0,0.15)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = theme.line;
+                    e.currentTarget.style.boxShadow = "0 8px 30px -6px rgba(0,0,0,0.06)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  <iframe
+                    src="/herrmann_homepage.html"
+                    title="Herrmann High Fidelity"
+                    style={{
+                      width: isMobile ? "100%" : "200%",
+                      height: isMobile ? "100%" : "200%",
+                      transform: isMobile ? "none" : "scale(0.5)",
+                      transformOrigin: "top left",
+                      border: "none",
+                      display: "block"
+                    }}
+                  />
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -551,7 +618,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>The Brand System</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
+            <div style={{ maxWidth: "100%" }}>
               <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
                 Rather than redesign a single page in isolation, I built a small brand book first so the homepage would sit on a coherent foundation. <strong style={{ color: theme.ink }}>This is the part of the project I am most proud of</strong>, because it forced me to make and defend a complete set of decisions.
               </p>
@@ -575,168 +642,46 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
             ))}
           </div>
 
-          {/* Brand Book link */}
+          {/* Brand Book iframe */}
           <Reveal delay={0.2}>
-            <div style={{ marginTop: isMobile ? 32 : 48 }}>
-              <a
-                href="/herrmann_brand_book.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 10,
-                  padding: isMobile ? "16px 24px" : "18px 32px",
-                  borderRadius: 14,
-                  background: theme.card, border: `1px solid ${theme.line}`,
-                  fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.ink,
-                  textDecoration: "none",
-                  transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s",
-                  cursor: "pointer",
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = theme.accent;
-                  e.currentTarget.style.boxShadow = mode === "dark" ? "0 12px 32px rgba(0,0,0,0.25)" : "0 12px 32px rgba(0,0,0,0.06)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = theme.line;
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
-              >
-                <BookOpen size={18} color={theme.accent} strokeWidth={1.8} />
-                View Full Brand Book
-                <ExternalLink size={14} color={theme.inkMute} />
-              </a>
+            <div style={{ maxWidth: "100%", margin: "48px auto 12px", textAlign: "center" }}>
+              <span style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute, fontStyle: "italic", letterSpacing: "0.01em" }}>
+                Scroll to view full brand book
+              </span>
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── THE REDESIGNED HOMEPAGE ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>The Redesigned Homepage</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                With the system in place, the homepage redesign focused on three things: <strong style={{ color: theme.ink }}>a stronger first impression</strong>, <strong style={{ color: theme.ink }}>a clearer path into the work</strong>, and <strong style={{ color: theme.ink }}>a layout that feels current without losing the studio's character.</strong>
-              </p>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 36px" }}>
-                The redesign reframes the hero around real storytelling rather than placeholders, gives the portfolio more room to shine, tightens the visual hierarchy so the eye moves naturally down the page, and applies the documented brand system consistently from top to bottom.
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Homepage link card */}
-          <Reveal delay={0.1}>
-            <a
-              href="/herrmann_homepage.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <div className="brandbook-box"
               style={{
-                display: "flex", flexDirection: "column", gap: 0,
                 borderRadius: 14, overflow: "hidden",
-                background: theme.card, border: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
-                textDecoration: "none",
-                transition: "border-color 0.25s, box-shadow 0.25s, transform 0.25s",
-                cursor: "pointer",
-                maxWidth: 900,
+                background: theme.card, border: `1px solid ${theme.line}`,
+                boxShadow: "0 8px 30px -6px rgba(0,0,0,0.06)",
+                maxWidth: "100%", margin: "0 auto",
+                position: "relative",
+                height: isMobile ? 400 : 700,
+                transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
               }}
-              onMouseEnter={e => {
+              onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = theme.accent;
-                e.currentTarget.style.boxShadow = mode === "dark" ? "0 12px 32px rgba(0,0,0,0.25)" : "0 12px 32px rgba(0,0,0,0.06)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                const img = e.currentTarget.querySelector('img');
-                if (img) img.style.transform = "scale(1.02)";
+                e.currentTarget.style.boxShadow = "0 24px 60px -12px rgba(0,0,0,0.15)";
+                e.currentTarget.style.transform = "translateY(-4px)";
               }}
-              onMouseLeave={e => {
-                e.currentTarget.style.borderColor = mode === "dark" ? theme.line : "rgba(0,0,0,0.15)";
-                e.currentTarget.style.boxShadow = "none";
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = theme.line;
+                e.currentTarget.style.boxShadow = "0 8px 30px -6px rgba(0,0,0,0.06)";
                 e.currentTarget.style.transform = "translateY(0)";
-                const img = e.currentTarget.querySelector('img');
-                if (img) img.style.transform = "scale(1)";
               }}
             >
-              <div style={{
-                overflow: "hidden",
-                background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
-              }}>
-                <img src={herrmannCoverImg} alt="Herrmann homepage redesign preview" style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.4s ease" }} />
-              </div>
-              <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-                <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>Redesigned Homepage</span>
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                  <span style={{ fontFamily: "Inter", fontSize: 12, fontWeight: 500, color: theme.inkMute, opacity: 0.7 }}>View Full Page</span>
-                  <ExternalLink size={14} color={theme.inkMute} />
-                </div>
-              </div>
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── HONEST REFLECTION ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Honest Reflection</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 32px", maxWidth: 900 }}>
-              Because this was a self-initiated concept, there are real limits worth naming.
-            </p>
-          </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: isMobile ? 16 : 20 }}>
-            {reflectionItems.map((item, i) => (
-              <Reveal key={i} delay={0.08 + i * 0.04}>
-                <div style={{
-                  padding: isMobile ? "24px 20px" : "28px 24px",
-                  borderRadius: 14,
-                  background: theme.card, border: `1px solid ${theme.line}`,
-                  height: "100%", boxSizing: "border-box",
-                  display: "flex", gap: 16, alignItems: "start",
-                }}>
-                  <IconBadge icon={item.icon} theme={theme} />
-                  <div>
-                    <strong style={{ color: theme.ink, fontWeight: 600, display: "block", fontSize: isMobile ? 17 : 18, marginBottom: 8, letterSpacing: "-0.01em", fontFamily: "Inter" }}>{item.lead}</strong>
-                    <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 16, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>{item.body}</p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.2}>
-            <div style={{
-              marginTop: isMobile ? 32 : 48,
-              padding: isMobile ? "20px" : "24px 28px",
-              borderRadius: 14, background: theme.bgAlt, border: `1px solid ${theme.line}`,
-              display: "flex", gap: 16, alignItems: "center",
-              maxWidth: 900,
-            }}>
-              <Search size={20} color={theme.accent} strokeWidth={1.6} style={{ flexShrink: 0 }} />
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 16, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                If I were to take this further, the next step would be <strong style={{ color: theme.ink }}>a short, friendly note to the studio</strong> sharing the concept with no strings attached, simply to learn how a working agency would react to an outside perspective.
-              </p>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── WHAT I LEARNED ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>What I Learned</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                This project pushed me to work the way I would on a real brief: start from observation, define the problem before reaching for solutions, build a system instead of decorating a page, and stay honest about the boundaries of what I could know on my own. Working with a real, established brand was harder than inventing a fictional one, and that difficulty is exactly why it was worth doing.
-              </p>
+              <iframe
+                src="/herrmann_brand_book.html"
+                title="Herrmann Brand Book"
+                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+              />
             </div>
           </Reveal>
         </div>
       </section>
 
       {/* ── CLOSING ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal>
             <div style={{
@@ -747,7 +692,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
               border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
               textAlign: "center",
-              maxWidth: 720,
+              maxWidth: 780,
               margin: "0 auto",
               overflow: "hidden"
             }}>
@@ -779,8 +724,8 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
               }} />
 
               <div style={{ position: "relative", zIndex: 1 }}>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: theme.inkMute, margin: "0 0 16px", fontStyle: "italic" }}>
-                  Independent concept project. Not affiliated with Herrmann Advertising | Branding | Technology. All trademarks belong to their respective owners.
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
+                  This is a self-initiated concept project, so it lives or dies on its reasoning. I’d love to hear where this approach succeeds and where it falls short. If anyone at Herrmann Advertising finds these ideas useful, feel free to run with them.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
                   <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
@@ -796,7 +741,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
       </section>
 
       {/* ── NEXT CASE ── */}
-      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px" }}>
+      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", background: theme.bgAlt }}>
         <div
           onClick={() => {
             if (next.pdfLink) {

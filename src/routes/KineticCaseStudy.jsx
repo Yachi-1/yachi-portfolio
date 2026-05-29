@@ -5,6 +5,7 @@ import Reveal from "../components/Reveal.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import kpImage from "../assets/KP_Cover.png";
+import kpConnectImg from "../assets/kp_connect_design.png";
 
 export default function KineticCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isTablet, isMobileOrTablet } = useBreakpoint();
@@ -144,7 +145,7 @@ export default function KineticCaseStudy({ theme, mode, setRoute }) {
             <div style={{ marginTop: 48, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)", gap: isMobile ? 20 : 24 }}>
               {[
                 { label: "Before Redesign", href: "https://www.kpconnect.com/", img: "/Kinetic_Before.png", alt: "Original Kinetic Potential homepage" },
-                { label: "After Redesign", href: "https://www.figma.com/design/9T1FeFHEfZLsbXZPwNcHZp/KP-Connect?node-id=0-1&t=Y7wUIGGvEOwYtnzB-1", img: "/Kinetic_After.png", alt: "Kinetic Potential homepage redesign" },
+                { label: "After Redesign", href: "https://www.figma.com/proto/9T1FeFHEfZLsbXZPwNcHZp/KP-Connect?node-id=1-2513&p=f&t=DTb9disoclGKMFPX-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1", img: "/Kinetic_After_v2.png", alt: "Kinetic Potential homepage redesign" },
               ].map(l => (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" style={{
                   display: "flex", flexDirection: "column", gap: 0,
@@ -158,8 +159,6 @@ export default function KineticCaseStudy({ theme, mode, setRoute }) {
                     e.currentTarget.style.borderColor = theme.accent;
                     e.currentTarget.style.boxShadow = mode === "dark" ? "0 12px 32px rgba(0,0,0,0.25)" : "0 12px 32px rgba(0,0,0,0.06)";
                     e.currentTarget.style.transform = "translateY(-2px)";
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = "scale(1.02)";
                     const text = e.currentTarget.querySelector('.hover-text');
                     if (text) { text.style.color = theme.accent; text.style.opacity = "1"; }
                     const icon = e.currentTarget.querySelector('.hover-icon');
@@ -169,8 +168,6 @@ export default function KineticCaseStudy({ theme, mode, setRoute }) {
                     e.currentTarget.style.borderColor = mode === "dark" ? theme.line : "rgba(0,0,0,0.15)";
                     e.currentTarget.style.boxShadow = "none";
                     e.currentTarget.style.transform = "translateY(0)";
-                    const img = e.currentTarget.querySelector('img');
-                    if (img) img.style.transform = "scale(1)";
                     const text = e.currentTarget.querySelector('.hover-text');
                     if (text) { text.style.color = theme.inkMute; text.style.opacity = "0.7"; }
                     const icon = e.currentTarget.querySelector('.hover-icon');
@@ -178,10 +175,10 @@ export default function KineticCaseStudy({ theme, mode, setRoute }) {
                   }}
                 >
                   <div style={{
-                    overflow: "hidden",
+                    height: 350, overflow: "hidden",
                     background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
                   }}>
-                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "auto", display: "block", transition: "transform 0.4s ease" }} onError={(e) => { e.target.src = "https://placehold.co/800x450/e2e8f0/64748b?text=" + l.label.replace(" ", "+") }} />
+                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} onError={(e) => { e.target.src = "https://placehold.co/800x450/e2e8f0/64748b?text=" + l.label.replace(" ", "+") }} />
                   </div>
                   <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
@@ -897,6 +894,48 @@ Contact`}
               </Reveal>
             ))}
           </div>
+
+          {/* Connect Homepage Scrollable Image */}
+          <Reveal delay={0.2}>
+            <div style={{ maxWidth: "100%", margin: "48px auto 12px", textAlign: "center" }}>
+              <span style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute, fontStyle: "italic", letterSpacing: "0.01em" }}>
+                Click to view full Figma design
+              </span>
+            </div>
+            <a className="homepage-box"
+              href="https://www.figma.com/design/9T1FeFHEfZLsbXZPwNcHZp/KP-Connect?node-id=0-1&t=Whhn5IPlRkJEoOhH-1"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                borderRadius: 14, overflow: "hidden",
+                background: theme.card, border: `1px solid ${theme.line}`,
+                boxShadow: "0 8px 30px -6px rgba(0,0,0,0.06)",
+                maxWidth: "100%", margin: "0 auto",
+                position: "relative",
+                transition: "border-color 0.3s, box-shadow 0.3s, transform 0.3s",
+                cursor: "pointer"
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = theme.accent;
+                e.currentTarget.style.boxShadow = "0 24px 60px -12px rgba(0,0,0,0.15)";
+                e.currentTarget.style.transform = "translateY(-4px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = theme.line;
+                e.currentTarget.style.boxShadow = "0 8px 30px -6px rgba(0,0,0,0.06)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <img
+                src={kpConnectImg}
+                alt="Kinetic Potential Homepage Design"
+                style={{
+                  width: "100%", height: "auto", display: "block"
+                }}
+              />
+            </a>
+          </Reveal>
         </div>
       </section>
 

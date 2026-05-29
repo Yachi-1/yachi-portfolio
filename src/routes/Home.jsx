@@ -265,10 +265,10 @@ export default function Home({ theme, mode, setRoute }) {
               boxShadow: mode === "dark" ? "0 16px 50px rgba(0,0,0,0.4)" : "0 16px 50px rgba(0,0,0,0.08)",
             }}
           >
-            <div style={{ 
-              fontFamily: "'Caveat', cursive", fontSize: isMobile ? 18 : 24, fontWeight: 500, 
+            <div style={{
+              fontFamily: "'Caveat', cursive", fontSize: isMobile ? 18 : 24, fontWeight: 500,
               color: theme.accent, opacity: mode === "dark" ? 1 : 0.9,
-              marginBottom: isMobile ? 12 : 16, textAlign: "center" 
+              marginBottom: isMobile ? 12 : 16, textAlign: "center"
             }}>
               what I love ✿
             </div>
@@ -279,8 +279,8 @@ export default function Home({ theme, mode, setRoute }) {
                 { emoji: "🎵", label: "Music", bg: theme.pastel5 },
                 { emoji: "☕", label: "Tea & Coffee", bg: theme.pastel6 },
               ].map((item, i) => (
-                <motion.div 
-                  key={i} 
+                <motion.div
+                  key={i}
                   whileHover={{ scale: 1.05 }}
                   style={{
                     aspectRatio: "1/1", borderRadius: isMobile ? 8 : 10,
@@ -292,9 +292,9 @@ export default function Home({ theme, mode, setRoute }) {
                   }}
                 >
                   <span style={{ fontSize: isMobile ? 18 : 24, marginBottom: 2 }}>{item.emoji}</span>
-                  <span style={{ 
-                    fontFamily: "Inter", fontSize: isMobile ? 8 : 10, fontWeight: 700, 
-                    color: "rgba(0,0,0,0.75)", 
+                  <span style={{
+                    fontFamily: "Inter", fontSize: isMobile ? 8 : 10, fontWeight: 700,
+                    color: "rgba(0,0,0,0.75)",
                     textTransform: "uppercase", letterSpacing: "0.02em"
                   }}>
                     {item.label}
