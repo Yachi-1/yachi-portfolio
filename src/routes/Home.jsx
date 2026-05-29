@@ -124,7 +124,7 @@ export default function Home({ theme, mode, setRoute }) {
                   borderRadius: 999, padding: "3px 8px",
                 }}>
                   <span style={{ width: 4, height: 4, borderRadius: 999, background: "#5BA8D6" }} />
-                  2019 — 2023
+                  2019 - 2023
                 </div>
               </div>
             </motion.div>
@@ -168,7 +168,7 @@ export default function Home({ theme, mode, setRoute }) {
                   borderRadius: 999, padding: "3px 8px",
                 }}>
                   <span style={{ width: 4, height: 4, borderRadius: 999, background: mode === "dark" ? "#FFB58F" : "#D4733A" }} />
-                  2023 — 2025
+                  2023 - 2025
                 </div>
               </div>
             </motion.div>
@@ -209,9 +209,9 @@ export default function Home({ theme, mode, setRoute }) {
             </div>
 
             {[
-              { role: "UX Researcher", company: "University of Maryland, Baltimore County", year: "Jan 2025 — Present", tint: "#E8A2A2" },
-              { role: "UI/UX Designer", company: "KineticPotential", year: "Oct 2024 — Sept 2025", tint: "#A2C9E8" },
-              { role: "Product Designer", company: "ToplineSwitchgear", year: "Jan 2021 — July 2023", tint: "#B5D8B0" },
+              { role: "UX Researcher", company: "University of Maryland, Baltimore County", year: "Jan 2025 - Present", tint: "#E8A2A2" },
+              { role: "UI/UX Designer", company: "KineticPotential", year: "Oct 2024 - Sept 2025", tint: "#A2C9E8" },
+              { role: "Product Designer", company: "ToplineSwitchgear", year: "Jan 2021 - July 2023", tint: "#B5D8B0" },
             ].map((item, i) => (
               <motion.div
                 key={i}

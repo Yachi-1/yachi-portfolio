@@ -90,7 +90,7 @@ function DesktopFolder({ theme, mode, isOpen, setIsOpen, setRoute }) {
       margin: "0 auto"
     }}>
       <GridPaper theme={theme} noMask={true} />
-      {/* Moodboard stickers — only visible when closed */}
+      {/* Moodboard stickers - only visible when closed */}
       <AnimatePresence>
         {!isOpen && STICKERS.map((s, i) => (
           <StickerElement key={i} sticker={s} mode={mode} theme={theme} index={i} />

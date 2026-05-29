@@ -7,6 +7,8 @@ import KineticCaseStudy from "./KineticCaseStudy.jsx";
 import ContrarianCaseStudy from "./ContrarianCaseStudy.jsx";
 import NellisCaseStudy from "./NellisCaseStudy.jsx";
 import HerrmannCaseStudy from "./HerrmannCaseStudy.jsx";
+import RemitflowCaseStudy from "./RemitflowCaseStudy.jsx";
+import VegasCaseStudy from "./VegasCaseStudy.jsx";
 
 const DEFAULT_STORY = [
   { h: "The challenge", t: "Users were dropping off mid-funnel. The data said one thing, but qualitative interviews surfaced a different story - one we couldn't have caught with analytics alone." },
@@ -47,6 +49,13 @@ export default function ProjectDetail({ id, theme, mode, setRoute }) {
     return <HerrmannCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
   }
 
+  if (id === "remitflow") {
+    return <RemitflowCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  }
+
+  if (id === "vegas") {
+    return <VegasCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  }
 
   const project = projects.find(p => p.id === id);
   if (!project) {
@@ -143,7 +152,7 @@ export default function ProjectDetail({ id, theme, mode, setRoute }) {
         </section>
       </Reveal>
 
-      <section style={{ padding: isMobile ? "30px 4vw" : "60px 6vw" }}>
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
         <div style={{
           maxWidth: 1100, margin: "0 auto", display: "grid",
           gridTemplateColumns: isMobileOrTablet ? "1fr" : "minmax(220px, 280px) 1fr",
@@ -188,7 +197,7 @@ export default function ProjectDetail({ id, theme, mode, setRoute }) {
         </div>
       </section>
 
-      <section style={{ padding: isMobile ? "30px 4vw 60px" : "60px 6vw 100px" }}>
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", display: "flex", flexDirection: "column", gap: isMobile ? 36 : 60 }}>
           {story.map((s, i) => (
             <Reveal key={i} delay={0.05}>

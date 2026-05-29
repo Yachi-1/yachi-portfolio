@@ -1,117 +1,13 @@
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight, Target, Search, Users, Lightbulb, Briefcase, FileText } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
-import contrarianImg from "../assets/Contrarian_Thinking_Cover.png";
 
-/* ─── Shared section-header style ─── */
-const SectionLabel = ({ children, theme }) => (
-  <div style={{
-    fontFamily: "'Caveat', cursive", fontSize: 20, color: theme.accent, marginBottom: 8,
-  }}>{children}</div>
-);
+import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
 
-/* ─── Problem/Solution block (used 3×) ─── */
-function ProblemBlock({ num, problemHeading, problemBody, solutionName, solutionBody, decisions, cap1, cap2, closing, theme, mode, isMobile }) {
-  const isAlt = num % 2 !== 0; // Alternates: Problem 1 alt (bgAlt), Problem 2 standard (bg), Problem 3 alt (bgAlt)
-  return (
-    <section style={{
-      padding: isMobile ? "60px 4vw" : "100px 6vw",
-      background: isAlt ? theme.bgAlt : theme.bg,
-      borderTop: `1px solid ${theme.line}`,
-    }}>
-      <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-        <Reveal>
-          <div style={{ maxWidth: 900 }}>
-            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
-              Problem {String(num).padStart(2, "0")}
-            </div>
-            <h2 style={{ fontFamily: "Inter", fontSize: "clamp(28px, 3.5vw, 48px)", fontWeight: 500, letterSpacing: "-0.03em", color: theme.ink, margin: "0 0 24px", lineHeight: 1.1 }}>
-              {problemHeading}
-            </h2>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-              {problemBody}
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.1}>
-          <div style={{ maxWidth: 900 }}>
-            <div style={{ margin: isMobile ? "40px 0 12px" : "56px 0 12px", height: 1, background: theme.line }} />
-            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 12 }}>
-              Solution
-            </div>
-            <h3 style={{ fontFamily: "Inter", fontSize: "clamp(22px, 2.5vw, 36px)", fontWeight: 500, letterSpacing: "-0.025em", color: theme.ink, margin: "0 0 16px" }}>
-              {solutionName}
-            </h3>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-              {solutionBody}
-            </p>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.15}>
-          <div style={{ marginTop: 48, maxWidth: 900 }}>
-            <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 20 }}>
-              Key Design Decisions
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              {decisions.map((d, i) => (
-                <div key={i} style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "28px 1fr", gap: isMobile ? 6 : 16, alignItems: "start" }}>
-                  <div style={{ fontFamily: "'Caveat', cursive", fontSize: 18, color: theme.accent, lineHeight: 1.4 }}>{i + 1}</div>
-                  <p style={{ fontFamily: "Inter", fontSize: 15.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                    <strong style={{ color: theme.ink, fontWeight: 600 }}>{d.lead} </strong>{d.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Screenshots */}
-        <Reveal delay={0.2}>
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-            gap: isMobile ? 18 : 32, marginTop: isMobile ? 32 : 56,
-            width: "100%",
-          }}>
-            {[{ label: cap1 }, { label: cap2 }].map((s, i) => (
-              <div key={i}>
-                <div style={{
-                  borderRadius: 14, overflow: "hidden",
-                  background: theme.bgAlt,
-                  border: `1px solid ${theme.line}`,
-                  aspectRatio: "16/10",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <img
-                    src={contrarianImg}
-                    alt={s.label}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
-                </div>
-                <div style={{ fontFamily: "Inter", fontSize: 12.5, color: theme.inkMute, marginTop: 10, letterSpacing: "0.01em" }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.25}>
-          <div style={{ maxWidth: 900 }}>
-            <p style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, marginTop: 32, paddingTop: 24, borderTop: `1px solid ${theme.line}` }}>
-              <strong style={{ color: theme.ink }}>What it demonstrates: </strong>{closing}
-            </p>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Main export ─── */
+/* ═══════════════════════════════════════════════════════════
+   MAIN EXPORT
+   ═══════════════════════════════════════════════════════════ */
 export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const project = projects.find(p => p.id === "contrarian");
@@ -120,54 +16,28 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
 
   if (!project) return null;
 
-  const links = [
-    { label: "Marketing Design Hub", href: "#" },
-    { label: "Deal Pipeline Dashboard", href: "#" },
-    { label: "AI Acquisition Matcher", href: "#" },
-  ];
-
+  /* ── data ── */
   const meta = [
-    { k: "Role", v: "Research, Design, Build, Deploy" },
-    { k: "Stack", v: "Next.js · Vercel · Claude API · Tailwind" },
-    { k: "Timeline", v: "One Weekend Sprint" },
-    { k: "Year", v: "2026" },
+    { k: "Role", v: "Sole Designer" },
+    { k: "Timeline", v: "3 weeks of evenings" },
+    { k: "Deliverables", v: "3 product prototypes" },
+    { k: "Method", v: "Desk research, synthesis, ideation, prototyping" },
   ];
 
-  const approachItems = [
-    "Read both of their newsletters and listened to recent podcast episodes",
-    "Studied the public structure of their two programs and event calendar",
-    "Mapped the acquisition journey their members are actively going through",
-    "Identified their stated AI direction from a recent newsletter",
-    "Picked three problems, one per layer of the business",
-  ];
-
-  const learned = [
-    {
-      lead: "Domain depth changes everything.",
-      body: "The most important hours I spent on this project were not designing. They were reading newsletters, listening to episodes, and mapping the member journey. Every meaningful decision in all three products came from that research. Without it, I would have shipped three handsome but generic tools.",
-    },
-    {
-      lead: "Speed is a design constraint, not a corner cut.",
-      body: "Building three products in one weekend forced ruthless prioritization. Every feature had to earn its place. The Matcher quiz losing three steps, the dashboard losing two columns, the hub losing a notifications panel. Those cuts made the work sharper, not weaker.",
-    },
-    {
-      lead: "The Deal Pipeline Dashboard is the project I would push hardest on next.",
-      body: "It is the one with the most product surface to develop. Collaboration between buyer and broker, document handling for LOIs and diligence, financial modeling. If this were a real engagement, that is where I would want to go deeper.",
-    },
-    {
-      lead: "AI tools live or die on the reasoning layer.",
-      body: "The Matcher's quiz is fine. The recommendations are fine. The thing that makes it actually useful is whether the reasoning paragraph genuinely connects the user's profile to the suggested business. That is a prompt design problem as much as a UX problem, and it is where most AI products under invest.",
-    },
+  const colorTokens = [
+    { name: "Paper", hex: "#FDFAF5", use: "Workhorse background" },
+    { name: "Cream", hex: "#F5F0E8", use: "Secondary surface" },
+    { name: "Ink", hex: "#1A1410", use: "Typography" },
+    { name: "Amber", hex: "#C8832A", use: "Action, money, opportunity" },
+    { name: "Rust", hex: "#8B3A2A", use: "Risk, stalled deals" },
   ];
 
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
       {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 0" : "0 6vw 0", minHeight: "100vh", display: "flex", flexDirection: "column" }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto", width: "100%", flex: 1, display: "flex", flexDirection: "column" }}>
-
-          {/* Back button */}
+      <section style={{ padding: isMobile ? "0 4vw 40px" : "0 6vw 60px" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto", width: "100%" }}>
           <Reveal>
             <button
               onClick={() => setRoute("projects")}
@@ -185,101 +55,48 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
             </button>
           </Reveal>
 
-          {/* Text zone — 40% */}
-          <div style={{ flex: "0 0 auto", paddingBottom: 40 }}>
+          <div>
             <Reveal delay={0.05}>
-              <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 20 }}>
-                Case Study · 2026
-              </div>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1, maxWidth: 900 }}>
-                Designing for an <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>Acquisition Entrepreneur</span> Community
-              </h1>
-            </Reveal>
-            <Reveal delay={0.15}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 24px", maxWidth: 720 }}>
-                Three products built for the members of Contrarian Thinking. A marketing operations hub, a deal pipeline dashboard, and an AI matchmaker.
-              </p>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                {["Product Design", "AI Integration", "Self Initiated"].map(tag => (
-                  <span key={tag} style={{
-                    padding: "5px 14px", borderRadius: 999,
-                    background: theme.bgAlt, border: `1px solid ${theme.line}`,
-                    fontFamily: "Inter", fontSize: 12, fontWeight: 600, color: theme.ink,
-                  }}>{tag}</span>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
+                {["UX Strategy", "Research", "Product Design", "Prototyping", "2026"].map((tag, i) => (
+                  <div key={i} style={{
+                    padding: "4px 12px",
+                    borderRadius: 100,
+                    background: mode === "dark" ? `${theme.accent}20` : `${theme.accent}12`,
+                    border: `1px solid ${theme.accent}30`,
+                    color: theme.accent,
+                    fontFamily: "Inter",
+                    fontSize: 10.5,
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase"
+                  }}>
+                    {tag}
+                  </div>
                 ))}
               </div>
             </Reveal>
+            <Reveal delay={0.1}>
+              <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
+                Contrarian Thinking - <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>A UX Process Walkthrough</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0", maxWidth: 800 }}>
+                Designing three different products for the small-business buying community in America. Built without inside access, structured to show the thinking, not just the screens.
+              </p>
+            </Reveal>
           </div>
 
-          {/* Image zone — 60% */}
           <Reveal delay={0.25}>
-            <div style={{
-              flex: 1, borderRadius: "20px 20px 0 0",
-              overflow: "hidden", border: `1px solid ${theme.line}`,
-              borderBottom: "none",
-              background: theme.bgAlt,
-              minHeight: isMobile ? 240 : 420,
-            }}>
-              <img
-                src={contrarianImg}
-                alt="Three app screenshots side by side"
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── OVERVIEW ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Overview</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                Contrarian Thinking is an education and community business that teaches over a million weekly readers how to buy small businesses — laundromats, HVAC companies, car washes, and plumbing shops — as a path to wealth. They run two flagship programs, a publishing arm, live events, and have publicly committed to becoming an AI-first company.
-              </p>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                I spent a focused weekend studying their business and identifying three operational problems. One inside the company, two inside their member base. Then I designed and shipped a working product for each.
-              </p>
-            </div>
-          </Reveal>
-
-          {/* Live links */}
-          <Reveal delay={0.1}>
-            <div style={{ marginTop: 48, display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)", gap: 12, maxWidth: 900 }}>
-              {links.map(l => (
-                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer" style={{
-                  display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8,
-                  padding: "16px 20px", borderRadius: 14,
-                  background: theme.card, border: `1px solid ${theme.line}`,
-                  fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink,
-                  textDecoration: "none", transition: "border-color 0.2s, box-shadow 0.2s",
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = theme.accent; e.currentTarget.style.boxShadow = "0 8px 24px rgba(0,0,0,0.04)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.borderColor = theme.line; e.currentTarget.style.boxShadow = "none"; }}
-                >
-                  {l.label} <ExternalLink size={13} color={theme.inkMute} />
-                </a>
-              ))}
-            </div>
-          </Reveal>
-
-          {/* Metadata strip */}
-          <Reveal delay={0.15}>
             <div style={{
               marginTop: 48, paddingTop: 32, borderTop: `1px solid ${theme.line}`,
               display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4,1fr)", gap: isMobile ? 24 : 32,
-              width: "100%",
             }}>
               {meta.map((m, i) => (
                 <div key={m.k} style={{
-                  borderLeft: isMobile && i % 2 === 0 ? "none" : `1px solid ${theme.line}`,
-                  paddingLeft: isMobile && i % 2 === 0 ? 0 : 16,
+                  borderLeft: isMobile ? "none" : `1px solid ${theme.line}`,
+                  paddingLeft: isMobile ? 0 : 16,
                 }}>
                   <div style={{ fontFamily: "Inter", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
                   <div style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
@@ -290,107 +107,269 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      {/* ── APPROACH ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
+      {/* ── THE BRIEF ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>How I Approached It</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
-                Most spec work picks a company and redesigns their landing page. I wanted to go deeper. The brief I set for myself was simple. Don't redesign their marketing. Design tools their team and their members would actually use.
-              </p>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 36px" }}>
-                That meant three weeks of input compressed into one weekend of output.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 16, maxWidth: 900 }}>
-              {approachItems.map((item, i) => (
-                <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
-                  <div style={{ fontFamily: "'Caveat', cursive", fontSize: 20, color: theme.accent, flexShrink: 0, lineHeight: 1.3 }}>{i + 1}</div>
-                  <p style={{ fontFamily: "Inter", fontSize: 16.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>{item}</p>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr",
+              gap: isMobile ? 32 : 48,
+            }}>
+              <div>
+                <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
+                  Phase 01 · The Brief
                 </div>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: "clamp(24px, 3vw, 38px)", fontWeight: 500, letterSpacing: "-0.025em", color: theme.ink, marginTop: 52, marginBottom: 0 }}>
-                Then I built.
-              </p>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                  Contrarian Thinking is a media-and-education company built around Codie Sanchez's "buy boring businesses" thesis. They have 10,000+ paying members. But the actual work members joined to do-finding, evaluating, buying, and running a small business-happens almost entirely outside the product surface.
+                </p>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                  I gave myself a fictional engagement: imagine Contrarian Thinking has hired a designer-in-residence. Design what should live between the course and the close.
+                </p>
+              </div>
+              <div>
+                <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
+                  Constraints
+                </div>
+                <div style={{ padding: "20px", borderRadius: 12, background: theme.card, border: `1px solid ${theme.line}` }}>
+                  <ul style={{ margin: 0, paddingLeft: 20, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                    <li style={{ marginBottom: 8 }}><strong>No access.</strong> No member interviews, no analytics, no team Slack. Desk research only.</li>
+                    <li style={{ marginBottom: 8 }}><strong>Three weeks of evenings.</strong> Real-time constraint. Forces editing and prioritization.</li>
+                    <li style={{ marginBottom: 8 }}><strong>Show the process.</strong> Document research and synthesis, not just final screens.</li>
+                    <li><strong>Ship working prototypes.</strong> If a product can be built in code, it should be.</li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── PROBLEM 01 ── */}
-      <ProblemBlock
-        num={1} theme={theme} mode={mode} isMobile={isMobile}
-        problemHeading="The marketing team is running a multi-channel pipeline without operational infrastructure."
-        problemBody="A Marketing Designer at a company like Contrarian Thinking ships across Webflow landing pages, HubSpot emails, paid ad creative, sales decks, event graphics, and social posts. Most teams manage this in a mix of Notion, Asana, Slack threads, and shared drives. Context switching eats the day. Throughput suffers."
-        solutionName="Marketing Design Hub"
-        solutionBody="A single workspace built around how a designer at this kind of company actually works. Kanban for sprint execution, calendar for content scheduling, AI assisted task intake."
-        decisions={[
-          { lead: "Channel-first filtering.", body: "The filter bar maps directly to the team's real channels — Webflow, HubSpot, Ad Creative, Decks. Filtering becomes a batching tool. A designer can spend a morning in HubSpot mode and an afternoon in Webflow mode, drastically reducing context switching cost." },
-          { lead: "Calendar tied to real publishing cadence.", body: "Main Street Minute on Tuesdays. Contrarian Thinking newsletter on Thursdays. Workshop dates. The calendar isn't generic. It is anchored to the company's actual content rhythm." },
-          { lead: "AI-assisted task intake.", body: "Typing a new task auto routes it to the right category, priority, and column. Small saving per task. Significant saving per sprint." },
-          { lead: "Sprint stats as a feedback loop.", body: "Throughput, review backlog, and shipped count are surfaced in the header. Not for vanity, but to catch bottlenecks before they stall the pipeline." },
-        ]}
-        cap1="Kanban board view with sprint stats in the header."
-        cap2="Calendar view with color coded content types."
-        closing="designing for how work flows, not just what gets produced."
-      />
+      {/* ── RESEARCH & AUDIT ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Phase 02 · Competitor Audit</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+              I audited four products in the adjacent space against the five stages of the buyer journey. The gaps showed that nobody is serving the whole journey, and that "course + community + product" is an open positioning.
+            </p>
+          </Reveal>
 
-      {/* ── PROBLEM 02 ── */}
-      <ProblemBlock
-        num={2} theme={theme} mode={mode} isMobile={isMobile}
-        problemHeading="Members are buying businesses with spreadsheet workflows."
-        problemBody="Contrarian Thinking's members are actively pursuing acquisitions — sourcing leads, sending Letters of Intent, doing due diligence, securing financing, closing deals. The company teaches a structured methodology, but the tooling members use to apply it is whatever they cobble together: Google Sheets, Notion, sticky notes. The methodology deserves a system."
-        solutionName="Deal Pipeline Dashboard"
-        solutionBody="A purpose-built tracker for the acquisition journey, designed in the language of the people doing it. Six stages, financial metrics on every card, a detail panel for deep diving into each deal."
-        decisions={[
-          { lead: "Six stages, mirroring the real workflow.", body: "Sourcing → Screening → LOI Sent → Due Diligence → Financing → Closed. Not generic Kanban. The stages are the methodology made visible." },
-          { lead: "Financial literacy baked into the UI.", body: "Every deal card surfaces SDE and SDE multiple — the two numbers acquisition entrepreneurs are taught to live and die by. A generic CRM would surface deal size. This surfaces the metrics that decide whether a deal is good." },
-          { lead: "Days-in-stage counter on every card.", body: "Deals don't fail because they are bad. They fail because they stall. The counter surfaces stalling early." },
-          { lead: "Realistic sample deals.", body: "Laundromats in Austin, HVAC in Phoenix, plumbing in Charlotte. The actual industries, geographies, and price ranges this community pursues. Domain accuracy is a design choice." },
-        ]}
-        cap1="Kanban board with industry tagged deal cards across six stages."
-        cap2="Detail panel with stage progress and financials grid."
-        closing="designing fluently in the customer's language. Vocabulary, workflows, and mental models all match."
-      />
+          <Reveal delay={0.1}>
+            <div style={{
+              background: theme.card, borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", marginBottom: 20
+            }}>
+              <div style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontFamily: "Inter", minWidth: 700 }}>
+                  <thead>
+                    <tr style={{ background: theme.bgAlt, borderBottom: `2px solid ${theme.line}` }}>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Product</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Source Deals</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Evaluate</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Track Pipeline</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Close Deal</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Operate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { name: "BizBuySell", stages: ["✓", "partial", "-", "-", "-"] },
+                      { name: "Acquire.com", stages: ["✓", "partial", "partial", "-", "-"] },
+                      { name: "DealRoom", stages: ["-", "✓", "✓", "partial", "-"] },
+                      { name: "Searchfunder", stages: ["partial", "partial", "-", "-", "-"] },
+                      { name: "Contrarian (today)", stages: ["-", "-", "-", "-", "-"], isCurrent: true },
+                    ].map((row, idx) => (
+                      <tr key={idx} style={{ borderBottom: `1px solid ${theme.line}`, background: row.isCurrent ? `${theme.accent}10` : "transparent" }}>
+                        <td style={{ padding: "16px 20px", fontWeight: row.isCurrent ? 700 : 500, color: row.isCurrent ? theme.accent : theme.ink, fontSize: 15 }}>
+                          {row.name}
+                        </td>
+                        {row.stages.map((val, i) => (
+                          <td key={i} style={{ padding: "16px 20px", color: val === "✓" ? theme.success : val === "partial" ? theme.warning : theme.inkMute, fontWeight: 600, fontSize: 15 }}>
+                            {val}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkSoft, fontStyle: "italic", margin: 0 }}>
+              <strong>What this told me:</strong> CT's product surface today is empty on this matrix, which is a feature, not a bug. It means they can build the integrated journey nobody else has.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-      {/* ── PROBLEM 03 ── */}
-      <ProblemBlock
-        num={3} theme={theme} mode={mode} isMobile={isMobile}
-        problemHeading="New members face a paradox of choice."
-        problemBody="The company covers over 130 industries. A new member sitting down on day one has to pick one, and picking wrong wastes months of effort. The 'where do I even start' question is the highest stakes question a member ever asks, and there is no good tool for it."
-        solutionName="AI Acquisition Matcher"
-        solutionBody="A working AI tool that turns the member's profile into four personalized business type recommendations, each with a match score, reasoning, financial ranges, and tags."
-        decisions={[
-          { lead: "Five steps, no more.", body: "Budget, industry preferences, risk tolerance, experience and involvement, location. I cut three other dimensions during prototyping because they didn't change the recommendation quality. The quiz finishes in under two minutes." },
-          { lead: "Reasoning is the product.", body: "Match scores are easy. The actual value is the reasoning paragraph that connects this specific person's profile to this specific business type. Designed and prompted for specificity, not generic platitudes." },
-          { lead: "Real API calls, not mockups.", body: "The tool sends the profile to the Claude API and returns live recommendations. Designing an AI product means committing to its variability, not faking deterministic outputs." },
-          { lead: "Color-coded match confidence.", body: "Strong fits, solid fits, and weaker matches are visually distinguished. The user can calibrate quickly without reading every card in depth." },
-        ]}
-        cap1="A quiz step with the multi-select industry options."
-        cap2="Results page showing four ranked match cards with reasoning."
-        closing="designing AI-native experiences from the capability outward, not bolting AI onto a finished product."
-      />
+      {/* ── SYNTHESIS ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Phase 03 · Synthesis</SectionLabel></Reveal>
+          
+          <Reveal delay={0.05}>
+            <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, marginBottom: 40 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
+                <IconBadge icon={Users} theme={theme} />
+                <div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 600, color: theme.ink, margin: 0 }}>Marcus, 34</h3>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkMute }}>Mid-career corporate · 5 months into the Academy</div>
+                </div>
+              </div>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 18, fontStyle: "italic", color: theme.ink, margin: "0 0 16px", borderLeft: `3px solid ${theme.accent}`, paddingLeft: 16 }}>
+                "I've looked at maybe 200 listings on BizBuySell. I have no idea which of them I should actually pursue."
+              </p>
+              <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                His emotional confidence collapses at stage 4 of the journey. This is the moment he paid Contrarian Thinking to help him through, and it's the moment the product abandons him.
+              </p>
+            </div>
+          </Reveal>
 
-      {/* ── WHAT I LEARNED ── */}
+          <Reveal delay={0.1}>
+            <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 20 }}>Four Insights</h3>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
+              <ProblemCard num={1} heading="The Gap" body="Members spend 4–12 months in a phase the current product doesn't support." theme={theme} isMobile={isMobile} icon={Target} />
+              <ProblemCard num={2} heading="Filtering" body="The hard part isn't choosing a business, it's narrowing 200+ listings to 3 worth pursuing." theme={theme} isMobile={isMobile} icon={Search} />
+              <ProblemCard num={3} heading="Lost Track" body="Buyers run their pipeline in spreadsheets that break down by week three." theme={theme} isMobile={isMobile} icon={FileText} />
+              <ProblemCard num={4} heading="After Close" body="The moment a deal closes, the buyer's problem changes, but no product changes with them." theme={theme} isMobile={isMobile} icon={Briefcase} />
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── IDEATION & CUTTING ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>What I Learned</SectionLabel></Reveal>
-          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 40 : 56, marginTop: 16, maxWidth: 900 }}>
-            {learned.map((l, i) => (
-              <Reveal key={i} delay={i * 0.06}>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                  <strong style={{ color: theme.ink, fontWeight: 600, display: "block", fontSize: isMobile ? 18 : 20, marginBottom: 8, letterSpacing: "-0.01em" }}>{l.lead}</strong>
-                  {l.body}
-                </p>
-              </Reveal>
-            ))}
+          <Reveal><SectionLabel theme={theme}>Phase 04 · Ideation & How Might We</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+              Each insight became a "how-might-we" question. I sketched seven product ideas, and cut four of them. Cutting was the highest-leverage decision in the entire project.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 24 }}>
+            <Reveal delay={0.1}>
+              <InsightCard lead="How might we..." body="help Marcus go from 200 listings to 3 high-confidence options without him doing the filtering himself?" theme={theme} isMobile={isMobile} icon={Lightbulb} />
+              <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 8, fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent }}>
+                <ArrowRight size={16} /> Leads to AI Acquisition Matcher
+              </div>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <InsightCard lead="How might we..." body="give buyers a tool that holds their pipeline so it stops collapsing in week three?" theme={theme} isMobile={isMobile} icon={Lightbulb} />
+              <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 8, fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent }}>
+                <ArrowRight size={16} /> Leads to Deal Pipeline Dashboard
+              </div>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <InsightCard lead="How might we..." body="support members in the first 90 days of ownership when their problem suddenly changes from buying to operating?" theme={theme} isMobile={isMobile} icon={Lightbulb} />
+              <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 8, fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent }}>
+                <ArrowRight size={16} /> Leads to Marketing Design Hub
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── DESIGN SYSTEM ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Design Language</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+              All three interfaces share a system: same type, same palette, same components, same voice. Without it, the three products would have felt like three startups. With it, they feel like one ecosystem.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div style={{
+              padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, marginBottom: 40
+            }}>
+              <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 24 }}>Color Tokens</h3>
+              <div style={{ display: "grid", gridTemplateColumns: `repeat(auto-fill, minmax(${isMobile ? "140px" : "180px"}, 1fr))`, gap: 20 }}>
+                {colorTokens.map((token, i) => (
+                  <div key={i} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    <div style={{
+                      width: "100%", height: 80, borderRadius: 8, background: token.hex,
+                      border: token.hex === "#FDFAF5" || token.hex === "#F5F0E8" ? `1px solid ${theme.line}` : "none",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.05)"
+                    }} />
+                    <div>
+                      <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{token.name}</div>
+                      <div style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkMute, textTransform: "uppercase" }}>{token.hex}</div>
+                      <div style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkSoft, marginTop: 4, lineHeight: 1.4 }}>{token.use}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── THE 3 INTERFACES ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Phase 05 · Deliver</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 60px", maxWidth: 900 }}>
+              The three products from the synthesis became three interfaces: live prototypes built in Next.js.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 60 : 100 }}>
+            {/* Interface 01 */}
+            <Reveal delay={0.1}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: 40, alignItems: "center" }}>
+                <div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>1. AI Acquisition Matcher</h3>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Profile in, ranked deals out.</div>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
+                    <strong>A recommender, not a search engine.</strong> The buyer fills in a profile once. The matcher ranks every live deal against that profile and shows the top three matches with a fit score and the reasoning behind it.
+                  </p>
+                  <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}`, paddingLeft: 12 }}>
+                    <strong>Profile is the primary input.</strong> No filter form, no friction.<br/>
+                    <strong>Score visible, not hidden.</strong> 94, 87, 82. Transparent scoring earns trust.
+                  </p>
+                </div>
+                <ImagePlaceholder text="AI Matcher Prototype UI" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 450} />
+              </div>
+            </Reveal>
+
+            {/* Interface 02 */}
+            <Reveal delay={0.15}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1.5fr 1fr", gap: 40, alignItems: "center" }}>
+                {!isMobileOrTablet && <ImagePlaceholder text="Deal Pipeline Dashboard UI" theme={theme} isMobile={isMobile} height={450} />}
+                <div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>2. Deal Pipeline Dashboard</h3>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>A CRM that speaks the buyer's language.</div>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
+                    <strong>A CRM, not a project tracker.</strong> A pipeline view with five stages drawn directly from the Academy curriculum: Sourcing → LOI → Diligence → Financing → Close.
+                  </p>
+                  <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}`, paddingLeft: 12 }}>
+                    <strong>Workflow-native stage names.</strong> Same language Codie teaches.<br/>
+                    <strong>Color codes risk.</strong> LOI cards get amber, diligence gets rust, because that's where deals die.
+                  </p>
+                </div>
+                {isMobileOrTablet && <ImagePlaceholder text="Deal Pipeline Dashboard UI" theme={theme} isMobile={isMobile} height={300} />}
+              </div>
+            </Reveal>
+
+            {/* Interface 03 */}
+            <Reveal delay={0.2}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: 40, alignItems: "center" }}>
+                <div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>3. Marketing Design Hub</h3>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Vertical packs for newly-acquired Main Street.</div>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
+                    <strong>Vertical-specific packs, not a generic library.</strong> Industry-specific template packs for the newly-acquired business owner. The Laundromat Starter Pack ships with 12 templates, ready to use.
+                  </p>
+                  <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}`, paddingLeft: 12 }}>
+                    <strong>Pack, not library.</strong> The pack already knows what the member needs.<br/>
+                    <strong>Pre-written, not blank.</strong> The member edits a name, not a paragraph.
+                  </p>
+                </div>
+                <ImagePlaceholder text="Marketing Design Hub UI" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 450} />
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -399,24 +378,90 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal>
-            <div style={{ maxWidth: 900 }}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 28px" }}>
-                This was a self-initiated project. I picked Contrarian Thinking because they are an interesting business with a specific underserved member base and a clear strategic direction. The work is not affiliated with the company.
-              </p>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                If you are building tools for a niche community, or thinking about how AI fits into a product you already have,{" "}
-                <span style={{ color: theme.accent, fontFamily: "'Caveat', cursive", fontSize: isMobile ? 18 : 22 }}>I would love to talk.</span>
-              </p>
+            <div style={{
+              position: "relative",
+              padding: isMobile ? "32px 24px" : "40px 40px",
+              borderRadius: 24,
+              background: theme.card,
+              border: `1px solid ${theme.line}`,
+              boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
+              textAlign: "center",
+              maxWidth: 720,
+              margin: "0 auto",
+              overflow: "hidden"
+            }}>
+              {/* Dotted grid pattern overlay */}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: `radial-gradient(${theme.ink} 1px, transparent 1px)`,
+                backgroundSize: "20px 20px",
+                opacity: mode === "dark" ? 0.08 : 0.04,
+                pointerEvents: "none"
+              }} />
+
+              {/* Vibrant solid top bar */}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 4,
+                background: theme.accent,
+                borderTopLeftRadius: 24,
+                borderTopRightRadius: 24
+              }} />
+
+              {/* Creative glowing orbs */}
+              <div style={{
+                position: "absolute", top: -80, left: -80, width: 250, height: 250,
+                background: theme.accent, opacity: mode === "dark" ? 0.15 : 0.05, filter: "blur(60px)", borderRadius: "50%", pointerEvents: "none"
+              }} />
+              <div style={{
+                position: "absolute", bottom: -80, right: -80, width: 300, height: 300,
+                background: theme.accent, opacity: mode === "dark" ? 0.1 : 0.04, filter: "blur(80px)", borderRadius: "50%", pointerEvents: "none"
+              }} />
+
+              {/* Massive decorative quote marks */}
+              <div style={{
+                position: "absolute", top: 8, left: 24,
+                fontFamily: "Georgia, serif", fontSize: 130, lineHeight: 1,
+                color: theme.accent, opacity: mode === "dark" ? 0.08 : 0.04,
+                userSelect: "none", pointerEvents: "none", transform: "rotate(-10deg)"
+              }}>“</div>
+              <div style={{
+                position: "absolute", bottom: 20, right: 24,
+                fontFamily: "Georgia, serif", fontSize: 130, lineHeight: 1,
+                color: theme.accent, opacity: mode === "dark" ? 0.08 : 0.04,
+                userSelect: "none", pointerEvents: "none", transform: "rotate(10deg)"
+              }}>”</div>
+
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                  The hardest part wasn't designing three products. It was deciding they belonged together. Speculative work has to over-index on honesty. Naming the limits, and showing the validation plan, is what makes the work credible instead of fan fiction.
+                </p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
+                  <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
+                  <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                    <span style={{ color: theme.accent, fontFamily: "'Caveat', cursive", fontSize: isMobile ? 24 : 28 }}>- Yachi</span>
+                  </p>
+                  <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
+                </div>
+              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── NEXT CASE ── */}
-      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", background: theme.bgAlt }}>
+      {/* ── NEXT PROJECT ── */}
+      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", marginTop: 60 }}>
         <div
-          onClick={() => { setRoute(`project:${next.id}`); window.lenis?.scrollTo(0); }}
-          data-cursor="view" data-cursor-label="Next"
+          onClick={() => {
+            if (next.pdfLink) {
+              window.open(next.pdfLink, "_blank");
+            } else {
+              setRoute(`project:${next.id}`);
+              window.lenis?.scrollTo(0);
+            }
+          }}
+          data-magnet="0.05"
+          data-cursor="view"
+          data-cursor-label="Next"
           style={{
             maxWidth: 1300, margin: "0 auto",
             padding: isMobile ? "32px 24px" : "60px 50px",
@@ -424,26 +469,27 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
             background: `linear-gradient(135deg, ${theme[next.color1]}, ${theme[next.color2]})`,
             display: "flex", alignItems: "center", justifyContent: "space-between",
             gap: 24, flexWrap: "wrap", cursor: "pointer",
-            transition: "box-shadow 0.25s ease",
           }}
-          onMouseEnter={e => e.currentTarget.style.boxShadow = mode === "dark" ? "0 24px 60px rgba(0,0,0,0.3)" : "0 24px 60px rgba(0,0,0,0.08)"}
-          onMouseLeave={e => e.currentTarget.style.boxShadow = "none"}
         >
           <div>
             <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.55)", marginBottom: 8 }}>Next case</div>
-            <div style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 500, letterSpacing: "-0.035em", color: "rgba(0,0,0,0.9)", lineHeight: 1 }}>{next.title}</div>
+            <div style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 500, letterSpacing: "-0.035em", color: "rgba(0,0,0,0.9)", lineHeight: 1 }}>
+              {next.title}
+            </div>
             <div style={{ fontFamily: "'Caveat', cursive", fontSize: 22, color: "rgba(0,0,0,0.6)", marginTop: 6 }}>{next.subtitle}</div>
           </div>
           <div style={{
-            width: isMobile ? 56 : 70, height: isMobile ? 56 : 70, borderRadius: 999,
+            width: isMobile ? 56 : 70,
+            height: isMobile ? 56 : 70,
+            borderRadius: 999,
             background: "rgba(0,0,0,0.85)", color: "white",
-            display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0,
           }}>
             <ArrowRight size={isMobile ? 22 : 26} />
           </div>
         </div>
       </section>
-
     </div>
   );
 }

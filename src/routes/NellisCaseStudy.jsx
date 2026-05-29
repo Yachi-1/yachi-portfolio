@@ -15,21 +15,6 @@ const SectionLabel = ({ children, theme }) => (
   }}>{children}</div>
 );
 
-/* ─── Blockquote ─── */
-const Callout = ({ children, theme, isMobile }) => (
-  <div style={{
-    borderLeft: `3px solid ${theme.accent}`,
-    paddingLeft: isMobile ? 16 : 24,
-    margin: isMobile ? "28px 0" : "40px 0",
-  }}>
-    <p style={{
-      fontFamily: "Inter", fontSize: isMobile ? 17 : 20,
-      lineHeight: 1.55, color: theme.ink, fontWeight: 500,
-      fontStyle: "italic", margin: 0, letterSpacing: "-0.01em",
-    }}>{children}</p>
-  </div>
-);
-
 /* ─── Icon wrapper for consistent sizing ─── */
 const IconBadge = ({ icon: Icon, theme, size = 20 }) => (
   <div style={{
@@ -150,7 +135,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
   const meta = [
     { k: "Role", v: "UI/UX Designer (self-initiated)" },
     { k: "Timeline", v: "2 weeks" },
-    { k: "Tools", v: "Figma · Claude Design · Maze" },
+    { k: "Tools", v: "Figma · Claude · Maze" },
     { k: "Year", v: "2025" },
   ];
 

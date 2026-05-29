@@ -1,0 +1,571 @@
+import { ArrowRight, Sparkles, Target, Compass, Lightbulb, Search, Users, ShieldCheck, CheckCircle2, XCircle, FileText, Repeat, Zap, Activity, Navigation, Smartphone, Banknote, ShieldAlert, Coins, History, FileSearch, ArrowDownUp, Layers } from "lucide-react";
+import Reveal from "../components/Reveal.jsx";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import { projects } from "../data/projects.js";
+
+import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
+
+/* ═══════════════════════════════════════════════════════════
+   MAIN EXPORT
+   ═══════════════════════════════════════════════════════════ */
+export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
+  const { isMobile, isMobileOrTablet } = useBreakpoint();
+  const project = projects.find(p => p.id === "remitflow");
+  const idx = projects.findIndex(p => p.id === "remitflow");
+  const next = projects[(idx + 1) % projects.length];
+
+  if (!project) return null;
+
+  /* ── data ── */
+  const meta = [
+    { k: "Role", v: "UX / Product Designer (end-to-end)" },
+    { k: "Scope", v: "Research, IA, interaction design, UI, design system, prototype" },
+    { k: "Tools", v: "Figma (UI & prototyping), FigJam (ideation & flows)" },
+    { k: "Surfaces", v: "Global Payments Dashboard + 5-step payout flow, bulk payouts, payment tracking" },
+  ];
+
+  return (
+    <div style={{ paddingTop: isMobile ? 100 : 130 }}>
+
+      {/* ── HERO ── */}
+      <section style={{ padding: isMobile ? "0 4vw 40px" : "0 6vw 60px" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto", width: "100%" }}>
+          <Reveal>
+            <button
+              onClick={() => setRoute("projects")}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                background: "transparent", border: "none",
+                fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft,
+                cursor: "pointer", marginBottom: 40,
+                transition: "color 0.2s ease, transform 0.2s ease",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
+              onMouseLeave={e => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}
+            >
+              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
+            </button>
+          </Reveal>
+
+          <div>
+            <Reveal delay={0.05}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
+                {["UX Design", "Fintech", "AI Agent", "2024"].map((tag, i) => (
+                  <div key={i} style={{
+                    padding: "4px 12px",
+                    borderRadius: 100,
+                    background: mode === "dark" ? `${theme.accent}20` : `${theme.accent}12`,
+                    border: `1px solid ${theme.accent}30`,
+                    color: theme.accent,
+                    fontFamily: "Inter",
+                    fontSize: 10.5,
+                    fontWeight: 700,
+                    letterSpacing: "0.12em",
+                    textTransform: "uppercase"
+                  }}>
+                    {tag}
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
+                Designing <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>RemitFlow</span>
+              </h1>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0", maxWidth: 800 }}>
+                An AI-assisted, end-to-end payment experience for paying contractors across 80+ countries.
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.2}>
+            <ImagePlaceholder text="Hero Dashboard / Multi-device mockups" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 500} />
+          </Reveal>
+
+          <Reveal delay={0.25}>
+            <div style={{
+              marginTop: 48, paddingTop: 32, borderTop: `1px solid ${theme.line}`,
+              display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4,1fr)", gap: isMobile ? 24 : 32,
+            }}>
+              {meta.map((m, i) => (
+                <div key={m.k} style={{
+                  borderLeft: isMobile ? "none" : `1px solid ${theme.line}`,
+                  paddingLeft: isMobile ? 0 : 16,
+                }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── OVERVIEW & CHALLENGE ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal delay={0.05}>
+            <div style={{
+              display: "grid",
+              gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr",
+              gap: isMobile ? 32 : 48,
+            }}>
+              <div>
+                <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
+                  Overview
+                </div>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                  Paying contractors internationally is deceptively hard. A single payout can touch fluctuating exchange rates, country-specific compliance rules, multiple payment rails with different speeds and costs, and a stack of manual data entry that quietly invites errors.
+                </p>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                  I designed <strong style={{ color: theme.ink }}>RemitFlow</strong>, a seamless multi-currency payment flow that uses AI to do the heavy lifting - extracting invoice data, surfacing the right contractor, comparing payment methods, locking FX rates, and catching compliance issues <em>before</em> a payment goes out.
+                </p>
+              </div>
+              <div>
+                <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
+                  The Challenge & Outcome
+                </div>
+                <p style={{ fontFamily: "Inter", fontSize: 15.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                  Design a seamless global payment flow for <strong>80+ countries</strong> that delivers multi-currency support, adapts to compliance rules, and leverages AI for smart suggestions-without losing the user's trust.
+                </p>
+                <div style={{ padding: "20px", borderRadius: 12, background: theme.card, border: `1px solid ${theme.line}` }}>
+                  <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                    <CheckCircle2 size={18} color={theme.accent} strokeWidth={2} style={{ flexShrink: 0, marginTop: 2 }} />
+                    <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.55, color: theme.ink, margin: 0, fontWeight: 500 }}>
+                      The Outcome: A guided 5-step experience that reduces payment processing time through smart automation and predictive assistance-turning a manual, error-prone chore into a confident click.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── PROBLEM UNDERSTANDING ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Problem Space</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              I framed the problem space across three lenses: the inherent complexity of the domain, the real pain users feel, and where AI could meaningfully help.
+            </p>
+          </Reveal>
+          
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: isMobile ? 16 : 20 }}>
+            <ProblemCard
+              num={1} theme={theme} isMobile={isMobile} icon={Banknote}
+              heading="Payment Complexity"
+              body={[
+                "Multiple currencies with fluctuating exchange rates.",
+                "Various payment methods with different speeds/costs.",
+                "Country-specific compliance requirements and fees.",
+                "Manual data entry that is inherently prone to errors."
+              ]}
+            />
+            <ProblemCard
+              num={2} theme={theme} isMobile={isMobile} icon={ShieldAlert}
+              heading="User Pain Points"
+              body={[
+                "Errors require stressful corrections after the fact.",
+                "Hidden fees are discovered too late.",
+                "Unclear status tracking after sending.",
+                "Repetitive work to pay the same contractors monthly."
+              ]}
+            />
+            <ProblemCard
+              num={3} theme={theme} isMobile={isMobile} icon={Sparkles}
+              heading="The AI Opportunity"
+              body={[
+                "Learns payment patterns over time.",
+                "Predicts user needs and preferences.",
+                "Suggests optimal methods and timing.",
+                "Prevents errors before they happen."
+              ]}
+            />
+          </div>
+
+          <Reveal delay={0.2}>
+            <div style={{ marginTop: 56 }}>
+              <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
+                User Persona: The Finance Manager
+              </div>
+              <div style={{
+                padding: isMobile ? "24px 20px" : "32px 40px",
+                borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`,
+                display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: isMobile ? 24 : 48
+              }}>
+                <div>
+                  <Callout theme={theme} isMobile={isMobile}>
+                    "I pay the same 20 contractors monthly, but still enter everything manually."
+                  </Callout>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 20, justifyContent: "center" }}>
+                  <div>
+                    <span style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, color: theme.ink, display: "block", marginBottom: 6 }}>Frustrations</span>
+                    <span style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft }}>✗ Repetitive data entry · ✗ Hidden fees · ✗ Last-minute compliance issues</span>
+                  </div>
+                  <div>
+                    <span style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, color: theme.ink, display: "block", marginBottom: 6 }}>Goals</span>
+                    <span style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft }}>✓ Process payments quickly · ✓ Minimize errors · ✓ Stay compliant</span>
+                  </div>
+                  <div>
+                    <span style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, color: theme.ink, display: "block", marginBottom: 6 }}>Needs from AI</span>
+                    <span style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft }}>✓ Extract invoice details · ✓ Suggest the right contractor · ✓ Validate compliance</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── JOURNEY MAPPING ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>From Manual to Magical</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 800 }}>
+              Mapping the persona's current journey against the desired AI-assisted journey made the value of automation concrete. We collapse external research, manual entry, and reactive problem-solving into a guided, transparent path.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48 }}>
+            <Reveal delay={0.1}>
+              <div style={{ padding: isMobile ? "24px 20px" : "32px 28px", borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                  <History size={20} color={theme.inkSoft} />
+                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>Current Journey (Manual)</h3>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {[
+                    "📧 Receive invoice - manual review",
+                    "💻 Log into payment system - navigation overhead",
+                    "⌨️ Manually enter all details - typing and checking",
+                    "🔍 Google exchange rates - external research",
+                    "⚠️ Discover a compliance issue - searching docs",
+                    "🤔 Choose a payment method - guesswork",
+                    "✅ Finally submit"
+                  ].map((step, i) => (
+                    <div key={i} style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, opacity: 0.8 }}>{i+1}. {step}</div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div style={{ padding: isMobile ? "24px 20px" : "32px 28px", borderRadius: 14, background: `${theme.accent}10`, border: `1px solid ${theme.accent}30` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                  <Sparkles size={20} color={theme.accent} />
+                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>Desired Journey (AI-Assisted)</h3>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {[
+                    { text: "Receive invoice", icon: "📧" },
+                    { text: "Upload to system → AI extracts data (automated)", icon: "📤", highlight: true },
+                    { text: "AI suggests contractor & amount (confirmation, not entry)", icon: "🤖", highlight: true },
+                    { text: "FX rate and fees shown upfront (transparency)", icon: "💡" },
+                    { text: "AI recommends the optimal method (comparison)", icon: "✅", highlight: true },
+                    { text: "Compliance auto-checked by AI (validation)", icon: "🛡️", highlight: true },
+                    { text: "Finally submit - with confidence", icon: "✅" }
+                  ].map((step, i) => (
+                    <div key={i} style={{ 
+                      fontFamily: "Inter", fontSize: 15, 
+                      color: step.highlight ? theme.accent : theme.ink, 
+                      fontWeight: step.highlight ? 600 : 400
+                    }}>
+                      {i+1}. {step.icon} {step.text}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.2}>
+            <ImagePlaceholder text="Journey Map Flow Diagram" theme={theme} isMobile={isMobile} height={200} />
+          </Reveal>
+
+        </div>
+      </section>
+
+      {/* ── COMPETITIVE ANALYSIS ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Competitive Analysis</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              To position the design, I looked at how leading tools handle global contractor payments. The market splits into tools that move money cheaply (but offload compliance) and tools that manage workforces (heavy HR platforms). Crucially, none treats AI as a proactive, explainable assistant woven through the payout flow itself.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div style={{ overflowX: "auto", paddingBottom: 20 }}>
+              <table style={{ width: "100%", minWidth: 800, borderCollapse: "collapse", fontFamily: "Inter", fontSize: 14.5 }}>
+                <thead>
+                  <tr style={{ borderBottom: `2px solid ${theme.line}`, textAlign: "left" }}>
+                    <th style={{ padding: "16px", color: theme.ink, fontWeight: 600 }}>Dimension</th>
+                    <th style={{ padding: "16px", color: theme.inkMute, fontWeight: 500 }}>Wise</th>
+                    <th style={{ padding: "16px", color: theme.inkMute, fontWeight: 500 }}>Payoneer</th>
+                    <th style={{ padding: "16px", color: theme.inkMute, fontWeight: 500 }}>Deel</th>
+                    <th style={{ padding: "16px", color: theme.accent, fontWeight: 700, background: `${theme.accent}10`, borderRadius: "12px 12px 0 0" }}>RemitFlow</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ["FX Transparency", "Strong - mid-market rate, clear cost", "Moderate - margin on contractor", "Bundled into platform pricing", "Core principle - full FX & fees shown upfront"],
+                    ["Compliance Handling", "None (money movement only)", "Limited (onboarding/docs)", "Strong - automates tax & compliance", "Built-in - pre-submission checks"],
+                    ["AI Assistance", "Minimal", "Minimal", "Emerging", "Central - extraction, suggestions, anomaly detect"],
+                    ["In-App Comparison", "No (single rail)", "Limited", "Multiple methods, less comparison", "Yes - bank vs crypto vs wallet, side by side"],
+                  ].map((row, i) => (
+                    <tr key={i} style={{ borderBottom: `1px solid ${theme.line}` }}>
+                      <td style={{ padding: "16px", color: theme.ink, fontWeight: 600 }}>{row[0]}</td>
+                      <td style={{ padding: "16px", color: theme.inkSoft }}>{row[1]}</td>
+                      <td style={{ padding: "16px", color: theme.inkSoft }}>{row[2]}</td>
+                      <td style={{ padding: "16px", color: theme.inkSoft }}>{row[3]}</td>
+                      <td style={{ padding: "16px", color: theme.ink, fontWeight: 600, background: `${theme.accent}05` }}>{row[4]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <div style={{ marginTop: 40, padding: isMobile ? "24px 20px" : "32px 40px", borderRadius: 16, background: theme.bgAlt, border: `1px solid ${theme.line}` }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+                <Target size={24} color={theme.accent} />
+                <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 600, color: theme.ink, margin: 0 }}>How It Shaped The Design</h3>
+              </div>
+              <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                This gap analysis directly informed the product's positioning: <strong style={{ color: theme.ink }}>lead with transparency</strong> (FX/fees always upfront), <strong style={{ color: theme.ink }}>make compliance proactive</strong> (checked before final confirmation), and <strong style={{ color: theme.ink }}>make AI the connective tissue</strong> of the flow. RemitFlow isn't trying to out-scale a full HR platform; it's designed to make the repetitive, multi-currency payout faster, clearer, and more trustworthy.
+              </p>
+            </div>
+          </Reveal>
+
+        </div>
+      </section>
+
+      {/* ── UX STRATEGY & DECISIONS ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>UX Strategy</SectionLabel></Reveal>
+          
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 24, marginTop: 40, marginBottom: 56 }}>
+            <Reveal delay={0.05}>
+              <InsightCard num={1} lead="Progressive Disclosure." body="Reveal complexity only when needed, leaning on AI for smart defaults so the default path stays simple." theme={theme} isMobile={isMobile} icon={Layers} />
+            </Reveal>
+            <Reveal delay={0.1}>
+              <InsightCard num={2} lead="Radical Transparency." body="Show all costs, FX conversions, and fees upfront. No surprises." theme={theme} isMobile={isMobile} icon={Search} />
+            </Reveal>
+            <Reveal delay={0.15}>
+              <InsightCard num={3} lead="Error Prevention." body="AI catches issues proactively, with clear, actionable messages rather than cryptic failures." theme={theme} isMobile={isMobile} icon={ShieldCheck} />
+            </Reveal>
+            <Reveal delay={0.2}>
+              <InsightCard num={4} lead="Intelligent Assistant." body="AI suggests, but the user decides. Always show the reasoning and allow overrides." theme={theme} isMobile={isMobile} icon={Sparkles} />
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.25}>
+            <ImagePlaceholder text="Key UI Screens: FX Lock, AI Suggestions, Pre-submission Compliance" theme={theme} isMobile={isMobile} height={350} />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── AI INTEGRATION & FLOW ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>The 5-Step Flow & AI Weave</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+              AI is woven through the flow as an assistant, not an autopilot - every suggestion is explainable and overridable. Here's how it integrates into the Information Architecture.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {[
+              { step: "Step 1: Invoice / Amount", ai: "OCR extracts amount, contractor, invoice number, and date from an uploaded PDF/image.", icon: FileText },
+              { step: "Step 2: Contractor Selection", ai: "Surfaces the top 3 suggested contractors and detects recurring patterns.", icon: Users },
+              { step: "Step 3: Payment Method", ai: "Provides a recommendation (e.g. 'Crypto recommended based on speed/cost') alongside Bank and Wallet options.", icon: ArrowDownUp },
+              { step: "Step 4: Review & Confirm", ai: "Flags unusual amounts (Anomaly Detection) and auto-validates country-specific compliance.", icon: ShieldCheck },
+              { step: "Step 5: Confirmation", ai: "Offers to set up auto-payments after success.", icon: Repeat },
+            ].map((s, i) => (
+              <Reveal key={i} delay={0.1 + (i * 0.05)}>
+                <div style={{
+                  display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 24,
+                  alignItems: isMobile ? "flex-start" : "center",
+                  padding: "24px 32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 16, width: isMobile ? "100%" : "30%", flexShrink: 0 }}>
+                    <s.icon size={24} color={theme.accent} />
+                    <div style={{ fontFamily: "Inter", fontSize: 17, fontWeight: 600, color: theme.ink }}>{s.step}</div>
+                  </div>
+                  <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flex: 1 }}>
+                    <Sparkles size={16} color={theme.accent} style={{ marginTop: 4, flexShrink: 0 }} />
+                    <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, lineHeight: 1.6 }}>{s.ai}</div>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.3}>
+            <ImagePlaceholder text="User Flow Diagram / Prototype Steps" theme={theme} isMobile={isMobile} height={400} />
+          </Reveal>
+
+        </div>
+      </section>
+
+      {/* ── EDGE CASES ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Edge Cases & Error Handling</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+              Designing for the unhappy paths is where trust is earned. Each edge case pairs a clear user-facing solution with an explainable AI message.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: 20 }}>
+            {[
+              { title: "FX rate fluctuation", sol: "Lock rate for 60s, show countdown timer. Refresh if expired.", ai: '"Rate changed. New estimate: ₹1,58,500 (₹500 less)."' },
+              { title: "Insufficient balance", sol: "Check balance before review step, show a clear error.", ai: '"Add funds or schedule for a date when balance is sufficient."' },
+              { title: "Compliance violation", sol: "Block at review with a clear explanation.", ai: '"Split into 2 payments or use an alternative method."' },
+              { title: "Contractor details change", sol: "Require confirmation and allow a note/reason.", ai: "Highlights the change and asks for confirmation." },
+              { title: "Unusual amount", sol: "Require additional confirmation.", ai: '"This is 3× your average payment to this contractor. Verify before proceeding."' },
+            ].map((e, i) => (
+              <Reveal key={i} delay={0.1 + (i * 0.05)}>
+                <div style={{ padding: "24px", borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}`, height: "100%" }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 12 }}>{e.title}</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkSoft, marginBottom: 16 }}><strong>Solution:</strong> {e.sol}</div>
+                  <div style={{ padding: "12px 16px", borderRadius: 8, background: `${theme.accent}10`, color: theme.accent, fontFamily: "Inter", fontSize: 13, fontStyle: "italic" }}>
+                    AI Message: {e.ai}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLOSING ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{
+              position: "relative",
+              padding: isMobile ? "32px 24px" : "40px 40px",
+              borderRadius: 24,
+              background: theme.card,
+              border: `1px solid ${theme.line}`,
+              boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
+              textAlign: "center",
+              maxWidth: 720,
+              margin: "0 auto",
+              overflow: "hidden"
+            }}>
+              {/* Dotted grid pattern overlay */}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                backgroundImage: `radial-gradient(${theme.ink} 1px, transparent 1px)`,
+                backgroundSize: "20px 20px",
+                opacity: mode === "dark" ? 0.08 : 0.04,
+                pointerEvents: "none"
+              }} />
+
+              {/* Vibrant solid top bar */}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, height: 4,
+                background: theme.accent,
+                borderTopLeftRadius: 24,
+                borderTopRightRadius: 24
+              }} />
+
+              {/* Creative glowing orbs */}
+              <div style={{
+                position: "absolute", top: -80, left: -80, width: 250, height: 250,
+                background: theme.accent, opacity: mode === "dark" ? 0.15 : 0.05, filter: "blur(60px)", borderRadius: "50%", pointerEvents: "none"
+              }} />
+              <div style={{
+                position: "absolute", bottom: -80, right: -80, width: 300, height: 300,
+                background: theme.accent, opacity: mode === "dark" ? 0.1 : 0.04, filter: "blur(80px)", borderRadius: "50%", pointerEvents: "none"
+              }} />
+
+              {/* Massive decorative quote marks */}
+              <div style={{
+                position: "absolute", top: 8, left: 24,
+                fontFamily: "Georgia, serif", fontSize: 130, lineHeight: 1,
+                color: theme.accent, opacity: mode === "dark" ? 0.08 : 0.04,
+                userSelect: "none", pointerEvents: "none", transform: "rotate(-10deg)"
+              }}>“</div>
+              <div style={{
+                position: "absolute", bottom: 20, right: 24,
+                fontFamily: "Georgia, serif", fontSize: 130, lineHeight: 1,
+                color: theme.accent, opacity: mode === "dark" ? 0.08 : 0.04,
+                userSelect: "none", pointerEvents: "none", transform: "rotate(10deg)"
+              }}>”</div>
+
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                  Every suggestion shows its reasoning, every cost is visible before commitment, and the user always holds the final decision. By designing the edge cases and error states as carefully as the happy path, the flow stays trustworthy exactly where global payments tend to break down.
+                </p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
+                  <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
+                  <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                    <span style={{ color: theme.accent, fontFamily: "'Caveat', cursive", fontSize: isMobile ? 24 : 28 }}>- Yachi</span>
+                  </p>
+                  <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── NEXT PROJECT ── */}
+      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", marginTop: 60 }}>
+        <div
+          onClick={() => {
+            if (next.pdfLink) {
+              window.open(next.pdfLink, "_blank");
+            } else {
+              setRoute(`project:${next.id}`);
+              window.lenis?.scrollTo(0);
+            }
+          }}
+          data-magnet="0.05"
+          data-cursor="view"
+          data-cursor-label="Next"
+          style={{
+            maxWidth: 1300, margin: "0 auto",
+            padding: isMobile ? "32px 24px" : "60px 50px",
+            borderRadius: isMobile ? 18 : 24,
+            background: `linear-gradient(135deg, ${theme[next.color1]}, ${theme[next.color2]})`,
+            display: "flex", alignItems: "center", justifyContent: "space-between",
+            gap: 24, flexWrap: "wrap", cursor: "pointer",
+          }}
+        >
+          <div>
+            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.55)", marginBottom: 8 }}>Next case</div>
+            <div style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 56px)", fontWeight: 500, letterSpacing: "-0.035em", color: "rgba(0,0,0,0.9)", lineHeight: 1 }}>
+              {next.title}
+            </div>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: 22, color: "rgba(0,0,0,0.6)", marginTop: 6 }}>{next.subtitle}</div>
+          </div>
+          <div style={{
+            width: isMobile ? 56 : 70,
+            height: isMobile ? 56 : 70,
+            borderRadius: 999,
+            background: "rgba(0,0,0,0.85)", color: "white",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0,
+          }}>
+            <ArrowRight size={isMobile ? 22 : 26} />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
