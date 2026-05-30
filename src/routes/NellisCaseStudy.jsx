@@ -1,5 +1,6 @@
 import { ArrowRight, ExternalLink, Eye, EyeOff, Clock, Target, Compass, Lightbulb, Scissors, Search, Users, BarChart3, ShieldCheck, MapPin, Star, Video, MousePointerClick, Layers, Package, ScanEye, CheckCircle2, XCircle, RefreshCw, Smartphone, Palette, FlaskConical, ArrowUpDown, Images, MessageSquareQuote } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import { Callout } from "../components/CaseStudyBlocks.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import nellisOriginalImg from "../assets/Nellis_Original.png";
@@ -80,7 +81,7 @@ function ProblemCard({ num, heading, body, theme, isMobile, icon: Icon }) {
         <p style={{
           fontFamily: "Inter", fontSize: isMobile ? 15 : 16,
           lineHeight: 1.6, color: theme.inkSoft, margin: 0,
-        }}>{body}</p>
+        }}>{Array.isArray(body) ? body.join(" ") : body}</p>
       </div>
     </Reveal>
   );
@@ -134,7 +135,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
   /* ── data ── */
   const meta = [
     { k: "Role", v: "UI/UX Designer (self-initiated)" },
-    { k: "Timeline", v: "2 weeks" },
+    { k: "Timeline", v: "1 week" },
     { k: "Tools", v: "Figma · Claude · Maze" },
     { k: "Year", v: "2025" },
   ];

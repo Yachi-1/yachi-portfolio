@@ -1,10 +1,10 @@
-import { ArrowRight, Sparkles, Target, Compass, Lightbulb, Search, Users, ShieldCheck, CheckCircle2, XCircle, FileText, Repeat, Zap, Activity, Navigation, Smartphone, Banknote, ShieldAlert, Coins, History, FileSearch, ArrowDownUp, Layers } from "lucide-react";
+import { Mail, Monitor, Keyboard, AlertTriangle, HelpCircle, Upload, Bot, ArrowRight, Sparkles, Target, Compass, Lightbulb, Search, Users, ShieldCheck, CheckCircle2, XCircle, FileText, Repeat, Zap, Activity, Navigation, Smartphone, Banknote, ShieldAlert, Coins, History, FileSearch, ArrowDownUp, Layers } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
 import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
-
+import remitflowHeroImg from "../assets/remitflow_hero_transparent.png";
 /* ═══════════════════════════════════════════════════════════
    MAIN EXPORT
    ═══════════════════════════════════════════════════════════ */
@@ -18,10 +18,10 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
 
   /* ── data ── */
   const meta = [
-    { k: "Role", v: "UX / Product Designer (end-to-end)" },
-    { k: "Scope", v: "Research, IA, interaction design, UI, design system, prototype" },
-    { k: "Tools", v: "Figma (UI & prototyping), FigJam (ideation & flows)" },
-    { k: "Surfaces", v: "Global Payments Dashboard + 5-step payout flow, bulk payouts, payment tracking" },
+    { k: "Role", v: "UX Designer" },
+    { k: "Timeline", v: "4 weeks" },
+    { k: "Tools", v: "Figma, FigJam" },
+    { k: "Year", v: "2024" },
   ];
 
   return (
@@ -50,7 +50,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <div>
             <Reveal delay={0.05}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
-                {["UX Design", "Fintech", "AI Agent", "2024"].map((tag, i) => (
+                {["UX Design", "Fintech", "2024"].map((tag, i) => (
                   <div key={i} style={{
                     padding: "4px 12px",
                     borderRadius: 100,
@@ -81,7 +81,17 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           </div>
 
           <Reveal delay={0.2}>
-            <ImagePlaceholder text="Hero Dashboard / Multi-device mockups" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 500} />
+            <div style={{
+              marginTop: 24,
+              display: "flex",
+              justifyContent: "center",
+              background: "linear-gradient(145deg, #FFF0F5 0%, #FFD6E5 100%)",
+              borderRadius: 24,
+              paddingTop: isMobile ? 16 : 32,
+              overflow: "hidden"
+            }}>
+              <img src={remitflowHeroImg} alt="RemitFlow Dashboard" style={{ width: "100%", height: isMobile ? 350 : 550, objectFit: "cover", objectPosition: "center", display: "block" }} />
+            </div>
           </Reveal>
 
           <Reveal delay={0.25}>
@@ -153,7 +163,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
               I framed the problem space across three lenses: the inherent complexity of the domain, the real pain users feel, and where AI could meaningfully help.
             </p>
           </Reveal>
-          
+
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: isMobile ? 16 : 20 }}>
             <ProblemCard
               num={1} theme={theme} isMobile={isMobile} icon={Banknote}
@@ -195,7 +205,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
               <div style={{
                 padding: isMobile ? "24px 20px" : "32px 40px",
                 borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`,
-                display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: isMobile ? 24 : 48
+                display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: isMobile ? 24 : 48
               }}>
                 <div>
                   <Callout theme={theme} isMobile={isMobile}>
@@ -222,72 +232,29 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      {/* ── JOURNEY MAPPING ── */}
+      {/* ── UX STRATEGY & DECISIONS ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>From Manual to Magical</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 800 }}>
-              Mapping the persona's current journey against the desired AI-assisted journey made the value of automation concrete. We collapse external research, manual entry, and reactive problem-solving into a guided, transparent path.
-            </p>
-          </Reveal>
+          <Reveal><SectionLabel theme={theme}>UX Strategy</SectionLabel></Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48 }}>
-            <Reveal delay={0.1}>
-              <div style={{ padding: isMobile ? "24px 20px" : "32px 28px", borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}` }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
-                  <History size={20} color={theme.inkSoft} />
-                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>Current Journey (Manual)</h3>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  {[
-                    "📧 Receive invoice - manual review",
-                    "💻 Log into payment system - navigation overhead",
-                    "⌨️ Manually enter all details - typing and checking",
-                    "🔍 Google exchange rates - external research",
-                    "⚠️ Discover a compliance issue - searching docs",
-                    "🤔 Choose a payment method - guesswork",
-                    "✅ Finally submit"
-                  ].map((step, i) => (
-                    <div key={i} style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, opacity: 0.8 }}>{i+1}. {step}</div>
-                  ))}
-                </div>
-              </div>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 24, marginTop: 40, marginBottom: 56 }}>
+            <Reveal delay={0.05}>
+              <InsightCard num={1} lead="Progressive Disclosure." body="Reveal complexity only when needed, leaning on AI for smart defaults so the default path stays simple." theme={theme} isMobile={isMobile} icon={Layers} />
             </Reveal>
-
+            <Reveal delay={0.1}>
+              <InsightCard num={2} lead="Radical Transparency." body="Show all costs, FX conversions, and fees upfront. No surprises." theme={theme} isMobile={isMobile} icon={Search} />
+            </Reveal>
             <Reveal delay={0.15}>
-              <div style={{ padding: isMobile ? "24px 20px" : "32px 28px", borderRadius: 14, background: `${theme.accent}10`, border: `1px solid ${theme.accent}30` }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
-                  <Sparkles size={20} color={theme.accent} />
-                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>Desired Journey (AI-Assisted)</h3>
-                </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  {[
-                    { text: "Receive invoice", icon: "📧" },
-                    { text: "Upload to system → AI extracts data (automated)", icon: "📤", highlight: true },
-                    { text: "AI suggests contractor & amount (confirmation, not entry)", icon: "🤖", highlight: true },
-                    { text: "FX rate and fees shown upfront (transparency)", icon: "💡" },
-                    { text: "AI recommends the optimal method (comparison)", icon: "✅", highlight: true },
-                    { text: "Compliance auto-checked by AI (validation)", icon: "🛡️", highlight: true },
-                    { text: "Finally submit - with confidence", icon: "✅" }
-                  ].map((step, i) => (
-                    <div key={i} style={{ 
-                      fontFamily: "Inter", fontSize: 15, 
-                      color: step.highlight ? theme.accent : theme.ink, 
-                      fontWeight: step.highlight ? 600 : 400
-                    }}>
-                      {i+1}. {step.icon} {step.text}
-                    </div>
-                  ))}
-                </div>
-              </div>
+              <InsightCard num={3} lead="Error Prevention." body="AI catches issues proactively, with clear, actionable messages rather than cryptic failures." theme={theme} isMobile={isMobile} icon={ShieldCheck} />
+            </Reveal>
+            <Reveal delay={0.2}>
+              <InsightCard num={4} lead="Intelligent Assistant." body="AI suggests, but the user decides. Always show the reasoning and allow overrides." theme={theme} isMobile={isMobile} icon={Sparkles} />
             </Reveal>
           </div>
 
-          <Reveal delay={0.2}>
-            <ImagePlaceholder text="Journey Map Flow Diagram" theme={theme} isMobile={isMobile} height={200} />
+          <Reveal delay={0.25}>
+            <ImagePlaceholder text="Key UI Screens: FX Lock, AI Suggestions, Pre-submission Compliance" theme={theme} isMobile={isMobile} height={350} />
           </Reveal>
-
         </div>
       </section>
 
@@ -297,7 +264,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>Competitive Analysis</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              To position the design, I looked at how leading tools handle global contractor payments. The market splits into tools that move money cheaply (but offload compliance) and tools that manage workforces (heavy HR platforms). Crucially, none treats AI as a proactive, explainable assistant woven through the payout flow itself.
+              I analyzed leading tools to position the design. The market splits between cheap money movers and heavy HR platforms. Crucially, none seamlessly integrates AI as a proactive assistant into the payout flow.
             </p>
           </Reveal>
 
@@ -315,10 +282,10 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
                 </thead>
                 <tbody>
                   {[
-                    ["FX Transparency", "Strong - mid-market rate, clear cost", "Moderate - margin on contractor", "Bundled into platform pricing", "Core principle - full FX & fees shown upfront"],
-                    ["Compliance Handling", "None (money movement only)", "Limited (onboarding/docs)", "Strong - automates tax & compliance", "Built-in - pre-submission checks"],
-                    ["AI Assistance", "Minimal", "Minimal", "Emerging", "Central - extraction, suggestions, anomaly detect"],
-                    ["In-App Comparison", "No (single rail)", "Limited", "Multiple methods, less comparison", "Yes - bank vs crypto vs wallet, side by side"],
+                    ["FX Transparency", "Strong: mid-market rate, clear cost", "Moderate: margin on contractor", "Bundled into platform pricing", "Core principle: full FX & fees shown upfront"],
+                    ["Compliance Handling", "None (money movement only)", "Limited (onboarding/docs)", "Strong: automates tax & compliance", "Built-in: pre-submission checks"],
+                    ["AI Assistance", "Minimal", "Minimal", "Emerging", "Central: extraction, suggestions, anomaly detect"],
+                    ["In-App Comparison", "No (single rail)", "Limited", "Multiple methods, less comparison", "Yes: bank vs crypto vs wallet, side by side"],
                   ].map((row, i) => (
                     <tr key={i} style={{ borderBottom: `1px solid ${theme.line}` }}>
                       <td style={{ padding: "16px", color: theme.ink, fontWeight: 600 }}>{row[0]}</td>
@@ -348,29 +315,83 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      {/* ── UX STRATEGY & DECISIONS ── */}
+      {/* ── JOURNEY MAPPING ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>UX Strategy</SectionLabel></Reveal>
-          
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 24, marginTop: 40, marginBottom: 56 }}>
-            <Reveal delay={0.05}>
-              <InsightCard num={1} lead="Progressive Disclosure." body="Reveal complexity only when needed, leaning on AI for smart defaults so the default path stays simple." theme={theme} isMobile={isMobile} icon={Layers} />
-            </Reveal>
+          <Reveal><SectionLabel theme={theme}>From Manual to Magical</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              Mapping the persona's current journey against the desired AI-assisted journey made the value of automation concrete. We collapse external research, manual entry, and reactive problem-solving into a guided, transparent path.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: isMobile ? 32 : 48 }}>
             <Reveal delay={0.1}>
-              <InsightCard num={2} lead="Radical Transparency." body="Show all costs, FX conversions, and fees upfront. No surprises." theme={theme} isMobile={isMobile} icon={Search} />
+              <div style={{ padding: isMobile ? "24px 20px" : "32px 28px", borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                  <History size={20} color={theme.inkSoft} />
+                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>Current Journey (Manual)</h3>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {[
+                    { text: "Receive invoice - manual review", icon: Mail },
+                    { text: "Log into payment system - navigation overhead", icon: Monitor },
+                    { text: "Manually enter all details - typing and checking", icon: Keyboard },
+                    { text: "Google exchange rates - external research", icon: Search },
+                    { text: "Discover a compliance issue - searching docs", icon: AlertTriangle },
+                    { text: "Choose a payment method - guesswork", icon: HelpCircle },
+                    { text: "Finally submit", icon: CheckCircle2 }
+                  ].map((step, i) => (
+                    <div key={i} style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, opacity: 0.8, display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      <div style={{ marginTop: 2, display: "flex", gap: 6, alignItems: "center" }}>
+                        <span style={{ fontSize: 14 }}>{i + 1}.</span>
+                        <step.icon size={16} color={theme.accent} />
+                      </div>
+                      <span>{step.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Reveal>
+
             <Reveal delay={0.15}>
-              <InsightCard num={3} lead="Error Prevention." body="AI catches issues proactively, with clear, actionable messages rather than cryptic failures." theme={theme} isMobile={isMobile} icon={ShieldCheck} />
-            </Reveal>
-            <Reveal delay={0.2}>
-              <InsightCard num={4} lead="Intelligent Assistant." body="AI suggests, but the user decides. Always show the reasoning and allow overrides." theme={theme} isMobile={isMobile} icon={Sparkles} />
+              <div style={{ padding: isMobile ? "24px 20px" : "32px 28px", borderRadius: 14, background: theme.card, border: `2px solid ${theme.accent}` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 24 }}>
+                  <Sparkles size={20} color={theme.accent} />
+                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>Desired Journey (AI-Assisted)</h3>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {[
+                    { text: "Receive invoice", icon: Mail },
+                    { text: "Upload to system → AI extracts data (automated)", icon: Upload, highlight: true },
+                    { text: "AI suggests contractor & amount (confirmation, not entry)", icon: Bot, highlight: true },
+                    { text: "FX rate and fees shown upfront (transparency)", icon: Lightbulb },
+                    { text: "AI recommends the optimal method (comparison)", icon: Sparkles, highlight: true },
+                    { text: "Compliance auto-checked by AI (validation)", icon: ShieldCheck, highlight: true },
+                    { text: "Finally submit - with confidence", icon: CheckCircle2 }
+                  ].map((step, i) => (
+                    <div key={i} style={{
+                      fontFamily: "Inter", fontSize: 15,
+                      color: step.highlight ? theme.accent : theme.ink,
+                      fontWeight: step.highlight ? 600 : 400,
+                      display: "flex", alignItems: "flex-start", gap: 10
+                    }}>
+                      <div style={{ marginTop: 2, display: "flex", gap: 6, alignItems: "center" }}>
+                        <span style={{ fontSize: 14, color: theme.inkSoft, fontWeight: 400 }}>{i + 1}.</span>
+                        <step.icon size={16} color={theme.accent} />
+                      </div>
+                      <span>{step.text}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </Reveal>
           </div>
 
-          <Reveal delay={0.25}>
-            <ImagePlaceholder text="Key UI Screens: FX Lock, AI Suggestions, Pre-submission Compliance" theme={theme} isMobile={isMobile} height={350} />
+          <Reveal delay={0.2}>
+            <ImagePlaceholder text="Journey Map Flow Diagram" theme={theme} isMobile={isMobile} height={200} />
           </Reveal>
+
         </div>
       </section>
 
@@ -379,8 +400,8 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>The 5-Step Flow & AI Weave</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
-              AI is woven through the flow as an assistant, not an autopilot - every suggestion is explainable and overridable. Here's how it integrates into the Information Architecture.
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              AI is woven through the flow as an assistant, not an autopilot every suggestion is explainable and overridable. Here's how it integrates into the Information Architecture.
             </p>
           </Reveal>
 
@@ -418,12 +439,204 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
+      {/* ── DESIGN SYSTEM ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Design System</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              To maintain consistency across the platform, we established a foundational design system built on clear typography, accessible colors, and a predictable 8px spacing grid.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "repeat(3, 1fr)", gap: 32 }}>
+            {/* 1. Color Palette */}
+            <Reveal delay={0.1}>
+              <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, height: "100%" }}>
+                <div style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+                  <Layers size={20} color={theme.accent} />
+                  Color Palette
+                </div>
+
+                <div style={{ display: "flex", flexDirection: "column", gap: 24, marginBottom: 24 }}>
+                  <div>
+                    <div style={{ width: "100%", height: 48, background: "#2E6DB5", borderRadius: 8, marginBottom: 8 }}></div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>Primary Blue</span>
+                      <span style={{ fontFamily: "JetBrains Mono", fontSize: 12, color: theme.inkSoft }}>#2E6DB5</span>
+                    </div>
+                    <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginTop: 4 }}>Trust & Professionalism</div>
+                  </div>
+
+                  <div>
+                    <div style={{ width: "100%", height: 48, background: "#10B981", borderRadius: 8, marginBottom: 8 }}></div>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                      <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>Accent Green</span>
+                      <span style={{ fontFamily: "JetBrains Mono", fontSize: 12, color: theme.inkSoft }}>#10B981</span>
+                    </div>
+                    <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginTop: 4 }}>Success & Growth</div>
+                  </div>
+
+                  <div>
+                    <div style={{ display: "flex", height: 48, borderRadius: 8, overflow: "hidden", marginBottom: 8 }}>
+                      {["#9CA3AF", "#6B7280", "#4B5563", "#374151", "#1F2937", "#111827"].map(c => (
+                        <div key={c} style={{ flex: 1, background: c }}></div>
+                      ))}
+                    </div>
+                    <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>Neutral Grays</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginTop: 4 }}>Hierarchy & Readability</div>
+                  </div>
+                </div>
+
+                <div style={{ borderTop: `1px solid ${theme.line}`, paddingTop: 24 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink, marginBottom: 12 }}>Semantic Colors</div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                    {[
+                      { l: "Success", c: "#10B981" },
+                      { l: "Warning", c: "#F97316" },
+                      { l: "Error", c: "#EF4444" },
+                      { l: "Info", c: "#2E6DB5" }
+                    ].map(s => (
+                      <div key={s.l} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <div style={{ width: 12, height: 12, borderRadius: "50%", background: s.c }}></div>
+                        <span style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft }}>{s.l}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 2. Typography */}
+            <Reveal delay={0.15}>
+              <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, height: "100%" }}>
+                <div style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+                  <span style={{ fontSize: 20, color: theme.accent, fontWeight: 700 }}>Aa</span>
+                  Typography
+                </div>
+
+                <div style={{ marginBottom: 24 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 28, fontWeight: 700, color: theme.ink, marginBottom: 4 }}>Inter</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginBottom: 16 }}>Primary Font — Headings & Body</div>
+
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, fontWeight: 500, color: theme.ink, marginBottom: 4 }}>JetBrains Mono</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft }}>Monospace Font — Amounts & IDs</div>
+                </div>
+
+                <div style={{ borderTop: `1px solid ${theme.line}`, paddingTop: 24 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Type Scale</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                    <div>
+                      <div style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 700, color: theme.ink, marginBottom: 2, lineHeight: 1 }}>Heading 3</div>
+                      <div style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkSoft }}>24px / Bold / Inter</div>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 2, lineHeight: 1 }}>Heading 4</div>
+                      <div style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkSoft }}>18px / Semibold / Inter</div>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 400, color: theme.ink, marginBottom: 2, lineHeight: 1 }}>Body Large</div>
+                      <div style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkSoft }}>16px / Regular / Inter</div>
+                    </div>
+                    <div>
+                      <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 14, fontWeight: 500, color: theme.ink, marginBottom: 2, lineHeight: 1 }}>$12,345.67</div>
+                      <div style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkSoft }}>14px / Medium / JetBrains</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* 3. Spacing System */}
+            <Reveal delay={0.2}>
+              <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, height: "100%" }}>
+                <div style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 24, display: "flex", alignItems: "center", gap: 10 }}>
+                  <Monitor size={20} color={theme.accent} />
+                  Spacing System
+                </div>
+
+                <div style={{ marginBottom: 24 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>8px Base Unit</div>
+                  <div style={{ display: "flex", gap: 4, alignItems: "flex-end", height: 40 }}>
+                    {[1, 2, 3, 4, 5, 6].map(u => (
+                      <div style={{ width: 16, height: u * 8, background: theme.accent, opacity: 0.2 + (u * 0.1), borderRadius: "2px 2px 0 0" }} key={u}></div>
+                    ))}
+                  </div>
+                  <div style={{ display: "flex", gap: 4, marginTop: 8 }}>
+                    {[8, 16, 24, 32, 40, 48].map(px => (
+                      <div style={{ width: 16, fontFamily: "Inter", fontSize: 10, color: theme.inkSoft, textAlign: "center" }} key={px}>{px}</div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ borderTop: `1px solid ${theme.line}`, paddingTop: 24, marginBottom: 24 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink, marginBottom: 12 }}>Component Padding</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {[
+                      { l: "Cards", v: "24px" },
+                      { l: "Buttons", v: "16px 32px" },
+                      { l: "Input Fields", v: "16px" }
+                    ].map(s => (
+                      <div key={s.l} style={{ display: "flex", justifyContent: "space-between", fontFamily: "Inter", fontSize: 13 }}>
+                        <span style={{ color: theme.inkSoft }}>{s.l}</span>
+                        <span style={{ color: theme.ink, fontWeight: 500 }}>{s.v}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div style={{ borderTop: `1px solid ${theme.line}`, paddingTop: 24 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink, marginBottom: 12 }}>Border Radius</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                    {[
+                      { l: "Cards", v: "12px" },
+                      { l: "Buttons & Inputs", v: "8px" }
+                    ].map(s => (
+                      <div key={s.l} style={{ display: "flex", justifyContent: "space-between", fontFamily: "Inter", fontSize: 13 }}>
+                        <span style={{ color: theme.inkSoft }}>{s.l}</span>
+                        <span style={{ color: theme.ink, fontWeight: 500 }}>{s.v}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HIGH FIDELITY ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>High Fidelity Designs</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              Bringing the wireframes and design system together, the high-fidelity screens focus on clarity, trust, and ease of use. The UI guides the user naturally through the AI-assisted flow.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+            <Reveal delay={0.1}>
+              <ImagePlaceholder text="Dashboard & Overview - Showing recent transactions and AI suggestions" theme={theme} isMobile={isMobile} height={500} />
+            </Reveal>
+            <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: 32 }}>
+              <Reveal delay={0.15}>
+                <ImagePlaceholder text="Invoice Upload & AI Data Extraction" theme={theme} isMobile={isMobile} height={400} />
+              </Reveal>
+              <Reveal delay={0.2}>
+                <ImagePlaceholder text="Review & Confirmation - FX Rates and Fees" theme={theme} isMobile={isMobile} height={400} />
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── EDGE CASES ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Edge Cases & Error Handling</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
               Designing for the unhappy paths is where trust is earned. Each edge case pairs a clear user-facing solution with an explainable AI message.
             </p>
           </Reveal>
@@ -451,7 +664,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
       </section>
 
       {/* ── CLOSING ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal>
             <div style={{

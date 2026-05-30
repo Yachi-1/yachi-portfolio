@@ -1,5 +1,6 @@
 import { ArrowRight, ExternalLink, Eye, Paintbrush, BookOpen, Search, Lightbulb, Ruler, Type, Palette, Grid3X3, Image, FileText, Layout, Smartphone, AlertTriangle, Users, FlaskConical, MessageSquareQuote, Layers, PenTool } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import { Callout } from "../components/CaseStudyBlocks.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import herrmannCoverImg from "../assets/Herrmann_Cover.png";

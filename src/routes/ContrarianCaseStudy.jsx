@@ -205,7 +205,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Phase 03 · Synthesis</SectionLabel></Reveal>
-          
+
           <Reveal delay={0.05}>
             <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, marginBottom: 40 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 16 }}>
@@ -326,7 +326,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>A recommender, not a search engine.</strong> The buyer fills in a profile once. The matcher ranks every live deal against that profile and shows the top three matches with a fit score and the reasoning behind it.
                   </p>
                   <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}`, paddingLeft: 12 }}>
-                    <strong>Profile is the primary input.</strong> No filter form, no friction.<br/>
+                    <strong>Profile is the primary input.</strong> No filter form, no friction.<br />
                     <strong>Score visible, not hidden.</strong> 94, 87, 82. Transparent scoring earns trust.
                   </p>
                 </div>
@@ -345,7 +345,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>A CRM, not a project tracker.</strong> A pipeline view with five stages drawn directly from the Academy curriculum: Sourcing → LOI → Diligence → Financing → Close.
                   </p>
                   <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}`, paddingLeft: 12 }}>
-                    <strong>Workflow-native stage names.</strong> Same language Codie teaches.<br/>
+                    <strong>Workflow-native stage names.</strong> Same language Codie teaches.<br />
                     <strong>Color codes risk.</strong> LOI cards get amber, diligence gets rust, because that's where deals die.
                   </p>
                 </div>
@@ -363,7 +363,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Vertical-specific packs, not a generic library.</strong> Industry-specific template packs for the newly-acquired business owner. The Laundromat Starter Pack ships with 12 templates, ready to use.
                   </p>
                   <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}`, paddingLeft: 12 }}>
-                    <strong>Pack, not library.</strong> The pack already knows what the member needs.<br/>
+                    <strong>Pack, not library.</strong> The pack already knows what the member needs.<br />
                     <strong>Pre-written, not blank.</strong> The member edits a name, not a paragraph.
                   </p>
                 </div>

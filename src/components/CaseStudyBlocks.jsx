@@ -90,7 +90,7 @@ export function ProblemCard({ num, heading, body, theme, isMobile, icon: Icon })
           fontFamily: "Inter", fontSize: isMobile ? 14 : 15,
           lineHeight: 1.6, color: theme.inkSoft, margin: 0,
         }}>
-          {body}
+          {Array.isArray(body) ? body.join(" ") : body}
         </p>
       </div>
     </Reveal>
