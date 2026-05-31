@@ -5,6 +5,9 @@ import { projects } from "../data/projects.js";
 
 import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
 import remitflowHeroImg from "../assets/remitflow_hero_transparent.png";
+import remitflowDashboardImg from "../assets/remitflow_dashboard.png";
+import remitflowVideo from "../assets/remitflow_video.mov";
+import remitflowUserFlowImg from "../assets/user_flow.png";
 /* ═══════════════════════════════════════════════════════════
    MAIN EXPORT
    ═══════════════════════════════════════════════════════════ */
@@ -20,7 +23,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
   const meta = [
     { k: "Role", v: "UX Designer" },
     { k: "Timeline", v: "4 weeks" },
-    { k: "Tools", v: "Figma, FigJam" },
+    { k: "Tools", v: "Figma, FigJam, Miro" },
     { k: "Year", v: "2024" },
   ];
 
@@ -237,7 +240,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>UX Strategy</SectionLabel></Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 24, marginTop: 40, marginBottom: 56 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 24, marginTop: 40 }}>
             <Reveal delay={0.05}>
               <InsightCard num={1} lead="Progressive Disclosure." body="Reveal complexity only when needed, leaning on AI for smart defaults so the default path stays simple." theme={theme} isMobile={isMobile} icon={Layers} />
             </Reveal>
@@ -252,9 +255,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
           </div>
 
-          <Reveal delay={0.25}>
-            <ImagePlaceholder text="Key UI Screens: FX Lock, AI Suggestions, Pre-submission Compliance" theme={theme} isMobile={isMobile} height={350} />
-          </Reveal>
+
         </div>
       </section>
 
@@ -388,9 +389,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
           </div>
 
-          <Reveal delay={0.2}>
-            <ImagePlaceholder text="Journey Map Flow Diagram" theme={theme} isMobile={isMobile} height={200} />
-          </Reveal>
+
 
         </div>
       </section>
@@ -405,42 +404,126 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
             </p>
           </Reveal>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+          <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 32, alignItems: "flex-start" }}>
+
+            {/* Left Column: 5 Steps Timeline */}
+            <div style={{ display: "flex", flexDirection: "column", flex: 1.8, position: "relative" }}>
+              {/* Vertical line behind icons */}
+              {!isMobile && <div style={{ position: "absolute", left: 24, top: 24, bottom: 24, width: 2, background: theme.line, zIndex: 0 }} />}
+
+              {[
+                { step: "Step 1: Invoice / Amount", ai: "OCR extracts amount, contractor, invoice number, and date from an uploaded PDF/image.", icon: FileText },
+                { step: "Step 2: Contractor Selection", ai: "Surfaces the top 3 suggested contractors and detects recurring patterns.", icon: Users },
+                { step: "Step 3: Payment Method", ai: "Provides a recommendation (e.g. 'Crypto recommended based on speed/cost') alongside Bank and Wallet options.", icon: ArrowDownUp },
+                { step: "Step 4: Review & Confirm", ai: "Flags unusual amounts (Anomaly Detection) and auto-validates country-specific compliance.", icon: ShieldCheck },
+                { step: "Step 5: Confirmation", ai: "Offers to set up auto-payments after success.", icon: Repeat },
+              ].map((s, i) => (
+                <Reveal key={i} delay={0.1 + (i * 0.05)}>
+                  <div style={{
+                    display: "flex", gap: 24,
+                    alignItems: "flex-start",
+                    padding: "20px 0",
+                    position: "relative", zIndex: 1
+                  }}>
+                    {/* Icon Circle */}
+                    <div style={{
+                      width: 50, height: 50, borderRadius: "50%", background: theme.card, border: `1px solid ${theme.line}`,
+                      display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0,
+                      boxShadow: mode === "dark" ? "0 4px 12px rgba(0,0,0,0.5)" : "0 4px 12px rgba(0,0,0,0.05)"
+                    }}>
+                      <s.icon size={22} color={theme.accent} />
+                    </div>
+
+                    {/* Content */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 12 }}>
+                      <div style={{ fontFamily: "Inter", fontSize: 17, fontWeight: 600, color: theme.ink }}>{s.step}</div>
+                      <div style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                        <Sparkles size={16} color={theme.accent} style={{ marginTop: 2, flexShrink: 0 }} />
+                        <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, lineHeight: 1.6 }}>{s.ai}</div>
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            {/* Right Column: Flow Diagram Image */}
+            <div style={{ flex: 0.8, position: isMobile ? "static" : "sticky", top: 100 }}>
+              <Reveal delay={0.3}>
+                <div style={{
+                  width: "100%",
+                  height: isMobile ? 400 : 550,
+                  borderRadius: 16,
+                  border: `1px solid ${theme.line}`,
+                  background: theme.card,
+                  boxShadow: mode === "dark" ? "0 12px 24px -10px rgba(0,0,0,0.5)" : "0 12px 24px -10px rgba(0,0,0,0.05)",
+                  padding: isMobile ? 16 : 32
+                }}>
+                  <img src={remitflowUserFlowImg} alt="User Flow Diagram" style={{ width: "100%", height: "100%", display: "block", objectFit: "contain", objectPosition: "center" }} />
+                </div>
+              </Reveal>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* ── EDGE CASES ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>Edge Cases & Error Handling</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              Designing for the unhappy paths is where trust is earned. Each edge case pairs a clear user-facing solution with an explainable AI message.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 24 }}>
             {[
-              { step: "Step 1: Invoice / Amount", ai: "OCR extracts amount, contractor, invoice number, and date from an uploaded PDF/image.", icon: FileText },
-              { step: "Step 2: Contractor Selection", ai: "Surfaces the top 3 suggested contractors and detects recurring patterns.", icon: Users },
-              { step: "Step 3: Payment Method", ai: "Provides a recommendation (e.g. 'Crypto recommended based on speed/cost') alongside Bank and Wallet options.", icon: ArrowDownUp },
-              { step: "Step 4: Review & Confirm", ai: "Flags unusual amounts (Anomaly Detection) and auto-validates country-specific compliance.", icon: ShieldCheck },
-              { step: "Step 5: Confirmation", ai: "Offers to set up auto-payments after success.", icon: Repeat },
-            ].map((s, i) => (
+              { title: "FX rate fluctuation", sol: "Lock rate for 60s, show countdown timer. Refresh if expired.", ai: '"Rate changed. New estimate: ₹1,58,500 (₹500 less)."' },
+              { title: "Insufficient balance", sol: "Check balance before review step, show a clear error.", ai: '"Add funds or schedule for a date when balance is sufficient."' },
+              { title: "Compliance violation", sol: "Block at review with a clear explanation.", ai: '"Split into 2 payments or use an alternative method."' },
+              { title: "Contractor details change", sol: "Require confirmation and allow a note/reason.", ai: '"Highlights the change and asks for confirmation."' },
+              { title: "Unusual amount", sol: "Require additional confirmation.", ai: '"This is 3× your average payment to this contractor. Verify before proceeding."' },
+            ].map((e, i) => (
               <Reveal key={i} delay={0.1 + (i * 0.05)}>
                 <div style={{
-                  display: "flex", flexDirection: isMobile ? "column" : "row", gap: isMobile ? 12 : 24,
-                  alignItems: isMobile ? "flex-start" : "center",
-                  padding: "24px 32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`
+                  padding: "28px",
+                  borderRadius: 16,
+                  background: theme.card,
+                  border: `1px solid ${theme.line}`,
+                  borderTop: `4px solid ${theme.accent}`,
+                  height: "100%",
+                  boxShadow: mode === "dark" ? "0 4px 12px rgba(0,0,0,0.2)" : "0 4px 12px rgba(0,0,0,0.03)",
+                  display: "flex", flexDirection: "column"
                 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 16, width: isMobile ? "100%" : "30%", flexShrink: 0 }}>
-                    <s.icon size={24} color={theme.accent} />
-                    <div style={{ fontFamily: "Inter", fontSize: 17, fontWeight: 600, color: theme.ink }}>{s.step}</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 12 }}>{e.title}</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, marginBottom: 24, lineHeight: 1.5 }}>
+                    <strong style={{ color: theme.ink }}>Solution:</strong> {e.sol}
                   </div>
-                  <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flex: 1 }}>
-                    <Sparkles size={16} color={theme.accent} style={{ marginTop: 4, flexShrink: 0 }} />
-                    <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, lineHeight: 1.6 }}>{s.ai}</div>
+                  <div style={{
+                    marginTop: "auto",
+                    padding: "14px 18px",
+                    borderRadius: "0 12px 12px 12px",
+                    background: mode === "dark" ? `${theme.accent}15` : `${theme.accent}10`,
+                    color: theme.accent,
+                    fontFamily: "Inter", fontSize: 14, fontStyle: "italic",
+                    display: "flex", gap: 10, alignItems: "flex-start",
+                    borderLeft: `2px solid ${theme.accent}`
+                  }}>
+                    <Sparkles size={16} style={{ flexShrink: 0, marginTop: 2 }} />
+                    <div style={{ lineHeight: 1.5 }}>{e.ai}</div>
                   </div>
                 </div>
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={0.3}>
-            <ImagePlaceholder text="User Flow Diagram / Prototype Steps" theme={theme} isMobile={isMobile} height={400} />
-          </Reveal>
-
         </div>
       </section>
 
       {/* ── DESIGN SYSTEM ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Design System</SectionLabel></Reveal>
           <Reveal delay={0.05}>
@@ -606,7 +689,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
       </section>
 
       {/* ── HIGH FIDELITY ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>High Fidelity Designs</SectionLabel></Reveal>
           <Reveal delay={0.05}>
@@ -617,48 +700,18 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
 
           <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
             <Reveal delay={0.1}>
-              <ImagePlaceholder text="Dashboard & Overview - Showing recent transactions and AI suggestions" theme={theme} isMobile={isMobile} height={500} />
+              <div style={{
+                maxWidth: 800,
+                margin: "0 auto",
+                borderRadius: 16,
+                overflow: "hidden",
+                border: `1px solid ${theme.line}`,
+                background: theme.card,
+                boxShadow: mode === "dark" ? "0 12px 24px -10px rgba(0,0,0,0.5)" : "0 12px 24px -10px rgba(0,0,0,0.05)"
+              }}>
+                <video src={remitflowVideo} autoPlay loop muted playsInline style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }} />
+              </div>
             </Reveal>
-            <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: 32 }}>
-              <Reveal delay={0.15}>
-                <ImagePlaceholder text="Invoice Upload & AI Data Extraction" theme={theme} isMobile={isMobile} height={400} />
-              </Reveal>
-              <Reveal delay={0.2}>
-                <ImagePlaceholder text="Review & Confirmation - FX Rates and Fees" theme={theme} isMobile={isMobile} height={400} />
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── EDGE CASES ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Edge Cases & Error Handling</SectionLabel></Reveal>
-          <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              Designing for the unhappy paths is where trust is earned. Each edge case pairs a clear user-facing solution with an explainable AI message.
-            </p>
-          </Reveal>
-
-          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr", gap: 20 }}>
-            {[
-              { title: "FX rate fluctuation", sol: "Lock rate for 60s, show countdown timer. Refresh if expired.", ai: '"Rate changed. New estimate: ₹1,58,500 (₹500 less)."' },
-              { title: "Insufficient balance", sol: "Check balance before review step, show a clear error.", ai: '"Add funds or schedule for a date when balance is sufficient."' },
-              { title: "Compliance violation", sol: "Block at review with a clear explanation.", ai: '"Split into 2 payments or use an alternative method."' },
-              { title: "Contractor details change", sol: "Require confirmation and allow a note/reason.", ai: "Highlights the change and asks for confirmation." },
-              { title: "Unusual amount", sol: "Require additional confirmation.", ai: '"This is 3× your average payment to this contractor. Verify before proceeding."' },
-            ].map((e, i) => (
-              <Reveal key={i} delay={0.1 + (i * 0.05)}>
-                <div style={{ padding: "24px", borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}`, height: "100%" }}>
-                  <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 12 }}>{e.title}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkSoft, marginBottom: 16 }}><strong>Solution:</strong> {e.sol}</div>
-                  <div style={{ padding: "12px 16px", borderRadius: 8, background: `${theme.accent}10`, color: theme.accent, fontFamily: "Inter", fontSize: 13, fontStyle: "italic" }}>
-                    AI Message: {e.ai}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>
@@ -722,7 +775,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
 
               <div style={{ position: "relative", zIndex: 1 }}>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  Every suggestion shows its reasoning, every cost is visible before commitment, and the user always holds the final decision. By designing the edge cases and error states as carefully as the happy path, the flow stays trustworthy exactly where global payments tend to break down.
+                  I designed this project for a friend launching a new business. The goal was to create a prototype for testing with early users and validating the concept through real feedback.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
                   <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />

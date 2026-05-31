@@ -39,23 +39,43 @@ export const IconBadge = ({ icon: Icon, theme, size = 20 }) => (
 export function InsightCard({ num, lead, body, theme, isMobile, icon: Icon }) {
   return (
     <div style={{
+      position: "relative",
+      overflow: "hidden",
       padding: isMobile ? "24px 20px" : "32px 28px",
-      borderRadius: 14,
-      background: theme.bgAlt,
+      borderRadius: 16,
+      background: theme.card,
       border: `1px solid ${theme.line}`,
       height: "100%",
       boxSizing: "border-box",
+      display: "flex",
+      flexDirection: "column",
     }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-        {Icon && <IconBadge icon={Icon} theme={theme} />}
+      {num && (
+        <div style={{
+          position: "absolute",
+          bottom: -20,
+          right: 10,
+          fontFamily: "Inter",
+          fontSize: 120,
+          fontWeight: 900,
+          color: theme.accent,
+          opacity: 0.04,
+          lineHeight: 1,
+          pointerEvents: "none",
+        }}>
+          {String(num).padStart(2, "0")}
+        </div>
+      )}
+      <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20, position: "relative", zIndex: 1 }}>
+        {Icon && <IconBadge icon={Icon} theme={theme} size={22} />}
         {num && <div style={{
-          fontFamily: "'Caveat', cursive", fontSize: 18, color: theme.accent,
+          fontFamily: "'Caveat', cursive", fontSize: 20, color: theme.accent,
           lineHeight: 1,
         }}>{String(num).padStart(2, "0")}</div>}
       </div>
       <p style={{
         fontFamily: "Inter", fontSize: isMobile ? 15 : 16.5,
-        lineHeight: 1.6, color: theme.inkSoft, margin: 0,
+        lineHeight: 1.6, color: theme.inkSoft, margin: 0, position: "relative", zIndex: 1
       }}>
         <strong style={{ color: theme.ink, fontWeight: 600 }}>{lead} </strong>{body}
       </p>

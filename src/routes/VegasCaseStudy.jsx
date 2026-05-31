@@ -233,7 +233,7 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
             </p>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: isMobile ? 16 : 24, marginBottom: 56 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: isMobile ? 16 : 24 }}>
             <Reveal delay={0.1}>
               <InsightCard num={1} lead="Speed over decoration." body="Every screen is optimized for task completion, not visual flourish. If a design choice didn't move the agent closer to 'Sale Complete,' it was cut." theme={theme} isMobile={isMobile} icon={Zap} />
             </Reveal>
