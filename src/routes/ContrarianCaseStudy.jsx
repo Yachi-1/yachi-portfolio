@@ -153,7 +153,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Phase 02 · Competitor Audit</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
               I audited four products in the adjacent space against the five stages of the buyer journey. The gaps showed that nobody is serving the whole journey, and that "course + community + product" is an open positioning.
             </p>
           </Reveal>
@@ -244,7 +244,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Phase 04 · Ideation & How Might We</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
               Each insight became a "how-might-we" question. I sketched seven product ideas, and cut four of them. Cutting was the highest-leverage decision in the entire project.
             </p>
           </Reveal>
@@ -277,7 +277,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Design Language</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: 900 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
               All three interfaces share a system: same type, same palette, same components, same voice. Without it, the three products would have felt like three startups. With it, they feel like one ecosystem.
             </p>
           </Reveal>
@@ -313,7 +313,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Phase 05 · Deliver</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 60px", maxWidth: 900 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 60px", maxWidth: "100%" }}>
               The three products from the synthesis became three interfaces: live prototypes built in Next.js.
             </p>
           </Reveal>
@@ -321,7 +321,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
           <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 60 : 100 }}>
             {/* Interface 01 */}
             <Reveal delay={0.1}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: 40, alignItems: "center" }}>
                 <div>
                   <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>1. AI Acquisition Matcher</h3>
                   <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Profile in, ranked deals out.</div>
@@ -333,11 +333,11 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Score visible, not hidden.</strong> 94, 87, 82. Transparent scoring earns trust.
                   </p>
                 </div>
-                <a 
-                  href="https://ai-acquisition-matcher-by-yachi.vercel.app/" 
-                  target="_blank" 
+                <a
+                  href="https://ai-acquisition-matcher-by-yachi.vercel.app/"
+                  target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease", width: "100%" }}
+                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
                   onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
                   onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
                 >
@@ -348,7 +348,19 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
 
             {/* Interface 02 */}
             <Reveal delay={0.15}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1.5fr 1fr", gap: 40, alignItems: "center" }}>
+                {!isMobileOrTablet && (
+                  <a
+                    href="https://deal-pipeline-dashboard-by-yachi.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
+                  >
+                    <img src={dealPipelineImg} alt="Deal Pipeline Dashboard UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </a>
+                )}
                 <div>
                   <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>2. Deal Pipeline Dashboard</h3>
                   <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>A CRM that speaks the buyer's language.</div>
@@ -360,22 +372,24 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Color codes risk.</strong> LOI cards get amber, diligence gets rust, because that's where deals die.
                   </p>
                 </div>
-                <a 
-                  href="https://deal-pipeline-dashboard-by-yachi.vercel.app/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease", width: "100%" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
-                >
-                  <img src={dealPipelineImg} alt="Deal Pipeline Dashboard UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
-                </a>
+                {isMobileOrTablet && (
+                  <a
+                    href="https://deal-pipeline-dashboard-by-yachi.vercel.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
+                  >
+                    <img src={dealPipelineImg} alt="Deal Pipeline Dashboard UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </a>
+                )}
               </div>
             </Reveal>
 
             {/* Interface 03 */}
             <Reveal delay={0.2}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: 40, alignItems: "center" }}>
                 <div>
                   <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>3. Marketing Design Hub</h3>
                   <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>Vertical packs for newly-acquired Main Street.</div>
@@ -387,11 +401,11 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Pre-written, not blank.</strong> The member edits a name, not a paragraph.
                   </p>
                 </div>
-                <a 
-                  href="https://marketing-design-hub-by-yachi.vercel.app/" 
-                  target="_blank" 
+                <a
+                  href="https://marketing-design-hub-by-yachi.vercel.app/"
+                  target="_blank"
                   rel="noopener noreferrer"
-                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease", width: "100%" }}
+                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
                   onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
                   onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
                 >
