@@ -4,10 +4,12 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
 import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
+import LazyVideo from "../components/LazyVideo.jsx";
 import remitflowHeroImg from "../assets/remitflow_hero_transparent.png";
-import remitflowDashboardImg from "../assets/remitflow_dashboard.png";
-import remitflowVideo from "../assets/remitflow_video.mov";
-import remitflowUserFlowImg from "../assets/user_flow.png";
+import remitflowVideoMp4 from "../assets/remitflow_video.mp4";
+import remitflowVideoWebm from "../assets/remitflow_video.webm";
+import remitflowPoster from "../assets/remitflow_poster.png?w=1280&format=webp&quality=80";
+import remitflowUserFlowImg from "../assets/user_flow.png?w=1400&format=webp&quality=82";
 /* ═══════════════════════════════════════════════════════════
    MAIN EXPORT
    ═══════════════════════════════════════════════════════════ */
@@ -93,7 +95,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
               paddingTop: isMobile ? 16 : 32,
               overflow: "hidden"
             }}>
-              <img src={remitflowHeroImg} alt="RemitFlow Dashboard" style={{ width: "100%", height: isMobile ? 350 : 550, objectFit: "cover", objectPosition: "center", display: "block" }} />
+              <img src={remitflowHeroImg} alt="RemitFlow Dashboard" loading="eager" fetchpriority="high" decoding="async" style={{ width: "100%", height: isMobile ? 350 : 550, objectFit: "cover", objectPosition: "center", display: "block" }} />
             </div>
           </Reveal>
 
@@ -459,7 +461,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
                   boxShadow: mode === "dark" ? "0 12px 24px -10px rgba(0,0,0,0.5)" : "0 12px 24px -10px rgba(0,0,0,0.05)",
                   padding: isMobile ? 16 : 32
                 }}>
-                  <img src={remitflowUserFlowImg} alt="User Flow Diagram" style={{ width: "100%", height: "100%", display: "block", objectFit: "contain", objectPosition: "center" }} />
+                  <img src={remitflowUserFlowImg} alt="User Flow Diagram" loading="lazy" decoding="async" style={{ width: "100%", height: "100%", display: "block", objectFit: "contain", objectPosition: "center" }} />
                 </div>
               </Reveal>
             </div>
@@ -709,7 +711,14 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
                 background: theme.card,
                 boxShadow: mode === "dark" ? "0 12px 24px -10px rgba(0,0,0,0.5)" : "0 12px 24px -10px rgba(0,0,0,0.05)"
               }}>
-                <video src={remitflowVideo} autoPlay loop muted playsInline style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }} />
+                <LazyVideo
+                  poster={remitflowPoster}
+                  sources={[
+                    { src: remitflowVideoWebm, type: "video/webm" },
+                    { src: remitflowVideoMp4, type: "video/mp4" },
+                  ]}
+                  style={{ width: "100%", height: "auto", display: "block", objectFit: "contain" }}
+                />
               </div>
             </Reveal>
           </div>

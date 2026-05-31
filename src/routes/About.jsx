@@ -5,6 +5,7 @@ import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
 import SectionDivider from "../components/SectionDivider.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import ResponsiveImage from "../components/ResponsiveImage.jsx";
 import heroImg from "../assets/Yachi_Main_Image.jpg?w=320;640;960&format=avif;webp;jpg&as=picture";
 import yachiImg1 from "../assets/Yachi_Image_1.jpeg?w=160;320&format=avif;webp;jpg&as=picture";
 import yachiImg2 from "../assets/Yachi_Image_2.jpg?w=160;320&format=avif;webp;jpg&as=picture";
@@ -98,34 +99,6 @@ export default function About({ theme, mode }) {
 
       <JourneyRoadmap theme={theme} isMobileOrTablet={isMobileOrTablet} isMobile={isMobile} />
     </div>
-  );
-}
-
-const FORMAT_MIME = {
-  avif: "image/avif",
-  webp: "image/webp",
-  jpeg: "image/jpeg",
-  jpg: "image/jpeg",
-  png: "image/png",
-};
-
-function ResponsiveImage({ source, alt, style, loading, fetchPriority, width, height }) {
-  return (
-    <picture>
-      {Object.entries(source.sources).map(([format, srcset]) => (
-        <source key={format} type={FORMAT_MIME[format] || `image/${format}`} srcSet={srcset} />
-      ))}
-      <img
-        src={source.img.src}
-        alt={alt}
-        width={width || source.img.w}
-        height={height || source.img.h}
-        loading={loading}
-        decoding="async"
-        fetchpriority={fetchPriority}
-        style={style}
-      />
-    </picture>
   );
 }
 

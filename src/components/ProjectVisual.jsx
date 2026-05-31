@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
-import herrmannImg from "../assets/Herrmann_Cover.png";
-import vegasImg from "../assets/Vegas_Tickets_Cover.png";
-import contrarianImg from "../assets/Contrarian_Thinking_Cover.png";
-import nellisImg from "../assets/Nellis_Auction_Cover.png";
-import kpImg from "../assets/KP_Cover.png";
-import remitflowImg from "../assets/Remit_Flow_Cover.png";
+import herrmannImg from "../assets/Herrmann_Cover.png?w=1200&format=webp&quality=80";
+import vegasImg from "../assets/Vegas_Tickets_Cover.png?w=1200&format=webp&quality=80";
+import contrarianImg from "../assets/Contrarian_Thinking_Cover.png?w=1200&format=webp&quality=80";
+import nellisImg from "../assets/Nellis_Auction_Cover.png?w=1200&format=webp&quality=80";
+import kpImg from "../assets/KP_Cover.png?w=1200&format=webp&quality=80";
+import remitflowImg from "../assets/Remit_Flow_Cover.png?w=1200&format=webp&quality=80";
 
 const visualCardStyle = (theme) => ({
   position: "absolute",

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
 
 import { themes } from "./theme.js";
@@ -7,9 +7,8 @@ import MagneticCursor from "./components/MagneticCursor.jsx";
 import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 import SectionDivider from "./components/SectionDivider.jsx";
-import Home from "./routes/Home.jsx";
 
-
+const Home = lazy(() => import("./routes/Home.jsx"));
 const About = lazy(() => import("./routes/About.jsx"));
 const Projects = lazy(() => import("./routes/Projects.jsx"));
 const Resume = lazy(() => import("./routes/Resume.jsx"));
@@ -100,6 +99,7 @@ export default function App() {
   const [mode, setMode] = useState("light");
   const [route, setRoute] = useState("home");
   const theme = themes[mode];
+  const reduced = useReducedMotion();
 
   const lenisRef = useRef(null);
   useLenis(lenisRef);
@@ -146,10 +146,10 @@ export default function App() {
       <AnimatePresence mode="wait">
         <motion.div
           key={route}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -16 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          initial={reduced ? false : { opacity: 0, y: 16 }}
+          animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+          exit={reduced ? { opacity: 0 } : { opacity: 0, y: -16 }}
+          transition={reduced ? { duration: 0 } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <Suspense fallback={null}>
             {route === "home" && <Home theme={theme} mode={mode} setRoute={setRoute} />}

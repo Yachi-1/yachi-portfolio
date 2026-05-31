@@ -5,6 +5,7 @@ import ProjectVisual from "./ProjectVisual.jsx";
 import GridPaper from "./GridPaper.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import { prefetchCaseStudy } from "../utils/prefetchCaseStudy.js";
 
 const SCATTER_POSITIONS = [
   { x: -220, y: -360 }, // Top-Left
@@ -388,7 +389,7 @@ function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, 
         pointerEvents: isOpen ? "auto" : "none",
         transformOrigin: "bottom center"
       }}
-      onHoverStart={() => isOpen && setIsHovered(true)}
+      onHoverStart={() => { if (isOpen) { setIsHovered(true); prefetchCaseStudy(p.id); } }}
       onHoverEnd={() => isOpen && setIsHovered(false)}
       data-magnet="0"
       data-cursor="view"
@@ -424,7 +425,7 @@ function MobileProjectItem({ p, i, theme, mode, setRoute }) {
         if (p.pdfLink) window.open(p.pdfLink, "_blank");
         else setRoute(`project:${p.id}`);
       }}
-      onHoverStart={() => setIsHovered(true)}
+      onHoverStart={() => { setIsHovered(true); prefetchCaseStudy(p.id); }}
       onHoverEnd={() => setIsHovered(false)}
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}

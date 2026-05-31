@@ -1,14 +1,25 @@
+import { lazy, Suspense } from "react";
 import { ArrowRight } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
 import ProjectVisual from "../components/ProjectVisual.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
-import KineticCaseStudy from "./KineticCaseStudy.jsx";
-import ContrarianCaseStudy from "./ContrarianCaseStudy.jsx";
-import NellisCaseStudy from "./NellisCaseStudy.jsx";
-import HerrmannCaseStudy from "./HerrmannCaseStudy.jsx";
-import RemitflowCaseStudy from "./RemitflowCaseStudy.jsx";
-import VegasCaseStudy from "./VegasCaseStudy.jsx";
+
+const KineticCaseStudy = lazy(() => import("./KineticCaseStudy.jsx"));
+const ContrarianCaseStudy = lazy(() => import("./ContrarianCaseStudy.jsx"));
+const NellisCaseStudy = lazy(() => import("./NellisCaseStudy.jsx"));
+const HerrmannCaseStudy = lazy(() => import("./HerrmannCaseStudy.jsx"));
+const RemitflowCaseStudy = lazy(() => import("./RemitflowCaseStudy.jsx"));
+const VegasCaseStudy = lazy(() => import("./VegasCaseStudy.jsx"));
+
+const CASE_STUDIES = {
+  nellis: NellisCaseStudy,
+  kinetic: KineticCaseStudy,
+  contrarian: ContrarianCaseStudy,
+  herrmann: HerrmannCaseStudy,
+  remitflow: RemitflowCaseStudy,
+  vegas: VegasCaseStudy,
+};
 
 const DEFAULT_STORY = [
   { h: "The challenge", t: "Users were dropping off mid-funnel. The data said one thing, but qualitative interviews surfaced a different story - one we couldn't have caught with analytics alone." },
@@ -33,28 +44,13 @@ const DEFAULT_STATS = [
 export default function ProjectDetail({ id, theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
 
-  if (id === "nellis") {
-    return <NellisCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
-  }
-
-  if (id === "kinetic") {
-    return <KineticCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
-  }
-
-  if (id === "contrarian") {
-    return <ContrarianCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
-  }
-
-  if (id === "herrmann") {
-    return <HerrmannCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
-  }
-
-  if (id === "remitflow") {
-    return <RemitflowCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
-  }
-
-  if (id === "vegas") {
-    return <VegasCaseStudy theme={theme} mode={mode} setRoute={setRoute} />;
+  const CaseStudy = CASE_STUDIES[id];
+  if (CaseStudy) {
+    return (
+      <Suspense fallback={null}>
+        <CaseStudy theme={theme} mode={mode} setRoute={setRoute} />
+      </Suspense>
+    );
   }
 
   const project = projects.find(p => p.id === id);

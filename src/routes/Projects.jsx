@@ -6,6 +6,7 @@ import ProjectVisual from "../components/ProjectVisual.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import GridPaper from "../components/GridPaper.jsx";
+import { prefetchCaseStudy } from "../utils/prefetchCaseStudy.js";
 
 export default function Projects({ theme, mode, setRoute }) {
   const { isMobile, isTablet } = useBreakpoint();
@@ -61,7 +62,7 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
           window.lenis?.scrollTo(0);
         }
       }}
-      onHoverStart={() => setIsHovered(true)}
+      onHoverStart={() => { setIsHovered(true); prefetchCaseStudy(p.id); }}
       onHoverEnd={() => setIsHovered(false)}
       whileHover={{ y: -10 }}
       transition={{ type: "spring", stiffness: 260, damping: 24 }}

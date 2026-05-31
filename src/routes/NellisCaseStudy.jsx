@@ -3,8 +3,8 @@ import Reveal from "../components/Reveal.jsx";
 import { Callout } from "../components/CaseStudyBlocks.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
-import nellisOriginalImg from "../assets/Nellis_Original.png";
-import nellisRedesignImg from "../assets/Nellis_Redesign.png";
+import nellisOriginalImg from "../assets/Nellis_Original.png?w=1200&format=webp&quality=80";
+import nellisRedesignImg from "../assets/Nellis_Redesign.png?w=1200&format=webp&quality=80";
 import nellisHeroV1Img from "../assets/nellis_hero_v1.png";
 import nellisHeroV2Img from "../assets/nellis_hero_v2.png";
 import nellisHeroV3Img from "../assets/nellis_hero_v3.png";
@@ -305,7 +305,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
                     height: 350, overflow: "hidden",
                     background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
                   }}>
-                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
+                    <img src={l.img} alt={l.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
                   </div>
                   <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
@@ -729,7 +729,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
                       padding: isMobile ? "24px" : "40px",
                       display: "flex", justifyContent: "center", alignItems: "center"
                     }}>
-                      <img src={v.img} alt={`Hero ${v.ver} Wireframe`} style={{ width: "100%", maxWidth: "240px", height: "auto", display: "block" }} />
+                      <img src={v.img} alt={`Hero ${v.ver} Wireframe`} loading="lazy" decoding="async" style={{ width: "100%", maxWidth: "240px", height: "auto", display: "block" }} />
                     </div>
                     <div style={{
                       display: "flex", gap: 12, alignItems: "flex-start",
@@ -806,6 +806,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               <iframe
                 src="/nellis_auction_homepage.html"
                 title="Nellis Auction Homepage Design"
+                loading="lazy"
                 style={{ width: "100%", height: "100%", border: "none", display: "block" }}
               />
             </div>

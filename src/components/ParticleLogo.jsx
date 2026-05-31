@@ -27,6 +27,8 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
     const ctx = canvas.getContext("2d");
     
     let animationFrameId;
+    let paused = false;      // true when off-screen or tab hidden
+    let idleRendered = false; // true once the at-rest frame is drawn (hover variant)
     let W = 0, H = 0, DPR = 1;
     
     let particles = [];
@@ -197,6 +199,15 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
     }
     
     function frame(now) {
+      // Skip all work while off-screen / tab hidden, or while the hover logo is
+      // at rest and its static frame has already been drawn. Keep a cheap rAF
+      // alive to resume instantly when state changes.
+      const playing = playOnHover ? hoverState.current.playing : true;
+      if (paused || (!playing && idleRendered)) {
+        animationFrameId = requestAnimationFrame(frame);
+        return;
+      }
+
       const m = playOnHover ? morphAmountHover(now) : morphAmount(now);
       const rot = now * 0.0006; // even faster rotation
       const tilt = 0.42;
@@ -259,7 +270,9 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
         ctx.drawImage(cleanTextCanvas, padding, padding, drawSize, drawSize);
         ctx.globalAlpha = 1.0;
       }
-    
+
+      // At rest, the next frame can short-circuit until hover re-triggers it.
+      idleRendered = !playing;
       animationFrameId = requestAnimationFrame(frame);
     }
     
@@ -282,10 +295,23 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
     };
     img.src = "/favicon.png";
 
+    // Pause the loop when the logo scrolls out of view or the tab is hidden.
+    let onScreen = true, tabHidden = false;
+    const updatePaused = () => { paused = !onScreen || tabHidden; };
+    const io = new IntersectionObserver(
+      ([entry]) => { onScreen = entry.isIntersecting; updatePaused(); },
+      { rootMargin: "100px" }
+    );
+    io.observe(canvas);
+    const onVisibility = () => { tabHidden = document.visibilityState === "hidden"; updatePaused(); };
+    document.addEventListener("visibilitychange", onVisibility);
+
     return () => {
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);
       }
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, [mode, size, playOnHover]);
 

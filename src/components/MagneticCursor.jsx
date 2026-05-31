@@ -131,8 +131,16 @@ function CursorImpl({ theme, reduced }) {
       visibleRef.current = false;
       setVisible(false);
     };
-    const onScroll = () => refreshRect();
-    const onResize = () => refreshRect();
+    // Coalesce rect refreshes to one layout read per frame. Skip entirely when
+    // no magnet is active (the common case during scroll) to avoid reflow.
+    let rectRafScheduled = false;
+    const scheduleRefresh = () => {
+      if (!activeMagnet.current || rectRafScheduled) return;
+      rectRafScheduled = true;
+      requestAnimationFrame(() => { rectRafScheduled = false; refreshRect(); });
+    };
+    const onScroll = scheduleRefresh;
+    const onResize = scheduleRefresh;
 
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseleave", onLeave);

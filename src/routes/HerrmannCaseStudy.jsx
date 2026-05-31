@@ -3,10 +3,8 @@ import Reveal from "../components/Reveal.jsx";
 import { Callout } from "../components/CaseStudyBlocks.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
-import herrmannCoverImg from "../assets/Herrmann_Cover.png";
-import herrmannWireframeImg from "../assets/herrmann_wireframe.png";
-import herrmannOriginalImg from "../assets/herrmann_original.png";
-import herrmannRedesignImg from "../assets/herrmann_redesign.png";
+import herrmannOriginalImg from "../assets/herrmann_original.png?w=1200&format=webp&quality=80";
+import herrmannRedesignImg from "../assets/herrmann_redesign.png?w=1200&format=webp&quality=80";
 import wireframeHtml from "../../wireframe_squared.html?raw";
 
 /* ─── Shared section-header style ─── */
@@ -274,7 +272,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                     height: 350, overflow: "hidden",
                     background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
                   }}>
-                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
+                    <img src={l.img} alt={l.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} />
                   </div>
                   <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
@@ -583,6 +581,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                   <iframe
                     src="/herrmann_homepage.html"
                     title="Herrmann High Fidelity"
+                    loading="lazy"
                     style={{
                       width: isMobile ? "100%" : "200%",
                       height: isMobile ? "100%" : "200%",
@@ -659,6 +658,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
               <iframe
                 src="/herrmann_brand_book.html"
                 title="Herrmann Brand Book"
+                loading="lazy"
                 style={{ width: "100%", height: "100%", border: "none", display: "block" }}
               />
             </div>

@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Reveal from "../components/Reveal.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
-import kpImage from "../assets/KP_Cover.png";
 import kpConnectImg from "../assets/kp_connect_design.png";
 
 export default function KineticCaseStudy({ theme, mode, setRoute }) {
@@ -178,7 +177,7 @@ export default function KineticCaseStudy({ theme, mode, setRoute }) {
                     height: 350, overflow: "hidden",
                     background: theme.bgAlt, borderBottom: mode === "dark" ? `1px solid ${theme.line}` : "1px solid rgba(0,0,0,0.15)",
                   }}>
-                    <img src={l.img} alt={l.alt} style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} onError={(e) => { e.target.src = "https://placehold.co/800x450/e2e8f0/64748b?text=" + l.label.replace(" ", "+") }} />
+                    <img src={l.img} alt={l.alt} loading="lazy" decoding="async" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top center", display: "block" }} onError={(e) => { e.target.src = "https://placehold.co/800x450/e2e8f0/64748b?text=" + l.label.replace(" ", "+") }} />
                   </div>
                   <div style={{ padding: "14px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
                     <span style={{ fontFamily: "Inter", fontSize: 14, fontWeight: 600, color: theme.ink }}>{l.label}</span>
@@ -930,6 +929,8 @@ Contact`}
               <img
                 src={kpConnectImg}
                 alt="Kinetic Potential Homepage Design"
+                loading="lazy"
+                decoding="async"
                 style={{
                   width: "100%", height: "auto", display: "block"
                 }}
