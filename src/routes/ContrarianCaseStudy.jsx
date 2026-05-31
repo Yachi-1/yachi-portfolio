@@ -21,9 +21,9 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
 
   /* ── data ── */
   const meta = [
-    { k: "Role", v: "Sole Designer" },
-    { k: "Timeline", v: "3 weeks of evenings" },
-    { k: "Tools", v: "Figma" },
+    { k: "Role", v: "Product Designer" },
+    { k: "Timeline", v: "2 weeks" },
+    { k: "Tools", v: "Figma, Claude, Google Antigravity" },
     { k: "Year", v: "2026" },
   ];
 
@@ -61,7 +61,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
           <div>
             <Reveal delay={0.05}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
-                {["UX Strategy", "Research", "Product Design", "Prototyping", "2026"].map((tag, i) => (
+                {["Research", "Prototyping", "2026"].map((tag, i) => (
                   <div key={i} style={{
                     padding: "4px 12px",
                     borderRadius: 100,
