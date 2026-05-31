@@ -137,7 +137,6 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                 <div style={{ padding: "20px", borderRadius: 12, background: theme.card, border: `1px solid ${theme.line}` }}>
                   <ul style={{ margin: 0, paddingLeft: 20, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
                     <li style={{ marginBottom: 8 }}><strong>No access.</strong> No member interviews, no analytics, no team Slack. Desk research only.</li>
-                    <li style={{ marginBottom: 8 }}><strong>Three weeks of evenings.</strong> Real-time constraint. Forces editing and prioritization.</li>
                     <li style={{ marginBottom: 8 }}><strong>Show the process.</strong> Document research and synthesis, not just final screens.</li>
                     <li><strong>Ship working prototypes.</strong> If a product can be built in code, it should be.</li>
                   </ul>
