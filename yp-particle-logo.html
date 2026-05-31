@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YP — particle logo</title>
+  <style>
+    :root {
+      --bg-0: #07070b;
+      --bg-1: #11101a;
+      --ui: #ff9ec7;
+      --ui-dim: rgba(255, 158, 199, 0.35);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      background:
+        radial-gradient(120% 120% at 50% 40%, var(--bg-1) 0%, var(--bg-0) 70%);
+      color: var(--ui);
+      font-family: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      min-height: 100%;
+      overflow: hidden;
+      transition: background 0.5s ease;
+    }
+
+    body.light {
+      --bg-0: #fbeef2;
+      --bg-1: #ffffff;
+      --ui: #d6477a;
+      --ui-dim: rgba(214, 71, 122, 0.3);
+    }
+
+    .stage {
+      width: min(82vw, 560px);
+      max-width: 560px;
+      aspect-ratio: 1 / 1;
+      position: relative;
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .controls button {
+      appearance: none;
+      background: transparent;
+      border: 1px solid var(--ui-dim);
+      color: var(--ui);
+      border-radius: 999px;
+      padding: 7px 16px;
+      font: inherit;
+      letter-spacing: inherit;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .controls button:hover {
+      border-color: var(--ui);
+      background: var(--ui-dim);
+    }
+
+    .controls .sep {
+      opacity: 0.4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stage">
+    <canvas id="c"></canvas>
+  </div>
+
+  <div class="controls">
+    <button id="theme">theme</button>
+    <span class="sep">/</span>
+    <button id="replay">replay</button>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("c");
+    const ctx = canvas.getContext("2d");
+
+    let W = 0, H = 0, DPR = 1;
+    const LETTERS = "YP";
+
+    // ---- particle state ----
+    let particles = [];
+    let N = 0;
+
+    // ---- timeline (ms) ----
+    const PHASE = {
+      sphereHold: 2200,
+      form: 1900,
+      textHold: 2600,
+      disperse: 1700,
+    };
+    const CYCLE = PHASE.sphereHold + PHASE.form + PHASE.textHold + PHASE.disperse;
+    let t0 = performance.now();
+
+    // ---- helpers ----
+    const smooth = t => t * t * (3 - 2 * t);           // smoothstep
+    const ease = t => 1 - Math.pow(1 - t, 3);        // easeOutCubic
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    // theme-driven particle colours
+    function palette() {
+      return document.body.classList.contains("light")
+        ? { r: 232, g: 80, b: 130, depthLift: 60 }   // deeper pinks on cream
+        : { r: 255, g: 110, b: 165, depthLift: 90 }; // bright pinks on near-black
+    }
+
+    // Sample the "YP" glyphs to get 2D target points (CSS-px space, centred at 0,0)
+    function sampleText(size) {
+      if (!size || size <= 0) return [];
+      const off = document.createElement("canvas");
+      off.width = size; off.height = size;
+      const o = off.getContext("2d");
+      o.fillStyle = "#fff";
+      o.textAlign = "center";
+      o.textBaseline = "middle";
+      // pick a font size that fills the box; bold geometric weight reads well as dots
+      let fs = size * 0.62;
+      o.font = `800 ${fs}px "Poppins", "Arial Black", system-ui, sans-serif`;
+      // shrink to fit width if needed
+      while (o.measureText(LETTERS).width > size * 0.82 && fs > 10) {
+        fs *= 0.96;
+        o.font = `800 ${fs}px "Poppins", "Arial Black", system-ui, sans-serif`;
+      }
+      o.fillText(LETTERS, size / 2, size / 2 + fs * 0.02);
+
+      const data = o.getImageData(0, 0, size, size).data;
+      const step = Math.max(2, Math.round(size / 150)); // density of sampling
+      const pts = [];
+      for (let y = 0; y < size; y += step) {
+        for (let x = 0; x < size; x += step) {
+          const a = data[(y * size + x) * 4 + 3];
+          if (a > 128) {
+            // tiny jitter so the grid sampling doesn't look mechanical
+            pts.push({
+              x: x - size / 2 + (Math.random() - 0.5) * step,
+              y: y - size / 2 + (Math.random() - 0.5) * step,
+            });
+          }
+        }
+      }
+      return pts;
+    }
+
+    // Fibonacci sphere — evenly distributed points, no clumping
+    function fibonacciSphere(count, radius) {
+      const pts = [];
+      const golden = Math.PI * (3 - Math.sqrt(5));
+      for (let i = 0; i < count; i++) {
+        const y = 1 - (i / (count - 1)) * 2;        // -1 .. 1
+        const r = Math.sqrt(1 - y * y);
+        const theta = golden * i;
+        pts.push({
+          x: Math.cos(theta) * r * radius,
+          y: y * radius,
+          z: Math.sin(theta) * r * radius,
+        });
+      }
+      return pts;
+    }
+
+    function build() {
+      const cssSize = canvas.clientWidth;
+      const textPts = sampleText(cssSize);
+      N = textPts.length;
+      const radius = cssSize * 0.40;
+      const spherePts = fibonacciSphere(N, radius);
+
+      particles = textPts.map((tp, i) => ({
+        tx: tp.x, ty: tp.y,                  // text target (2D)
+        sx: spherePts[i].x,                  // sphere home (3D, pre-rotation)
+        sy: spherePts[i].y,
+        sz: spherePts[i].z,
+        delay: Math.random() * 0.45,         // per-particle stagger for the swarm-settle feel
+        baseR: 0.8 + Math.random() * 0.7,    // dot size variation
+        flicker: Math.random() * Math.PI * 2,
+      }));
+    }
+
+    function resize() {
+      const cssSize = canvas.clientWidth;
+      if (!cssSize || cssSize <= 0) return false;   // not laid out yet — bail safely
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      W = cssSize; H = cssSize;
+      canvas.width = cssSize * DPR;
+      canvas.height = cssSize * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      build();
+      return true;
+    }
+
+    function morphAmount(now) {
+      // returns global morph m: 0 = sphere, 1 = text
+      let t = (now - t0) % CYCLE;
+      if (t < PHASE.sphereHold) return 0;
+      t -= PHASE.sphereHold;
+      if (t < PHASE.form) return ease(t / PHASE.form);
+      t -= PHASE.form;
+      if (t < PHASE.textHold) return 1;
+      t -= PHASE.textHold;
+      return 1 - ease(t / PHASE.disperse);
+    }
+
+    function frame(now) {
+      const m = morphAmount(now);
+      const rot = now * 0.00035;          // sphere spin
+      const tilt = 0.42;                  // fixed x-tilt
+      const cosR = Math.cos(rot), sinR = Math.sin(rot);
+      const cosT = Math.cos(tilt), sinT = Math.sin(tilt);
+      const focal = W * 1.4;
+      const cx = W / 2, cy = H / 2;
+      const pal = palette();
+
+      ctx.clearRect(0, 0, W, H);
+
+      for (let i = 0; i < N; i++) {
+        const p = particles[i];
+
+        // rotate sphere point (Y axis then X tilt)
+        let x = p.sx * cosR - p.sz * sinR;
+        let z = p.sx * sinR + p.sz * cosR;
+        let y = p.sy * cosT - z * sinT;
+        z = p.sy * sinT + z * cosT;
+
+        // perspective projection
+        const scale = focal / (focal + z);
+        const projX = cx + x * scale;
+        const projY = cy + y * scale;
+
+        // per-particle morph with stagger
+        const local = clamp((m - p.delay) / (1 - 0.45), 0, 1);
+        const mm = smooth(local);
+
+        const drawX = projX + (cx + p.tx - projX) * mm;
+        const drawY = projY + (cy + p.ty - projY) * mm;
+
+        // depth shading (only meaningful while spherey)
+        const depth = clamp((z + W * 0.4) / (W * 0.8), 0, 1); // 0 back .. 1 front
+        const sphereAlpha = 0.25 + depth * 0.75;
+        const alpha = sphereAlpha + (1 - sphereAlpha) * mm;   // text state = full
+        const lift = (1 - depth) * pal.depthLift * (1 - mm);  // back dots dimmer pink
+
+        const flick = 0.85 + 0.15 * Math.sin(now * 0.004 + p.flicker);
+        const r = p.baseR * (0.7 + 0.5 * (depth * (1 - mm) + mm)) * (0.9 + 0.2 * mm);
+
+        ctx.beginPath();
+        ctx.fillStyle =
+          `rgba(${pal.r - lift | 0}, ${pal.g - lift * 0.4 | 0}, ${pal.b - lift * 0.2 | 0}, ${alpha * flick})`;
+        ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(frame);
+    }
+
+    // ---- controls ----
+    document.getElementById("theme").addEventListener("click", () => {
+      document.body.classList.toggle("light");
+    });
+    document.getElementById("replay").addEventListener("click", () => {
+      t0 = performance.now();
+    });
+
+    window.addEventListener("resize", resize);
+
+    // Robust startup: only build once the canvas actually has a non-zero size
+    // (ResizeObserver handles iframes/late layout) AND the webfont is settled
+    // (so glyph sampling matches the rendered "YP").
+    let started = false;
+    let fontsOk = false;
+
+    function tryBuild() {
+      if (!fontsOk) return;
+      if (resize() && !started) {     // resize() returns false until size > 0
+        started = true;
+        requestAnimationFrame(frame);
+      }
+    }
+
+    const ro = new ResizeObserver(() => tryBuild());
+    ro.observe(canvas);
+
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Poppins:wght@800&family=DM+Mono&display=swap";
+    document.head.appendChild(link);
+
+    const fontsReady = (document.fonts && document.fonts.ready)
+      ? document.fonts.ready
+      : Promise.resolve();
+    // Resolve even if the font request is blocked; fall back to a system bold face.
+    Promise.race([fontsReady, new Promise(r => setTimeout(r, 1200))]).then(() => {
+      fontsOk = true;
+      tryBuild();
+    });
+  </script>
+</body>
+
+</html>
