@@ -369,7 +369,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
 
                 <p style={{
                   fontFamily: "Inter",
-                  fontSize: isMobile ? 18 : 20,
+                  fontSize: isMobile ? 16 : 18.5,
                   lineHeight: 1.6,
                   color: theme.inkSoft,
                   margin: 0
@@ -396,7 +396,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
 
                 <p style={{
                   fontFamily: "Inter",
-                  fontSize: isMobile ? 18 : 20,
+                  fontSize: isMobile ? 16 : 18.5,
                   lineHeight: 1.6,
                   color: theme.inkSoft,
                   margin: 0

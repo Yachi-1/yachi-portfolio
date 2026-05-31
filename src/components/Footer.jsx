@@ -9,7 +9,7 @@ const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30
 const QUICK_LINKS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "projects", label: "Work" },
+  { id: "projects", label: "Projects" },
   { id: "resume", label: "Resume" },
 ];
 
@@ -74,8 +74,9 @@ export default function Footer({ theme, mode, setRoute }) {
           gap: isMobile ? 32 : 40, alignItems: "start",
         }}>
           <div>
-            <div 
-              style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, cursor: "pointer" }}
+            <button 
+              aria-label="Home"
+              style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, cursor: "pointer", background: "transparent", border: "none", padding: 0 }}
               onMouseEnter={() => setLogoHovered(true)}
               onMouseLeave={() => setLogoHovered(false)}
               onClick={() => {
@@ -84,7 +85,7 @@ export default function Footer({ theme, mode, setRoute }) {
               }}
             >
               <ParticleLogo mode={mode || "light"} size={48} playOnHover={true} isHovered={logoHovered} />
-            </div>
+            </button>
             <p style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft, lineHeight: 1.6, maxWidth: 360, margin: 0 }}>
               Product designer. Currently shaping the next chapter of human-centered AI.
             </p>

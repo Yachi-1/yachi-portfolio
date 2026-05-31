@@ -4,6 +4,13 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
 import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
+import vegasTicketsHero from "../assets/vegas-tickets.png";
+import screen1Img from "../assets/vegas/Screen 1- Event Search.png";
+import screen2Img from "../assets/vegas/Screen 2- Seat Selection.png";
+import screen3Img from "../assets/vegas/Screen 3- Checkout.png";
+import screen4Img from "../assets/vegas/Screen 4- Confirmation.png";
+import dashboardImg from "../assets/vegas/Dashboard.png";
+import venuesImg from "../assets/vegas/Venues.png";
 
 /* ═══════════════════════════════════════════════════════════
    MAIN EXPORT
@@ -19,10 +26,9 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
   /* ── data ── */
   const meta = [
     { k: "Role", v: "UX / Product Designer" },
-    { k: "Timeline", v: "6 weeks" },
-    { k: "Team", v: "Designer + PM + 2 Engineers" },
-    { k: "Deliverables", v: "Product strategy, user flows, design system, hi-fi mockups, React spec" },
+    { k: "Timeline", v: "2 weeks" },
     { k: "Tools", v: "Figma, React (handoff)" },
+    { k: "Year", v: "2025" },
   ];
 
   const colorTokens = [
@@ -62,7 +68,7 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
           <div>
             <Reveal delay={0.05}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
-                {["SaaS", "Point of Sale", "Ticketing", "B2B2C", "2025"].map((tag, i) => (
+                {["Point of Sale", "Ticketing", "2025"].map((tag, i) => (
                   <div key={i} style={{
                     padding: "4px 12px",
                     borderRadius: 100,
@@ -82,24 +88,22 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
             <Reveal delay={0.1}>
               <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-                Vegas Tickets - <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>Multi-Tenant POS</span>
+                Vegas Tickets <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>Multi-Tenant POS</span>
               </h1>
             </Reveal>
             <Reveal delay={0.15}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0", maxWidth: 800 }}>
+              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0" }}>
                 A point-of-sale web app that lets sales agents close a ticket sale in under 90 seconds, while giving partner venues their own branded storefront.
               </p>
             </Reveal>
           </div>
 
-          <Reveal delay={0.2}>
-            <ImagePlaceholder text="POS Dashboard & Sales Flow Mockups" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 500} />
-          </Reveal>
+
 
           <Reveal delay={0.25}>
             <div style={{
               marginTop: 48, paddingTop: 32, borderTop: `1px solid ${theme.line}`,
-              display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(5,1fr)", gap: isMobile ? 24 : 32,
+              display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4,1fr)", gap: isMobile ? 24 : 32,
             }}>
               {meta.map((m, i) => (
                 <div key={m.k} style={{
@@ -270,14 +274,20 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
                     Each event card surfaces an availability badge - <strong>green for Available, amber for Low Stock, red for Sold Out</strong>. Sold-out events drop to 50% opacity and become non-clickable.
                   </p>
                 </div>
-                <ImagePlaceholder text="Screen 1: Event Search" theme={theme} isMobile={isMobile} height={isMobile ? 250 : 350} />
+                <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                  <img src={screen1Img} alt="Screen 1: Event Search" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
               </div>
             </Reveal>
 
             {/* Step 2 */}
             <Reveal delay={0.15}>
               <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1.5fr 1fr", gap: 32, alignItems: "center" }}>
-                {!isMobileOrTablet && <ImagePlaceholder text="Screen 2: Seat Selection" theme={theme} isMobile={isMobile} height={350} />}
+                {!isMobileOrTablet && (
+                  <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                    <img src={screen2Img} alt="Screen 2: Seat Selection" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </div>
+                )}
                 <div>
                   <h3 style={{ fontFamily: "Inter", fontSize: 22, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>2. Seat Selection</h3>
                   <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
@@ -287,7 +297,11 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
                     A persistent order-summary sidebar updates in real time and always displays a "Zero Service Fees" badge, reinforcing the all-in pricing promise right at the purchase-decision moment.
                   </p>
                 </div>
-                {isMobileOrTablet && <ImagePlaceholder text="Screen 2: Seat Selection" theme={theme} isMobile={isMobile} height={250} />}
+                {isMobileOrTablet && (
+                  <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                    <img src={screen2Img} alt="Screen 2: Seat Selection" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </div>
+                )}
               </div>
             </Reveal>
 
@@ -303,14 +317,20 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
                     Payment is presented as three card-style options (Credit Card, Cash, Invoice). The primary CTA, a 48px gold <strong>"Complete Sale"</strong> button, carries the total inline and stays disabled until every field validates.
                   </p>
                 </div>
-                <ImagePlaceholder text="Screen 3: Checkout Form" theme={theme} isMobile={isMobile} height={isMobile ? 250 : 350} />
+                <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                  <img src={screen3Img} alt="Screen 3: Checkout Form" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
               </div>
             </Reveal>
 
             {/* Step 4 */}
             <Reveal delay={0.25}>
               <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1.5fr 1fr", gap: 32, alignItems: "center" }}>
-                {!isMobileOrTablet && <ImagePlaceholder text="Screen 4: Confirmation & Dashboard" theme={theme} isMobile={isMobile} height={350} />}
+                {!isMobileOrTablet && (
+                  <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                    <img src={screen4Img} alt="Screen 4: Confirmation & Dashboard" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </div>
+                )}
                 <div>
                   <h3 style={{ fontFamily: "Inter", fontSize: 22, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>4. Confirmation & Dashboard</h3>
                   <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
@@ -320,7 +340,54 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
                     The operational dashboard gives Ops Leads top-line KPIs and tracks the "Avg Transaction time" to ensure the 90-second target is met.
                   </p>
                 </div>
-                {isMobileOrTablet && <ImagePlaceholder text="Screen 4: Confirmation & Dashboard" theme={theme} isMobile={isMobile} height={250} />}
+                {isMobileOrTablet && (
+                  <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                    <img src={screen4Img} alt="Screen 4: Confirmation & Dashboard" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </div>
+                )}
+              </div>
+            </Reveal>
+
+            {/* Dashboard */}
+            <Reveal delay={0.3}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1.5fr", gap: 32, alignItems: "center" }}>
+                <div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 22, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Operational Dashboard</h3>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
+                    The operational dashboard gives Ops Leads a bird's eye view of daily performance. Real-time metrics track ticket sales, revenue, and active agents at a glance.
+                  </p>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft }}>
+                    Customizable date ranges and automated reporting make end-of-day reconciliation effortless, shifting managers away from spreadsheets and into actionable insights.
+                  </p>
+                </div>
+                <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                  <img src={dashboardImg} alt="Operational Dashboard" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Venues */}
+            <Reveal delay={0.35}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1.5fr 1fr", gap: 32, alignItems: "center" }}>
+                {!isMobileOrTablet && (
+                  <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                    <img src={venuesImg} alt="Multi-Tenant Venues" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </div>
+                )}
+                <div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 22, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Multi-Tenant Architecture</h3>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 16 }}>
+                    The system scales effortlessly across different venues through a multi-tenant structure. Each venue has its own dedicated inventory, branded storefront, and pricing tiers.
+                  </p>
+                  <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft }}>
+                    This ensures agents only see the tickets relevant to their specific location, while a centralized backend allows global administrators to manage multiple sites seamlessly.
+                  </p>
+                </div>
+                {isMobileOrTablet && (
+                  <div style={{ borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: mode === "dark" ? "0 12px 40px rgba(0,0,0,0.3)" : "0 12px 40px rgba(0,0,0,0.06)" }}>
+                    <img src={venuesImg} alt="Multi-Tenant Venues" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </div>
+                )}
               </div>
             </Reveal>
           </div>

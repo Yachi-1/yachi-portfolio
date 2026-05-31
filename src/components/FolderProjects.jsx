@@ -104,6 +104,16 @@ function DesktopFolder({ theme, mode, isOpen, setIsOpen, setRoute }) {
         width: "100%", height: "100%",
       }}>
         <motion.div
+          role="button"
+          tabIndex={0}
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close portfolio folder" : "Open portfolio folder"}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              setIsOpen(!isOpen);
+            }
+          }}
           animate={{ scale: isOpen ? 0.9 : 1 }}
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           onClick={() => setIsOpen(!isOpen)}
@@ -266,6 +276,16 @@ function MobileFolder({ theme, mode, isOpen, setIsOpen, setRoute }) {
       <GridPaper theme={theme} noMask={true} />
 
       <motion.div
+        role="button"
+        tabIndex={0}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? "Close portfolio folder" : "Open portfolio folder"}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }
+        }}
         animate={{ scale: isOpen ? 0.92 : 1 }}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
         onClick={() => setIsOpen(!isOpen)}

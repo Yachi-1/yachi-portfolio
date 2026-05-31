@@ -95,6 +95,24 @@ function useHideCursor() {
   }, []);
 }
 
+function useTitle(route) {
+  useEffect(() => {
+    const titles = {
+      home: "Yachi Patel · Home",
+      about: "Yachi Patel · About",
+      projects: "Yachi Patel · Projects",
+      resume: "Yachi Patel · Resume",
+    };
+    if (route.startsWith("project:")) {
+      const id = route.split(":")[1];
+      const formatTitle = (str) => str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+      document.title = `Yachi Patel · ${formatTitle(id)}`;
+    } else {
+      document.title = titles[route] || "Yachi Patel · Portfolio";
+    }
+  }, [route]);
+}
+
 export default function App() {
   const [mode, setMode] = useState("light");
   const [route, setRoute] = useState("home");
@@ -105,6 +123,7 @@ export default function App() {
   useLenis(lenisRef);
   useFonts();
   useHideCursor();
+  useTitle(route);
 
   useEffect(() => {
     // Immediate scroll reset

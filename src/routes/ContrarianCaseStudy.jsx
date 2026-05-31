@@ -4,6 +4,9 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
 import { SectionLabel, Callout, IconBadge, InsightCard, ProblemCard, ImagePlaceholder } from "../components/CaseStudyBlocks.jsx";
+import marketingHubImg from "../assets/Marketing_Design_Hub.png";
+import dealPipelineImg from "../assets/Deal_Pipeline_Dashboard.png";
+import aiMatcherImg from "../assets/AI_Matcher_Prototype.png";
 
 /* ═══════════════════════════════════════════════════════════
    MAIN EXPORT
@@ -20,8 +23,8 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
   const meta = [
     { k: "Role", v: "Sole Designer" },
     { k: "Timeline", v: "3 weeks of evenings" },
-    { k: "Deliverables", v: "3 product prototypes" },
-    { k: "Method", v: "Desk research, synthesis, ideation, prototyping" },
+    { k: "Tools", v: "Figma" },
+    { k: "Year", v: "2026" },
   ];
 
   const colorTokens = [
@@ -78,7 +81,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
             <Reveal delay={0.1}>
               <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-                Contrarian Thinking - <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>A UX Process Walkthrough</span>
+                Contrarian Thinking <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>A UX Process Walkthrough</span>
               </h1>
             </Reveal>
             <Reveal delay={0.15}>
@@ -330,14 +333,34 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Score visible, not hidden.</strong> 94, 87, 82. Transparent scoring earns trust.
                   </p>
                 </div>
-                <ImagePlaceholder text="AI Matcher Prototype UI" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 450} />
+                <a 
+                  href="https://ai-acquisition-matcher-by-yachi.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
+                >
+                  <img src={aiMatcherImg} alt="AI Matcher Prototype UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                </a>
               </div>
             </Reveal>
 
             {/* Interface 02 */}
             <Reveal delay={0.15}>
               <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1.5fr 1fr", gap: 40, alignItems: "center" }}>
-                {!isMobileOrTablet && <ImagePlaceholder text="Deal Pipeline Dashboard UI" theme={theme} isMobile={isMobile} height={450} />}
+                {!isMobileOrTablet && (
+                  <a 
+                    href="https://deal-pipeline-dashboard-by-yachi.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
+                  >
+                    <img src={dealPipelineImg} alt="Deal Pipeline Dashboard UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </a>
+                )}
                 <div>
                   <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>2. Deal Pipeline Dashboard</h3>
                   <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.accent, marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.05em" }}>A CRM that speaks the buyer's language.</div>
@@ -349,7 +372,18 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Color codes risk.</strong> LOI cards get amber, diligence gets rust, because that's where deals die.
                   </p>
                 </div>
-                {isMobileOrTablet && <ImagePlaceholder text="Deal Pipeline Dashboard UI" theme={theme} isMobile={isMobile} height={300} />}
+                {isMobileOrTablet && (
+                  <a 
+                    href="https://deal-pipeline-dashboard-by-yachi.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
+                    onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
+                  >
+                    <img src={dealPipelineImg} alt="Deal Pipeline Dashboard UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                  </a>
+                )}
               </div>
             </Reveal>
 
@@ -367,7 +401,16 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                     <strong>Pre-written, not blank.</strong> The member edits a name, not a paragraph.
                   </p>
                 </div>
-                <ImagePlaceholder text="Marketing Design Hub UI" theme={theme} isMobile={isMobile} height={isMobile ? 300 : 450} />
+                <a 
+                  href="https://marketing-design-hub-by-yachi.vercel.app/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = mode === "dark" ? `0 24px 60px rgba(0,0,0,0.5)` : `0 24px 60px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = theme.accent; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.transform = "none"; e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.borderColor = theme.line; }}
+                >
+                  <img src={marketingHubImg} alt="Marketing Design Hub UI" loading="lazy" style={{ width: "100%", height: "auto", display: "block" }} />
+                </a>
               </div>
             </Reveal>
           </div>

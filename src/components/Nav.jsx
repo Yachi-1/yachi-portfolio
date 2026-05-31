@@ -10,7 +10,7 @@ const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "projects", label: "Work" },
+  { id: "projects", label: "Projects" },
   { id: "resume", label: "Resume" },
 ];
 
@@ -50,6 +50,7 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
         onMouseEnter={() => setLogoHovered(true)}
         onMouseLeave={() => setLogoHovered(false)}
         data-magnet="0.2"
+        aria-label="Home"
         style={{
           display: "flex", alignItems: "center", gap: 8,
           background: "transparent", border: "none", cursor: "pointer",

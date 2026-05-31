@@ -85,19 +85,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
           </div>
 
-          <Reveal delay={0.2}>
-            <div style={{
-              marginTop: 24,
-              display: "flex",
-              justifyContent: "center",
-              background: "linear-gradient(145deg, #FFF0F5 0%, #FFD6E5 100%)",
-              borderRadius: 24,
-              paddingTop: isMobile ? 16 : 32,
-              overflow: "hidden"
-            }}>
-              <img src={remitflowHeroImg} alt="RemitFlow Dashboard" loading="eager" fetchpriority="high" decoding="async" style={{ width: "100%", height: isMobile ? 350 : 550, objectFit: "cover", objectPosition: "center", display: "block" }} />
-            </div>
-          </Reveal>
+
 
           <Reveal delay={0.25}>
             <div style={{
