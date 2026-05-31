@@ -61,7 +61,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
           <div>
             <Reveal delay={0.05}>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
-                {["Research", "Prototyping", "2026"].map((tag, i) => (
+                {["Media & Education", "Prototyping", "2026"].map((tag, i) => (
                   <div key={i} style={{
                     padding: "4px 12px",
                     borderRadius: 100,
