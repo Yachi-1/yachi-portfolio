@@ -138,7 +138,8 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                   <ul style={{ margin: 0, paddingLeft: 20, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
                     <li style={{ marginBottom: 8 }}><strong>No access.</strong> No member interviews, no analytics, no team Slack. Desk research only.</li>
                     <li style={{ marginBottom: 8 }}><strong>Show the process.</strong> Document research and synthesis, not just final screens.</li>
-                    <li><strong>Ship working prototypes.</strong> If a product can be built in code, it should be.</li>
+                    <li style={{ marginBottom: 8 }}><strong>Focus on utility.</strong> Design tools that solve specific problems in the acquisition journey.</li>
+                    <li><strong>Deliver working prototypes.</strong> If a product can be built in code, it should be.</li>
                   </ul>
                 </div>
               </div>
