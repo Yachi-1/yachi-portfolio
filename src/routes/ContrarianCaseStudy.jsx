@@ -85,7 +85,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
               </h1>
             </Reveal>
             <Reveal delay={0.15}>
-              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0", maxWidth: 800 }}>
+              <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "0", maxWidth: "100%" }}>
                 Designing three different products for the small-business buying community in America. Built without inside access, structured to show the thinking, not just the screens.
               </p>
             </Reveal>
@@ -476,7 +476,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
 
               <div style={{ position: "relative", zIndex: 1 }}>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  The hardest part wasn't designing three products. It was deciding they belonged together. Speculative work has to over-index on honesty. Naming the limits, and showing the validation plan, is what makes the work credible instead of fan fiction.
+                  This is a self-initiated project, so it lives or dies on the reasoning. I'd love feedback on where the logic for these three products is weakest. If you're at Contrarian Thinking and any of this is useful, please use it.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
                   <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
