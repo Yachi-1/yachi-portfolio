@@ -106,12 +106,24 @@ export function ProblemCard({ num, heading, body, theme, isMobile, icon: Icon })
           fontWeight: 600, color: theme.ink, margin: "0 0 12px",
           lineHeight: 1.3, letterSpacing: "-0.015em",
         }}>{heading}</h3>
-        <p style={{
-          fontFamily: "Inter", fontSize: isMobile ? 14 : 15,
-          lineHeight: 1.6, color: theme.inkSoft, margin: 0,
-        }}>
-          {Array.isArray(body) ? body.join(" ") : body}
-        </p>
+        {Array.isArray(body) ? (
+          <ul style={{
+            fontFamily: "Inter", fontSize: isMobile ? 14 : 15,
+            lineHeight: 1.6, color: theme.inkSoft, margin: 0,
+            paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6
+          }}>
+            {body.map((item, i) => (
+              <li key={i} style={{ paddingLeft: 4 }}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p style={{
+            fontFamily: "Inter", fontSize: isMobile ? 14 : 15,
+            lineHeight: 1.6, color: theme.inkSoft, margin: 0,
+          }}>
+            {body}
+          </p>
+        )}
       </div>
     </Reveal>
   );

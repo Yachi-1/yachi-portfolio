@@ -162,20 +162,20 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
               num={1} theme={theme} isMobile={isMobile} icon={Banknote}
               heading="Payment Complexity"
               body={[
-                "Multiple currencies with fluctuating exchange rates.",
-                "Various payment methods with different speeds/costs.",
-                "Country-specific compliance requirements and fees.",
-                "Manual data entry that is inherently prone to errors."
+                "Multiple currencies & fluctuating rates.",
+                "Various methods, speeds & costs.",
+                "Country-specific compliance & fees.",
+                "Error-prone manual data entry."
               ]}
             />
             <ProblemCard
               num={2} theme={theme} isMobile={isMobile} icon={ShieldAlert}
               heading="User Pain Points"
               body={[
-                "Errors require stressful corrections after the fact.",
-                "Hidden fees are discovered too late.",
-                "Unclear status tracking after sending.",
-                "Repetitive work to pay the same contractors monthly."
+                "Stressful post-error corrections.",
+                "Hidden fees discovered too late.",
+                "Unclear tracking after sending.",
+                "Repetitive monthly contractor work."
               ]}
             />
             <ProblemCard
@@ -183,9 +183,9 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
               heading="The AI Opportunity"
               body={[
                 "Learns payment patterns over time.",
-                "Predicts user needs and preferences.",
-                "Suggests optimal methods and timing.",
-                "Prevents errors before they happen."
+                "Predicts user needs & preferences.",
+                "Suggests optimal methods & timing.",
+                "Proactively prevents errors."
               ]}
             />
           </div>
@@ -255,7 +255,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>Competitive Analysis</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              I analyzed leading tools to position the design. The market splits between cheap money movers and heavy HR platforms. Crucially, none seamlessly integrates AI as a proactive assistant into the payout flow.
+              The market splits between basic money movers and heavy HR platforms. Crucially, none use AI as a proactive payout assistant.
             </p>
           </Reveal>
 
@@ -312,7 +312,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>From Manual to Magical</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              Mapping the persona's current journey against the desired AI-assisted journey made the value of automation concrete. We collapse external research, manual entry, and reactive problem-solving into a guided, transparent path.
+              Mapping the current vs. AI-assisted journey shows the clear value of automation. We turn manual entry and reactive fixes into a guided, transparent path.
             </p>
           </Reveal>
 
@@ -390,7 +390,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>The 5-Step Flow & AI Weave</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              AI is woven through the flow as an assistant, not an autopilot every suggestion is explainable and overridable. Here's how it integrates into the Information Architecture.
+              AI acts as an assistant, not an autopilot every suggestion is explainable and overridable. Here's how it integrates into the architecture.
             </p>
           </Reveal>
 
@@ -518,7 +518,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>Design System</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              To maintain consistency across the platform, we established a foundational design system built on clear typography, accessible colors, and a predictable 8px spacing grid.
+              To ensure consistency, we built a design system rooted in clear typography, accessible colors, and an 8px grid.
             </p>
           </Reveal>
 
@@ -590,10 +590,10 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
 
                 <div style={{ marginBottom: 24 }}>
                   <div style={{ fontFamily: "Inter", fontSize: 28, fontWeight: 700, color: theme.ink, marginBottom: 4 }}>Inter</div>
-                  <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginBottom: 16 }}>Primary Font — Headings & Body</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft, marginBottom: 16 }}>Primary Font - Headings & Body</div>
 
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 24, fontWeight: 500, color: theme.ink, marginBottom: 4 }}>JetBrains Mono</div>
-                  <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft }}>Monospace Font — Amounts & IDs</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkSoft }}>Monospace Font - Amounts & IDs</div>
                 </div>
 
                 <div style={{ borderTop: `1px solid ${theme.line}`, paddingTop: 24 }}>
@@ -684,7 +684,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>High Fidelity Designs</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
-              Bringing the wireframes and design system together, the high-fidelity screens focus on clarity, trust, and ease of use. The UI guides the user naturally through the AI-assisted flow.
+              The high-fidelity UI focuses on clarity and trust, naturally guiding users through the AI-assisted flow.
             </p>
           </Reveal>
 
@@ -713,8 +713,76 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      {/* ── CLOSING ── */}
+      {/* ── REFLECTION ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal>
+            <div style={{ fontFamily: "'Caveat', cursive", fontSize: 24, color: theme.accent, marginBottom: 0 }}>
+              Reflection
+            </div>
+            <h2 style={{ fontFamily: "Inter", fontSize: isMobile ? 32 : 48, fontWeight: 600, letterSpacing: "-0.03em", color: theme.ink, marginTop: 0, marginBottom: 48, lineHeight: 1.1 }}>
+              What worked, and what I'd revisit.
+            </h2>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 32 }}>
+            {/* What worked */}
+            <Reveal delay={0.1}>
+              <div style={{ background: theme.card, borderRadius: 24, padding: isMobile ? 24 : 40, border: `1px solid ${theme.line}`, height: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+                  <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#10b981" }} />
+                  <div style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 600, color: theme.ink }}>What worked</div>
+                </div>
+
+                <div style={{ marginBottom: 32 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>AI as an Assistant, Not Autopilot</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                    Keeping the AI suggestions transparent and overridable built trust. Users preferred having control over the final payout decision rather than a black-box automated process.
+                  </div>
+                </div>
+
+                <div style={{ height: 1, background: theme.line, marginBottom: 32 }} />
+
+                <div>
+                  <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>The 5-Step Guided Flow</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                    Breaking down complex international payouts into a linear, wizard-like flow reduced cognitive load and minimized errors compared to a traditional dense dashboard.
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* What I'd revisit */}
+            <Reveal delay={0.2}>
+              <div style={{ background: theme.card, borderRadius: 24, padding: isMobile ? 24 : 40, border: `1px solid ${theme.line}`, height: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 32 }}>
+                  <div style={{ width: 12, height: 12, borderRadius: "50%", background: theme.accent }} />
+                  <div style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 600, color: theme.ink }}>What I'd revisit</div>
+                </div>
+
+                <div style={{ marginBottom: 32 }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>Testing with Real Financial Data</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                    While the flow works well conceptually, testing with real, messy financial documents and edge-case compliance issues would reveal friction points in the AI's data extraction accuracy.
+                  </div>
+                </div>
+
+                <div style={{ height: 1, background: theme.line, marginBottom: 32 }} />
+
+                <div>
+                  <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>Advanced Error States</div>
+                  <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                    The current design handles the happy path beautifully. In the future, I would spend more time mapping out complex error states (like blocked transactions or missing tax forms) and how the AI helps resolve them.
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CLOSING ── */}
+      <section style={{ padding: isMobile ? "60px 4vw 40px" : "100px 6vw 60px", background: mode === "dark" ? theme.bgAlt : "#f3efe8" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal>
             <div style={{
@@ -788,7 +856,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
       </section>
 
       {/* ── NEXT PROJECT ── */}
-      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", marginTop: 60 }}>
+      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", background: mode === "dark" ? theme.bgAlt : "#f3efe8" }}>
         <div
           onClick={() => {
             if (next.pdfLink) {

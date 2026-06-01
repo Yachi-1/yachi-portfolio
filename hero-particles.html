@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yachi Patel</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    background:transparent;          /* no background */
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .stage{ position:relative; width:min(960px,94vw); height:clamp(120px,16vw,220px); }
+  canvas{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+</style>
+</head>
+<body>
+  <div class="stage"><canvas id="c"></canvas></div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('c');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- CONFIG ---------------------------------------------------
+  const TEXT = 'Yachi Patel';
+  const COLOR = '#FF8FA3';
+  const FONT_FAMILY = "'Playfair Display', serif";
+  const FONT_WEIGHT = 500;
+  const SAMPLE_STEP = 2;
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  let W, H, P = [], n = 0, fontDevice = 48;
+  let zArr, idx, bufX, bufY, bufS, bufA, bufZ;
+  let intro = 0;                              // 0..1 fly-IN, then static
+
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const ease = t => 1 - Math.pow(1 - t, 3);
+
+  // clamp(28px, 4vw, 48px)
+  function cssSize() { return Math.max(28, Math.min(48, 0.04 * window.innerWidth)); }
+
+  function build() {
+    const off = document.createElement('canvas');
+    const o = off.getContext('2d');
+    off.width = W; off.height = H;
+    const font = s => `${FONT_WEIGHT} ${s}px ${FONT_FAMILY}`;
+
+    fontDevice = cssSize() * DPR;
+    o.font = font(fontDevice);
+    const w = o.measureText(TEXT).width;
+    if (w > W * 0.94) fontDevice *= (W * 0.94) / w;   // safety: keep on one line
+
+    o.fillStyle = '#000';
+    o.textAlign = 'center';
+    o.textBaseline = 'middle';
+    o.font = font(fontDevice);
+    o.fillText(TEXT, W / 2, H * 0.5);
+
+    const d = o.getImageData(0, 0, W, H).data;
+    const pts = [];
+    let minX = 1e9, maxX = -1e9;
+    for (let y = 0; y < H; y += SAMPLE_STEP) {
+      for (let x = 0; x < W; x += SAMPLE_STEP) {
+        if (d[(y * W + x) * 4 + 3] > 128) {
+          const bx = x - W / 2, by = y - H / 2;
+          pts.push([bx, by]);
+          if (bx < minX) minX = bx; if (bx > maxX) maxX = bx;
+        }
+      }
+    }
+    const spread = Math.max(maxX - minX, fontDevice);
+    const dotBase = Math.max(0.9 * DPR, fontDevice * 0.02);
+
+    P = pts.map(([bx, by]) => {
+      const pz = (Math.sin(bx * 0.03) * Math.cos(by * 0.034)) * fontDevice * 0.10
+                 + rand(-1, 1) * fontDevice * 0.03;
+      const ang = rand(0, Math.PI * 2), r = rand(0.4, 1.4) * spread * 0.5;
+      return {
+        bx, by, pz,
+        sx: Math.cos(ang) * r, sy: Math.sin(ang) * r * 0.7, sz: rand(-1, 1) * fontDevice * 8,
+        size: rand(0.7, 1.3) * dotBase,
+        seed: Math.random() * 1000
+      };
+    });
+
+    n = P.length;
+    zArr = new Float32Array(n); idx = new Uint32Array(n);
+    bufX = new Float32Array(n); bufY = new Float32Array(n);
+    bufS = new Float32Array(n); bufA = new Float32Array(n);
+    for (let i = 0; i < n; i++) idx[i] = i;
+  }
+
+  function resize() {
+    const r = canvas.getBoundingClientRect();
+    W = Math.floor(r.width * DPR);
+    H = Math.floor(r.height * DPR);
+    canvas.width = W; canvas.height = H;
+    build();
+    intro = 0;
+  }
+
+  let raf, last = performance.now();
+  function tick(now) {
+    const dt = Math.min((now - last) / 16.67, 2); last = now;
+    const t = now * 0.001;
+    if (intro < 1) intro = Math.min(1, intro + 0.016 * dt);
+    const k = ease(intro);
+    const damp = 1 - k;                       // motion fades to 0 -> static
+
+    const ay = Math.sin(t * 0.32) * 0.34 * damp;
+    const ax = Math.sin(t * 0.24) * 0.10 * damp;
+    const cay = Math.cos(ay), say = Math.sin(ay);
+    const cax = Math.cos(ax), sax = Math.sin(ax);
+    const focal = Math.max(W, H) * 0.9;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = COLOR;
+
+    for (let i = 0; i < n; i++) {
+      const p = P[i];
+      const z = p.pz + Math.sin(p.bx * 0.012 + t * 1.6) * fontDevice * 0.22 * damp;
+      const X = p.sx + (p.bx - p.sx) * k;
+      const Y = p.sy + (p.by - p.sy) * k;
+      const Z = p.sz + (z - p.sz) * k;
+
+      const x1 = X * cay + Z * say;
+      const z1 = -X * say + Z * cay;
+      const y2 = Y * cax - z1 * sax;
+      const z2 = Y * sax + z1 * cax;
+
+      const scale = focal / (focal + z2);
+      bufX[i] = W / 2 + x1 * scale;
+      bufY[i] = H / 2 + y2 * scale;
+      bufS[i] = p.size * scale;
+      const nrm = Math.max(0, Math.min(1, (scale - 0.7) / 0.6));
+      bufA[i] = 0.82 + nrm * 0.18;            // depth via opacity (color stays #FF8FA3)
+      zArr[i] = z2;
+    }
+
+    idx.sort((a, b) => zArr[b] - zArr[a]);     // far -> near
+
+    for (let j = 0; j < n; j++) {
+      const i = idx[j];
+      ctx.globalAlpha = bufA[i];
+      ctx.beginPath();
+      ctx.arc(bufX[i], bufY[i], bufS[i], 0, 6.283);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    if (intro < 1) raf = requestAnimationFrame(tick);   // freeze after the intro
+  }
+
+  window.addEventListener('resize', () => {
+    cancelAnimationFrame(raf); resize(); last = performance.now(); raf = requestAnimationFrame(tick);
+  });
+
+  function boot() {
+    resize();
+    if (reduceMotion) intro = 1;
+    last = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+  // make sure Playfair Display is ready before rasterising the glyphs
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load(`${FONT_WEIGHT} 48px 'Playfair Display'`).then(boot).catch(boot);
+  } else { boot(); }
+})();
+</script>
+</body>
+</html>

@@ -342,7 +342,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
       {/* ── THE SETUP ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>The Setup</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Setup</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <div style={{
               display: "grid",
@@ -373,7 +373,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
       {/* ── THE PROBLEM ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>The Problem</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Problem</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <div style={{
               display: "grid",
@@ -605,9 +605,9 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               marginBottom: isMobile ? 40 : 56,
             }}>
               <div>
-                <h2 style={{ fontFamily: "Inter", fontSize: "clamp(22px, 2.5vw, 32px)", fontWeight: 500, letterSpacing: "-0.025em", color: theme.ink, margin: "0 0 16px", lineHeight: 1.2 }}>
+                <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 16px", lineHeight: 1.2 }}>
                   Audit Map
-                </h2>
+                </h3>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15.5 : 17, lineHeight: 1.65, color: theme.inkSoft, margin: "0 0 20px" }}>
                   Before sketching, I screenshotted the current homepage and annotated every block with three labels: <strong style={{ color: theme.ink }}>what it's trying to do</strong>, <strong style={{ color: theme.ink }}>what it actually does</strong>, and <strong style={{ color: theme.ink }}>what a first-time visitor would take from it.</strong>
                 </p>
@@ -646,9 +646,9 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               marginBottom: isMobile ? 40 : 56,
             }}>
               <div>
-                <h2 style={{ fontFamily: "Inter", fontSize: "clamp(22px, 2.5vw, 32px)", fontWeight: 500, letterSpacing: "-0.025em", color: theme.ink, margin: "0 0 16px", lineHeight: 1.2 }}>
+                <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 16px", lineHeight: 1.2 }}>
                   Low-fi Sketches
-                </h2>
+                </h3>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15.5 : 17, lineHeight: 1.65, color: theme.inkSoft, margin: "0 0 20px" }}>
                   I sketched four homepage structures on paper, varying what came first: search-first (like eBay), hero + live auctions (like StockX), category grid first, and story-led (hero + how it works, then auctions).
                 </p>
@@ -681,10 +681,10 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
           </Reveal>
 
           {/* Key decisions */}
-          <Reveal delay={0.12}>
-            <h2 style={{ fontFamily: "Inter", fontSize: "clamp(22px, 2.5vw, 32px)", fontWeight: 500, letterSpacing: "-0.025em", color: theme.ink, margin: "0 0 20px", lineHeight: 1.2 }}>
+          <Reveal delay={0.1}>
+            <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 20px", lineHeight: 1.2 }}>
               Key Decisions, with the Reasoning
-            </h2>
+            </h3>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 20, marginBottom: isMobile ? 40 : 56 }}>
               {[
                 { icon: MousePointerClick, lead: "Hero: pair the headline with a live auction preview.", body: "I replaced a generic stock-photo banner with a real auction card: actual item, current bid, time left. This is happening right now, here's proof." },
@@ -709,9 +709,9 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
           {/* Hero versions grouped */}
           <Reveal delay={0.14}>
             <div style={{ marginBottom: 48 }}>
-              <h2 style={{ fontFamily: "Inter", fontSize: "clamp(22px, 2.5vw, 32px)", fontWeight: 500, letterSpacing: "-0.025em", color: theme.ink, margin: "0 0 24px", lineHeight: 1.2 }}>
+              <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 24px", lineHeight: 1.2 }}>
                 Hero: Three Versions
-              </h2>
+              </h3>
               <div style={{
                 display: "grid",
                 gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",

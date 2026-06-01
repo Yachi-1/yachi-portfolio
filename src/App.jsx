@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Lenis from "lenis";
 
@@ -8,11 +8,11 @@ import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 import SectionDivider from "./components/SectionDivider.jsx";
 
-const Home = lazy(() => import("./routes/Home.jsx"));
-const About = lazy(() => import("./routes/About.jsx"));
-const Projects = lazy(() => import("./routes/Projects.jsx"));
-const Resume = lazy(() => import("./routes/Resume.jsx"));
-const ProjectDetail = lazy(() => import("./routes/ProjectDetail.jsx"));
+import Home from "./routes/Home.jsx";
+import About from "./routes/About.jsx";
+import Projects from "./routes/Projects.jsx";
+import Resume from "./routes/Resume.jsx";
+import ProjectDetail from "./routes/ProjectDetail.jsx";
 
 function isTouchDevice() {
   if (typeof window === "undefined") return false;
@@ -115,7 +115,28 @@ function useTitle(route) {
 
 export default function App() {
   const [mode, setMode] = useState("light");
-  const [route, setRoute] = useState("home");
+  const [route, setRoute] = useState(() => {
+    const hash = window.location.hash.replace('#', '');
+    return hash || "home";
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      setRoute(hash || "home");
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  useEffect(() => {
+    if (route === "home") {
+      window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+    } else if (window.location.hash.replace('#', '') !== route) {
+      window.location.hash = route;
+    }
+  }, [route]);
+
   const theme = themes[mode];
   const reduced = useReducedMotion();
 
@@ -125,8 +146,15 @@ export default function App() {
   useHideCursor();
   useTitle(route);
 
+  const prevRoute = useRef(route);
+
   useEffect(() => {
-    // Immediate scroll reset
+    if (prevRoute.current === route) {
+      return;
+    }
+    prevRoute.current = route;
+    
+    // Immediate scroll reset on route change
     window.scrollTo(0, 0);
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });
@@ -170,7 +198,6 @@ export default function App() {
           exit={reduced ? { opacity: 0 } : { opacity: 0, y: -16 }}
           transition={reduced ? { duration: 0 } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Suspense fallback={null}>
             {route === "home" && <Home theme={theme} mode={mode} setRoute={setRoute} />}
             {route === "about" && <About theme={theme} mode={mode} />}
             {route === "projects" && <Projects theme={theme} mode={mode} setRoute={setRoute} />}
@@ -178,7 +205,6 @@ export default function App() {
             {isProjectDetail && (
               <ProjectDetail id={projectId} theme={theme} mode={mode} setRoute={setRoute} />
             )}
-          </Suspense>
         </motion.div>
       </AnimatePresence>
 
