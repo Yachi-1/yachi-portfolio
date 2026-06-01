@@ -129,7 +129,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
                   I gave myself a fictional engagement: imagine Contrarian Thinking has hired a designer-in-residence for one quarter. What would they ask me to work on? Design what should live between the course and the close.
                 </p>
-                
+
                 <h4 style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 700, color: theme.ink, marginTop: 32, marginBottom: 12 }}>What I knew going in</h4>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 16, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
                   <strong>From the website:</strong> Two flagship programs: Contrarian Academy and Growth Boardroom. A newsletter claimed at 1M+ readers. The brand is sharp, the copy is direct, the visual language leans course-creator more than editorial.
@@ -464,7 +464,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
               <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 40, maxWidth: 800 }}>
                 Before opening Figma, I sketched the key flows in low fidelity to pressure-test the design decisions. Wireframes catch architectural problems that polish hides.
               </p>
-              
+
               <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 24 }}>
                 {[
                   { title: "AI Matcher", version: "Iteration 02 · Kept", desc: "V1 had filters at the top. V2 moved the profile to a persistent left rail so results are always personalized. Won." },
@@ -668,7 +668,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Reflection & Next Steps</SectionLabel></Reveal>
-          
+
           <Reveal delay={0.05}>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 60 }}>
               <div>
