@@ -1,5 +1,6 @@
 import { Search, Lightbulb, Palette, Code2 } from "lucide-react";
 import Reveal from "./Reveal.jsx";
+import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 const ITEMS = [
   { icon: Search, title: "Research", text: "Defining user and business requirements through qualitative and quantitative research.", color: "pastel2" },
@@ -9,8 +10,9 @@ const ITEMS = [
 ];
 
 export default function ApproachSection({ theme }) {
+  const { isMobile } = useBreakpoint();
   return (
-    <section style={{ padding: "120px 6vw", background: theme.bgAlt, position: "relative" }}>
+    <section style={{ padding: isMobile ? "80px 4vw" : "120px 6vw", background: theme.bgAlt, position: "relative" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
         <Reveal>
           <div style={{ marginBottom: 60, maxWidth: 1000 }}>
@@ -29,35 +31,35 @@ export default function ApproachSection({ theme }) {
             </p>
           </div>
         </Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(240px, 1fr))", gap: isMobile ? 12 : 20 }}>
           {ITEMS.map((it, i) => {
             const Icon = it.icon;
             return (
               <Reveal key={it.title} delay={i * 0.08}>
                 <div style={{
-                  padding: 28, borderRadius: 20,
+                  padding: isMobile ? 16 : 28, borderRadius: 20,
                   background: theme.card,
                   border: `1px solid ${theme.line}`,
                   height: "100%",
                   position: "relative", overflow: "hidden",
                 }} >
                   <div style={{
-                    width: 48, height: 48, borderRadius: 14,
+                    width: isMobile ? 36 : 48, height: isMobile ? 36 : 48, borderRadius: 14,
                     background: theme[it.color],
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    marginBottom: 18,
+                    marginBottom: isMobile ? 12 : 18,
                   }}>
-                    <Icon size={22} color={theme.ink} />
+                    <Icon size={isMobile ? 18 : 22} color={theme.ink} />
                   </div>
                   <div style={{
-                    fontFamily: "'Caveat', cursive", fontSize: 18, color: theme.inkMute,
+                    fontFamily: "'Caveat', cursive", fontSize: isMobile ? 15 : 18, color: theme.inkMute,
                     marginBottom: 4,
                   }}>0{i + 1}</div>
                   <h3 style={{
-                    fontFamily: "Inter", fontSize: 22, fontWeight: 600,
+                    fontFamily: "Inter", fontSize: isMobile ? 17 : 22, fontWeight: 600,
                     letterSpacing: "-0.02em", color: theme.ink, margin: 0, marginBottom: 8,
                   }}>{it.title}</h3>
-                  <p style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft, lineHeight: 1.5, margin: 0 }}>
+                  <p style={{ fontFamily: "Inter", fontSize: isMobile ? 13 : 14.5, color: theme.inkSoft, lineHeight: 1.4, margin: 0 }}>
                     {it.text}
                   </p>
                 </div>

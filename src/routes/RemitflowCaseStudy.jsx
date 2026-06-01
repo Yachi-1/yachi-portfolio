@@ -90,12 +90,12 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
           <Reveal delay={0.25}>
             <div style={{
               marginTop: 48, paddingTop: 32, borderTop: `1px solid ${theme.line}`,
-              display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4,1fr)", gap: isMobile ? 24 : 32,
+              display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4,1fr)", gap: isMobile ? 24 : 32,
             }}>
               {meta.map((m, i) => (
                 <div key={m.k} style={{
-                  borderLeft: isMobile ? "none" : `1px solid ${theme.line}`,
-                  paddingLeft: isMobile ? 0 : 16,
+                  borderLeft: isMobile && (i === 0 || i === 2) ? "none" : `1px solid ${theme.line}`,
+                  paddingLeft: isMobile && (i === 0 || i === 2) ? 0 : 16,
                 }}>
                   <div style={{ fontFamily: "Inter", fontSize: 10.5, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
                   <div style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
@@ -123,7 +123,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
                   Paying contractors internationally is deceptively hard. A single payout can touch fluctuating exchange rates, country-specific compliance rules, multiple payment rails with different speeds and costs, and a stack of manual data entry that quietly invites errors.
                 </p>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                  I designed <strong style={{ color: theme.ink }}>RemitFlow</strong>, a seamless multi-currency payment flow that uses AI to do the heavy lifting - extracting invoice data, surfacing the right contractor, comparing payment methods, locking FX rates, and catching compliance issues <em>before</em> a payment goes out.
+                  I designed <strong style={{ color: theme.ink }}>RemitFlow</strong>, a seamless multi-currency payment flow that uses AI to do the heavy lifting extracting invoice data, surfacing the right contractor, comparing payment methods, locking FX rates, and catching compliance issues <em>before</em> a payment goes out.
                 </p>
               </div>
               <div>
@@ -131,13 +131,13 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
                   The Challenge & Outcome
                 </div>
                 <p style={{ fontFamily: "Inter", fontSize: 15.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  Design a seamless global payment flow for <strong>80+ countries</strong> that delivers multi-currency support, adapts to compliance rules, and leverages AI for smart suggestions-without losing the user's trust.
+                  Design a seamless global payment flow for <strong>80+ countries</strong> that delivers multi-currency support, adapts to compliance rules, and leverages AI for smart suggestions without losing the user's trust.
                 </p>
                 <div style={{ padding: "20px", borderRadius: 12, background: theme.card, border: `1px solid ${theme.line}` }}>
                   <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                     <CheckCircle2 size={18} color={theme.accent} strokeWidth={2} style={{ flexShrink: 0, marginTop: 2 }} />
                     <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.55, color: theme.ink, margin: 0, fontWeight: 500 }}>
-                      The Outcome: A guided 5-step experience that reduces payment processing time through smart automation and predictive assistance-turning a manual, error-prone chore into a confident click.
+                      The Outcome: A guided 5-step experience that reduces payment processing time through smart automation and predictive assistance turning a manual, error-prone chore into a confident click.
                     </p>
                   </div>
                 </div>

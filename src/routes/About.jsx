@@ -116,7 +116,8 @@ function PortraitFrame({ theme, mode, isMobile }) {
       width: "100%",
       maxWidth: isMobile ? 260 : 320,
       aspectRatio: "4/5",
-      margin: "0 auto"
+      margin: "0 auto",
+      marginBottom: isMobile ? 40 : 0,
     }}>
       <div style={{
         position: "absolute", top: -20, left: 40, width: 90, height: 32,

@@ -124,10 +124,18 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                   Phase 01 · The Brief
                 </div>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  Contrarian Thinking is a media-and-education company built around Codie Sanchez's "buy boring businesses" thesis. They have 10,000+ paying members. But the actual work members joined to do-finding, evaluating, buying, and running a small business-happens almost entirely outside the product surface.
+                  Contrarian Thinking is a media-and-education company built around Codie Sanchez's "buy boring businesses" thesis. They have 10,000+ paying members. But the actual work members joined to do—finding, evaluating, buying, and running a small business—happens almost entirely outside the product surface.
                 </p>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                  I gave myself a fictional engagement: imagine Contrarian Thinking has hired a designer-in-residence. Design what should live between the course and the close.
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                  I gave myself a fictional engagement: imagine Contrarian Thinking has hired a designer-in-residence for one quarter. What would they ask me to work on? Design what should live between the course and the close.
+                </p>
+                
+                <h4 style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 700, color: theme.ink, marginTop: 32, marginBottom: 12 }}>What I knew going in</h4>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 16, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
+                  <strong>From the website:</strong> Two flagship programs: Contrarian Academy and Growth Boardroom. A newsletter claimed at 1M+ readers. The brand is sharp, the copy is direct, the visual language leans course-creator more than editorial.
+                </p>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 16, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                  <strong>From the founder:</strong> Codie Sanchez owns dozens of small businesses. Brand voice is punchy, manifesto-grade. The brand has earned the right to be taken seriously.
                 </p>
               </div>
               <div>
@@ -136,10 +144,10 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                 </div>
                 <div style={{ padding: "20px", borderRadius: 12, background: theme.card, border: `1px solid ${theme.line}` }}>
                   <ul style={{ margin: 0, paddingLeft: 20, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
-                    <li style={{ marginBottom: 8 }}><strong>No access.</strong> No member interviews, no analytics, no team Slack. Desk research only.</li>
-                    <li style={{ marginBottom: 8 }}><strong>Show the process.</strong> Document research and synthesis, not just final screens.</li>
-                    <li style={{ marginBottom: 8 }}><strong>Focus on utility.</strong> Design tools that solve specific problems in the acquisition journey.</li>
-                    <li><strong>Deliver working prototypes.</strong> If a product can be built in code, it should be.</li>
+                    <li style={{ marginBottom: 12 }}><strong>No access.</strong> No member interviews, no analytics, no team Slack. Desk research only.</li>
+                    <li style={{ marginBottom: 12 }}><strong>Three weeks of evenings.</strong> Real-time constraint. Forces editing and prioritization.</li>
+                    <li style={{ marginBottom: 12 }}><strong>Show the process.</strong> Treat this as a case study from day one, document research and synthesis, not just final screens.</li>
+                    <li><strong>Ship working prototypes.</strong> If a product can be built in code, it should be, static mockups are easier to fake than functional UI.</li>
                   </ul>
                 </div>
               </div>
@@ -151,9 +159,39 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       {/* ── RESEARCH & AUDIT ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Phase 02 · Competitor Audit</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Phase 02 · Research</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
+              Without member interviews, the next-best signal is the words members and operators use in public—newsletters, podcast transcripts, community forums, testimonials.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 32, marginBottom: 60 }}>
+              <div>
+                <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Primary sources (CT's surface)</h3>
+                <ul style={{ paddingLeft: 20, margin: 0, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                  <li style={{ marginBottom: 12 }}><strong>Main Street Minute</strong> (Newsletter) - Heavy on real deal breakdowns.</li>
+                  <li style={{ marginBottom: 12 }}><strong>Codie Sanchez on YouTube</strong> - Verbatim quotes shaped the persona.</li>
+                  <li style={{ marginBottom: 12 }}><strong>contrarianthinking.co</strong> - Captured tone of voice and positioning.</li>
+                  <li><strong>Academy member stories</strong> - Reveal turning points in the journey.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Secondary sources (Wider community)</h3>
+                <ul style={{ paddingLeft: 20, margin: 0, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>
+                  <li style={{ marginBottom: 12 }}><strong>Reddit</strong> (r/smallbusiness, r/SearchFunds) - Repeated questions are unmet needs.</li>
+                  <li style={{ marginBottom: 12 }}><strong>#BoringBusiness</strong> (X / Twitter) - Following active buyers/brokers gave the language.</li>
+                  <li style={{ marginBottom: 12 }}><strong>BizBuySell Insight Report</strong> - Industry data on deal sizes and multiples.</li>
+                  <li><strong>Competitor products</strong> - Audited UX of adjacent marketplaces and tools.</li>
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>What the competitors actually solve</h3>
+            <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 24px" }}>
               I audited four products in the adjacent space against the five stages of the buyer journey. The gaps showed that nobody is serving the whole journey, and that "course + community + product" is an open positioning.
             </p>
           </Reveal>
@@ -228,12 +266,92 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
           </Reveal>
 
           <Reveal delay={0.1}>
+            <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 20 }}>Marcus's journey, mapped</h3>
+            <div style={{
+              background: theme.card, borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", marginBottom: 60
+            }}>
+              <div style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left", fontFamily: "Inter", minWidth: 800 }}>
+                  <thead>
+                    <tr style={{ background: theme.bgAlt, borderBottom: `2px solid ${theme.line}` }}>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>Stage</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>01 Discover</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>02 Convert</th>
+                      <th style={{ padding: "16px 20px", color: theme.inkMute, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>03 Learn</th>
+                      <th style={{ padding: "16px 20px", color: theme.accent, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>04 Find & Evaluate</th>
+                      <th style={{ padding: "16px 20px", color: theme.accent, fontWeight: 600, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em" }}>05 Close & Operate</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[
+                      { label: "Doing", data: ["Podcasts, newsletter", "Signs up for Academy", "Cohort, playbooks", "200+ listings, 8 tabs", "Owns the business"] },
+                      { label: "Tool", data: ["YouTube", "Checkout", "LMS, Slack", "None from CT", "None from CT"] },
+                      { label: "Feeling", data: ["Excited", "Committed", "Confident", "Overwhelmed", "Alone"] },
+                      { label: "Status", data: ["covered", "covered", "covered", "GAP", "GAP"] }
+                    ].map((row, idx) => (
+                      <tr key={idx} style={{ borderBottom: `1px solid ${theme.line}` }}>
+                        <td style={{ padding: "16px 20px", fontWeight: 600, color: theme.inkMute, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.05em", background: theme.bgAlt }}>{row.label}</td>
+                        {row.data.map((val, i) => (
+                          <td key={i} style={{ padding: "16px 20px", color: (i >= 3 && row.label === "Status") ? theme.rust : (i >= 3 && row.label === "Feeling") ? theme.accent : theme.ink, fontWeight: i >= 3 ? 600 : 400, fontSize: 14 }}>
+                            {val}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.15}>
+            <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Sticky notes, then themes</h3>
+            <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 24px" }}>
+              Before writing insights, I dumped every notable quote and observation onto sticky notes. Then I grouped them into themes.
+            </p>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)", gap: 20, marginBottom: 60 }}>
+              {[
+                { title: "Overwhelm", notes: ["200 listings on BBS", "Eight tabs open", "Filter fatigue", "Should I look at SaaS?"] },
+                { title: "Lost track", notes: ["Google Sheet broke", "Forgot to follow up", "Which lender is on which deal?", "Days-since-contact drops"] },
+                { title: "After close", notes: ["Previous owner's face on Yelp", "Website from 2014", "Hire someone or Canva?", "Marketing spend ROI"] },
+                { title: "Brand fit", notes: ["Site feels like course funnel", "Editorial voice vs visual", "$10k+ expect investor-grade"] }
+              ].map((themeCol, idx) => (
+                <div key={idx} style={{ background: theme.card, borderRadius: 12, padding: 20, border: `1px solid ${theme.line}` }}>
+                  <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, color: theme.ink, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 16, paddingBottom: 12, borderBottom: `1px solid ${theme.line}` }}>
+                    {themeCol.title}
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                    {themeCol.notes.map((note, nIdx) => (
+                      <div key={nIdx} style={{ padding: "12px 14px", background: theme.bgAlt, borderRadius: 8, fontSize: 13, fontFamily: "Inter", lineHeight: 1.5, color: theme.inkSoft, borderLeft: `3px solid ${theme.accent}` }}>
+                        "{note}"
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
             <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 20 }}>Four Insights</h3>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               <ProblemCard num={1} heading="The Gap" body="Members spend 4–12 months in a phase the current product doesn't support." theme={theme} isMobile={isMobile} icon={Target} />
               <ProblemCard num={2} heading="Filtering" body="The hard part isn't choosing a business, it's narrowing 200+ listings to 3 worth pursuing." theme={theme} isMobile={isMobile} icon={Search} />
               <ProblemCard num={3} heading="Lost Track" body="Buyers run their pipeline in spreadsheets that break down by week three." theme={theme} isMobile={isMobile} icon={FileText} />
               <ProblemCard num={4} heading="After Close" body="The moment a deal closes, the buyer's problem changes, but no product changes with them." theme={theme} isMobile={isMobile} icon={Briefcase} />
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.25}>
+            <div style={{ marginTop: 60, padding: isMobile ? "32px 24px" : "48px 60px", borderRadius: 24, background: theme.ink, color: theme.bg, boxShadow: "0 20px 40px rgba(0,0,0,0.15)", position: "relative", overflow: "hidden" }}>
+              {/* background pattern */}
+              <div style={{ position: "absolute", inset: 0, opacity: 0.05, backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`, backgroundSize: "24px 24px" }} />
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.accent, marginBottom: 20 }}>Problem Statement</div>
+                <p style={{ fontFamily: "Georgia, serif", fontSize: isMobile ? 22 : 28, lineHeight: 1.5, margin: 0, fontStyle: "italic" }}>
+                  Marcus, a mid-career professional 5 months into the Academy, needs a way to <strong style={{ color: theme.accent, fontWeight: 400 }}>compress 200 listings to 3 high-confidence options</strong> and <strong style={{ color: theme.accent, fontWeight: 400 }}>track the deals he pursues without his Google Sheet collapsing</strong>, because the journey lasts 4–12 months, and Contrarian Thinking's current product abandons him for most of it.
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -269,6 +387,102 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
               </div>
             </Reveal>
           </div>
+
+          <Reveal delay={0.25}>
+            <div style={{ marginTop: 80 }}>
+              <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Seven products sketched. Four cut.</h3>
+              <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 40, maxWidth: 800 }}>
+                Before settling on three products, I sketched seven. Cutting four of them was the highest-leverage decision in the entire project; anything I kept was a claim I'd have to defend.
+              </p>
+
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 40 }}>
+                <div>
+                  <h4 style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 700, color: theme.ink, marginBottom: 20, display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: theme.accent }}>★</span> Kept
+                  </h4>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                    {[
+                      { name: "AI Acquisition Matcher", reason: "Highest user pain · highest signal in research · most defensible product shape" },
+                      { name: "Deal Pipeline Dashboard", reason: "Clear workflow problem · proven product category · easiest to validate" },
+                      { name: "Marketing Design Hub", reason: "Covers an underserved post-close moment · brand-defensible" }
+                    ].map((item, i) => (
+                      <div key={i} style={{ background: theme.card, padding: 20, borderRadius: 12, border: `1px solid ${theme.line}` }}>
+                        <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.ink, marginBottom: 6 }}>{item.name}</div>
+                        <div style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkSoft, lineHeight: 1.5 }}>{item.reason}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 700, color: theme.ink, marginBottom: 20, display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: theme.rust }}>✕</span> Cut
+                  </h4>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                    {[
+                      { name: "Brand Site Redesign", reason: "Visual refresh, not a product problem · stand-alone work" },
+                      { name: "SBA Lender Marketplace", reason: "Adjacent industry · regulatory complexity · not a design problem" },
+                      { name: "Member Mastermind Tool", reason: "Slack already does this · low marginal value" },
+                      { name: "Deal Valuation Calculator", reason: "Solved by existing course templates · feature, not a product" }
+                    ].map((item, i) => (
+                      <div key={i} style={{ background: theme.bgAlt, padding: 20, borderRadius: 12, border: `1px solid ${theme.line}` }}>
+                        <div style={{ fontFamily: "Inter", fontSize: 15, fontWeight: 600, color: theme.inkMute, marginBottom: 6 }}>{item.name}</div>
+                        <div style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkMute, lineHeight: 1.5 }}>{item.reason}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.3}>
+            <div style={{ marginTop: 80 }}>
+              <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Three products, three design decisions.</h3>
+              <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 40, maxWidth: 800 }}>
+                For each product, one architectural decision shaped everything downstream. These weren't aesthetic choices, they were the calls about what kind of product each one fundamentally is.
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 24 }}>
+                {[
+                  { num: "01", title: "AI Acquisition Matcher", head: "A recommender, not a search engine.", desc: "Marketplaces hand the filtering work to the user. A recommender does the work for them. The system ranks every live deal against that profile." },
+                  { num: "02", title: "Deal Pipeline Dashboard", head: "A CRM, not a project tracker.", desc: "Acquisition is a relationship with a seller, brokers, and lenders, not a project with tasks. Tasks live inside relationships, so the pipeline is the primary noun." },
+                  { num: "03", title: "Marketing Design Hub", head: "Vertical-specific packs, not a generic library.", desc: "A 'Canva for small business' is a worse version of Canva. The win is to be vertical-specific, a laundromat pack with templates that already say the right things." }
+                ].map((item, i) => (
+                  <div key={i} style={{ background: theme.card, padding: 32, borderRadius: 16, border: `1px solid ${theme.line}` }}>
+                    <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, color: theme.accent, marginBottom: 12 }}>{item.num} · {item.title}</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16, lineHeight: 1.4 }}>{item.head}</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 15, color: theme.inkSoft, lineHeight: 1.6 }}>{item.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.35}>
+            <div style={{ marginTop: 80 }}>
+              <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Wireframes before pixels</h3>
+              <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 40, maxWidth: 800 }}>
+                Before opening Figma, I sketched the key flows in low fidelity to pressure-test the design decisions. Wireframes catch architectural problems that polish hides.
+              </p>
+              
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 24 }}>
+                {[
+                  { title: "AI Matcher", version: "Iteration 02 · Kept", desc: "V1 had filters at the top. V2 moved the profile to a persistent left rail so results are always personalized. Won." },
+                  { title: "Pipeline Dashboard", version: "Iteration 03 · Kept", desc: "V1 was a list view. V2 was a kanban with 7 stages. V3 collapsed to 5 stages matching the Academy's vocabulary. Locked." },
+                  { title: "Design Hub", version: "Iteration 02 · Kept", desc: "V1 was a flat searchable library. V2 reframed as industry-specific 'packs' (laundromat, car wash). Stronger positioning." }
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", flexDirection: "column" }}>
+                    <div style={{ background: theme.bgAlt, height: 200, borderRadius: 12, border: `1px solid ${theme.line}`, marginBottom: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                      <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" }}>Wireframe Placeholder</div>
+                    </div>
+                    <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 4 }}>{item.title}</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.accent, fontWeight: 600, marginBottom: 12 }}>{item.version}</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 14, color: theme.inkSoft, lineHeight: 1.5 }}>{item.desc}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -305,6 +519,33 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
               </div>
             </div>
           </Reveal>
+
+          <Reveal delay={0.15}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 24 }}>
+              <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}` }}>
+                <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Typography</h3>
+                <ul style={{ paddingLeft: 20, margin: 0, fontFamily: "Inter", fontSize: 14, lineHeight: 1.6, color: theme.inkSoft }}>
+                  <li style={{ marginBottom: 12 }}><strong>Playfair Display</strong> - Headlines, pull quotes</li>
+                  <li style={{ marginBottom: 12 }}><strong>Inter</strong> - Body, UI labels. Neutral workhorse.</li>
+                  <li><strong>JetBrains Mono</strong> - Eyebrow labels, data.</li>
+                </ul>
+              </div>
+              <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}` }}>
+                <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Components</h3>
+                <p style={{ fontFamily: "Inter", fontSize: 14, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                  Three button states (Primary CTA, Ghost Secondary), one pill style (color-coded by stage). Anything more would be feature creep; anything less would force one-off styling.
+                </p>
+              </div>
+              <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}` }}>
+                <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, marginBottom: 16 }}>Voice</h3>
+                <ul style={{ paddingLeft: 20, margin: 0, fontFamily: "Inter", fontSize: 14, lineHeight: 1.6, color: theme.inkSoft }}>
+                  <li style={{ marginBottom: 12 }}><strong>Direct.</strong> No softening.</li>
+                  <li style={{ marginBottom: 12 }}><strong>Italicized emphasis.</strong> One word carries the punch.</li>
+                  <li><strong>Operator-grade.</strong> Members are running businesses, not learning to.</li>
+                </ul>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -313,9 +554,15 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Phase 05 · Deliver</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 60px", maxWidth: "100%" }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 24px", maxWidth: "100%" }}>
               The three products from the synthesis became three interfaces: live prototypes built in Next.js.
             </p>
+            <div style={{ background: theme.bgAlt, padding: 24, borderRadius: 12, border: `1px solid ${theme.line}`, marginBottom: 60, maxWidth: 900 }}>
+              <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, color: theme.accent, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 12 }}>How they connect</div>
+              <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
+                The three interfaces are designed to share a member profile, a design system, and an event log. The matcher learns from what closes in the pipeline; the pipeline triggers the design hub on close; all three live behind a shared design system. That shared spine is what makes this an ecosystem rather than three separate apps, and what gives Contrarian Thinking a defensible product moat no single-product startup can replicate.
+              </p>
+            </div>
           </Reveal>
 
           <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 60 : 100 }}>
@@ -417,73 +664,42 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      {/* ── CLOSING ── */}
+      {/* ── REFLECTION & NEXT STEPS ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal>
-            <div style={{
-              position: "relative",
-              padding: isMobile ? "32px 24px" : "40px 40px",
-              borderRadius: 24,
-              background: theme.card,
-              border: `1px solid ${theme.line}`,
-              boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
-              textAlign: "center",
-              maxWidth: 720,
-              margin: "0 auto",
-              overflow: "hidden"
-            }}>
-              {/* Dotted grid pattern overlay */}
-              <div style={{
-                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
-                backgroundImage: `radial-gradient(${theme.ink} 1px, transparent 1px)`,
-                backgroundSize: "20px 20px",
-                opacity: mode === "dark" ? 0.08 : 0.04,
-                pointerEvents: "none"
-              }} />
-
-              {/* Vibrant solid top bar */}
-              <div style={{
-                position: "absolute", top: 0, left: 0, right: 0, height: 4,
-                background: theme.accent,
-                borderTopLeftRadius: 24,
-                borderTopRightRadius: 24
-              }} />
-
-              {/* Creative glowing orbs */}
-              <div style={{
-                position: "absolute", top: -80, left: -80, width: 250, height: 250,
-                background: theme.accent, opacity: mode === "dark" ? 0.15 : 0.05, filter: "blur(60px)", borderRadius: "50%", pointerEvents: "none"
-              }} />
-              <div style={{
-                position: "absolute", bottom: -80, right: -80, width: 300, height: 300,
-                background: theme.accent, opacity: mode === "dark" ? 0.1 : 0.04, filter: "blur(80px)", borderRadius: "50%", pointerEvents: "none"
-              }} />
-
-              {/* Massive decorative quote marks */}
-              <div style={{
-                position: "absolute", top: 8, left: 24,
-                fontFamily: "Georgia, serif", fontSize: 130, lineHeight: 1,
-                color: theme.accent, opacity: mode === "dark" ? 0.08 : 0.04,
-                userSelect: "none", pointerEvents: "none", transform: "rotate(-10deg)"
-              }}>“</div>
-              <div style={{
-                position: "absolute", bottom: 20, right: 24,
-                fontFamily: "Georgia, serif", fontSize: 130, lineHeight: 1,
-                color: theme.accent, opacity: mode === "dark" ? 0.08 : 0.04,
-                userSelect: "none", pointerEvents: "none", transform: "rotate(10deg)"
-              }}>”</div>
-
-              <div style={{ position: "relative", zIndex: 1 }}>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  This is a self-initiated project, so it lives or dies on the reasoning. I'd love feedback on where the logic for these three products is weakest. If you're at Contrarian Thinking and any of this is useful, please use it.
+          <Reveal><SectionLabel theme={theme}>Reflection & Next Steps</SectionLabel></Reveal>
+          
+          <Reveal delay={0.05}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 60 }}>
+              <div>
+                <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 24 }}>What I'd do next.</h3>
+                <p style={{ fontFamily: "Inter", fontSize: 16, lineHeight: 1.6, color: theme.inkSoft, marginBottom: 24 }}>
+                  The case study ends here, but the real work would be the validation I couldn't do alone. If I had thirty days inside Contrarian Thinking, this is the order I'd answer the open questions in:
                 </p>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
-                  <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
-                  <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15 : 17, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                    <span style={{ color: theme.accent, fontFamily: "'Caveat', cursive", fontSize: isMobile ? 24 : 28 }}>- Yachi</span>
-                  </p>
-                  <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />
+                <ul style={{ paddingLeft: 20, margin: 0, fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, display: "flex", flexDirection: "column", gap: 16 }}>
+                  <li><strong>Interview five Academy members</strong> at different stages. Validate that the persona is right, the journey map matches reality, and the three products solve problems they recognize.</li>
+                  <li><strong>Test the matcher's recommendations</strong> against five real closed deals. If the model would have surfaced those deals to the buyer who bought them, the concept has foundation. If not, kill it.</li>
+                  <li><strong>Decide the matcher's data source.</strong> BizBuySell scrape, partnership, member-submitted, or original from CT Capital? Each is a different business.</li>
+                  <li><strong>Pricing model.</strong> Member benefit, separate SKU, or freemium. Test all three with 20 members on a call before writing more code.</li>
+                  <li><strong>Kill at least one product.</strong> Probably the Design Hub, it's furthest from the brand's core trust. Cutting it earns six months of focus.</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 style={{ fontFamily: "Inter", fontSize: 24, fontWeight: 600, color: theme.ink, marginBottom: 24 }}>What I learned</h3>
+                <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                  <div>
+                    <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>The hardest part wasn't designing three products. It was deciding they belonged together.</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>I sketched seven. Picking the three that share a journey, and cutting four that didn't, was the highest-leverage decision in the project.</div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>I built the matcher's UI before answering where the deal data comes from.</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>Mistake. The data question is a product question; ignoring it let me design something that looks good and would collapse on contact with reality. Next time, data and pricing get resolved before Figma opens.</div>
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: "Inter", fontSize: 16, fontWeight: 600, color: theme.ink, marginBottom: 8 }}>Speculative work has to over-index on honesty.</div>
+                    <div style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft }}>Every line of "users said" or "we tested" I couldn't back up would have weakened the document. Naming the limits, and showing the validation plan with real access, is what made the work credible instead of fan fiction.</div>
+                  </div>
                 </div>
               </div>
             </div>

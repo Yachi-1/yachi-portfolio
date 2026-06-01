@@ -169,7 +169,7 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
           {/* Tags */}
           <Reveal delay={0.05}>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 20, alignItems: "center" }}>
-              {["Creative Studio", "Brand System", "Web Redesign", "2026"].map((tag, i) => (
+              {["Brand System", "Web Redesign", "2026"].map((tag, i) => (
                 <div key={i} style={{
                   padding: "4px 12px",
                   borderRadius: 100,
@@ -539,9 +539,9 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                     srcDoc={wireframeHtml}
                     title="Herrmann Wireframe"
                     style={{
-                      width: isMobile ? "100%" : "200%",
-                      height: isMobile ? "100%" : "200%",
-                      transform: isMobile ? "none" : "scale(0.5)",
+                      width: isMobile ? "250%" : "200%",
+                      height: isMobile ? "250%" : "200%",
+                      transform: isMobile ? "scale(0.4)" : "scale(0.5)",
                       transformOrigin: "top left",
                       border: "none",
                       display: "block"
@@ -583,9 +583,9 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                     title="Herrmann High Fidelity"
                     loading="lazy"
                     style={{
-                      width: isMobile ? "100%" : "200%",
-                      height: isMobile ? "100%" : "200%",
-                      transform: isMobile ? "none" : "scale(0.5)",
+                      width: isMobile ? "250%" : "200%",
+                      height: isMobile ? "250%" : "200%",
+                      transform: isMobile ? "scale(0.4)" : "scale(0.5)",
                       transformOrigin: "top left",
                       border: "none",
                       display: "block"
@@ -659,7 +659,14 @@ export default function HerrmannCaseStudy({ theme, mode, setRoute }) {
                 src="/herrmann_brand_book.html"
                 title="Herrmann Brand Book"
                 loading="lazy"
-                style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+                style={{
+                  width: isMobile ? "250%" : "100%",
+                  height: isMobile ? "250%" : "100%",
+                  transform: isMobile ? "scale(0.4)" : "none",
+                  transformOrigin: "top left",
+                  border: "none",
+                  display: "block"
+                }}
               />
             </div>
           </Reveal>

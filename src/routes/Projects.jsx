@@ -31,12 +31,12 @@ export default function Projects({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      <section style={{ padding: isMobile ? "0 4vw" : "0 6vw", position: "relative", zIndex: 1 }}>
+      <section style={{ padding: isMobile ? "0 8vw" : "0 6vw", position: "relative", zIndex: 1 }}>
         <div style={{
-          maxWidth: 1400, margin: "0 auto",
+          maxWidth: isMobile ? 600 : 1400, margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
-          gap: isMobile ? 24 : 32,
+          gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
+          gap: isMobile ? 16 : 32,
         }}>
           {projects.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.05}>
@@ -117,20 +117,20 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
       </div>
 
       {/* Info */}
-      <div style={{ padding: isMobile ? "16px 16px 20px" : "20px 22px 24px", display: "flex", flexDirection: "column", gap: 6 }}>
+      <div style={{ padding: isMobile ? "12px 12px 14px" : "20px 22px 24px", display: "flex", flexDirection: "column", gap: isMobile ? 4 : 6 }}>
         {/* Title + year */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 6 }}>
           <h3 style={{
-            fontFamily: "Inter", fontSize: isMobile ? 17 : isTablet ? 19 : 20,
+            fontFamily: "Inter", fontSize: isMobile ? 14 : isTablet ? 19 : 20,
             fontWeight: 600, letterSpacing: "-0.02em",
             color: isHovered ? theme.accent : theme.ink,
             margin: 0, lineHeight: 1.2,
             transition: "color 0.3s ease",
           }}>{p.title}</h3>
           <span style={{
-            fontFamily: "JetBrains Mono, monospace", fontSize: 11,
+            fontFamily: "JetBrains Mono, monospace", fontSize: isMobile ? 9 : 11,
             fontWeight: 500, color: theme.inkMute,
-            padding: "3px 8px", borderRadius: 6,
+            padding: isMobile ? "2px 6px" : "3px 8px", borderRadius: 6,
             background: theme.bgAlt,
             flexShrink: 0,
           }}>{p.year}</span>
@@ -138,7 +138,7 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
 
         {/* Subtitle */}
         <div style={{
-          fontFamily: "'Caveat', cursive", fontSize: 16,
+          fontFamily: "'Caveat', cursive", fontSize: isMobile ? 14 : 16,
           color: theme.accent, lineHeight: 1.2,
         }}>{p.subtitle}</div>
       </div>

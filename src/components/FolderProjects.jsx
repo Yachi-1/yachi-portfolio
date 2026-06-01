@@ -320,6 +320,7 @@ function MobileFolder({ theme, mode, isOpen, setIsOpen, setRoute }) {
                 position: "absolute", bottom: 0,
                 pointerEvents: "none",
                 transformOrigin: "bottom center",
+                zIndex: 2,
               }}
             >
               <ProjectThumb p={p} theme={theme} mode={mode} size={90} />

@@ -39,23 +39,24 @@ export default function Footer({ theme, mode, setRoute }) {
 
   const linkBaseStyle = {
     fontFamily: "Inter",
-    fontSize: 15,
+    fontSize: isMobile ? 16 : 15,
     color: theme.ink,
     textDecoration: "none",
     display: "inline-flex",
     alignItems: "center",
     gap: 8,
+    padding: isMobile ? "6px 0" : 0,
     transition: "color 0.2s ease, transform 0.2s ease",
   };
 
   const buttonBaseStyle = {
     background: "none",
     border: "none",
-    padding: 0,
+    padding: isMobile ? "6px 0" : 0,
     fontFamily: "Inter",
-    fontSize: 15,
+    fontSize: isMobile ? 16 : 15,
     color: theme.ink,
-    textAlign: "left",
+    textAlign: isMobile ? "center" : "left",
     cursor: "pointer",
     transition: "color 0.2s ease, transform 0.2s ease",
   };
@@ -69,14 +70,18 @@ export default function Footer({ theme, mode, setRoute }) {
     }}>
       <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
         <div style={{
-          marginTop: isMobile ? 30 : 60, display: "grid",
-          gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1.4fr 1fr 1fr" : "1.4fr 1fr 1fr",
-          gap: isMobile ? 32 : 40, alignItems: "start",
+          marginTop: isMobile ? 20 : 60,
+          display: isMobile ? "flex" : "grid",
+          flexDirection: isMobile ? "column" : undefined,
+          gridTemplateColumns: isMobile ? undefined : "1.4fr 1fr 1fr",
+          gap: isMobile ? "40px" : 40,
+          alignItems: isMobile ? "center" : "start",
+          textAlign: isMobile ? "center" : "left",
         }}>
-          <div>
+          <div style={{ gridColumn: isMobile ? "1 / -1" : "auto", display: isMobile ? "flex" : "block", flexDirection: isMobile ? "column" : undefined, alignItems: isMobile ? "center" : undefined }}>
             <button 
               aria-label="Home"
-              style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16, cursor: "pointer", background: "transparent", border: "none", padding: 0 }}
+              style={{ display: "flex", justifyContent: isMobile ? "center" : "flex-start", alignItems: "center", gap: 10, marginBottom: isMobile ? 24 : 16, cursor: "pointer", background: "transparent", border: "none", padding: 0 }}
               onMouseEnter={() => setLogoHovered(true)}
               onMouseLeave={() => setLogoHovered(false)}
               onClick={() => {
@@ -84,18 +89,18 @@ export default function Footer({ theme, mode, setRoute }) {
                 window.lenis?.scrollTo(0);
               }}
             >
-              <ParticleLogo mode={mode || "light"} size={48} playOnHover={true} isHovered={logoHovered} />
+              <ParticleLogo mode={mode || "light"} size={isMobile ? 54 : 48} playOnHover={true} isHovered={logoHovered} />
             </button>
-            <p style={{ fontFamily: "Inter", fontSize: 14.5, color: theme.inkSoft, lineHeight: 1.6, maxWidth: 360, margin: 0 }}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 14.5, color: theme.inkSoft, lineHeight: 1.6, maxWidth: 360, margin: 0, textAlign: isMobile ? "center" : "left" }}>
               Product designer. Currently shaping the next chapter of human-centered AI.
             </p>
           </div>
 
-          <div>
-            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: theme.inkMute, textTransform: "uppercase", marginBottom: 18 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: isMobile ? "center" : "flex-start" }}>
+            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: theme.inkMute, textTransform: "uppercase", marginBottom: isMobile ? 20 : 18 }}>
               Quick links
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 10, alignItems: isMobile ? "center" : "flex-start" }}>
               {QUICK_LINKS.map(l => (
                 <button
                   key={l.id}
@@ -104,7 +109,6 @@ export default function Footer({ theme, mode, setRoute }) {
                       window.open(RESUME_URL, "_blank");
                     } else {
                       setRoute(l.id);
-                      // In case we are already on that route, setRoute won't trigger the effect
                       window.lenis?.scrollTo(0);
                     }
                   }}
@@ -118,18 +122,18 @@ export default function Footer({ theme, mode, setRoute }) {
             </div>
           </div>
 
-          <div>
-            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: theme.inkMute, textTransform: "uppercase", marginBottom: 18 }}>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: isMobile ? "center" : "flex-start" }}>
+            <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: theme.inkMute, textTransform: "uppercase", marginBottom: isMobile ? 20 : 18 }}>
               Connect
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 10, alignItems: isMobile ? "center" : "flex-start" }}>
               <a
                 href="mailto:yachi883@gmail.com"
                 data-magnet="0.2"
                 style={linkBaseStyle}
                 {...hoverHandlers}
               >
-                <Mail size={14} /> Email
+                <Mail size={isMobile ? 16 : 14} /> Email
               </a>
               <a
                 href="https://linkedin.com/in/yachi-patel/"
@@ -139,25 +143,26 @@ export default function Footer({ theme, mode, setRoute }) {
                 style={linkBaseStyle}
                 {...hoverHandlers}
               >
-                <Linkedin size={14} /> LinkedIn
+                <Linkedin size={isMobile ? 16 : 14} /> LinkedIn
               </a>
             </div>
           </div>
         </div>
 
         <div style={{
-          marginTop: isMobile ? 50 : 80, paddingTop: 24,
+          marginTop: isMobile ? 60 : 80, paddingTop: 24,
           borderTop: `1px solid ${theme.line}`,
           display: "flex",
           flexDirection: isMobile ? "column" : "row",
-          justifyContent: "space-between",
-          alignItems: isMobile ? "flex-start" : "center",
-          flexWrap: "wrap", gap: 12,
+          justifyContent: isMobile ? "center" : "space-between",
+          alignItems: "center",
+          textAlign: isMobile ? "center" : "left",
+          gap: isMobile ? 8 : 12,
         }}>
-          <div style={{ fontFamily: "'Caveat', cursive", fontSize: 20, color: theme.inkSoft, display: "inline-flex", alignItems: "center", gap: 8 }}>
-            Made with <Heart size={16} fill={theme.accent} color={theme.accent} /> by Yachi
+          <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15, color: theme.inkSoft, display: "inline-flex", alignItems: "center", gap: 6 }}>
+            Made with <Heart size={isMobile ? 14 : 15} fill={theme.accent} color={theme.accent} /> by Yachi
           </div>
-          <div style={{ fontFamily: "Inter", fontSize: 13, color: theme.inkMute }}>
+          <div style={{ fontFamily: "Inter", fontSize: isMobile ? 12 : 13, color: theme.inkMute }}>
             © 2026 Yachi Patel. All rights reserved.
           </div>
         </div>

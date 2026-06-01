@@ -113,7 +113,7 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
         {it.label}
       </button>
 
-      {it.id === "projects" && !isMobile && (
+      {it.id === "projects" && (
         <AnimatePresence>
           {isHovered && (
             <motion.div
