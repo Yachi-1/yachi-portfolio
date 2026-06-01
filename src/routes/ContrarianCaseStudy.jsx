@@ -121,7 +121,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
             }}>
               <div>
                 <div style={{ fontFamily: "Inter", fontSize: 13, fontWeight: 700, letterSpacing: "0.06em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 16 }}>
-                  Phase 01 · The Brief
+                  The Brief
                 </div>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
                   Contrarian Thinking is a media-and-education company built around Codie Sanchez's "buy boring businesses" thesis. They have 10,000+ paying members. But the actual work members joined to do—finding, evaluating, buying, and running a small business—happens almost entirely outside the product surface.
@@ -159,7 +159,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       {/* ── RESEARCH & AUDIT ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw" }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Phase 02 · Research</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Research</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
               Without member interviews, the next-best signal is the words members and operators use in public—newsletters, podcast transcripts, community forums, testimonials.
@@ -245,7 +245,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       {/* ── SYNTHESIS ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Phase 03 · Synthesis</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Synthesis</SectionLabel></Reveal>
 
           <Reveal delay={0.05}>
             <div style={{ padding: "32px", borderRadius: 16, background: theme.card, border: `1px solid ${theme.line}`, marginBottom: 40 }}>
@@ -360,7 +360,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       {/* ── IDEATION & CUTTING ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Phase 04 · Ideation & How Might We</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Ideation & How Might We</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
               Each insight became a "how-might-we" question. I sketched seven product ideas, and cut four of them. Cutting was the highest-leverage decision in the entire project.
@@ -552,7 +552,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
       {/* ── THE 3 INTERFACES ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Phase 05 · Deliver</SectionLabel></Reveal>
+          <Reveal><SectionLabel theme={theme}>Deliver</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 24px", maxWidth: "100%" }}>
               The three products from the synthesis became three interfaces: live prototypes built in Next.js.

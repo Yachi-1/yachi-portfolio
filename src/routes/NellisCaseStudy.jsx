@@ -588,130 +588,23 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               </p>
             </div>
           </Reveal>
+
+
         </div>
       </section>
 
-      {/* ── PROCESS ── */}
+      {/* ── HERO ITERATIONS ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
-          <Reveal><SectionLabel theme={theme}>Process</SectionLabel></Reveal>
-
-          {/* Audit map + Priority grid side by side */}
-          <Reveal delay={0.05}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr",
-              gap: isMobile ? 24 : 48,
-              marginBottom: isMobile ? 40 : 56,
-            }}>
-              <div>
-                <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 16px", lineHeight: 1.2 }}>
-                  Audit Map
-                </h3>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15.5 : 17, lineHeight: 1.65, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  Before sketching, I screenshotted the current homepage and annotated every block with three labels: <strong style={{ color: theme.ink }}>what it's trying to do</strong>, <strong style={{ color: theme.ink }}>what it actually does</strong>, and <strong style={{ color: theme.ink }}>what a first-time visitor would take from it.</strong>
-                </p>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15.5 : 17, lineHeight: 1.65, color: theme.inkSoft, margin: 0 }}>
-                  The page has at least six "primary" CTAs visible at once. When everything is primary, nothing is.
-                </p>
-              </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                {[
-                  { label: "Must do", items: "Explain what Nellis is, show what's available now, build trust", icon: CheckCircle2 },
-                  { label: "Should do", items: "Show pickup locations, browse categories, social proof", icon: Target },
-                  { label: "Could do", items: "Video stories, app download, expanded reviews", icon: Lightbulb },
-                  { label: "Don't need", items: "Warehouse-level event listings, internal jargon, four parallel CTAs", icon: XCircle },
-                ].map((p, i) => (
-                  <div key={i} style={{
-                    padding: isMobile ? "16px" : "18px",
-                    borderRadius: 12, background: theme.card, border: `1px solid ${theme.line}`,
-                  }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                      <p.icon size={14} color={i === 3 ? theme.inkMute : theme.accent} strokeWidth={2} />
-                      <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: i === 3 ? theme.inkMute : theme.accent }}>{p.label}</div>
-                    </div>
-                    <p style={{ fontFamily: "Inter", fontSize: 13.5, lineHeight: 1.5, color: theme.inkSoft, margin: 0 }}>{p.items}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Low-fi sketches + page structure side by side */}
-          <Reveal delay={0.08}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr",
-              gap: isMobile ? 24 : 48,
-              marginBottom: isMobile ? 40 : 56,
-            }}>
-              <div>
-                <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 16px", lineHeight: 1.2 }}>
-                  Low-fi Sketches
-                </h3>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15.5 : 17, lineHeight: 1.65, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  I sketched four homepage structures on paper, varying what came first: search-first (like eBay), hero + live auctions (like StockX), category grid first, and story-led (hero + how it works, then auctions).
-                </p>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 15.5 : 17, lineHeight: 1.65, color: theme.inkSoft, margin: 0 }}>
-                  Both testers preferred the story-led option. They wanted to understand what Nellis was before browsing.
-                </p>
-              </div>
-              <div style={{
-                padding: isMobile ? "20px 16px" : "28px 24px",
-                borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}`,
-                fontFamily: "'IBM Plex Mono', 'Menlo', monospace",
-                fontSize: isMobile ? 12 : 13, lineHeight: 2, color: theme.inkSoft,
-              }}>
-                <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 12 }}>Final Page Structure</div>
-                {[
-                  "1. Hero - value prop + primary CTA + live auction",
-                  "2. How it works - 4 steps with numbered circles",
-                  "3. Live auctions near you - filterable card grid",
-                  "4. Browse categories - visual category tiles",
-                  "5. Trust strip - returns, pickup, pricing, locations",
-                  "6. Pickup locations - photo cards, place-first",
-                  "7. Reviews - rating + review count + testimonials",
-                  "8. Customer stories - video + thumbnails",
-                  '9. Final CTA - "Ready to stop paying retail?"',
-                ].map((line, i) => (
-                  <div key={i}>{line}</div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          {/* Key decisions */}
-          <Reveal delay={0.1}>
-            <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 20px", lineHeight: 1.2 }}>
-              Key Decisions, with the Reasoning
-            </h3>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: isMobile ? 16 : 20, marginBottom: isMobile ? 40 : 56 }}>
-              {[
-                { icon: MousePointerClick, lead: "Hero: pair the headline with a live auction preview.", body: "I replaced a generic stock-photo banner with a real auction card: actual item, current bid, time left. This is happening right now, here's proof." },
-                { icon: Layers, lead: "How it works: numbered, horizontal, one line each.", body: "Four steps: Discover → Bid & Win → Schedule Pickup → Love It or Return It. The part of the page doing the heaviest lifting." },
-                { icon: BarChart3, lead: "Live auctions: countdowns in red, retail comparison in green.", body: "Retail price struck through next to current bid, plus a 'you save' indicator. Showing retail vs. current bid is the entire pitch." },
-                { icon: MapPin, lead: "Pickup locations: photos, not just addresses.", body: "Photo cards - warehouse interior, storefront. The address becomes secondary. This is a real place, not a logistical hurdle." },
-              ].map((d, i) => (
-                <div key={i} style={{
-                  display: "flex", gap: 16, alignItems: "start",
-                  padding: isMobile ? "20px 16px" : "24px 20px",
-                  borderRadius: 14, background: theme.card, border: `1px solid ${theme.line}`,
-                }}>
-                  <IconBadge icon={d.icon} theme={theme} />
-                  <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                    <strong style={{ color: theme.ink, fontWeight: 600 }}>{d.lead} </strong>{d.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-
           {/* Hero versions grouped */}
+          <Reveal><SectionLabel theme={theme}>Hero: Three Versions</SectionLabel></Reveal>
+          <Reveal delay={0.08}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "16px 0 40px" }}>
+              I explored several layout variations to find the perfect balance between communicating the core value proposition and showcasing the excitement of live auctions.
+            </p>
+          </Reveal>
           <Reveal delay={0.14}>
-            <div style={{ marginBottom: 48 }}>
-              <h3 style={{ fontFamily: "Inter", fontSize: 20, fontWeight: 500, color: theme.ink, margin: "0 0 24px", lineHeight: 1.2 }}>
-                Hero: Three Versions
-              </h3>
+            <div>
               <div style={{
                 display: "grid",
                 gridTemplateColumns: isMobile ? "1fr" : "repeat(3, 1fr)",
@@ -756,9 +649,9 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
         <div style={{ maxWidth: 1400, margin: "0 auto" }}>
           <Reveal><SectionLabel theme={theme}>Final Design</SectionLabel></Reveal>
           <Reveal delay={0.05}>
-            <h2 style={{ fontFamily: "Inter", fontSize: "clamp(28px, 3.5vw, 48px)", fontWeight: 500, letterSpacing: "-0.03em", color: theme.ink, margin: "0 0 24px", lineHeight: 1.1 }}>
-              Section by Section
-            </h2>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18, lineHeight: 1.6, color: theme.inkSoft, margin: "16px 0 40px" }}>
+              The final homepage design replaces a confusing grid of CTAs with a clear, story-led narrative. It builds trust, explains the model, and showcases live auction value all on the first page.
+            </p>
           </Reveal>
 
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: isMobile ? 16 : 20 }}>
