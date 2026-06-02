@@ -5,7 +5,7 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import herrmannOriginalImg from "../assets/herrmann_original.png?w=1200&format=webp&quality=80";
 import herrmannRedesignImg from "../assets/herrmann_redesign.png?w=1200&format=webp&quality=80";
-import wireframeHtml from "../../wireframe_squared.html?raw";
+import wireframeHtml from "../../docs/wireframe_squared.html?raw";
 
 /* ─── Shared section-header style ─── */
 const SectionLabel = ({ children, theme }) => (

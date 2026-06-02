@@ -75,7 +75,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
             <Reveal delay={0.1}>
               <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-                Designing <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>RemitFlow</span>
+                RemitFlow: <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>Designing Global Payouts</span>
               </h1>
             </Reveal>
             <Reveal delay={0.15}>

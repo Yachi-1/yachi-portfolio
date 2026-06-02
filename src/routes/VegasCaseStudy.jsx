@@ -825,6 +825,63 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
           </div>
         </div>
       </section>
+      {/* ── WHAT I LEARNED ── */}
+      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+          <Reveal><SectionLabel theme={theme}>What I Learned</SectionLabel></Reveal>
+          <Reveal delay={0.05}>
+            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px" }}>
+              Lessons learned from designing a complex transactional system from scratch.
+            </p>
+          </Reveal>
+
+          <div style={{ display: "grid", gridTemplateColumns: isMobileOrTablet ? "1fr" : "1fr 1fr 1fr", gap: 24 }}>
+            {[
+              {
+                icon: Target,
+                color: "#C9A84C",
+                title: "Design for Speed, Not Beauty",
+                desc: "In a high-pressure environment, every extra click costs real money. I learned to ruthlessly prioritize task completion speed over visual flourish the best interface is the one the agent doesn't even notice."
+              },
+              {
+                icon: Layers,
+                color: "#3182CE",
+                title: "Scalable Systems > Pixel-Perfect Screens",
+                desc: "Building a token-based design system that works across 10+ branded tenants taught me that investing time in architecture pays off exponentially one well-built system beats ten custom designs."
+              },
+              {
+                icon: ShieldAlert,
+                color: "#E53E3E",
+                title: "Edge Cases Define Quality",
+                desc: "Designing the happy path is easy. The real craft lives in how a system handles payment failures, mid-session seat conflicts, and price changes those moments define whether users trust the product."
+              }
+            ].map((item, i) => (
+              <Reveal key={i} delay={0.1 + (i * 0.08)}>
+                <div style={{
+                  padding: "24px",
+                  borderRadius: 16,
+                  background: theme.card,
+                  border: `1px solid ${theme.line}`,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 16
+                }}>
+                  <div style={{
+                    width: 44, height: 44, borderRadius: 12,
+                    background: `${item.color}12`,
+                    display: "flex", alignItems: "center", justifyContent: "center"
+                  }}>
+                    <item.icon size={22} color={item.color} />
+                  </div>
+                  <h3 style={{ fontFamily: "Inter", fontSize: 18, fontWeight: 600, color: theme.ink, margin: 0 }}>{item.title}</h3>
+                  <p style={{ fontFamily: "Inter", fontSize: 15, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>{item.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── CLOSING ── */}
       <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
@@ -832,13 +889,13 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
           <Reveal>
             <div style={{
               position: "relative",
-              padding: isMobile ? "32px 24px" : "40px 40px",
+              padding: isMobile ? "24px 24px" : "32px 48px",
               borderRadius: 24,
               background: theme.card,
               border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
               textAlign: "center",
-              maxWidth: 720,
+              maxWidth: 900,
               margin: "0 auto",
               overflow: "hidden"
             }}>
@@ -885,7 +942,7 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
 
               <div style={{ position: "relative", zIndex: 1 }}>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  The design delivers a single-screen-per-step flow that lets an agent move from open to "Sale Complete" without tool-switching. Most importantly, the all-in-pricing promise is structurally enforced, turning the company's core differentiator into something the customer sees before they pay.
+                  This project was originally an interview design challenge. The company decided to eliminate the UX/UI Designer role due to internal restructuring, but completing the task gave me a great opportunity to design complex operational workflows and build a scalable design system from scratch.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
                   <div style={{ height: 1, flex: 1, maxWidth: 60, borderBottom: `2px dashed ${theme.line}` }} />

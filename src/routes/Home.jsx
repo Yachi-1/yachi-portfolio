@@ -25,7 +25,7 @@ export default function Home({ theme, mode, setRoute }) {
 
   return (
     <div style={{ position: "relative", paddingTop: isMobile ? 90 : 110 }}>
-      <section style={{ position: "relative", minHeight: isMobile ? "108vh" : "100vh", padding: isMobile ? "0 4vw" : "0 6vw", overflow: "hidden" }}>
+      <section style={{ position: "relative", minHeight: isMobile ? "108vh" : "100vh", padding: isMobile ? "0 4vw" : "0 6vw", overflowX: "clip" }}>
         <GridPaper theme={theme} />
         <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
 
@@ -57,9 +57,9 @@ export default function Home({ theme, mode, setRoute }) {
               right: isMobile ? "-1%" : "4%",
               top: isMobile ? 6 : 30,
               width: isMobile ? 150 : 280,
-              background: mode === "dark" ? "#1E1E26" : "#2A2A2A",
+              background: mode === "dark" ? "#2D2D3D" : "#2A2A2A",
               borderRadius: 12, overflow: "hidden",
-              boxShadow: mode === "dark" ? "0 20px 60px rgba(0,0,0,0.5)" : "0 20px 60px rgba(0,0,0,0.12)",
+              boxShadow: mode === "dark" ? "0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)" : "0 20px 60px rgba(0,0,0,0.12)",
             }}
           >
             <div style={{
@@ -92,13 +92,13 @@ export default function Home({ theme, mode, setRoute }) {
               left: isMobile ? "-2%" : "4%",
               top: isMobile ? 4 : 10,
               width: isMobile ? 205 : 280,
-              background: mode === "dark" ? "#1A110D" : "#FFE8D8",
+              background: mode === "dark" ? "#2B1A13" : "#FFE8D8",
               borderRadius: isMobile ? 16 : 24, overflow: "hidden",
               padding: isMobile ? "10px 10px 12px" : "20px 20px 22px",
               boxShadow: mode === "dark"
-                ? "0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,180,130,0.06)"
+                ? "0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,180,130,0.12)"
                 : "0 24px 60px rgba(200,100,50,0.12), inset 0 1px 0 rgba(255,255,255,0.8)",
-              border: `1px solid ${mode === "dark" ? "rgba(255,180,130,0.12)" : "rgba(255,160,100,0.25)"}`,
+              border: `1px solid ${mode === "dark" ? "rgba(255,180,130,0.25)" : "rgba(255,160,100,0.25)"}`,
             }}
           >
             <div style={{ marginBottom: isMobile ? 8 : 16 }}>
@@ -111,8 +111,8 @@ export default function Home({ theme, mode, setRoute }) {
               style={{
                 display: "flex", alignItems: "flex-start", gap: isMobile ? 8 : 12, textAlign: "left",
                 padding: isMobile ? "8px" : "12px", borderRadius: 14,
-                background: mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.65)",
-                border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.95)"}`,
+                background: mode === "dark" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.65)",
+                border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.95)"}`,
                 boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
               }}
             >
@@ -155,8 +155,8 @@ export default function Home({ theme, mode, setRoute }) {
               style={{
                 display: "flex", alignItems: "flex-start", gap: isMobile ? 8 : 12, textAlign: "left",
                 padding: isMobile ? "8px" : "12px", borderRadius: 14,
-                background: mode === "dark" ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.65)",
-                border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.95)"}`,
+                background: mode === "dark" ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.65)",
+                border: `1px solid ${mode === "dark" ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.95)"}`,
                 boxShadow: "0 4px 12px rgba(0,0,0,0.03)",
               }}
             >
@@ -283,9 +283,9 @@ export default function Home({ theme, mode, setRoute }) {
               bottom: isMobile ? 90 : 60,
               width: isMobile ? 130 : 200,
               padding: isMobile ? 8 : 14,
-              background: mode === "dark" ? "#1E1E26" : "#FFFFFF",
+              background: mode === "dark" ? "#292936" : "#FFFFFF",
               borderRadius: isMobile ? 12 : 14, border: `1px solid ${theme.line}`,
-              boxShadow: mode === "dark" ? "0 16px 50px rgba(0,0,0,0.4)" : "0 16px 50px rgba(0,0,0,0.08)",
+              boxShadow: mode === "dark" ? "0 16px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)" : "0 16px 50px rgba(0,0,0,0.08)",
             }}
           >
             <div style={{

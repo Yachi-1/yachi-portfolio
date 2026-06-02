@@ -81,7 +81,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
             </Reveal>
             <Reveal delay={0.1}>
               <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 68px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-                Contrarian Thinking <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>A UX Process Walkthrough</span>
+                Contrarian Thinking: <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "clamp(34px, 5.5vw, 70px)" }}>UX Design</span>
               </h1>
             </Reveal>
             <Reveal delay={0.15}>
@@ -124,7 +124,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                   The Brief
                 </div>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
-                  Contrarian Thinking is a media-and-education company built around Codie Sanchez's "buy boring businesses" thesis. They have 10,000+ paying members. But the actual work members joined to do—finding, evaluating, buying, and running a small business—happens almost entirely outside the product surface.
+                  Contrarian Thinking is a media-and-education company built around Codie Sanchez's "buy boring businesses" thesis. They have 10,000+ paying members. But the actual work members joined to do - finding, evaluating, buying, and running a small business - happens almost entirely outside the product surface.
                 </p>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
                   I gave myself a fictional engagement: imagine Contrarian Thinking has hired a designer-in-residence for one quarter. What would they ask me to work on? Design what should live between the course and the close.
@@ -162,7 +162,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
           <Reveal><SectionLabel theme={theme}>Research</SectionLabel></Reveal>
           <Reveal delay={0.05}>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 40px", maxWidth: "100%" }}>
-              Without member interviews, the next-best signal is the words members and operators use in public—newsletters, podcast transcripts, community forums, testimonials.
+              Without member interviews, the next-best signal is the words members and operators use in public - newsletters, podcast transcripts, community forums, testimonials.
             </p>
           </Reveal>
 
