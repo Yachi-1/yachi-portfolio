@@ -87,43 +87,80 @@ export function InsightCard({ num, lead, body, theme, isMobile, icon: Icon }) {
 export function ProblemCard({ num, heading, body, theme, isMobile, icon: Icon }) {
   return (
     <Reveal delay={num * 0.06}>
-      <div style={{
-        padding: isMobile ? "24px 20px" : "32px 28px",
-        borderRadius: 14,
-        background: theme.card,
-        border: `1px solid ${theme.line}`,
-        height: "100%", boxSizing: "border-box",
-      }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-          {Icon && <IconBadge icon={Icon} theme={theme} />}
+      <div 
+        style={{
+          position: "relative",
+          padding: isMobile ? "24px 20px" : "32px 28px",
+          borderRadius: 16,
+          background: theme.card,
+          border: `1px solid ${theme.line}`,
+          height: "100%", boxSizing: "border-box",
+          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+          overflow: "hidden"
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "translateY(-6px)";
+          e.currentTarget.style.boxShadow = "0 20px 40px -10px rgba(0,0,0,0.06)";
+          e.currentTarget.style.borderColor = `${theme.accent}40`;
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translateY(0)";
+          e.currentTarget.style.boxShadow = "none";
+          e.currentTarget.style.borderColor = theme.line;
+        }}
+      >
+        <div style={{
+          position: "absolute", top: 0, left: 0, right: 0, height: 3,
+          background: `linear-gradient(90deg, ${theme.accent}20, ${theme.accent}, ${theme.accent}20)`,
+          opacity: 0, transition: "opacity 0.4s ease"
+        }} 
+        className="problem-card-top-bar"
+        />
+        
+        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20 }}>
+          {Icon && (
+            <div style={{
+              width: 48, height: 48, borderRadius: 14,
+              background: `linear-gradient(135deg, ${theme.accent}15, transparent)`,
+              border: `1px solid ${theme.accent}25`,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              flexShrink: 0,
+            }}>
+              <Icon size={22} color={theme.accent} strokeWidth={1.8} />
+            </div>
+          )}
           {num && <div style={{
-            fontFamily: "'Caveat', cursive", fontSize: 18, color: theme.accent,
-            lineHeight: 1,
+            fontFamily: "'Caveat', cursive", fontSize: 22, color: theme.accent, opacity: 0.9, lineHeight: 1
           }}>{num}</div>}
         </div>
         <h3 style={{
-          fontFamily: "Inter", fontSize: isMobile ? 17 : 19,
-          fontWeight: 600, color: theme.ink, margin: "0 0 12px",
+          fontFamily: "Inter", fontSize: isMobile ? 18 : 20,
+          fontWeight: 600, color: theme.ink, margin: "0 0 14px",
           lineHeight: 1.3, letterSpacing: "-0.015em",
         }}>{heading}</h3>
         {Array.isArray(body) ? (
           <ul style={{
-            fontFamily: "Inter", fontSize: isMobile ? 14 : 15,
+            fontFamily: "Inter", fontSize: isMobile ? 15 : 15.5,
             lineHeight: 1.6, color: theme.inkSoft, margin: 0,
-            paddingLeft: 20, display: "flex", flexDirection: "column", gap: 6
+            paddingLeft: 20, display: "flex", flexDirection: "column", gap: 8
           }}>
             {body.map((item, i) => (
-              <li key={i} style={{ paddingLeft: 4 }}>{item}</li>
+               <li key={i} style={{ paddingLeft: 4 }}>{item}</li>
             ))}
           </ul>
         ) : (
           <p style={{
-            fontFamily: "Inter", fontSize: isMobile ? 14 : 15,
+            fontFamily: "Inter", fontSize: isMobile ? 15 : 15.5,
             lineHeight: 1.6, color: theme.inkSoft, margin: 0,
           }}>
             {body}
           </p>
         )}
+        <style>{`
+          div[style*="translateY(-6px)"] .problem-card-top-bar {
+            opacity: 1 !important;
+          }
+        `}</style>
       </div>
     </Reveal>
   );
