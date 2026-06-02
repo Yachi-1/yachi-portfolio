@@ -116,24 +116,28 @@ function useTitle(route) {
 export default function App() {
   const [mode, setMode] = useState("light");
   const [route, setRoute] = useState(() => {
-    const hash = window.location.hash.replace('#', '');
-    return hash || "home";
+    const path = window.location.pathname.substring(1);
+    return path || "home";
   });
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      setRoute(hash || "home");
+    const handlePopState = () => {
+      const path = window.location.pathname.substring(1);
+      setRoute(path || "home");
     };
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
   useEffect(() => {
     if (route === "home") {
-      window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
-    } else if (window.location.hash.replace('#', '') !== route) {
-      window.location.hash = route;
+      if (window.location.pathname !== "/") {
+        window.history.pushState(null, '', "/");
+      }
+    } else {
+      if (window.location.pathname !== `/${route}`) {
+        window.history.pushState(null, '', `/${route}`);
+      }
     }
   }, [route]);
 

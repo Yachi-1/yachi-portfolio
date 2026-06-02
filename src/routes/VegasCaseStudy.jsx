@@ -25,9 +25,9 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
 
   /* ── data ── */
   const meta = [
-    { k: "Role", v: "UX / Product Designer" },
+    { k: "Role", v: "UX Designer" },
     { k: "Timeline", v: "2 weeks" },
-    { k: "Tools", v: "Figma, React (handoff)" },
+    { k: "Tools", v: "Figma, React" },
     { k: "Year", v: "2025" },
   ];
 
@@ -134,9 +134,6 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
                 </div>
                 <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
                   Vegas Tickets is a premium resale marketplace known for concierge-level service, all-in pricing with zero hidden fees, and deep local expertise. They needed a <strong>point-of-sale (POS) web portal</strong> so their sales agents and partner venue operators could process ticket transactions quickly and accurately.
-                </p>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: 0 }}>
-                  I designed the end-to-end agent sale flow - search, seat selection, checkout, confirmation - plus the operational dashboard and a multi-tenant venue management view. The system is built so that 10+ partner venues can run their own branded instance without a single screen being redesigned.
                 </p>
               </div>
               <div>
