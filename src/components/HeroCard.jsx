@@ -39,7 +39,7 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
   };
 
   return (
-    <motion.div style={{ y: reduced || isMobile ? 0 : parallaxY, position: "absolute", zIndex: props.style?.zIndex, left: props.style?.left, right: props.style?.right, top: props.style?.top, bottom: props.style?.bottom }}>
+    <motion.div className="hero-card" style={{ y: reduced || isMobile ? 0 : parallaxY, position: "absolute", zIndex: props.style?.zIndex, left: props.style?.left, right: props.style?.right, top: props.style?.top, bottom: props.style?.bottom }}>
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}

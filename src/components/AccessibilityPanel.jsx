@@ -166,7 +166,15 @@ export default function AccessibilityPanel({ theme, mode }) {
 
   // Keyboard Navigation
   useEffect(() => {
-    if (!settings.keyboardNavigation) return;
+    if (!settings.keyboardNavigation) {
+      const disableTab = (e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+        }
+      };
+      window.addEventListener('keydown', disableTab);
+      return () => window.removeEventListener('keydown', disableTab);
+    }
 
     const elements = {
       h: 'h1, h2, h3, h4, h5, h6',
