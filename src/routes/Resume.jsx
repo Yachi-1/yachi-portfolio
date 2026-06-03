@@ -3,8 +3,8 @@ import FloatingBlobs from "../components/FloatingBlobs.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
-const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
-const RESUME_PREVIEW_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/preview";
+const RESUME_URL = "https://drive.google.com/file/d/1kDuE4GTIChyBL2oi2pAQ3h94ZFRwhSXp/view?usp=sharing";
+const RESUME_PREVIEW_URL = "https://drive.google.com/file/d/1kDuE4GTIChyBL2oi2pAQ3h94ZFRwhSXp/preview";
 
 export default function Resume({ theme, mode }) {
   const { isMobile } = useBreakpoint();

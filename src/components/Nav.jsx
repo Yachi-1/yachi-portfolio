@@ -6,7 +6,7 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import ParticleLogo from "./ParticleLogo.jsx";
 
-const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
+const RESUME_URL = "https://drive.google.com/file/d/1kDuE4GTIChyBL2oi2pAQ3h94ZFRwhSXp/view?usp=sharing";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },

@@ -4,7 +4,7 @@ import { Mail, Linkedin, Heart } from "lucide-react";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import ParticleLogo from "./ParticleLogo.jsx";
 
-const RESUME_URL = "https://drive.google.com/file/d/1PVTsGVL1kLe4wHbP0_QZFdnPf30uMVoZ/view?usp=sharing";
+const RESUME_URL = "https://drive.google.com/file/d/1kDuE4GTIChyBL2oi2pAQ3h94ZFRwhSXp/view?usp=sharing";
 
 const QUICK_LINKS = [
   { id: "home", label: "Home" },
