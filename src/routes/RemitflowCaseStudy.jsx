@@ -25,7 +25,7 @@ export default function RemitflowCaseStudy({ theme, mode, setRoute }) {
   const meta = [
     { k: "Role", v: "UX Designer" },
     { k: "Timeline", v: "4 weeks" },
-    { k: "Tools", v: "Figma, FigJam, Miro" },
+    { k: "Tools", v: "Figma, Miro, UX Pilot" },
     { k: "Year", v: "2024" },
   ];
 

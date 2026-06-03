@@ -136,7 +136,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
   const meta = [
     { k: "Role", v: "UI/UX Designer (self-initiated)" },
     { k: "Timeline", v: "1 week" },
-    { k: "Tools", v: "Figma · Claude · Maze" },
+    { k: "Tools", v: "Figma, Claude, Maze" },
     { k: "Year", v: "2025" },
   ];
 

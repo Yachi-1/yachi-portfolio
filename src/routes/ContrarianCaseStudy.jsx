@@ -23,7 +23,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
   const meta = [
     { k: "Role", v: "Product Designer" },
     { k: "Timeline", v: "2 weeks" },
-    { k: "Tools", v: "Figma, Claude, Google Antigravity" },
+    { k: "Tools", v: "Figma, Claude, Antigravity" },
     { k: "Year", v: "2026" },
   ];
 
