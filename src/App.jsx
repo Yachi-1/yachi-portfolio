@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import Lenis from "lenis";
 
 import { themes } from "./theme.js";
 import MagneticCursor from "./components/MagneticCursor.jsx";
+import AccessibilityPanel from "./components/AccessibilityPanel.jsx";
 import Nav from "./components/Nav.jsx";
 import Footer from "./components/Footer.jsx";
 import SectionDivider from "./components/SectionDivider.jsx";
@@ -13,6 +14,7 @@ import About from "./routes/About.jsx";
 import Projects from "./routes/Projects.jsx";
 import Resume from "./routes/Resume.jsx";
 import ProjectDetail from "./routes/ProjectDetail.jsx";
+import { useA11yReducedMotion } from "./hooks/useA11yReducedMotion.js";
 
 function isTouchDevice() {
   if (typeof window === "undefined") return false;
@@ -142,7 +144,7 @@ export default function App() {
   }, [route]);
 
   const theme = themes[mode];
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
 
   const lenisRef = useRef(null);
   useLenis(lenisRef);
@@ -157,7 +159,7 @@ export default function App() {
       return;
     }
     prevRoute.current = route;
-    
+
     // Immediate scroll reset on route change
     window.scrollTo(0, 0);
     if (lenisRef.current) {
@@ -169,39 +171,41 @@ export default function App() {
   const projectId = isProjectDetail ? route.split(":")[1] : null;
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: theme.bg,
-        color: theme.ink,
-        fontFamily: "Inter, sans-serif",
-        transition: "background .6s ease, color .6s ease",
-        overflowX: "hidden",
-      }}
-    >
+    <MotionConfig reducedMotion={reduced ? "always" : "user"}>
+      <div
+        style={{
+          minHeight: "100vh",
+          background: theme.bg,
+          color: theme.ink,
+          fontFamily: "Inter, sans-serif",
+          transition: "background .6s ease, color .6s ease",
+          overflowX: "hidden",
+        }}
+      >
 
-      <style>{`
-        ::selection { background: ${theme.accent}; color: white; }
-        button:focus-visible, a:focus-visible { outline: 2px solid ${theme.accent}; outline-offset: 3px; border-radius: 6px; }
-      `}</style>
+        <style>{`
+          ::selection { background: ${theme.accent}; color: white; }
+          button:focus-visible, a:focus-visible { outline: 2px solid ${theme.accent}; outline-offset: 3px; border-radius: 6px; }
+        `}</style>
 
-      <MagneticCursor theme={theme} />
-      <Nav
-        theme={theme}
-        mode={mode}
-        setMode={setMode}
-        route={route}
-        setRoute={setRoute}
-      />
+        <MagneticCursor theme={theme} />
+        <AccessibilityPanel theme={theme} mode={mode} />
+        <Nav
+          theme={theme}
+          mode={mode}
+          setMode={setMode}
+          route={route}
+          setRoute={setRoute}
+        />
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={route}
-          initial={reduced ? false : { opacity: 0, y: 16 }}
-          animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
-          exit={reduced ? { opacity: 0 } : { opacity: 0, y: -16 }}
-          transition={reduced ? { duration: 0 } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={route}
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0 }}
+            exit={reduced ? { opacity: 0 } : { opacity: 0, y: -16 }}
+            transition={reduced ? { duration: 0 } : { duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          >
             {route === "home" && <Home theme={theme} mode={mode} setRoute={setRoute} />}
             {route === "about" && <About theme={theme} mode={mode} />}
             {route === "projects" && <Projects theme={theme} mode={mode} setRoute={setRoute} />}
@@ -209,12 +213,13 @@ export default function App() {
             {isProjectDetail && (
               <ProjectDetail id={projectId} theme={theme} mode={mode} setRoute={setRoute} />
             )}
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
 
-      <SectionDivider theme={theme} />
+        <SectionDivider theme={theme} />
 
-      <Footer theme={theme} mode={mode} setRoute={setRoute} />
-    </div>
+        <Footer theme={theme} mode={mode} setRoute={setRoute} />
+      </div>
+    </MotionConfig>
   );
 }

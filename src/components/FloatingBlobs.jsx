@@ -1,8 +1,9 @@
 import { useRef } from "react";
-import { motion, useReducedMotion, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 export default function FloatingBlobs({ theme }) {
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
   const containerRef = useRef(null);
   // Only animate while the blobs are actually on screen — no off-screen churn.
   const inView = useInView(containerRef, { margin: "100px" });

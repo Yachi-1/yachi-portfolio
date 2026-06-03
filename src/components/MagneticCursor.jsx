@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 const SIZES = {
   default: { ring: 36, dot: 6 },
@@ -18,7 +19,7 @@ function isTouchDevice() {
 }
 
 export default function MagneticCursor({ theme }) {
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
   const [touch, setTouch] = useState(false);
 
   useEffect(() => {

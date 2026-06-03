@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 import { ArrowRight, MousePointer2, ChevronDown } from "lucide-react";
 import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
@@ -11,7 +12,7 @@ import HeroCard from "../components/HeroCard.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
 export default function Home({ theme, mode, setRoute }) {
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
   const { isMobile, isTablet } = useBreakpoint();
   const { scrollY } = useScroll();
 
@@ -402,7 +403,7 @@ export default function Home({ theme, mode, setRoute }) {
               <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: "-0.05em" }}>
                 DES
                 <motion.span
-                  animate={reduced ? undefined : { opacity: [1, 0.4, 1] }}
+                  animate={reduced ? { opacity: 1 } : { opacity: [1, 0.4, 1] }}
                   transition={reduced ? undefined : { duration: 1.2, repeat: Infinity }}
                   style={{
                     display: "inline-block", verticalAlign: "baseline",
@@ -447,7 +448,7 @@ export default function Home({ theme, mode, setRoute }) {
                 Scroll
               </div>
               <motion.div
-                animate={reduced ? undefined : { y: [0, 8, 0] }}
+                animate={reduced ? { y: 0 } : { y: [0, 8, 0] }}
                 transition={reduced ? undefined : { duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
               >
                 <ChevronDown size={20} color={theme.inkMute} />

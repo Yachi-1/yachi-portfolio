@@ -1,10 +1,11 @@
 import { useRef } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 export default function Reveal({ children, delay = 0, y = 30, className, style }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
 
   if (reduced) {
     return (

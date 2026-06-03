@@ -54,6 +54,18 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
 
   return (
     <motion.div
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          if (p.pdfLink) window.open(p.pdfLink, "_blank");
+          else {
+            setRoute(`project:${p.id}`);
+            window.lenis?.scrollTo(0);
+          }
+        }
+      }}
       onClick={() => {
         if (p.pdfLink) {
           window.open(p.pdfLink, "_blank");

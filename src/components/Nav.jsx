@@ -1,4 +1,5 @@
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 import { Sun, Moon } from "lucide-react";
 import { useState } from "react";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
@@ -15,7 +16,7 @@ const NAV_ITEMS = [
 ];
 
 export default function Nav({ theme, mode, setMode, route, setRoute }) {
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
   const { isMobile, isTablet } = useBreakpoint();
   const [logoHovered, setLogoHovered] = useState(false);
 

@@ -89,58 +89,45 @@ export function ProblemCard({ num, heading, body, theme, isMobile, icon: Icon })
     <Reveal delay={num * 0.06}>
       <div 
         style={{
-          position: "relative",
-          padding: isMobile ? "24px 20px" : "32px 28px",
+          padding: isMobile ? "20px 16px" : "24px",
           borderRadius: 16,
           background: theme.card,
           border: `1px solid ${theme.line}`,
           height: "100%", boxSizing: "border-box",
-          transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-          overflow: "hidden"
+          transition: "border-color 0.3s ease, box-shadow 0.3s ease",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-6px)";
-          e.currentTarget.style.boxShadow = "0 20px 40px -10px rgba(0,0,0,0.06)";
           e.currentTarget.style.borderColor = `${theme.accent}40`;
+          e.currentTarget.style.boxShadow = "0 8px 30px rgba(0,0,0,0.04)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "none";
           e.currentTarget.style.borderColor = theme.line;
+          e.currentTarget.style.boxShadow = "none";
         }}
       >
-        <div style={{
-          position: "absolute", top: 0, left: 0, right: 0, height: 3,
-          background: `linear-gradient(90deg, ${theme.accent}20, ${theme.accent}, ${theme.accent}20)`,
-          opacity: 0, transition: "opacity 0.4s ease"
-        }} 
-        className="problem-card-top-bar"
-        />
-        
-        <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
           {Icon && (
             <div style={{
-              width: 48, height: 48, borderRadius: 14,
-              background: `linear-gradient(135deg, ${theme.accent}15, transparent)`,
-              border: `1px solid ${theme.accent}25`,
+              width: 32, height: 32, borderRadius: 8,
+              background: `${theme.accent}12`,
               display: "flex", alignItems: "center", justifyContent: "center",
               flexShrink: 0,
             }}>
-              <Icon size={22} color={theme.accent} strokeWidth={1.8} />
+              <Icon size={16} color={theme.accent} strokeWidth={2} />
             </div>
           )}
           {num && <div style={{
-            fontFamily: "'Caveat', cursive", fontSize: 22, color: theme.accent, opacity: 0.9, lineHeight: 1
+            fontFamily: "'Caveat', cursive", fontSize: 20, color: theme.accent, lineHeight: 1
           }}>{num}</div>}
         </div>
         <h3 style={{
-          fontFamily: "Inter", fontSize: isMobile ? 18 : 20,
-          fontWeight: 600, color: theme.ink, margin: "0 0 14px",
-          lineHeight: 1.3, letterSpacing: "-0.015em",
+          fontFamily: "Inter", fontSize: 17,
+          fontWeight: 700, color: theme.ink, margin: "0 0 8px",
+          lineHeight: 1.3, letterSpacing: "-0.01em",
         }}>{heading}</h3>
         {Array.isArray(body) ? (
           <ul style={{
-            fontFamily: "Inter", fontSize: isMobile ? 15 : 15.5,
+            fontFamily: "Inter", fontSize: 15,
             lineHeight: 1.6, color: theme.inkSoft, margin: 0,
             paddingLeft: 20, display: "flex", flexDirection: "column", gap: 8
           }}>
@@ -150,17 +137,12 @@ export function ProblemCard({ num, heading, body, theme, isMobile, icon: Icon })
           </ul>
         ) : (
           <p style={{
-            fontFamily: "Inter", fontSize: isMobile ? 15 : 15.5,
+            fontFamily: "Inter", fontSize: 15,
             lineHeight: 1.6, color: theme.inkSoft, margin: 0,
           }}>
             {body}
           </p>
         )}
-        <style>{`
-          div[style*="translateY(-6px)"] .problem-card-top-bar {
-            opacity: 1 !important;
-          }
-        `}</style>
       </div>
     </Reveal>
   );

@@ -264,6 +264,14 @@ function SkillJar({ theme, isMobile }) {
       >
         <GridPaper theme={theme} noMask={true} />
         <motion.div
+          role="button"
+          tabIndex={isSpilled ? -1 : 0}
+          onKeyDown={(e) => {
+            if (!isSpilled && (e.key === 'Enter' || e.key === ' ')) {
+              e.preventDefault();
+              setIsSpilled(true);
+            }
+          }}
           onClick={() => setIsSpilled(true)}
           animate={isSpilled
             ? { rotate: -100, x: isMobile ? -160 : -220, y: 0, opacity: 0, scale: 0 }

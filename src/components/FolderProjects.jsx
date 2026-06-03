@@ -384,6 +384,8 @@ function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, 
   const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.div
+      role="button"
+      tabIndex={isOpen ? 0 : -1}
       onClick={(e) => {
         if (isOpen) {
           e.stopPropagation();

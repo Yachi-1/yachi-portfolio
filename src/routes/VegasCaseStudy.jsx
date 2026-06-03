@@ -883,9 +883,9 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      {/* ── CLOSING ── */}
-      <section style={{ padding: isMobile ? "60px 4vw" : "100px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
-        <div style={{ maxWidth: 1400, margin: "0 auto" }}>
+      {/* ── CLOSING & NEXT PROJECT ── */}
+      <section style={{ padding: isMobile ? "60px 4vw 60px" : "100px 6vw 100px", background: theme.bgAlt, borderTop: `1px solid ${theme.line}` }}>
+        <div style={{ maxWidth: 1400, margin: "0 auto", marginBottom: isMobile ? 60 : 80 }}>
           <Reveal>
             <div style={{
               position: "relative",
@@ -955,10 +955,8 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
             </div>
           </Reveal>
         </div>
-      </section>
 
-      {/* ── NEXT PROJECT ── */}
-      <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", marginTop: 60 }}>
+        {/* ── NEXT PROJECT ── */}
         <div
           onClick={() => {
             if (next.pdfLink) {

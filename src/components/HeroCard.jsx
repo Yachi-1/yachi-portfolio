@@ -1,9 +1,10 @@
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 export default function HeroCard({ children, staticContent, isMobile, floatDelay = 0, floatDuration = 4, parallaxY, ...props }) {
   const ref = useRef(null);
-  const reduced = useReducedMotion();
+  const reduced = useA11yReducedMotion();
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -61,7 +62,7 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
           }}
         >
           <motion.div
-            animate={reduced || isMobile ? undefined : { y: [0, -10, 0] }}
+            animate={reduced || isMobile ? { y: 0 } : { y: [0, -10, 0] }}
             transition={reduced || isMobile ? undefined : {
               duration: floatDuration,
               repeat: Infinity,
