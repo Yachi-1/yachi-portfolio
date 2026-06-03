@@ -26,7 +26,7 @@ export const projects = [
       { k: "Timeline", v: "2024" },
       { k: "Marketing Hub", v: "Live →", link: "https://marketing-hub.vercel.app" },
       { k: "Deal Pipeline", v: "Live →", link: "https://deal-pipeline.vercel.app" },
-      { k: "AI Matcher", v: "Live →", link: "https://ai-matcher.vercel.app" },
+      { k: "AI Matcher", v: "Live →", link: "https://ai-acquisition-matcher.vercel.app/" },
     ],
     stats: [
       { k: "3", v: "Products shipped" },

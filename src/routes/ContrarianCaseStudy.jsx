@@ -601,7 +601,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
                   </p>
                 </div>
                 <a
-                  href="https://ai-acquisition-matcher-by-yachi.vercel.app/"
+                  href="https://ai-acquisition-matcher.vercel.app/"
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{ display: "block", borderRadius: 16, border: `1px solid ${theme.line}`, overflow: "hidden", boxShadow: "none", cursor: "pointer", transition: "all 0.2s ease" }}
