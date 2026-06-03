@@ -108,30 +108,12 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
         overflow: "hidden",
       }}>
         <ProjectVisual project={p} theme={theme} hover={isHovered} />
-
-
-
-        {/* Hover arrow */}
-        <motion.div
-          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.7 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            position: "absolute", bottom: 16, right: 16,
-            width: 42, height: 42, borderRadius: 999,
-            background: "rgba(255,255,255,0.92)",
-            backdropFilter: "blur(12px)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-          }}
-        >
-          <ArrowRight size={16} color="#1A1A1A" />
-        </motion.div>
       </div>
 
       {/* Info */}
       <div style={{ padding: isMobile ? "12px 12px 14px" : "20px 22px 24px", display: "flex", flexDirection: "column", gap: isMobile ? 4 : 6 }}>
-        {/* Title + year */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 6 }}>
+        {/* Title */}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 6 }}>
           <h3 style={{
             fontFamily: "Inter", fontSize: isMobile ? 14 : isTablet ? 19 : 20,
             fontWeight: 600, letterSpacing: "-0.02em",
@@ -139,13 +121,20 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
             margin: 0, lineHeight: 1.2,
             transition: "color 0.3s ease",
           }}>{p.title}</h3>
-          <span style={{
-            fontFamily: "JetBrains Mono, monospace", fontSize: isMobile ? 9 : 11,
-            fontWeight: 500, color: theme.inkMute,
-            padding: isMobile ? "2px 6px" : "3px 8px", borderRadius: 6,
-            background: theme.bgAlt,
-            flexShrink: 0,
-          }}>{p.year}</span>
+          
+          {/* Hover arrow */}
+          <motion.div
+            animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              width: isMobile ? 28 : 38, height: isMobile ? 28 : 38, borderRadius: 999,
+              background: theme.bgAlt,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <ArrowRight size={isMobile ? 14 : 18} color={theme.ink} />
+          </motion.div>
         </div>
 
         {/* Subtitle */}
