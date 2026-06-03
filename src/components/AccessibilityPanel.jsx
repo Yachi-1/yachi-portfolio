@@ -335,19 +335,17 @@ export default function AccessibilityPanel({ theme, mode }) {
         style={{
           position: "fixed",
           bottom: 24,
-          left: 24,
+          right: 24,
           zIndex: 9998,
           width: 52,
           height: 52,
           borderRadius: 999,
-          border: `1px solid ${theme.line}`,
-          background: theme.glass,
-          backdropFilter: "blur(12px) saturate(140%)",
-          WebkitBackdropFilter: "blur(12px) saturate(140%)",
+          border: mode === "dark" ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(0,0,0,0.08)",
+          background: theme.accent,
           boxShadow:
             mode === "dark"
-              ? "0 8px 32px rgba(0,0,0,0.5)"
-              : "0 8px 32px rgba(0,0,0,0.08)",
+              ? "0 8px 32px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3)"
+              : "0 8px 24px rgba(255,143,163,0.35), 0 2px 8px rgba(255,143,163,0.2)",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
@@ -355,7 +353,7 @@ export default function AccessibilityPanel({ theme, mode }) {
           padding: 0,
         }}
       >
-        <Accessibility size={22} color={theme.accent} />
+        <Accessibility size={22} color="#ffffff" />
         {activeCount > 0 && (
           <div
             style={{
@@ -365,8 +363,8 @@ export default function AccessibilityPanel({ theme, mode }) {
               width: 20,
               height: 20,
               borderRadius: 999,
-              background: theme.accent,
-              color: "#fff",
+              background: "#ffffff",
+              color: theme.accent,
               fontSize: 11,
               fontWeight: 700,
               display: "flex",
@@ -405,13 +403,13 @@ export default function AccessibilityPanel({ theme, mode }) {
           <motion.div
             id="a11y-panel"
             ref={panelRef}
-            initial={{ x: -340, opacity: 0 }}
+            initial={{ x: 340, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -340, opacity: 0 }}
+            exit={{ x: 340, opacity: 0 }}
             transition={{ type: "spring", stiffness: 350, damping: 32 }}
             style={{
               position: "fixed",
-              left: 16,
+              right: 16,
               bottom: 16,
               top: 16,
               width: 320,
@@ -439,7 +437,18 @@ export default function AccessibilityPanel({ theme, mode }) {
                 flexShrink: 0,
               }}
             >
-              <Accessibility size={20} color={theme.accent} />
+              <div style={{
+                width: 32,
+                height: 32,
+                borderRadius: 999,
+                background: theme.accent,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}>
+                <Accessibility size={18} color="#ffffff" />
+              </div>
               <div style={{ flex: 1 }}>
                 <div
                   style={{
@@ -454,9 +463,13 @@ export default function AccessibilityPanel({ theme, mode }) {
                 <div
                   style={{
                     fontFamily: "Inter, sans-serif",
-                    fontSize: 11,
-                    color: theme.inkMute,
-                    marginTop: 2,
+                    fontSize: 12,
+                    fontWeight: 500,
+                    color: theme.inkSoft || theme.inkMute,
+                    opacity: 0.85,
+                    marginTop: 4,
+                    lineHeight: 1.4,
+                    letterSpacing: "-0.01em"
                   }}
                 >
                   Customize your browsing experience
