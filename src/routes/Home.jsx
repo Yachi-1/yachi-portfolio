@@ -340,6 +340,7 @@ export default function Home({ theme, mode, setRoute }) {
                 fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 48px)",
                 fontWeight: 500, fontStyle: "italic", color: theme.inkMute, letterSpacing: "0.02em",
                 marginBottom: 0, marginTop: isMobile ? 32 : 0,
+                pointerEvents: "auto",
               }}>
                 Yachi Patel
               </div>
@@ -362,6 +363,7 @@ export default function Home({ theme, mode, setRoute }) {
                 margin: 0,
                 textAlign: "center",
                 maxWidth: "min(1100px, 92vw)",
+                pointerEvents: "auto",
               }}>
               <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block" }}>
                 <em style={{
@@ -423,6 +425,7 @@ export default function Home({ theme, mode, setRoute }) {
                 fontFamily: "Inter, sans-serif", fontSize: "clamp(14px, 1.4vw, 18px)",
                 color: theme.inkSoft, maxWidth: 520, margin: "32px auto 0",
                 lineHeight: 1.6, textAlign: "center",
+                pointerEvents: "auto",
               }}>
                 Designing Digital Interfaces Since 2020
               </p>
