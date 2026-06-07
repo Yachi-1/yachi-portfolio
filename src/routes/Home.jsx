@@ -37,7 +37,7 @@ export default function Home({ theme, mode, setRoute }) {
             animate={{ opacity: 1, y: 0, rotate: 4, scale: isMobile ? 0.85 : 1 }}
             transition={{ delay: 0.6, duration: 1, ease: [0.22, 1, 0.36, 1] }}
             drag={!isMobile} dragMomentum dragElastic={0.18}
-            whileHover={isMobile ? undefined : { scale: 1.04, zIndex: 20 }}
+            whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: 5 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
@@ -84,7 +84,7 @@ export default function Home({ theme, mode, setRoute }) {
             animate={{ opacity: 1, y: 0, rotate: -6, scale: isMobile ? 0.85 : 1 }}
             transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
             drag={!isMobile} dragMomentum dragElastic={0.18}
-            whileHover={isMobile ? undefined : { scale: 1.04, zIndex: 20, rotate: -3 }}
+            whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, rotate: -3, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: -5 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
@@ -196,7 +196,7 @@ export default function Home({ theme, mode, setRoute }) {
             animate={{ opacity: 1, scale: isMobile ? 0.85 : 1, rotate: -3 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             drag={!isMobile} dragMomentum dragElastic={0.18}
-            whileHover={isMobile ? undefined : { scale: 1.05, zIndex: 20, rotate: -1 }}
+            whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, rotate: -1, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: -2 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
@@ -233,7 +233,7 @@ export default function Home({ theme, mode, setRoute }) {
             </div>
 
             {[
-              { role: "UX Researcher", company: "University of Maryland, Baltimore County", year: "Jan 2025 - Present", tint: "#E8A2A2" },
+              { role: "UX Researcher", company: "UMBC", year: "Jan 2025 - Present", tint: "#E8A2A2" },
               { role: "UI/UX Designer", company: "KineticPotential", year: "Oct 2024 - Sept 2025", tint: "#A2C9E8" },
               { role: "Product Designer", company: "ToplineSwitchgear", year: "Jan 2021 - July 2023", tint: "#B5D8B0" },
             ].map((item, i) => (
@@ -274,7 +274,7 @@ export default function Home({ theme, mode, setRoute }) {
             animate={{ opacity: 1, y: 0, rotate: 5, scale: isMobile ? 0.85 : 1 }}
             transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             drag={!isMobile} dragMomentum dragElastic={0.18}
-            whileHover={isMobile ? undefined : { scale: 1.04, zIndex: 20 }}
+            whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: 6 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
@@ -333,6 +333,7 @@ export default function Home({ theme, mode, setRoute }) {
             position: "relative", zIndex: 10,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
             minHeight: isMobile ? "92vh" : "85vh", textAlign: "center",
+            pointerEvents: "none",
           }}>
             <Reveal delay={0.1}>
               <div style={{
@@ -377,7 +378,8 @@ export default function Home({ theme, mode, setRoute }) {
                   borderRadius: 999, background: isPlayful ? theme.pastel5 : theme.accent,
                   position: "relative", margin: "0 -0.02em",
                   boxShadow: `0 4px 20px ${isPlayful ? theme.pastel5 : theme.accent}55`,
-                  cursor: "pointer", transition: "background 0.4s"
+                  cursor: "pointer", transition: "background 0.4s",
+                  pointerEvents: "auto",
                 }}
                   onClick={() => setIsPlayful(!isPlayful)}
                   tabIndex={0}
@@ -427,7 +429,7 @@ export default function Home({ theme, mode, setRoute }) {
             </Reveal>
 
             <Reveal delay={0.6}>
-              <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 24 }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 24, pointerEvents: "auto" }}>
                 <MagneticButton theme={theme} primary style={{ padding: "12px 22px", fontSize: 13 }} onClick={() => { setRoute("projects"); window.lenis?.scrollTo(0); }}>
                   See my work <ArrowRight size={14} />
                 </MagneticButton>

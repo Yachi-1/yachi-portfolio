@@ -38,18 +38,51 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
     y.set(0);
   };
 
+  // Extract gesture/animation props so they don't get lost in the style spread
+  const {
+    whileHover, whileTap, whileDrag,
+    drag, dragMomentum, dragElastic, dragConstraints,
+    initial, animate, transition,
+    style: cardStyle = {},
+    ...restProps
+  } = props;
+
   return (
-    <motion.div className="hero-card" style={{ y: reduced || isMobile ? 0 : parallaxY, position: "absolute", zIndex: props.style?.zIndex, left: props.style?.left, right: props.style?.right, top: props.style?.top, bottom: props.style?.bottom }}>
+    <motion.div
+      className="hero-card"
+      initial={initial}
+      animate={animate}
+      transition={transition}
+      whileHover={whileHover}
+      whileTap={whileTap}
+      whileDrag={whileDrag}
+      drag={drag}
+      dragMomentum={dragMomentum}
+      dragElastic={dragElastic}
+      dragConstraints={dragConstraints}
+      style={{
+        y: reduced || isMobile ? 0 : parallaxY,
+        position: "absolute",
+        zIndex: cardStyle.zIndex,
+        left: cardStyle.left,
+        right: cardStyle.right,
+        top: cardStyle.top,
+        bottom: cardStyle.bottom,
+        cursor: cardStyle.cursor,
+      }}
+    >
       <motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         style={{
-          ...props.style,
-          position: "relative", left: "auto", right: "auto", top: "auto", bottom: "auto", zIndex: "auto",
+          ...cardStyle,
+          position: "relative",
+          left: "auto", right: "auto", top: "auto", bottom: "auto",
+          zIndex: "auto",
           perspective: 1000,
         }}
-        {...props}
+        {...restProps}
       >
         {staticContent}
         <motion.div
@@ -58,7 +91,7 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
             rotateX: reduced || isMobile ? 0 : rotateX,
             rotateY: reduced || isMobile ? 0 : rotateY,
             transformStyle: "preserve-3d",
-            borderRadius: props.style?.borderRadius,
+            borderRadius: cardStyle.borderRadius,
           }}
         >
           <motion.div
@@ -72,7 +105,7 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
             style={{
               width: "100%", height: "100%",
               transform: "translateZ(10px)",
-              borderRadius: props.style?.borderRadius,
+              borderRadius: cardStyle.borderRadius,
             }}
           >
             {children}
@@ -82,3 +115,4 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
     </motion.div>
   );
 }
+
