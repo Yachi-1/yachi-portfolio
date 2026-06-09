@@ -1044,7 +1044,7 @@ Contact`}
           <Reveal delay={0.1}>
             <div style={{
               position: "relative",
-              padding: isMobile ? "24px 20px" : "32px 32px",
+              padding: isMobile ? "32px 24px" : "40px 40px",
               borderRadius: 24,
               background: theme.card,
               border: `1px solid ${theme.line}`,
@@ -1085,7 +1085,7 @@ Contact`}
               }}>”</div>
 
               <div style={{ position: "relative", zIndex: 1 }}>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
                   This is a live client project for Kinetic Potential. As the only designer on a small cross-functional team, I owned the UX research and visual design while aligning each decision with business and development input.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>

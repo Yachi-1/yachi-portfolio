@@ -745,7 +745,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
               textAlign: "center",
-              maxWidth: 720,
+              maxWidth: 800,
               margin: "0 auto",
               overflow: "hidden"
             }}>
@@ -791,7 +791,7 @@ export default function NellisCaseStudy({ theme, mode, setRoute }) {
               }}>”</div>
 
               <div style={{ position: "relative", zIndex: 1 }}>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
                   This is a self-initiated project, so it lives or dies on the reasoning. I'd love feedback on where the case for the redesign is weakest. If you're at Nellis Auction and any of this is useful, please use it.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>

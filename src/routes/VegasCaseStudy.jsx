@@ -889,13 +889,13 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
           <Reveal>
             <div style={{
               position: "relative",
-              padding: isMobile ? "24px 24px" : "32px 48px",
+              padding: isMobile ? "32px 24px" : "40px 40px",
               borderRadius: 24,
               background: theme.card,
               border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
               textAlign: "center",
-              maxWidth: 900,
+              maxWidth: 800,
               margin: "0 auto",
               overflow: "hidden"
             }}>
@@ -941,7 +941,7 @@ export default function VegasCaseStudy({ theme, mode, setRoute }) {
               }}>”</div>
 
               <div style={{ position: "relative", zIndex: 1 }}>
-                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 17 : 21, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 20px" }}>
+                <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 18.5, lineHeight: 1.6, color: theme.inkSoft, margin: "0 0 16px" }}>
                   This project was originally an interview design challenge. The company decided to eliminate the UX/UI Designer role due to internal restructuring, but completing the task gave me a great opportunity to design complex operational workflows and build a scalable design system from scratch.
                 </p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>

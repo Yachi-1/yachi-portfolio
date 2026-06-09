@@ -761,7 +761,7 @@ export default function ContrarianCaseStudy({ theme, mode, setRoute }) {
               border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 24px 48px -12px rgba(0,0,0,0.5)" : "0 32px 64px -16px rgba(0,0,0,0.08)",
               textAlign: "center",
-              maxWidth: 780,
+              maxWidth: 800,
               margin: "0 auto",
               overflow: "hidden"
             }}>
