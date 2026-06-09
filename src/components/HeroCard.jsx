@@ -61,7 +61,7 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
       dragElastic={dragElastic}
       dragConstraints={dragConstraints}
       style={{
-        y: reduced || isMobile ? 0 : parallaxY,
+        y: reduced ? 0 : parallaxY,
         position: "absolute",
         zIndex: cardStyle.zIndex,
         left: cardStyle.left,
@@ -95,8 +95,8 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
           }}
         >
           <motion.div
-            animate={reduced || isMobile ? { y: 0 } : { y: [0, -10, 0] }}
-            transition={reduced || isMobile ? undefined : {
+            animate={reduced ? { y: 0 } : { y: [0, -10, 0] }}
+            transition={reduced ? undefined : {
               duration: floatDuration,
               repeat: Infinity,
               ease: "easeInOut",

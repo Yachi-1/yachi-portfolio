@@ -4,7 +4,8 @@ import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 export default function Reveal({ children, delay = 0, y = 30, className, style }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-10% 0px -10% 0px" });
+  // Remove the -10% margin which causes issues on mobile if elements are tall or viewports are small
+  const inView = useInView(ref, { once: true, margin: "0px 0px -10px 0px" });
   const reduced = useA11yReducedMotion();
 
   if (reduced) {

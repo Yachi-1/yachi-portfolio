@@ -213,8 +213,18 @@ export default function AccessibilityPanel({ theme, mode }) {
       return;
     }
 
-    const handleMouseMove = (e) => {
-      const target = e.target;
+    const handleInteraction = (e) => {
+      let clientX, clientY, target;
+      if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
+        target = document.elementFromPoint(clientX, clientY);
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+        target = e.target;
+      }
+
       if (!target || !target.getBoundingClientRect) return;
 
       const rect = target.getBoundingClientRect();
@@ -222,7 +232,8 @@ export default function AccessibilityPanel({ theme, mode }) {
       const targetArea = rect.width * rect.height;
 
       // 1. Prevent massive layout wrappers (e.g. the whole page background) from being magnified
-      if (targetArea > screenArea * 0.3 || rect.width > window.innerWidth * 0.85) {
+      // Relaxed for mobile where text blocks can easily take up 95% of width and 50% of height.
+      if (target.tagName === 'BODY' || target.tagName === 'HTML' || target.tagName === 'MAIN' || targetArea > screenArea * 0.8) {
         setMagnifierData(prev => prev.show ? { ...prev, show: false } : prev);
         return;
       }
@@ -256,8 +267,8 @@ export default function AccessibilityPanel({ theme, mode }) {
       if (text && text.length > 0 && text.length < 1500) {
         setMagnifierData({
           text: text,
-          x: e.clientX,
-          y: e.clientY,
+          x: clientX,
+          y: clientY,
           show: true
         });
       } else {
@@ -265,8 +276,21 @@ export default function AccessibilityPanel({ theme, mode }) {
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    const handleTouchEnd = () => {
+      setMagnifierData(prev => prev.show ? { ...prev, show: false } : prev);
+    };
+
+    window.addEventListener('mousemove', handleInteraction);
+    window.addEventListener('touchmove', handleInteraction, { passive: true });
+    window.addEventListener('touchstart', handleInteraction, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleInteraction);
+      window.removeEventListener('touchmove', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
   }, [settings.textMagnifier]);
 
   const update = useCallback(
