@@ -70,7 +70,11 @@ body {
 [data-a11y-hide-images="true"] img:not(#a11y-panel img):not(#a11y-trigger img),
 [data-a11y-hide-images="true"] svg:not(#a11y-panel svg):not(#a11y-trigger svg),
 [data-a11y-hide-images="true"] video:not(#a11y-panel video):not(#a11y-trigger video),
-[data-a11y-hide-images="true"] .hero-card {
+[data-a11y-hide-images="true"] .hero-card,
+[data-a11y-hide-images="true"] .wireframe-box,
+[data-a11y-hide-images="true"] .hifi-box,
+[data-a11y-hide-images="true"] .brandbook-box,
+[data-a11y-hide-images="true"] .homepage-box {
   opacity: 0 !important;
   visibility: hidden !important;
 }

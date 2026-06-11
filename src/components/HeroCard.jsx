@@ -96,7 +96,7 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
         >
           <motion.div
             animate={reduced ? { y: 0 } : { y: [0, -10, 0] }}
-            transition={reduced ? undefined : {
+            transition={reduced ? { duration: 0.3 } : {
               duration: floatDuration,
               repeat: Infinity,
               ease: "easeInOut",

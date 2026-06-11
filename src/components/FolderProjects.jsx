@@ -6,6 +6,7 @@ import GridPaper from "./GridPaper.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { prefetchCaseStudy } from "../utils/prefetchCaseStudy.js";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 const SCATTER_POSITIONS = [
   { x: -220, y: -360 }, // Top-Left
@@ -23,6 +24,7 @@ const STICKERS = [];
 export default function FolderProjects({ theme, mode, setRoute }) {
   const [isOpen, setIsOpen] = useState(false);
   const { isMobile } = useBreakpoint();
+  const reduced = useA11yReducedMotion();
 
   return (
     <section style={{
@@ -60,6 +62,7 @@ export default function FolderProjects({ theme, mode, setRoute }) {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             setRoute={setRoute}
+            reduced={reduced}
           />
         )}
 
@@ -74,7 +77,7 @@ export default function FolderProjects({ theme, mode, setRoute }) {
   );
 }
 
-function DesktopFolder({ theme, mode, isOpen, setIsOpen, setRoute }) {
+function DesktopFolder({ theme, mode, isOpen, setIsOpen, setRoute, reduced }) {
   return (
     <div style={{
       background: `radial-gradient(circle at 20% 20%, ${theme.pastel2}28 0%, transparent 50%), radial-gradient(circle at 80% 80%, ${theme.pastel1}22 0%, transparent 50%), ${theme.card}`,
@@ -151,6 +154,7 @@ function DesktopFolder({ theme, mode, isOpen, setIsOpen, setRoute }) {
                   theme={theme} mode={mode}
                   closedX={closedX} closedY={closedY} closedRotate={closedRotate}
                   setRoute={setRoute}
+                  reduced={reduced}
                 />
               );
             })}
@@ -380,7 +384,7 @@ function ProjectThumb({ p, theme, mode, size = 150, isHovered = false }) {
   );
 }
 
-function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, closedX, closedY, closedRotate, setRoute }) {
+function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, closedX, closedY, closedRotate, setRoute, reduced }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
     <motion.div
@@ -419,8 +423,8 @@ function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, 
       data-cursor-label="View"
     >
       <motion.div
-        animate={isOpen ? { y: floatY } : {}}
-        transition={{ duration: floatDuration, repeat: Infinity, ease: "easeInOut" }}
+        animate={isOpen && !reduced ? { y: floatY } : { y: 0 }}
+        transition={isOpen && !reduced ? { duration: floatDuration, repeat: Infinity, ease: "easeInOut" } : { duration: 0.3 }}
         whileHover={isOpen ? { scale: 1.05 } : {}}
       >
         <ProjectThumb p={p} theme={theme} mode={mode} size={150} isHovered={isHovered} />
