@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
-import { ArrowRight, MousePointer2, ChevronDown } from "lucide-react";
+import { ArrowRight, MousePointer2 } from "lucide-react";
 import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
 import MagneticButton from "../components/MagneticButton.jsx";
@@ -16,7 +16,6 @@ export default function Home({ theme, mode, setRoute }) {
   const { isMobile, isTablet } = useBreakpoint();
   const { scrollY } = useScroll();
 
-  const [isPlayful, setIsPlayful] = useState(false);
 
   // Parallax offsets
   const parallax1 = useTransform(scrollY, [0, 1000], [0, -80]);
@@ -29,6 +28,18 @@ export default function Home({ theme, mode, setRoute }) {
       <section style={{ position: "relative", minHeight: isMobile ? "108vh" : "100vh", padding: isMobile ? "0 4vw" : "0 6vw", overflowX: "clip" }}>
         <GridPaper theme={theme} />
         <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
+
+          {/* Name — pinned to top of hero */}
+          <Reveal delay={0.1}>
+            <div style={{
+              position: "absolute", top: isMobile ? 18 : 26, left: 0, right: 0,
+              textAlign: "center", zIndex: 10, pointerEvents: "none",
+              fontFamily: "'Caveat', cursive", fontSize: "clamp(32px, 5vw, 58px)",
+              fontWeight: 700, fontStyle: "normal", color: theme.accent, letterSpacing: "0.02em",
+            }}>
+              Yachi Patel
+            </div>
+          </Reveal>
 
           {/* Terminal card */}
           <HeroCard
@@ -107,7 +118,7 @@ export default function Home({ theme, mode, setRoute }) {
             </div>
 
             <motion.div
-              whileHover={{ y: -2, scale: 1.02 }}
+              whileHover={reduced ? undefined : { y: -2, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               style={{
                 display: "flex", alignItems: "flex-start", gap: isMobile ? 8 : 12, textAlign: "left",
@@ -151,7 +162,7 @@ export default function Home({ theme, mode, setRoute }) {
             }} />
 
             <motion.div
-              whileHover={{ y: -2, scale: 1.02 }}
+              whileHover={reduced ? undefined : { y: -2, scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
               style={{
                 display: "flex", alignItems: "flex-start", gap: isMobile ? 8 : 12, textAlign: "left",
@@ -233,13 +244,13 @@ export default function Home({ theme, mode, setRoute }) {
             </div>
 
             {[
-              { role: "UX Researcher", company: "UMBC", year: "Jan 2025 - Present", tint: "#E8A2A2" },
+              { role: "UI/UX Designer", company: "RaikTechnology", year: "July 2026 - Present", tint: "#B5D8B0" },
+              { role: "UX Designer", company: "UMBC", year: "Jan 2025 - June 2026", tint: "#E8A2A2" },
               { role: "UI/UX Designer", company: "KineticPotential", year: "Oct 2024 - Sept 2025", tint: "#A2C9E8" },
-              { role: "Product Designer", company: "ToplineSwitchgear", year: "Jan 2021 - July 2023", tint: "#B5D8B0" },
             ].map((item, i) => (
               <motion.div
                 key={i}
-                whileHover={{ x: 2 }}
+                whileHover={reduced ? undefined : { x: 2 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 style={{
                   display: "flex", alignItems: "center", gap: isMobile ? 6 : 9,
@@ -305,7 +316,7 @@ export default function Home({ theme, mode, setRoute }) {
               ].map((item, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={reduced ? undefined : { scale: 1.05 }}
                   style={{
                     aspectRatio: "1/1", borderRadius: isMobile ? 8 : 10,
                     background: `linear-gradient(135deg, ${item.bg}, ${theme.pastel4})`,
@@ -333,18 +344,9 @@ export default function Home({ theme, mode, setRoute }) {
             position: "relative", zIndex: 10,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
             minHeight: isMobile ? "92vh" : "85vh", textAlign: "center",
+            paddingTop: isMobile ? 60 : 90,
             pointerEvents: "none",
           }}>
-            <Reveal delay={0.1}>
-              <div style={{
-                fontFamily: "'Playfair Display', serif", fontSize: "clamp(28px, 4vw, 48px)",
-                fontWeight: 500, fontStyle: "italic", color: theme.inkMute, letterSpacing: "0.02em",
-                marginBottom: 0, marginTop: isMobile ? 32 : 0,
-                pointerEvents: "auto",
-              }}>
-                Yachi Patel
-              </div>
-            </Reveal>
 
             <motion.h1
               initial="hidden"
@@ -365,44 +367,9 @@ export default function Home({ theme, mode, setRoute }) {
                 maxWidth: "min(1100px, 92vw)",
                 pointerEvents: "auto",
               }}>
-              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block" }}>
-                <em style={{
-                  fontFamily: "'Caveat', cursive", fontStyle: "normal",
-                  fontWeight: 600, color: isPlayful ? theme.pastel5 : theme.accent,
-                  fontSize: "0.85em", transition: "color 0.4s"
-                }}>Creative</em>
-              </motion.span>
-              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: "-0.05em" }}>
-                <span style={{ color: isPlayful ? theme.pastel5 : theme.accent, fontWeight: 800, transition: "color 0.4s" }}>PR</span>
-                <span style={{
-                  display: "inline-block", verticalAlign: "middle",
-                  width: "clamp(50px, 6vw, 90px)", height: "clamp(28px, 3.2vw, 48px)",
-                  borderRadius: 999, background: isPlayful ? theme.pastel5 : theme.accent,
-                  position: "relative", margin: "0 -0.02em",
-                  boxShadow: `0 4px 20px ${isPlayful ? theme.pastel5 : theme.accent}55`,
-                  cursor: "pointer", transition: "background 0.4s",
-                  pointerEvents: "auto",
-                }}
-                  onClick={() => setIsPlayful(!isPlayful)}
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setIsPlayful(!isPlayful); }}
-                  role="switch"
-                  aria-checked={isPlayful}
-                  aria-label="Toggle playful mode"
-                >
-                  <motion.div
-                    animate={{ x: isPlayful ? "110%" : "15%", rotate: isPlayful ? 180 : 0 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                    style={{
-                      position: "absolute", top: "10%",
-                      width: "clamp(22px, 2.6vw, 38px)", height: "clamp(22px, 2.6vw, 38px)",
-                      borderRadius: 999,
-                      background: mode === "dark" ? "#222" : "#fff",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
-                    }}
-                  />
-                </span>
-                <span style={{ color: isPlayful ? theme.pastel5 : theme.accent, fontWeight: 800, transition: "color 0.4s" }}>DUCT</span>
+
+              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: isMobile ? "8px" : "16px" }}>
+                <span style={{ color: theme.accent, fontWeight: 800 }}>UI/UX</span>
               </motion.span>
               <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: "-0.05em" }}>
                 DES
@@ -442,24 +409,6 @@ export default function Home({ theme, mode, setRoute }) {
               </div>
             </Reveal>
           </div>
-
-          <Reveal delay={0.8}>
-            <div style={{
-              position: "relative", zIndex: 15,
-              display: "flex", flexDirection: "column", alignItems: "center", gap: 8,
-              padding: isMobile ? "30px 0 24px" : "20px 0 40px",
-            }}>
-              <div style={{ fontFamily: "Inter", fontSize: 11, letterSpacing: "0.2em", color: theme.inkMute, textTransform: "uppercase" }}>
-                Scroll
-              </div>
-              <motion.div
-                animate={reduced ? { y: 0 } : { y: [0, 8, 0] }}
-                transition={reduced ? undefined : { duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <ChevronDown size={20} color={theme.inkMute} />
-              </motion.div>
-            </div>
-          </Reveal>
         </div>
       </section>
 

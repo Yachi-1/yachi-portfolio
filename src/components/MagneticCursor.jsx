@@ -89,7 +89,7 @@ function CursorImpl({ theme, reduced }) {
       let x = ex;
       let y = ey;
       const r = magnetRect.current;
-      if (r) {
+      if (r && !reduced) {
         const cx = r.left + r.width / 2;
         const cy = r.top + r.height / 2;
         const s = magnetStrength.current;

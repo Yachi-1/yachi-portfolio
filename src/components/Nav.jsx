@@ -6,7 +6,6 @@ import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import ParticleLogo from "./ParticleLogo.jsx";
 
-const RESUME_URL = "https://drive.google.com/file/d/1kDuE4GTIChyBL2oi2pAQ3h94ZFRwhSXp/view?usp=sharing";
 
 const NAV_ITEMS = [
   { id: "home", label: "Home" },
@@ -58,7 +57,7 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
           paddingRight: isMobile ? 4 : 8,
         }}
       >
-        <ParticleLogo mode={mode} size={isMobile ? 32 : 40} playOnHover={true} playOnFirstVisit={true} isHovered={logoHovered} />
+        <ParticleLogo mode={mode} size={isMobile ? 32 : 40} playOnHover={true} playOnFirstVisit={!reduced} isHovered={reduced ? false : logoHovered} reducedMotion={reduced} />
       </button>
       {!isMobile && <div style={{ width: 1, height: 22, background: theme.line }} />}
       {NAV_ITEMS.map((it) => (
@@ -91,12 +90,13 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
     >
       <button
         onClick={() => {
-          if (it.id === "resume") {
-            window.open(RESUME_URL, "_blank");
-          } else if (route === it.id) {
+          if (route === it.id) {
             window.lenis?.scrollTo(0);
+            window.scrollTo(0, 0);
           } else {
             setRoute(it.id);
+            window.lenis?.scrollTo(0);
+            window.scrollTo(0, 0);
           }
         }}
         data-magnet="0.25"

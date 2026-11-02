@@ -53,10 +53,10 @@ export default function HeroCard({ children, staticContent, isMobile, floatDelay
       initial={initial}
       animate={animate}
       transition={transition}
-      whileHover={whileHover}
-      whileTap={whileTap}
-      whileDrag={whileDrag}
-      drag={drag}
+      whileHover={reduced ? undefined : whileHover}
+      whileTap={reduced ? undefined : whileTap}
+      whileDrag={reduced ? undefined : whileDrag}
+      drag={reduced ? false : drag}
       dragMomentum={dragMomentum}
       dragElastic={dragElastic}
       dragConstraints={dragConstraints}

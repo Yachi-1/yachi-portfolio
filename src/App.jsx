@@ -25,9 +25,16 @@ function isTouchDevice() {
   );
 }
 
-function useLenis(lenisRef) {
+function useLenis(lenisRef, reduced) {
   useEffect(() => {
-    if (isTouchDevice()) return;
+    if (isTouchDevice() || reduced) {
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+        window.lenis = null;
+      }
+      return;
+    }
 
     const lenis = new Lenis({
       duration: 1.2,
@@ -72,7 +79,7 @@ function useLenis(lenisRef) {
       lenisRef.current = null;
       window.lenis = null;
     };
-  }, [lenisRef]);
+  }, [lenisRef, reduced]);
 }
 
 function useFonts() {
@@ -147,7 +154,7 @@ export default function App() {
   const reduced = useA11yReducedMotion();
 
   const lenisRef = useRef(null);
-  useLenis(lenisRef);
+  useLenis(lenisRef, reduced);
   useFonts();
   useHideCursor();
   useTitle(route);
@@ -209,7 +216,7 @@ export default function App() {
             {route === "home" && <Home theme={theme} mode={mode} setRoute={setRoute} />}
             {route === "about" && <About theme={theme} mode={mode} />}
             {route === "projects" && <Projects theme={theme} mode={mode} setRoute={setRoute} />}
-            {route === "resume" && <Resume theme={theme} mode={mode} />}
+            {route === "resume" && <Resume theme={theme} mode={mode} setRoute={setRoute} />}
             {isProjectDetail && (
               <ProjectDetail id={projectId} theme={theme} mode={mode} setRoute={setRoute} />
             )}

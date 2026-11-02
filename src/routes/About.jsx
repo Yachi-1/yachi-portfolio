@@ -6,6 +6,7 @@ import Reveal from "../components/Reveal.jsx";
 import SectionDivider from "../components/SectionDivider.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import ResponsiveImage from "../components/ResponsiveImage.jsx";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 import heroImg from "../assets/Yachi_Main_Image.jpg?w=320;640;960&format=avif;webp;jpg&as=picture";
 import yachiImg1 from "../assets/Yachi_Image_1.jpeg?w=160;320&format=avif;webp;jpg&as=picture";
 import yachiImg2 from "../assets/Yachi_Image_2.jpg?w=160;320&format=avif;webp;jpg&as=picture";
@@ -49,7 +50,7 @@ export default function About({ theme, mode }) {
                   lineHeight: 1.65, color: theme.inkSoft, marginTop: 0,
                   letterSpacing: "-0.01em",
                 }}>
-                  Four years in, I've designed across <span style={{ background: theme.pastel2, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>healthcare</span>, <span style={{ background: theme.pastel3, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>e-commerce</span>, <span style={{ background: theme.pastel5, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>enterprise</span>, and <span style={{ background: theme.pastel4, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>AI</span>. Each one taught me that the hardest part of design isn't the pixels; it's the listening (to both users and the business). I move through the full arc: research, prototype, test, ship. Along the way, I create intuitive, high-impact experiences that improve usability, boost engagement, and drive measurable business value.
+                  2+ years in, I’ve designed across 10+ industries, including <span style={{ background: theme.pastel2, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>healthcare</span>, <span style={{ background: theme.pastel3, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>e-commerce</span>, <span style={{ background: theme.pastel5, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>fintech</span>, and <span style={{ background: theme.pastel4, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>AI</span>. Each one taught me that the hardest part of design isn’t the pixels; it’s the listening (to both users and the business). I move through the full arc: research, prototype, test, ship. Lately I pair user research with modern AI design tools to get from insight to polished, user-centered product faster.
                 </p>
 
                 <p style={{
@@ -57,7 +58,7 @@ export default function About({ theme, mode }) {
                   lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
                   letterSpacing: "-0.01em",
                 }}>
-                  I've worked across both ends of the spectrum: fast-paced startups like <span style={{ fontWeight: 600, color: theme.ink }}>Kinetic Potential</span>, where I juggled multiple projects at once, and larger companies like <span style={{ fontWeight: 600, color: theme.ink }}>Topline Switchgear</span>, where I went deep on a single domain. I'm comfortable in both worlds.
+                  I’ve worked across both ends of the spectrum: at <span style={{ fontWeight: 600, color: theme.ink }}>Kinetic Potential</span>, I designed end-to-end experiences and full design systems for four brands, each with its own identity. In academia at <span style={{ fontWeight: 600, color: theme.ink }}>UMBC</span>, I went deep on a single problem, helping study how underserved communities use generative AI for health information and designing three high-fidelity prototypes to test with them. I’m comfortable in both worlds.
                 </p>
 
                 <p style={{
@@ -65,7 +66,7 @@ export default function About({ theme, mode }) {
                   lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
                   letterSpacing: "-0.01em",
                 }}>
-                  Right now, I'm a <span style={{ fontWeight: 600, color: theme.ink }}>UX Researcher at University of Maryland, Baltimore County</span>, studying how generative AI can help underserved communities understand their medical records.
+                  Right now, I’m a <span style={{ fontWeight: 600, color: theme.ink }}>UI/UX Designer at Raik Technology</span>, designing websites, mobile apps, design systems and brand assets for clients in SaaS, AI, fintech, e-commerce, healthcare, and legal, from first requirements call to high-fidelity UI.
                 </p>
               </div>
             </Reveal>
@@ -103,6 +104,7 @@ export default function About({ theme, mode }) {
 }
 
 function PortraitFrame({ theme, mode, isMobile }) {
+  const reduced = useA11yReducedMotion();
   const sideImg1 = isMobile
     ? { width: 90, height: 110, top: "12%", left: -16 }
     : { width: 120, height: 145, top: "15%", left: -60 };
@@ -155,7 +157,7 @@ function PortraitFrame({ theme, mode, isMobile }) {
       </div>
 
       <motion.div
-        whileHover={isMobile ? undefined : { scale: 1.1, rotate: -5, zIndex: 10 }}
+        whileHover={isMobile || reduced ? undefined : { scale: 1.1, rotate: -5, zIndex: 10 }}
         style={{
           position: "absolute",
           top: sideImg1.top, left: sideImg1.left,
@@ -174,7 +176,7 @@ function PortraitFrame({ theme, mode, isMobile }) {
       </motion.div>
 
       <motion.div
-        whileHover={isMobile ? undefined : { scale: 1.1, rotate: 5, zIndex: 10 }}
+        whileHover={isMobile || reduced ? undefined : { scale: 1.1, rotate: 5, zIndex: 10 }}
         style={{
           position: "absolute",
           bottom: sideImg2.bottom, right: sideImg2.right,
@@ -263,6 +265,33 @@ function SkillJar({ theme, isMobile }) {
         }}
       >
         <GridPaper theme={theme} noMask={true} />
+
+        {/* Hint text — top of box, disappears when spilled */}
+        <AnimatePresence>
+          {!isSpilled && (
+            <motion.p
+              key="jar-hint"
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              style={{
+                position: "absolute",
+                top: 16,
+                left: 0, right: 0,
+                textAlign: "center",
+                fontFamily: "Inter",
+                fontSize: 12,
+                color: theme.inkMute,
+                margin: 0,
+                pointerEvents: "none",
+                zIndex: 2,
+              }}
+            >
+              Click on the jar to view all skills.
+            </motion.p>
+          )}
+        </AnimatePresence>
         <motion.div
           role="button"
           tabIndex={isSpilled ? -1 : 0}
@@ -286,7 +315,7 @@ function SkillJar({ theme, isMobile }) {
             borderRadius: "20px 20px 60px 60px",
             position: "relative",
             zIndex: isSpilled ? 0 : 10,
-            marginBottom: isMobile ? 30 : 40,
+            marginTop: isMobile ? 30 : 50,
             cursor: isSpilled ? "default" : "pointer",
             pointerEvents: isSpilled ? "none" : "auto",
             boxShadow: "inset 0 0 20px rgba(255,255,255,0.2), 0 10px 30px rgba(0,0,0,0.05)"
@@ -365,12 +394,7 @@ function SkillJar({ theme, isMobile }) {
         </AnimatePresence>
       </div>
 
-      <p style={{
-        fontFamily: "Inter", fontSize: 12, color: theme.inkMute,
-        marginTop: 12, textAlign: "center"
-      }}>
-        {isSpilled ? "A collection of my technical skills." : "Click on the jar to view all skills."}
-      </p>
+
     </div>
   );
 }
@@ -388,13 +412,7 @@ function JourneyRoadmap({ theme, isMobileOrTablet, isMobile }) {
       text: "Built a foundation in software engineering, databases, and web technologies. First exposure to user-centered thinking.",
       icon: GraduationCap, color: "pastel2",
     },
-    {
-      stage: "Industry", year: "Jan 2021 - July 2023",
-      title: "Product Designer",
-      org: "Topline Switchgear Pvt. Ltd. · India",
-      text: "Designed an end-to-end ERP experience unifying 30+ manufacturing processes, improving workflow efficiency by 45% and reducing manual effort by 50%. Led 15 stakeholder discovery sessions and created 30+ high-fidelity prototypes.",
-      icon: Briefcase, color: "pastel3",
-    },
+
     {
       stage: "Education", year: "Aug 2023 - May 2025",
       title: "M.S. Human-Centered Computing",
@@ -406,15 +424,22 @@ function JourneyRoadmap({ theme, isMobileOrTablet, isMobile }) {
       stage: "Industry", year: "Oct 2024 - Sept 2025",
       title: "UI/UX Designer",
       org: "Kinetic Potential · USA",
-      text: "Designed end-to-end user experiences across 4 brand touchpoints. Led UX research spanning stakeholder interviews, competitive analysis, and surveys. Achieved a 60% improvement in task completion rates.",
+      text: "Designed end-to-end experiences for 4 brands, each with its own design system and brand guidelines. Led UX research through stakeholder interviews, competitive analysis, personas and heuristic evaluations, then validated responsive designs through usability testing before developer handoff.",
       icon: Briefcase, color: "pastel1",
     },
     {
-      stage: "Research", year: "Jan 2025 - Present",
+      stage: "Research", year: "Jan 2025 - June 2026",
       title: "UX Researcher",
       org: "University of Maryland, Baltimore County · USA",
-      text: "Conducting informant interviews with underserved populations in Baltimore. Designed high-fidelity prototypes for 3 generative AI tool concepts. Presented prototypes across 6 focus group sessions.",
+      text: "Collaborated on a human-centered study of how underserved communities use generative AI for health information, contributing to 5 key informant interviews, 6 focus groups and co-design sessions. Independently designed 3 high-fidelity prototypes and expanded the preferred one into a full onboarding-to-dashboard experience.",
       icon: FlaskConical, color: "pastel4",
+    },
+    {
+      stage: "Industry", year: "July 2026 - Present",
+      title: "UI/UX Designer",
+      org: "Raik Technology · India",
+      text: "Designing websites, mobile apps and digital products across 10+ industries, including SaaS, AI, fintech, e-commerce, healthcare and legal. Leading the full process from client requirements and mood boards to user flows, wireframes and high-fidelity UI, plus logos, design systems and brand assets.",
+      icon: Briefcase, color: "pastel3",
     },
   ];
 

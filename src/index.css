@@ -21,11 +21,22 @@ body {
 [data-a11y-reduced-motion="true"] *,
 [data-a11y-reduced-motion="true"] *::before,
 [data-a11y-reduced-motion="true"] *::after {
-  animation-duration: 0s !important;
+  animation: none !important;
+  animation-duration: 0.001ms !important;
   animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition: none !important;
   transition-duration: 0s !important;
   transition-delay: 0s !important;
   scroll-behavior: auto !important;
+}
+
+[data-a11y-reduced-motion="true"] a:hover,
+[data-a11y-reduced-motion="true"] button:hover,
+[data-a11y-reduced-motion="true"] footer a:hover,
+[data-a11y-reduced-motion="true"] footer button:hover,
+[data-a11y-reduced-motion="true"] footer span:hover {
+  transform: none !important;
 }
 
 /* Readable Font (Lexend — designed for readability) */

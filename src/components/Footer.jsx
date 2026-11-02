@@ -4,7 +4,8 @@ import { Mail, Linkedin, Heart } from "lucide-react";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import ParticleLogo from "./ParticleLogo.jsx";
 
-const RESUME_URL = "https://drive.google.com/file/d/1kDuE4GTIChyBL2oi2pAQ3h94ZFRwhSXp/view?usp=sharing";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
+
 
 const QUICK_LINKS = [
   { id: "home", label: "Home" },
@@ -13,15 +14,19 @@ const QUICK_LINKS = [
   { id: "resume", label: "Resume" },
 ];
 
-function makeHoverHandlers(theme) {
+function makeHoverHandlers(theme, reduced) {
   return {
     onMouseEnter: (e) => {
       e.currentTarget.style.color = theme.accent;
-      e.currentTarget.style.transform = "translateX(4px)";
+      if (!reduced) {
+        e.currentTarget.style.transform = "translateX(4px)";
+      }
     },
     onMouseLeave: (e) => {
       e.currentTarget.style.color = theme.ink;
-      e.currentTarget.style.transform = "translateX(0)";
+      if (!reduced) {
+        e.currentTarget.style.transform = "translateX(0)";
+      }
     },
     onMouseDown: (e) => {
       e.currentTarget.style.color = theme.pastel1;
@@ -34,7 +39,8 @@ function makeHoverHandlers(theme) {
 
 export default function Footer({ theme, mode, setRoute }) {
   const { isMobile, isTablet } = useBreakpoint();
-  const hoverHandlers = makeHoverHandlers(theme);
+  const reduced = useA11yReducedMotion();
+  const hoverHandlers = makeHoverHandlers(theme, reduced);
   const [logoHovered, setLogoHovered] = useState(false);
 
   const linkBaseStyle = {
@@ -46,7 +52,8 @@ export default function Footer({ theme, mode, setRoute }) {
     alignItems: "center",
     gap: 8,
     padding: isMobile ? "6px 0" : 0,
-    transition: "color 0.2s ease, transform 0.2s ease",
+    transition: reduced ? "none" : "color 0.2s ease, transform 0.2s ease",
+    transform: reduced ? "none" : undefined,
   };
 
   const buttonBaseStyle = {
@@ -58,7 +65,8 @@ export default function Footer({ theme, mode, setRoute }) {
     color: theme.ink,
     textAlign: isMobile ? "center" : "left",
     cursor: "pointer",
-    transition: "color 0.2s ease, transform 0.2s ease",
+    transition: reduced ? "none" : "color 0.2s ease, transform 0.2s ease",
+    transform: reduced ? "none" : undefined,
   };
 
   return (
@@ -82,14 +90,14 @@ export default function Footer({ theme, mode, setRoute }) {
             <button 
               aria-label="Home"
               style={{ display: "flex", justifyContent: isMobile ? "center" : "flex-start", alignItems: "center", gap: 10, marginBottom: isMobile ? 24 : 16, cursor: "pointer", background: "transparent", border: "none", padding: 0 }}
-              onMouseEnter={() => setLogoHovered(true)}
+              onMouseEnter={() => !reduced && setLogoHovered(true)}
               onMouseLeave={() => setLogoHovered(false)}
               onClick={() => {
                 setRoute("home");
                 window.lenis?.scrollTo(0);
               }}
             >
-              <ParticleLogo mode={mode || "light"} size={isMobile ? 54 : 48} playOnHover={true} isHovered={logoHovered} />
+              <ParticleLogo mode={mode || "light"} size={isMobile ? 54 : 48} playOnHover={true} isHovered={reduced ? false : logoHovered} reducedMotion={reduced} />
             </button>
             <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 14.5, color: theme.inkSoft, lineHeight: 1.6, maxWidth: 360, margin: 0, textAlign: isMobile ? "center" : "left" }}>
               Product designer. Currently shaping the next chapter of human-centered AI.
@@ -105,14 +113,11 @@ export default function Footer({ theme, mode, setRoute }) {
                 <button
                   key={l.id}
                   onClick={() => {
-                    if (l.id === "resume") {
-                      window.open(RESUME_URL, "_blank");
-                    } else {
-                      setRoute(l.id);
-                      window.lenis?.scrollTo(0);
-                    }
+                    setRoute(l.id);
+                    window.lenis?.scrollTo(0);
+                    window.scrollTo(0, 0);
                   }}
-                  data-magnet="0.2"
+                  data-magnet={reduced ? undefined : "0.2"}
                   style={buttonBaseStyle}
                   {...hoverHandlers}
                 >
@@ -129,7 +134,7 @@ export default function Footer({ theme, mode, setRoute }) {
             <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 10, alignItems: isMobile ? "center" : "flex-start" }}>
               <a
                 href="mailto:yachi883@gmail.com"
-                data-magnet="0.2"
+                data-magnet={reduced ? undefined : "0.2"}
                 style={linkBaseStyle}
                 {...hoverHandlers}
               >
@@ -139,7 +144,7 @@ export default function Footer({ theme, mode, setRoute }) {
                 href="https://linkedin.com/in/yachi-patel/"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-magnet="0.2"
+                data-magnet={reduced ? undefined : "0.2"}
                 style={linkBaseStyle}
                 {...hoverHandlers}
               >
@@ -175,13 +180,13 @@ export default function Footer({ theme, mode, setRoute }) {
           {"YACHI".split("").map((char, i) => (
             <motion.span
               key={i}
-              whileHover={{
+              whileHover={reduced ? undefined : {
                 scale: 1.15,
                 opacity: 0.5,
                 color: [theme.pastel3, theme.pastel2, theme.pastel6, theme.pastel5, theme.pastel1][i],
                 textShadow: `0 0 40px ${[theme.pastel3, theme.pastel2, theme.pastel6, theme.pastel5, theme.pastel1][i]}60`,
               }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 15 }}
               style={{
                 fontFamily: "Inter", fontSize: "clamp(80px, 22vw, 360px)",
                 fontWeight: 500, letterSpacing: "-0.06em", color: theme.ink,

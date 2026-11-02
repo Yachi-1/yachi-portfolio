@@ -66,12 +66,7 @@ export default function FolderProjects({ theme, mode, setRoute }) {
           />
         )}
 
-        <p style={{
-          fontFamily: "Inter", fontSize: 12, color: theme.inkMute,
-          marginTop: isMobile ? 24 : 32, textAlign: "center"
-        }}>
-          {isOpen ? "A collection of my selected work." : "Click on the portfolio folder to view all projects."}
-        </p>
+
       </div>
     </section>
   );
@@ -94,6 +89,33 @@ function DesktopFolder({ theme, mode, isOpen, setIsOpen, setRoute, reduced }) {
       margin: "0 auto"
     }}>
       <GridPaper theme={theme} noMask={true} />
+
+      {/* Hint text — top of box, disappears when open */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.p
+            key="hint"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            style={{
+              position: "absolute",
+              top: 20,
+              left: 0, right: 0,
+              textAlign: "center",
+              fontFamily: "Inter",
+              fontSize: 12,
+              color: theme.inkMute,
+              margin: 0,
+              pointerEvents: "none",
+              zIndex: 2,
+            }}
+          >
+            Click on the portfolio folder to view all projects.
+          </motion.p>
+        )}
+      </AnimatePresence>
       {/* Moodboard stickers - only visible when closed */}
       <AnimatePresence>
         {!isOpen && STICKERS.map((s, i) => (
@@ -425,7 +447,7 @@ function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, 
       <motion.div
         animate={isOpen && !reduced ? { y: floatY } : { y: 0 }}
         transition={isOpen && !reduced ? { duration: floatDuration, repeat: Infinity, ease: "easeInOut" } : { duration: 0.3 }}
-        whileHover={isOpen ? { scale: 1.05 } : {}}
+        whileHover={isOpen && !reduced ? { scale: 1.05 } : {}}
       >
         <ProjectThumb p={p} theme={theme} mode={mode} size={150} isHovered={isHovered} />
         <motion.div

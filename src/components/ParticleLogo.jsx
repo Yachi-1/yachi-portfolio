@@ -1,12 +1,17 @@
 import { useEffect, useRef } from "react";
 import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
-export default function ParticleLogo({ mode, size = 40, playOnHover = false, isHovered = false, playOnFirstVisit = false }) {
+export default function ParticleLogo({ mode, size = 40, playOnHover = false, isHovered = false, playOnFirstVisit = false, reducedMotion: propReducedMotion }) {
   const canvasRef = useRef(null);
   const hoverState = useRef({ playing: false, start: 0 });
-  const reducedMotion = useA11yReducedMotion();
+  const hookReducedMotion = useA11yReducedMotion();
+  const reducedMotion = propReducedMotion !== undefined ? propReducedMotion : hookReducedMotion;
 
   useEffect(() => {
+    if (reducedMotion) {
+      hoverState.current.playing = false;
+      return;
+    }
     if (playOnFirstVisit) {
       if (!sessionStorage.getItem("yp_logo_played_session")) {
         hoverState.current.playing = true;
@@ -14,14 +19,18 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
         sessionStorage.setItem("yp_logo_played_session", "true");
       }
     }
-  }, [playOnFirstVisit]);
+  }, [playOnFirstVisit, reducedMotion]);
 
   useEffect(() => {
+    if (reducedMotion) {
+      hoverState.current.playing = false;
+      return;
+    }
     if (playOnHover && isHovered && !hoverState.current.playing) {
       hoverState.current.playing = true;
       hoverState.current.start = performance.now();
     }
-  }, [isHovered, playOnHover]);
+  }, [isHovered, playOnHover, reducedMotion]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -200,7 +209,20 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
       return 1;
     }
 
+    function drawStatic() {
+      if (!cleanTextCanvas) return;
+      ctx.clearRect(0, 0, W, H);
+      const padding = W * 0.05;
+      const drawSize = W * 0.9;
+      ctx.drawImage(cleanTextCanvas, padding, padding, drawSize, drawSize);
+    }
+
     function frame(now) {
+      if (reducedMotion) {
+        drawStatic();
+        return;
+      }
+
       // Skip all work while off-screen / tab hidden, or while the hover logo is
       // at rest and its static frame has already been drawn. Keep a cheap rAF
       // alive to resume instantly when state changes.
@@ -282,15 +304,15 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
     let started = false;
     function tryBuild() {
       if (!imgOk) return;
-      if (resize() && !started) {
+      if (resize()) {
         if (reducedMotion) {
-          // Draw static final state
-          // Fast-forward to the end of the text hold phase
-          frame(performance.now() + PHASE.sphereHold + PHASE.form + PHASE.textHold - 100);
+          drawStatic();
           return;
         }
-        started = true;
-        animationFrameId = requestAnimationFrame(frame);
+        if (!started) {
+          started = true;
+          animationFrameId = requestAnimationFrame(frame);
+        }
       }
     }
 

@@ -7,9 +7,11 @@ import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import GridPaper from "../components/GridPaper.jsx";
 import { prefetchCaseStudy } from "../utils/prefetchCaseStudy.js";
+import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 export default function Projects({ theme, mode, setRoute }) {
   const { isMobile, isTablet } = useBreakpoint();
+  const reduced = useA11yReducedMotion();
 
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130, paddingBottom: 100, position: "relative" }}>
@@ -40,7 +42,7 @@ export default function Projects({ theme, mode, setRoute }) {
         }}>
           {projects.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.05}>
-              <ProjectCard p={p} theme={theme} mode={mode} setRoute={setRoute} isMobile={isMobile} isTablet={isTablet} />
+              <ProjectCard p={p} theme={theme} mode={mode} setRoute={setRoute} isMobile={isMobile} isTablet={isTablet} reduced={reduced} />
             </Reveal>
           ))}
         </div>
@@ -49,7 +51,7 @@ export default function Projects({ theme, mode, setRoute }) {
   );
 }
 
-function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
+function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet, reduced }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -74,10 +76,10 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet }) {
           window.lenis?.scrollTo(0);
         }
       }}
-      onHoverStart={() => { setIsHovered(true); prefetchCaseStudy(p.id); }}
+      onHoverStart={() => { if (!reduced) { setIsHovered(true); } prefetchCaseStudy(p.id); }}
       onHoverEnd={() => setIsHovered(false)}
-      whileHover={{ y: -10 }}
-      transition={{ type: "spring", stiffness: 260, damping: 24 }}
+      whileHover={reduced ? undefined : { y: -10 }}
+      transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 24 }}
       style={{
         cursor: "pointer",
         display: "flex",
