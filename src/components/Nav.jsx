@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 import { Sun, Moon } from "lucide-react";
 import { useState } from "react";
-import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import { useBreakpoint, useMediaQuery } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 import ParticleLogo from "./ParticleLogo.jsx";
 
@@ -17,13 +17,14 @@ const NAV_ITEMS = [
 export default function Nav({ theme, mode, setMode, route, setRoute }) {
   const reduced = useA11yReducedMotion();
   const { isMobile, isTablet } = useBreakpoint();
+  const isNarrow = useMediaQuery("(max-width: 359px)");
   const [logoHovered, setLogoHovered] = useState(false);
 
-  const padding = isMobile ? "6px 6px 6px 14px" : isTablet ? "7px 7px 7px 18px" : "8px 8px 8px 22px";
+  // Phone values scale with the viewport so all items fit down to 320px.
+  const padding = isMobile ? "6px 6px 6px clamp(6px, 2.5vw, 14px)" : isTablet ? "7px 7px 7px 18px" : "8px 8px 8px 22px";
   const top = isMobile ? 14 : 22;
-  const itemPadding = isMobile ? "6px 10px" : "8px 14px";
-  const itemFontSize = isMobile ? 12 : isTablet ? 13 : 13.5;
-  const logoFontSize = isMobile ? 22 : 24;
+  const itemPadding = isMobile ? "8px clamp(5px, 2vw, 10px)" : "8px 14px";
+  const itemFontSize = isMobile ? "clamp(11.5px, 3.2vw, 12px)" : isTablet ? 13 : 13.5;
 
   return (
     <motion.nav
@@ -32,7 +33,8 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       style={{
         position: "fixed", top, left: "50%", translateX: "-50%",
-        zIndex: 100, display: "flex", alignItems: "center", gap: isMobile ? 4 : 8,
+        zIndex: 100, display: "flex", alignItems: "center", gap: isMobile ? "clamp(1px, 1vw, 4px)" : 8,
+        width: "max-content",
         padding,
         background: theme.glass,
         backdropFilter: "blur(12px) saturate(140%)",
@@ -54,10 +56,11 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
         style={{
           display: "flex", alignItems: "center", gap: 8,
           background: "transparent", border: "none", cursor: "pointer",
-          paddingRight: isMobile ? 4 : 8,
+          padding: isMobile ? "0 2px 0 0" : "1px 8px 1px 6px",
+          flexShrink: 0,
         }}
       >
-        <ParticleLogo mode={mode} size={isMobile ? 32 : 40} playOnHover={true} playOnFirstVisit={!reduced} isHovered={reduced ? false : logoHovered} reducedMotion={reduced} />
+        <ParticleLogo mode={mode} size={isNarrow ? 26 : isMobile ? 32 : 40} playOnHover={true} playOnFirstVisit={!reduced} isHovered={reduced ? false : logoHovered} reducedMotion={reduced} />
       </button>
       {!isMobile && <div style={{ width: 1, height: 22, background: theme.line }} />}
       {NAV_ITEMS.map((it) => (
@@ -80,6 +83,8 @@ export default function Nav({ theme, mode, setMode, route, setRoute }) {
 
 function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, itemFontSize }) {
   const [isHovered, setIsHovered] = useState(false);
+  // A tap would otherwise fire hover and leave the dropdown stuck open.
+  const canHover = useMediaQuery("(hover: hover)");
   const active = route === it.id || (it.id === "projects" && route.startsWith("project:"));
 
   return (
@@ -89,16 +94,7 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
       onMouseLeave={() => setIsHovered(false)}
     >
       <button
-        onClick={() => {
-          if (route === it.id) {
-            window.lenis?.scrollTo(0);
-            window.scrollTo(0, 0);
-          } else {
-            setRoute(it.id);
-            window.lenis?.scrollTo(0);
-            window.scrollTo(0, 0);
-          }
-        }}
+        onClick={() => setRoute(it.id)}
         data-magnet="0.25"
         style={{
           position: "relative",
@@ -114,7 +110,7 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
         {it.label}
       </button>
 
-      {it.id === "projects" && (
+      {it.id === "projects" && canHover && (
         <AnimatePresence>
           {isHovered && (
             <motion.div
@@ -126,7 +122,7 @@ function NavItem({ it, route, setRoute, theme, mode, isMobile, itemPadding, item
                 position: "absolute",
                 top: "100%",
                 left: "50%",
-                transform: "translateX(-50%)",
+                x: "-50%",
                 marginTop: 12,
                 padding: "8px",
                 background: theme.bg,
@@ -214,11 +210,18 @@ function DropdownItem({ p, route, setRoute, setIsHovered, theme, mode }) {
 }
 
 function ThemeToggle({ theme, mode, setMode, isMobile }) {
-  const W = isMobile ? 44 : 56;
+  const narrow = useMediaQuery("(max-width: 359px)");
+  const W = narrow ? 38 : isMobile ? 44 : 56;
   const H = isMobile ? 26 : 32;
-  const thumb = isMobile ? 22 : 28;
-  const xLight = 2;
-  const xDark = W - thumb - 2;
+  // The thumb is positioned inside the 1px border, so measure from the inner box
+  // and use the same gap on every side.
+  const BORDER = 1;
+  const GAP = 2;
+  const innerW = W - BORDER * 2;
+  const innerH = H - BORDER * 2;
+  const thumb = innerH - GAP * 2;
+  const xLight = GAP;
+  const xDark = innerW - thumb - GAP;
   return (
     <button
       onClick={() => setMode(mode === "light" ? "dark" : "light")}
@@ -228,7 +231,8 @@ function ThemeToggle({ theme, mode, setMode, isMobile }) {
       style={{
         position: "relative",
         width: W, height: H, borderRadius: 999,
-        border: `1px solid ${theme.line}`,
+        border: `${BORDER}px solid ${theme.line}`,
+        boxSizing: "border-box",
         background: mode === "light"
           ? `linear-gradient(135deg, ${theme.pastel2}, ${theme.pastel3})`
           : `linear-gradient(135deg, #1a1a2e, #16161d)`,
@@ -241,7 +245,7 @@ function ThemeToggle({ theme, mode, setMode, isMobile }) {
         animate={{ x: mode === "light" ? xLight : xDark, rotate: mode === "light" ? 0 : 360 }}
         transition={{ type: "spring", stiffness: 400, damping: 22 }}
         style={{
-          position: "absolute", top: (H - thumb) / 2, left: 0,
+          position: "absolute", top: GAP, left: 0,
           width: thumb, height: thumb, borderRadius: 999,
           background: mode === "light"
             ? `radial-gradient(circle at 30% 30%, #FFF8C4, #FFD66B)`

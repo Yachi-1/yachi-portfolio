@@ -10,7 +10,7 @@ const ITEMS = [
 ];
 
 export default function ApproachSection({ theme }) {
-  const { isMobile } = useBreakpoint();
+  const { isMobile, isMobileOrTablet } = useBreakpoint();
   return (
     <section style={{ padding: isMobile ? "80px 4vw" : "120px 6vw", background: theme.bgAlt, position: "relative" }}>
       <div style={{ maxWidth: 1400, margin: "0 auto" }}>
@@ -31,7 +31,7 @@ export default function ApproachSection({ theme }) {
             </p>
           </div>
         </Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(auto-fit, minmax(240px, 1fr))", gap: isMobile ? 12 : 20 }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(auto-fit, minmax(min(240px, 100%), 1fr))" : isMobileOrTablet ? "repeat(2, minmax(0, 1fr))" : "repeat(4, minmax(0, 1fr))", gap: isMobile ? 12 : 20 }}>
           {ITEMS.map((it, i) => {
             const Icon = it.icon;
             return (

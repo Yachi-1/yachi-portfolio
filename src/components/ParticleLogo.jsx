@@ -12,12 +12,10 @@ export default function ParticleLogo({ mode, size = 40, playOnHover = false, isH
       hoverState.current.playing = false;
       return;
     }
+    // Play the intro on every page load (not just once per session)
     if (playOnFirstVisit) {
-      if (!sessionStorage.getItem("yp_logo_played_session")) {
-        hoverState.current.playing = true;
-        hoverState.current.start = performance.now();
-        sessionStorage.setItem("yp_logo_played_session", "true");
-      }
+      hoverState.current.playing = true;
+      hoverState.current.start = performance.now();
     }
   }, [playOnFirstVisit, reducedMotion]);
 

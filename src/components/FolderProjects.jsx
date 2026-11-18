@@ -4,8 +4,7 @@ import Reveal from "./Reveal.jsx";
 import ProjectVisual from "./ProjectVisual.jsx";
 import GridPaper from "./GridPaper.jsx";
 import { projects } from "../data/projects.js";
-import { useBreakpoint } from "../hooks/useBreakpoint.js";
-import { prefetchCaseStudy } from "../utils/prefetchCaseStudy.js";
+import { useBreakpoint, useMediaQuery } from "../hooks/useBreakpoint.js";
 import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 const SCATTER_POSITIONS = [
@@ -24,6 +23,8 @@ const STICKERS = [];
 export default function FolderProjects({ theme, mode, setRoute }) {
   const [isOpen, setIsOpen] = useState(false);
   const { isMobile } = useBreakpoint();
+  // The desktop fan needs about 1140px of width; below that its cards get clipped.
+  const useCarousel = useMediaQuery("(max-width: 1199px)");
   const reduced = useA11yReducedMotion();
 
   return (
@@ -47,7 +48,7 @@ export default function FolderProjects({ theme, mode, setRoute }) {
           </div>
         </Reveal>
 
-        {isMobile ? (
+        {useCarousel ? (
           <MobileFolder
             theme={theme}
             mode={mode}
@@ -438,7 +439,7 @@ function DesktopProjectItem({ p, i, isOpen, floatY, floatDuration, theme, mode, 
         pointerEvents: isOpen ? "auto" : "none",
         transformOrigin: "bottom center"
       }}
-      onHoverStart={() => { if (isOpen) { setIsHovered(true); prefetchCaseStudy(p.id); } }}
+      onHoverStart={() => { if (isOpen) { setIsHovered(true); } }}
       onHoverEnd={() => isOpen && setIsHovered(false)}
       data-magnet="0"
       data-cursor="view"
@@ -474,7 +475,7 @@ function MobileProjectItem({ p, i, theme, mode, setRoute }) {
         if (p.pdfLink) window.open(p.pdfLink, "_blank");
         else setRoute(`project:${p.id}`);
       }}
-      onHoverStart={() => { setIsHovered(true); prefetchCaseStudy(p.id); }}
+      onHoverStart={() => { setIsHovered(true); }}
       onHoverEnd={() => setIsHovered(false)}
       initial={{ opacity: 0, scale: 0.85 }}
       animate={{ opacity: 1, scale: 1 }}

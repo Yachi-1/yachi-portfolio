@@ -1,5 +1,5 @@
 import { Download } from "lucide-react";
-import FloatingBlobs from "../components/FloatingBlobs.jsx";
+import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 
@@ -12,9 +12,16 @@ export default function Resume({ theme, mode }) {
       minHeight: "100vh",
       padding: isMobile ? "90px 4vw 80px" : "120px 6vw 120px",
       position: "relative",
-      overflow: "hidden",
+      // clip (not hidden) so the sticky background below keeps working
+      overflow: "clip",
     }}>
-      <FloatingBlobs theme={theme} />
+      {/* Same grid as the Home hero, held at screen height while scrolling so
+          the fade stays centred on what's visible instead of the tall page. */}
+      <div aria-hidden style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 0 }}>
+        <div style={{ position: "sticky", top: 0, height: "100vh" }}>
+          <GridPaper theme={theme} />
+        </div>
+      </div>
 
       <style>{`
         /* Disable print */
@@ -124,7 +131,9 @@ export default function Resume({ theme, mode }) {
               }}
             >
               <img
-                src="/resume-preview.png"
+                src="/resume-preview.webp"
+                width={1854}
+                height={2400}
                 alt="Yachi Patel Resume"
                 draggable={false}
                 style={{

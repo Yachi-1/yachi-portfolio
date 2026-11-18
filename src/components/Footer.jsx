@@ -51,7 +51,7 @@ export default function Footer({ theme, mode, setRoute }) {
     display: "inline-flex",
     alignItems: "center",
     gap: 8,
-    padding: isMobile ? "6px 0" : 0,
+    padding: isMobile ? "6px 0" : "3px 0",
     transition: reduced ? "none" : "color 0.2s ease, transform 0.2s ease",
     transform: reduced ? "none" : undefined,
   };
@@ -59,7 +59,7 @@ export default function Footer({ theme, mode, setRoute }) {
   const buttonBaseStyle = {
     background: "none",
     border: "none",
-    padding: isMobile ? "6px 0" : 0,
+    padding: isMobile ? "6px 0" : "3px 0",
     fontFamily: "Inter",
     fontSize: isMobile ? 16 : 15,
     color: theme.ink,
@@ -94,7 +94,6 @@ export default function Footer({ theme, mode, setRoute }) {
               onMouseLeave={() => setLogoHovered(false)}
               onClick={() => {
                 setRoute("home");
-                window.lenis?.scrollTo(0);
               }}
             >
               <ParticleLogo mode={mode || "light"} size={isMobile ? 54 : 48} playOnHover={true} isHovered={reduced ? false : logoHovered} reducedMotion={reduced} />
@@ -108,14 +107,12 @@ export default function Footer({ theme, mode, setRoute }) {
             <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: theme.inkMute, textTransform: "uppercase", marginBottom: isMobile ? 20 : 18 }}>
               Quick links
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 10, alignItems: isMobile ? "center" : "flex-start" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 4, alignItems: isMobile ? "center" : "flex-start" }}>
               {QUICK_LINKS.map(l => (
                 <button
                   key={l.id}
                   onClick={() => {
                     setRoute(l.id);
-                    window.lenis?.scrollTo(0);
-                    window.scrollTo(0, 0);
                   }}
                   data-magnet={reduced ? undefined : "0.2"}
                   style={buttonBaseStyle}
@@ -131,7 +128,7 @@ export default function Footer({ theme, mode, setRoute }) {
             <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.12em", color: theme.inkMute, textTransform: "uppercase", marginBottom: isMobile ? 20 : 18 }}>
               Connect
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 10, alignItems: isMobile ? "center" : "flex-start" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: isMobile ? 14 : 4, alignItems: isMobile ? "center" : "flex-start" }}>
               <a
                 href="mailto:yachi883@gmail.com"
                 data-magnet={reduced ? undefined : "0.2"}
@@ -188,7 +185,7 @@ export default function Footer({ theme, mode, setRoute }) {
               }}
               transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 15 }}
               style={{
-                fontFamily: "Inter", fontSize: "clamp(80px, 22vw, 360px)",
+                fontFamily: "Inter", fontSize: "clamp(56px, 18vw, 320px)",
                 fontWeight: 500, letterSpacing: "-0.06em", color: theme.ink,
                 opacity: 0.06, lineHeight: 0.85, cursor: "default",
                 display: "inline-block",

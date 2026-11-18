@@ -4,7 +4,7 @@ import { GraduationCap, Briefcase, FlaskConical } from "lucide-react";
 import GridPaper from "../components/GridPaper.jsx";
 import Reveal from "../components/Reveal.jsx";
 import SectionDivider from "../components/SectionDivider.jsx";
-import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import { useBreakpoint, useMediaQuery } from "../hooks/useBreakpoint.js";
 import ResponsiveImage from "../components/ResponsiveImage.jsx";
 import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 import heroImg from "../assets/Yachi_Main_Image.jpg?w=320;640;960&format=avif;webp;jpg&as=picture";
@@ -18,12 +18,10 @@ export default function About({ theme, mode }) {
       <section style={{ padding: isMobile ? "0 4vw 60px" : "0 6vw 100px", position: "relative" }}>
         <GridPaper theme={theme} />
         <div style={{ maxWidth: 1400, margin: "0 auto", position: "relative" }}>
-          <Reveal>
+          <div>
             <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 22 : 28, color: theme.accent }}>
               Hi, I'm Yachi ✿
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
             <h1 style={{
               fontFamily: "Inter", fontSize: "clamp(44px, 8vw, 120px)",
               fontWeight: 500, letterSpacing: isMobile ? "-0.03em" : "-0.045em",
@@ -33,43 +31,40 @@ export default function About({ theme, mode }) {
               Designer.<br />
               <em style={{ fontFamily: "'Caveat', cursive", fontStyle: "normal", color: theme.accent }}>Curious human.</em>
             </h1>
-          </Reveal>
+          </div>
 
           <div style={{
             marginTop: isMobile ? 50 : 80, display: "grid",
             gridTemplateColumns: isMobileOrTablet ? "1fr" : "minmax(280px, 1fr) minmax(320px, 1.4fr)",
-            gap: isMobile ? 50 : 60, alignItems: "start",
+            // Wider on desktop so the portrait's overhanging photo clears the text.
+            gap: isMobile ? 50 : isMobileOrTablet ? 60 : "clamp(90px, 8vw, 120px)", alignItems: "start",
           }}>
-            <Reveal delay={0.2}>
-              <PortraitFrame theme={theme} mode={mode} isMobile={isMobile} />
-            </Reveal>
-            <Reveal delay={0.3}>
-              <div>
-                <p style={{
-                  fontFamily: "Inter", fontSize: "clamp(16px, 1.4vw, 19px)",
-                  lineHeight: 1.65, color: theme.inkSoft, marginTop: 0,
-                  letterSpacing: "-0.01em",
-                }}>
-                  2+ years in, I’ve designed across 10+ industries, including <span style={{ background: theme.pastel2, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>healthcare</span>, <span style={{ background: theme.pastel3, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>e-commerce</span>, <span style={{ background: theme.pastel5, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>fintech</span>, and <span style={{ background: theme.pastel4, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>AI</span>. Each one taught me that the hardest part of design isn’t the pixels; it’s the listening (to both users and the business). I move through the full arc: research, prototype, test, ship. Lately I pair user research with modern AI design tools to get from insight to polished, user-centered product faster.
-                </p>
+            <PortraitFrame theme={theme} mode={mode} isMobile={isMobile} />
+            <div>
+              <p style={{
+                fontFamily: "Inter", fontSize: "clamp(16px, 1.4vw, 19px)",
+                lineHeight: 1.65, color: theme.inkSoft, marginTop: 0,
+                letterSpacing: "-0.01em",
+              }}>
+                2+ years in, I’ve designed across 10+ industries, including <span style={{ background: theme.pastel2, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>healthcare</span>, <span style={{ background: theme.pastel3, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>e-commerce</span>, <span style={{ background: theme.pastel5, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>fintech</span>, and <span style={{ background: theme.pastel4, padding: "1px 8px", borderRadius: 6, color: "#1A202C" }}>AI</span>. Each one taught me that the hardest part of design isn’t the pixels; it’s the listening (to both users and the business). I move through the full arc: research, prototype, test, ship. Lately I pair user research with modern AI design tools to get from insight to polished, user-centered product faster.
+              </p>
 
-                <p style={{
-                  fontFamily: "Inter", fontSize: "clamp(16px, 1.4vw, 19px)",
-                  lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
-                  letterSpacing: "-0.01em",
-                }}>
-                  I’ve worked across both ends of the spectrum: at <span style={{ fontWeight: 600, color: theme.ink }}>Kinetic Potential</span>, I designed end-to-end experiences and full design systems for four brands, each with its own identity. In academia at <span style={{ fontWeight: 600, color: theme.ink }}>UMBC</span>, I went deep on a single problem, helping study how underserved communities use generative AI for health information and designing three high-fidelity prototypes to test with them. I’m comfortable in both worlds.
-                </p>
+              <p style={{
+                fontFamily: "Inter", fontSize: "clamp(16px, 1.4vw, 19px)",
+                lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
+                letterSpacing: "-0.01em",
+              }}>
+                I’ve worked across both ends of the spectrum: at <span style={{ fontWeight: 600, color: theme.ink }}>Kinetic Potential</span>, I designed end-to-end experiences and full design systems for four brands, each with its own identity. In academia at <span style={{ fontWeight: 600, color: theme.ink }}>UMBC</span>, I went deep on a single problem, helping study how underserved communities use generative AI for health information and designing three high-fidelity prototypes to test with them. I’m comfortable in both worlds.
+              </p>
 
-                <p style={{
-                  fontFamily: "Inter", fontSize: "clamp(16px, 1.4vw, 19px)",
-                  lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
-                  letterSpacing: "-0.01em",
-                }}>
-                  Right now, I’m a <span style={{ fontWeight: 600, color: theme.ink }}>UI/UX Designer at Raik Technology</span>, designing websites, mobile apps, design systems and brand assets for clients in SaaS, AI, fintech, e-commerce, healthcare, and legal, from first requirements call to high-fidelity UI.
-                </p>
-              </div>
-            </Reveal>
+              <p style={{
+                fontFamily: "Inter", fontSize: "clamp(16px, 1.4vw, 19px)",
+                lineHeight: 1.65, color: theme.inkSoft, marginTop: 20,
+                letterSpacing: "-0.01em",
+              }}>
+                Right now, I’m a <span style={{ fontWeight: 600, color: theme.ink }}>UI/UX Designer at Raik Technology</span>, designing websites, mobile apps, design systems and brand assets for clients in SaaS, AI, fintech, e-commerce, healthcare, and legal, from first requirements call to high-fidelity UI.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -107,7 +102,7 @@ function PortraitFrame({ theme, mode, isMobile }) {
   const reduced = useA11yReducedMotion();
   const sideImg1 = isMobile
     ? { width: 90, height: 110, top: "12%", left: -16 }
-    : { width: 120, height: 145, top: "15%", left: -60 };
+    : { width: 120, height: 145, top: "15%", left: "max(-60px, -5vw)" };
   const sideImg2 = isMobile
     ? { width: 110, height: 85, bottom: "6%", right: -20 }
     : { width: 145, height: 110, bottom: "5%", right: -70 };
@@ -210,6 +205,8 @@ function PortraitFrame({ theme, mode, isMobile }) {
 
 function SkillJar({ theme, isMobile }) {
   const [isSpilled, setIsSpilled] = useState(false);
+  const { isTablet } = useBreakpoint();
+  const isSmallDesktop = useMediaQuery("(max-width: 1199px)");
 
   const categories = [
     { label: "Research", color: "pastel2", skills: ["Competitive Analysis", "Information Architecture", "Persona Creation", "User Surveys", "Focus Groups", "User Interviews", "Empathy Mapping", "Journey Mapping", "Storyboarding", "Heuristic Evaluation"] },
@@ -255,7 +252,7 @@ function SkillJar({ theme, isMobile }) {
       <div
         spellCheck={false}
         style={{
-          height: isMobile ? 460 : 400, width: "100%",
+          height: isMobile ? 460 : isTablet ? 500 : isSmallDesktop ? 440 : 400, width: "100%",
           background: `radial-gradient(circle at 20% 20%, ${theme.pastel2}28 0%, transparent 50%), radial-gradient(circle at 80% 80%, ${theme.pastel1}22 0%, transparent 50%), ${theme.card}`,
           borderRadius: isMobile ? 24 : 32,
           border: `1px solid ${theme.line}`,
@@ -358,10 +355,12 @@ function SkillJar({ theme, isMobile }) {
           {isSpilled && (
             <div style={{
               position: "absolute", inset: 0,
-              padding: isMobile ? "24px" : "40px",
-              display: "flex", flexWrap: "wrap", justifyContent: "center", alignContent: "center",
+              padding: isMobile ? "44px 20px 24px" : "40px",
+              // "safe" keeps the first rows reachable when the pills overflow and scroll.
+              display: "flex", flexWrap: "wrap", justifyContent: "center", alignContent: "safe center",
               gap: isMobile ? "8px" : "12px",
-              overflowY: isMobile ? "auto" : "visible",
+              overflowY: isSmallDesktop || isTablet || isMobile ? "auto" : "visible",
+              maxHeight: "100%",
               zIndex: 5
             }}>
               {allSkills.map((skill) => (
@@ -602,7 +601,7 @@ function RoadmapCard({ n, theme, compact }) {
         <span style={{
           padding: "3px 9px", borderRadius: 999,
           background: theme[n.color],
-          fontFamily: "Inter", fontSize: 10.5, fontWeight: 600,
+          fontFamily: "Inter", fontSize: 11, fontWeight: 600,
           color: "rgba(0,0,0,0.7)", letterSpacing: "0.04em", textTransform: "uppercase",
         }}>{n.stage}</span>
         <span style={{ fontFamily: "Inter", fontSize: 12, color: theme.inkMute }}>

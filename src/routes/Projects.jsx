@@ -6,7 +6,6 @@ import ProjectVisual from "../components/ProjectVisual.jsx";
 import { projects } from "../data/projects.js";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import GridPaper from "../components/GridPaper.jsx";
-import { prefetchCaseStudy } from "../utils/prefetchCaseStudy.js";
 import { useA11yReducedMotion } from "../hooks/useA11yReducedMotion.js";
 
 export default function Projects({ theme, mode, setRoute }) {
@@ -33,12 +32,12 @@ export default function Projects({ theme, mode, setRoute }) {
         </div>
       </section>
 
-      <section style={{ padding: isMobile ? "0 8vw" : "0 6vw", position: "relative", zIndex: 1 }}>
+      <section style={{ padding: isMobile ? "0 4vw" : "0 6vw", position: "relative", zIndex: 1 }}>
         <div style={{
           maxWidth: isMobile ? 600 : 1400, margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
-          gap: isMobile ? 16 : 32,
+          gridTemplateColumns: isMobile ? "repeat(auto-fit, minmax(min(150px, 100%), 1fr))" : isTablet ? "repeat(2, 1fr)" : "repeat(3, 1fr)",
+          gap: isMobile ? 14 : 32,
         }}>
           {projects.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.05}>
@@ -64,7 +63,6 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet, reduced }) 
           if (p.pdfLink) window.open(p.pdfLink, "_blank");
           else {
             setRoute(`project:${p.id}`);
-            window.lenis?.scrollTo(0);
           }
         }
       }}
@@ -73,10 +71,9 @@ function ProjectCard({ p, theme, mode, setRoute, isMobile, isTablet, reduced }) 
           window.open(p.pdfLink, "_blank");
         } else {
           setRoute(`project:${p.id}`);
-          window.lenis?.scrollTo(0);
         }
       }}
-      onHoverStart={() => { if (!reduced) { setIsHovered(true); } prefetchCaseStudy(p.id); }}
+      onHoverStart={() => { if (!reduced) { setIsHovered(true); } }}
       onHoverEnd={() => setIsHovered(false)}
       whileHover={reduced ? undefined : { y: -10 }}
       transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 260, damping: 24 }}

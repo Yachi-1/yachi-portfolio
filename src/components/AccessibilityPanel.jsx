@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Accessibility,
   X,
   RotateCcw,
   Pause,
@@ -61,6 +60,29 @@ function syncAttributes(s) {
 /* ═══════════════════════════════════════════
    Sub-components
    ═══════════════════════════════════════════ */
+
+// Universal access symbol: figure with outstretched arms inside a circle
+function UniversalAccessIcon({ size = 22, color = "currentColor" }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth={2.2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="4.5" r="2.2" fill={color} stroke="none" />
+      <path d="M4 9c2.6.8 5.3 1.2 8 1.2s5.4-.4 8-1.2" />
+      <path d="M12 10.2v4.6" />
+      <path d="M12 14.8l-3.2 6" />
+      <path d="M12 14.8l3.2 6" />
+    </svg>
+  );
+}
 
 function ToggleRow({ icon: Icon, label, active, onToggle, theme }) {
   return (
@@ -364,6 +386,8 @@ export default function AccessibilityPanel({ theme, mode }) {
         whileHover={settings.reducedMotion ? undefined : { scale: 1.08 }}
         whileTap={settings.reducedMotion ? undefined : { scale: 0.95 }}
         aria-label="Accessibility Settings"
+        aria-expanded={open}
+        aria-controls="a11y-panel"
         style={{
           position: "fixed",
           bottom: 24,
@@ -385,7 +409,7 @@ export default function AccessibilityPanel({ theme, mode }) {
           padding: 0,
         }}
       >
-        <Accessibility size={22} color="#ffffff" />
+        <UniversalAccessIcon size={28} color="#ffffff" />
         {activeCount > 0 && (
           <div
             style={{
@@ -435,6 +459,8 @@ export default function AccessibilityPanel({ theme, mode }) {
           <motion.div
             id="a11y-panel"
             ref={panelRef}
+            role="dialog"
+            aria-label="Accessibility settings"
             initial={{ x: 340, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 340, opacity: 0 }}
@@ -444,7 +470,7 @@ export default function AccessibilityPanel({ theme, mode }) {
               right: 16,
               bottom: 16,
               top: 16,
-              width: 320,
+              width: "min(320px, calc(100vw - 32px))",
               zIndex: 9999,
               borderRadius: 20,
               background: theme.bg,
@@ -479,7 +505,7 @@ export default function AccessibilityPanel({ theme, mode }) {
                 justifyContent: "center",
                 flexShrink: 0,
               }}>
-                <Accessibility size={18} color="#ffffff" />
+                <UniversalAccessIcon size={22} color="#ffffff" />
               </div>
               <div style={{ flex: 1 }}>
                 <div
@@ -504,7 +530,7 @@ export default function AccessibilityPanel({ theme, mode }) {
                     letterSpacing: "-0.01em"
                   }}
                 >
-                  Customize your browsing experience
+                  Customize your browsing
                 </div>
               </div>
               <button
@@ -529,6 +555,7 @@ export default function AccessibilityPanel({ theme, mode }) {
 
             {/* Scrollable Content */}
             <div
+              data-lenis-prevent
               style={{
                 flex: 1,
                 overflowY: "auto",

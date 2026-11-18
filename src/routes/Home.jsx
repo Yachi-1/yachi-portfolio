@@ -9,37 +9,31 @@ import SectionDivider from "../components/SectionDivider.jsx";
 import FolderProjects from "../components/FolderProjects.jsx";
 import ApproachSection from "../components/ApproachSection.jsx";
 import HeroCard from "../components/HeroCard.jsx";
-import { useBreakpoint } from "../hooks/useBreakpoint.js";
+import { useBreakpoint, useMediaQuery } from "../hooks/useBreakpoint.js";
 
 export default function Home({ theme, mode, setRoute }) {
   const reduced = useA11yReducedMotion();
-  const { isMobile, isTablet } = useBreakpoint();
+  const { isMobile, isTablet, isLaptop } = useBreakpoint();
+  // Dragging claims touch gestures, which would stop the page scrolling on touch tablets.
+  const canDrag = useMediaQuery("(hover: hover) and (pointer: fine)");
   const { scrollY } = useScroll();
 
-
-  // Parallax offsets
-  const parallax1 = useTransform(scrollY, [0, 1000], [0, -80]);
-  const parallax2 = useTransform(scrollY, [0, 1000], [0, -40]);
-  const parallax3 = useTransform(scrollY, [0, 1000], [0, -120]);
-  const parallax4 = useTransform(scrollY, [0, 1000], [0, -60]);
+  // Subtle parallax offsets that give depth without colliding with text on scroll
+  const parallax1 = useTransform(scrollY, [0, 800], [0, -30]);
+  const parallax2 = useTransform(scrollY, [0, 800], [0, -20]);
+  const parallax3 = useTransform(scrollY, [0, 800], [0, -35]);
+  const parallax4 = useTransform(scrollY, [0, 800], [0, -25]);
 
   return (
     <div style={{ position: "relative", paddingTop: isMobile ? 90 : 110 }}>
-      <section style={{ position: "relative", minHeight: isMobile ? "108vh" : "100vh", padding: isMobile ? "0 4vw" : "0 6vw", overflowX: "clip" }}>
+      <section style={{
+        position: "relative",
+        minHeight: isMobile ? undefined : "max(100vh, 760px)",
+        padding: isMobile ? "0 4vw" : isLaptop ? "0 3vw" : "0 5vw",
+        overflowX: "clip"
+      }}>
         <GridPaper theme={theme} />
         <div style={{ position: "relative", maxWidth: 1400, margin: "0 auto" }}>
-
-          {/* Name — pinned to top of hero */}
-          <Reveal delay={0.1}>
-            <div style={{
-              position: "absolute", top: isMobile ? 18 : 26, left: 0, right: 0,
-              textAlign: "center", zIndex: 10, pointerEvents: "none",
-              fontFamily: "'Caveat', cursive", fontSize: "clamp(32px, 5vw, 58px)",
-              fontWeight: 700, fontStyle: "normal", color: theme.accent, letterSpacing: "0.02em",
-            }}>
-              Yachi Patel
-            </div>
-          </Reveal>
 
           {/* Terminal card */}
           <HeroCard
@@ -47,7 +41,7 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, y: 40, rotate: 4, scale: isMobile ? 0.85 : 1 }}
             animate={{ opacity: 1, y: 0, rotate: 4, scale: isMobile ? 0.85 : 1 }}
             transition={{ delay: 0.6, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            drag={!isMobile} dragMomentum dragElastic={0.18}
+            drag={canDrag} dragMomentum dragElastic={0.18}
             whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: 5 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
@@ -66,9 +60,9 @@ export default function Home({ theme, mode, setRoute }) {
             }
             style={{
               zIndex: 6, cursor: isMobile ? "default" : "grab",
-              right: isMobile ? "-1%" : "4%",
-              top: isMobile ? 6 : 30,
-              width: isMobile ? 150 : 280,
+              right: isMobile ? "-1%" : isTablet ? "0%" : isLaptop ? "1%" : "3%",
+              top: isMobile ? 6 : isTablet ? 12 : 24,
+              width: isMobile ? "clamp(130px, 40vw, 150px)" : isTablet ? 200 : isLaptop ? 240 : 270,
               background: mode === "dark" ? "#2D2D3D" : "#2A2A2A",
               borderRadius: 12, overflow: "hidden",
               boxShadow: mode === "dark" ? "0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)" : "0 20px 60px rgba(0,0,0,0.12)",
@@ -94,19 +88,19 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, y: 40, rotate: -6, scale: isMobile ? 0.85 : 1 }}
             animate={{ opacity: 1, y: 0, rotate: -6, scale: isMobile ? 0.85 : 1 }}
             transition={{ delay: 0.7, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            drag={!isMobile} dragMomentum dragElastic={0.18}
+            drag={canDrag} dragMomentum dragElastic={0.18}
             whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, rotate: -3, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: -5 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
             style={{
               zIndex: 5, cursor: isMobile ? "default" : "grab",
-              left: isMobile ? "-2%" : "4%",
-              top: isMobile ? 4 : 10,
-              width: isMobile ? 205 : 280,
+              left: isMobile ? "-2%" : isTablet ? "0%" : isLaptop ? "1%" : "3%",
+              top: isMobile ? 4 : isTablet ? 8 : 16,
+              width: isMobile ? "clamp(165px, 50vw, 205px)" : isTablet ? 210 : isLaptop ? 240 : 270,
               background: mode === "dark" ? "#2B1A13" : "#FFE8D8",
               borderRadius: isMobile ? 16 : 24, overflow: "hidden",
-              padding: isMobile ? "10px 10px 12px" : "20px 20px 22px",
+              padding: isMobile ? "10px 10px 12px" : isLaptop ? "14px 14px 16px" : "20px 20px 22px",
               boxShadow: mode === "dark"
                 ? "0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,180,130,0.12)"
                 : "0 24px 60px rgba(200,100,50,0.12), inset 0 1px 0 rgba(255,255,255,0.8)",
@@ -136,7 +130,7 @@ export default function Home({ theme, mode, setRoute }) {
                 boxShadow: "0 4px 12px rgba(157,212,240,0.4), inset 0 1px 0 rgba(255,255,255,0.5)",
               }}>🎓</div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontFamily: "Inter", fontSize: isMobile ? 6.5 : 7.5, fontWeight: 800, letterSpacing: 0.8, textTransform: "uppercase", color: theme.inkMute, opacity: mode === "dark" ? 1 : 0.7, marginBottom: 3 }}>
+                <div style={{ fontFamily: "Inter", fontSize: isMobile ? 7.5 : 8, fontWeight: 800, letterSpacing: 0.8, textTransform: "uppercase", color: theme.inkMute, opacity: mode === "dark" ? 1 : 0.7, marginBottom: 3 }}>
                   Bachelor's
                 </div>
                 <div style={{ fontFamily: "Inter", fontSize: isMobile ? 9.5 : 11, fontWeight: 700, color: theme.ink, lineHeight: 1.2, marginBottom: 6 }}>
@@ -180,7 +174,7 @@ export default function Home({ theme, mode, setRoute }) {
                 boxShadow: "0 4px 12px rgba(200,100,50,0.25), inset 0 1px 0 rgba(255,255,255,0.5)",
               }}>👨‍🎓</div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ fontFamily: "Inter", fontSize: isMobile ? 6.5 : 7.5, fontWeight: 800, letterSpacing: 0.8, textTransform: "uppercase", color: theme.inkMute, opacity: mode === "dark" ? 1 : 0.7, marginBottom: 3 }}>
+                <div style={{ fontFamily: "Inter", fontSize: isMobile ? 7.5 : 8, fontWeight: 800, letterSpacing: 0.8, textTransform: "uppercase", color: theme.inkMute, opacity: mode === "dark" ? 1 : 0.7, marginBottom: 3 }}>
                   Master's
                 </div>
                 <div style={{ fontFamily: "Inter", fontSize: isMobile ? 9.5 : 11, fontWeight: 700, color: theme.ink, lineHeight: 1.2, marginBottom: 6 }}>
@@ -206,7 +200,7 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, scale: isMobile ? 0.75 : 0.8, rotate: -3 }}
             animate={{ opacity: 1, scale: isMobile ? 0.85 : 1, rotate: -3 }}
             transition={{ delay: 0.9, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            drag={!isMobile} dragMomentum dragElastic={0.18}
+            drag={canDrag} dragMomentum dragElastic={0.18}
             whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, rotate: -1, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: -2 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
@@ -222,23 +216,15 @@ export default function Home({ theme, mode, setRoute }) {
             }
             style={{
               zIndex: 7, cursor: isMobile ? "default" : "grab",
-              right: isMobile ? "-1%" : "8%",
-              bottom: isMobile ? 110 : 100,
-              width: isMobile ? 180 : 260,
-              padding: isMobile ? "8px 8px 6px" : "16px 16px 14px",
+              right: isMobile ? "-1%" : isTablet ? "1%" : isLaptop ? "2%" : "5%",
+              bottom: isMobile ? 8 : isTablet ? 16 : 28,
+              width: isMobile ? "clamp(160px, 48vw, 190px)" : isTablet ? 205 : isLaptop ? 230 : 255,
+              padding: isMobile ? "8px 8px 6px" : isLaptop ? "12px 12px 10px" : "16px 16px 14px",
               background: `linear-gradient(170deg, ${theme.pastel3} 0%, #FFDFA0 100%)`,
               borderRadius: 4,
               boxShadow: "0 14px 30px rgba(120,80,0,0.18), inset 0 1px 0 rgba(255,255,255,0.5), inset 0 -2px 4px rgba(0,0,0,0.04)",
             }}
           >
-            <div style={{
-              position: "absolute", top: -10, left: "50%", transform: "translateX(-50%) rotate(-2deg)",
-              width: isMobile ? 40 : 56, height: isMobile ? 14 : 18,
-              background: "rgba(255,255,255,0.75)",
-              border: "1px solid rgba(255,255,255,0.7)",
-              boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
-            }} />
-
             <div style={{ marginBottom: isMobile ? 8 : 14 }}>
               <div style={{ fontFamily: "'Caveat', cursive", fontSize: isMobile ? 16 : 24, fontWeight: 500, color: theme.accent, lineHeight: 1 }}>experience ✿</div>
             </div>
@@ -265,10 +251,10 @@ export default function Home({ theme, mode, setRoute }) {
                 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ fontFamily: "Inter", fontSize: isMobile ? 8.5 : 9.5, fontWeight: 700, color: "#3A2D00", lineHeight: 1.2 }}>{item.role}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 7 : 8.5, color: "#3A2D00", opacity: 0.85, lineHeight: 1.25 }}>@{item.company}</div>
+                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 8 : 8.5, color: "#3A2D00", opacity: 0.85, lineHeight: 1.25 }}>@{item.company}</div>
                 </div>
                 <div style={{
-                  fontFamily: "'SF Mono', monospace", fontSize: isMobile ? 5.5 : 6.5, fontWeight: 600,
+                  fontFamily: "'SF Mono', monospace", fontSize: isMobile ? 7 : 7.5, fontWeight: 600,
                   color: "#3A2D00",
                   background: "rgba(255,255,255,0.5)",
                   padding: isMobile ? "2px 4px" : "2px 5px", borderRadius: 4,
@@ -284,17 +270,17 @@ export default function Home({ theme, mode, setRoute }) {
             initial={{ opacity: 0, y: 30, rotate: 5, scale: isMobile ? 0.85 : 1 }}
             animate={{ opacity: 1, y: 0, rotate: 5, scale: isMobile ? 0.85 : 1 }}
             transition={{ delay: 1.0, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            drag={!isMobile} dragMomentum dragElastic={0.18}
+            drag={canDrag} dragMomentum dragElastic={0.18}
             whileHover={isMobile ? undefined : { scale: 1.15, zIndex: 25, transition: { type: "spring", stiffness: 260, damping: 20 } }}
             whileTap={isMobile ? { scale: 0.97, rotate: 6 } : undefined}
             whileDrag={{ scale: 1.06, zIndex: 30, cursor: "grabbing" }}
             data-cursor="drag" data-cursor-label="Drag"
             style={{
               zIndex: 4, cursor: isMobile ? "default" : "grab",
-              left: isMobile ? "1%" : "8%",
-              bottom: isMobile ? 90 : 60,
-              width: isMobile ? 130 : 200,
-              padding: isMobile ? 8 : 14,
+              left: isMobile ? "1%" : isTablet ? "1%" : isLaptop ? "2%" : "5%",
+              bottom: isMobile ? 8 : isTablet ? 16 : 28,
+              width: isMobile ? "clamp(120px, 36vw, 130px)" : isTablet ? 150 : isLaptop ? 175 : 195,
+              padding: isMobile ? 8 : isLaptop ? 10 : 14,
               background: mode === "dark" ? "#292936" : "#FFFFFF",
               borderRadius: isMobile ? 12 : 14, border: `1px solid ${theme.line}`,
               boxShadow: mode === "dark" ? "0 16px 50px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)" : "0 16px 50px rgba(0,0,0,0.08)",
@@ -343,12 +329,30 @@ export default function Home({ theme, mode, setRoute }) {
           <div style={{
             position: "relative", zIndex: 10,
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-            minHeight: isMobile ? "92vh" : "85vh", textAlign: "center",
-            paddingTop: isMobile ? 60 : 90,
+            minHeight: isMobile ? "90vh" : isTablet ? "85vh" : "82vh",
+            textAlign: "center",
+            paddingTop: isMobile ? 180 : isTablet ? 190 : 20,
+            paddingBottom: isMobile ? 160 : isTablet ? 170 : 40,
             pointerEvents: "none",
           }}>
+            {/* Name — pinned directly above UI/UX */}
+            <Reveal delay={0.1}>
+              <div style={{
+                fontFamily: "'Caveat', cursive",
+                fontSize: isMobile ? "clamp(26px, 6.5vw, 36px)" : isLaptop ? "clamp(32px, 3.2vw, 44px)" : "clamp(36px, 3.5vw, 52px)",
+                fontWeight: 700,
+                color: theme.accent,
+                letterSpacing: "0.02em",
+                marginBottom: isMobile ? 4 : 8,
+                textAlign: "center",
+                pointerEvents: "auto",
+              }}>
+                Yachi Patel
+              </div>
+            </Reveal>
 
             <motion.h1
+              aria-label="UI/UX Designer"
               initial="hidden"
               animate="visible"
               variants={{
@@ -357,10 +361,16 @@ export default function Home({ theme, mode, setRoute }) {
               }}
               style={{
                 fontFamily: "Inter, sans-serif",
-                fontSize: isMobile ? "clamp(46px, 12vw, 64px)" : "clamp(48px, 8vw, 130px)",
+                fontSize: isMobile
+                  ? "clamp(48px, 12.5vw, 66px)"
+                  : isTablet
+                  ? "clamp(52px, 7vw, 76px)"
+                  : isLaptop
+                  ? "clamp(60px, 6.4vw, 96px)"
+                  : "clamp(72px, 7vw, 120px)",
                 lineHeight: 1.05,
                 fontWeight: 700,
-                letterSpacing: isMobile ? "-0.03em" : "-0.05em",
+                letterSpacing: isMobile ? "-0.03em" : "-0.04em",
                 color: theme.ink,
                 margin: 0,
                 textAlign: "center",
@@ -368,20 +378,25 @@ export default function Home({ theme, mode, setRoute }) {
                 pointerEvents: "auto",
               }}>
 
-              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: isMobile ? "8px" : "16px" }}>
-                <span style={{ color: theme.accent, fontWeight: 800 }}>UI/UX</span>
+              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block" }}>
+                <span style={{ color: theme.accent }}>UI/UX</span>
               </motion.span>
-              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: "-0.05em" }}>
+              <motion.span variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 20 } } }} style={{ display: "block", marginTop: "-0.04em" }}>
                 DES
                 <motion.span
                   animate={reduced ? { opacity: 1 } : { opacity: [1, 0.4, 1] }}
                   transition={reduced ? undefined : { duration: 1.2, repeat: Infinity }}
                   style={{
-                    display: "inline-block", verticalAlign: "baseline",
-                    color: mode === "dark" ? "#9B84E8" : "#7B5EA7", fontSize: "0.9em",
+                    display: "inline-block",
+                    // Icon glyph spans y≈4–21 of its 24-unit box; lower the box so the
+                    // glyph's bottom sits on the baseline and its top meets cap height.
+                    verticalAlign: "-0.125em",
+                    margin: "0 0.02em",
+                    color: mode === "dark" ? "#9B84E8" : "#7B5EA7",
+                    lineHeight: 0,
                   }}
                 >
-                  <MousePointer2 size="0.7em" style={{ display: "inline", verticalAlign: "baseline" }} />
+                  <MousePointer2 size="1em" aria-hidden="true" style={{ display: "block" }} />
                 </motion.span>
                 GNER
               </motion.span>
@@ -389,9 +404,13 @@ export default function Home({ theme, mode, setRoute }) {
 
             <Reveal delay={0.45}>
               <p style={{
-                fontFamily: "Inter, sans-serif", fontSize: "clamp(14px, 1.4vw, 18px)",
-                color: theme.inkSoft, maxWidth: 520, margin: "32px auto 0",
-                lineHeight: 1.6, textAlign: "center",
+                fontFamily: "Inter, sans-serif",
+                fontSize: "clamp(13px, 1.3vw, 17px)",
+                color: theme.inkSoft,
+                maxWidth: 520,
+                margin: "24px auto 0",
+                lineHeight: 1.6,
+                textAlign: "center",
                 pointerEvents: "auto",
               }}>
                 Designing Digital Interfaces Since 2020
@@ -399,11 +418,11 @@ export default function Home({ theme, mode, setRoute }) {
             </Reveal>
 
             <Reveal delay={0.6}>
-              <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 24, pointerEvents: "auto" }}>
-                <MagneticButton theme={theme} primary style={{ padding: "12px 22px", fontSize: 13 }} onClick={() => { setRoute("projects"); window.lenis?.scrollTo(0); }}>
+              <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, alignItems: "center", marginTop: 20, pointerEvents: "auto" }}>
+                <MagneticButton theme={theme} primary style={{ padding: "12px 22px", fontSize: 13 }} onClick={() => { setRoute("projects"); }}>
                   See my work <ArrowRight size={14} />
                 </MagneticButton>
-                <MagneticButton theme={theme} style={{ padding: "12px 22px", fontSize: 13 }} onClick={() => { setRoute("about"); window.lenis?.scrollTo(0); }}>
+                <MagneticButton theme={theme} style={{ padding: "12px 22px", fontSize: 13 }} onClick={() => { setRoute("about"); }}>
                   About me
                 </MagneticButton>
               </div>
