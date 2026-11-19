@@ -40,6 +40,7 @@ function usePrefetchRoutes() {
   }, []);
 }
 import { useA11yReducedMotion } from "./hooks/useA11yReducedMotion.js";
+import { projects } from "./data/projects.js";
 import { resetScroll, scrollToTop } from "./utils/scroll.js";
 
 function isTouchDevice() {
@@ -169,8 +170,8 @@ function useTitle(route) {
     };
     if (route.startsWith("project:")) {
       const id = route.split(":")[1];
-      const formatTitle = (str) => str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-      document.title = `Yachi Patel · ${formatTitle(id)}`;
+      const project = projects.find((p) => p.id === id);
+      document.title = project ? `Yachi Patel · ${project.title}` : "Yachi Patel · Project not found";
     } else {
       document.title = titles[route] || "Yachi Patel · Portfolio";
     }

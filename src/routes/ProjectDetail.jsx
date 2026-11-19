@@ -6,6 +6,9 @@ const CASE_STUDIES = {
   contrarian: lazy(() => import("./AgentplaceCaseStudy.jsx")),
   remitflow: lazy(() => import("./AureliaCaseStudy.jsx")),
   vegas: lazy(() => import("./KiyarosaCaseStudy.jsx")),
+  herrmann: lazy(() => import("./WorkroomsCaseStudy.jsx")),
+  nellis: lazy(() => import("./IronvaleCaseStudy.jsx")),
+  kinetic: lazy(() => import("./HearthCaseStudy.jsx")),
 };
 
 export default function ProjectDetail({ id, theme, mode, setRoute }) {

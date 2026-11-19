@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
-import herrmannImg from "../assets/Herrmann_Cover.png?w=1200&format=webp&quality=80";
-import vegasImg from "../assets/Vegas_Tickets_Cover.png?w=1200&format=webp&quality=80";
-import contrarianImg from "../assets/Contrarian_Thinking_Cover.png?w=1200&format=webp&quality=80";
-import nellisImg from "../assets/Nellis_Auction_Cover.png?w=1200&format=webp&quality=80";
-import kpImg from "../assets/KP_Cover.png?w=1200&format=webp&quality=80";
-import remitflowImg from "../assets/Remit_Flow_Cover.png?w=1200&format=webp&quality=80";
+import herrmannImg from "../assets/Workrooms_Cover.png?w=1200&format=webp&quality=82";
+import vegasImg from "../assets/Kiyarosa_Cover.png?w=1200&format=webp&quality=82";
+import contrarianImg from "../assets/Agentplace_Cover.png?w=1200&format=webp&quality=82";
+import ironvaleImg from "../assets/Ironvale_Cover.png?w=1200&format=webp&quality=82";
+import kpImg from "../assets/Hearth_Cover.png?w=1200&format=webp&quality=82";
+import remitflowImg from "../assets/Aurelia_Cover.png?w=1200&format=webp&quality=82";
 
 const visualCardStyle = (theme) => ({
   position: "absolute",
@@ -16,12 +16,12 @@ const visualCardStyle = (theme) => ({
   border: `1px solid rgba(0,0,0,0.06)`,
 });
 
-export const VisualNellis = memo(function VisualNellis({ theme, hover }) {
+export const VisualIronvale = memo(function VisualIronvale({ theme, hover }) {
   return (
     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <motion.img
-        src={nellisImg}
-        alt="Nellis Auction Cover"
+        src={ironvaleImg}
+        alt="Ironvale contractor website cover"
         loading="lazy"
         animate={{ scale: hover ? 1.05 : 1.01 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -42,7 +42,7 @@ export const VisualContrarian = memo(function VisualContrarian({ theme, hover })
     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <motion.img
         src={contrarianImg}
-        alt="Contrarian Thinking Cover"
+        alt="Agentplace Dashboard UI Audit cover"
         loading="lazy"
         animate={{ scale: hover ? 1.05 : 1.01 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -63,7 +63,7 @@ export const VisualHerrmann = memo(function VisualHerrmann({ theme, hover }) {
     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <motion.img
         src={herrmannImg}
-        alt="Herrmann Brand Book Cover"
+        alt="Horizon Workrooms VR study cover"
         loading="lazy"
         animate={{ scale: hover ? 1.05 : 1.01 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -84,7 +84,7 @@ export const VisualVegas = memo(function VisualVegas({ theme, hover }) {
     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <motion.img
         src={vegasImg}
-        alt="Vegas Tickets Cover"
+        alt="Kiyarosa skincare store cover"
         loading="lazy"
         animate={{ scale: hover ? 1.05 : 1.01 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -107,7 +107,7 @@ export const VisualKinetic = memo(function VisualKinetic({ theme, hover }) {
     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <motion.img
         src={kpImg}
-        alt="Kinetic Potential Cover"
+        alt="Hearth shared inbox website cover"
         loading="lazy"
         animate={{ scale: hover ? 1.05 : 1.01 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -128,7 +128,7 @@ export const VisualRemitflow = memo(function VisualRemitflow({ theme, hover }) {
     <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
       <motion.img
         src={remitflowImg}
-        alt="Global Payout Cover"
+        alt="Aurelia hotel website cover"
         loading="lazy"
         animate={{ scale: hover ? 1.05 : 1.01 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
@@ -145,7 +145,7 @@ export const VisualRemitflow = memo(function VisualRemitflow({ theme, hover }) {
 });
 
 const VISUALS = {
-  nellis: VisualNellis,
+  nellis: VisualIronvale,
   contrarian: VisualContrarian,
   herrmann: VisualHerrmann,
   vegas: VisualVegas,
