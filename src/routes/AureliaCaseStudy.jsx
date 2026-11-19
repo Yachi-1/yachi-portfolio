@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import CaseSummary from "../components/CaseSummary.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
@@ -139,6 +140,43 @@ function Note({ children, theme }) {
 
 /* ── Page ──────────────────────────────────────────────── */
 
+// Hero content for the case study page.
+const SUMMARY = {
+  eyebrow: "UX/UI case study · Hospitality website",
+  title: "Aurelia: designing the",
+  accent: "long afternoon",
+  lede: "A direct-booking website for a boutique group of eight hotels across India, Southeast Asia and the Gulf, designed to feel calm and still be easy to book.",
+  meta: [
+    { k: "Role", v: "UX/UI designer, end to end" },
+    { k: "Scope", v: "5 desktop pages" },
+    { k: "Tools", v: "Figma" },
+    { k: "Type", v: "Concept project" },
+  ],
+  hero: { src: heroImg, w: 1200, h: 901, alt: "Aurelia home page hero: a lakeside hotel photo with the headline “Built for the long afternoon”, a booking bar for destination, dates and guests, and an open guest popover." },
+  problem: {
+    title: "Beautiful hotel sites are easy to admire and hard to book",
+    text: "Aurelia had to look premium and still answer three practical questions quickly, so guests book direct instead of going back to booking sites.",
+    points: [
+      ["Too many choices", "Eight houses in three regions and three house types; guests can’t pick a place they can’t picture."],
+      ["Low trust in booking direct", "Fear of hidden taxes and rate changes sends people back to booking sites."],
+      ["Hard-to-compare rooms", "A 42 sqm room and a 210 sqm private house need the same simple comparison cues."],
+    ],
+  },
+  approach: ["Discover", "Define personas + journey", "Sitemap and flows", "Wireframes → 5 pages", "Test plan + heuristic review"],
+  highlights: [
+    ["Mood and action in one view", "The booking bar overlaps the hero photo, and the guest popover states its rules up front to prevent errors."],
+    ["Place first, then product", "Every house card leads with where it is, and filters follow the group’s own types: Resorts, City, Retreats."],
+    ["One spec row for every room", "Size, guests, bed and view in the same order, so rooms compare without opening each one."],
+    ["Honest offers, no pressure", "“Reasons to book directly”: each offer states its one condition, with no countdowns or “only 2 left”."],
+  ],
+  stats: [["8", "hotels"], ["3", "regions"], ["5", "pages designed"]],
+  takeaway: "Transparency is both a brand strategy and a UX strategy. A strong visual container, the arch frame, can unify very different places, and contrast over photos has to be tested image by image.",
+  project: "Aurelia",
+  screensLabel: "All pages",
+  screens: PAGES.map((p) => ({ src: p.src, w: p.w, h: p.h, label: p.name })),
+  note: "Concept project: personas, research and testing are proposed, and no outcome metrics are claimed.",
+};
+
 export default function AureliaCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const idx = projects.findIndex((p) => p.id === PROJECT_ID);
@@ -154,64 +192,9 @@ export default function AureliaCaseStudy({ theme, mode, setRoute }) {
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 48px" : "0 6vw 72px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal>
-            <button
-              onClick={() => setRoute("projects")}
-              data-cursor="hover"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: "transparent", border: "none",
-                fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft,
-                cursor: "pointer", padding: "8px 6px", marginLeft: -6, marginBottom: 28,
-                transition: "color 0.2s ease, transform 0.2s ease",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}
-            >
-              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
-            </button>
-          </Reveal>
-
-          <Reveal delay={0.05}>
-            <Eyebrow color={theme.inkMute}>UX/UI case study · Hospitality website</Eyebrow>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-              Aurelia: designing the{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "1.08em" }}>long afternoon</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: theme.inkSoft, margin: 0, maxWidth: 820 }}>
-              A direct-booking website for a boutique group of eight hotels across India, Southeast Asia and the Gulf. The goal was to make it feel calm and still be easy to book.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
-              gap: isMobile ? 20 : 32,
-              marginTop: isMobile ? 36 : 52,
-              paddingTop: isMobile ? 24 : 32,
-              borderTop: `1px solid ${theme.line}`,
-            }}>
-              {META.map((m) => (
-                <div key={m.k}>
-                  <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15.5, fontWeight: 500, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
+      <CaseSummary {...SUMMARY} theme={theme} mode={mode} setRoute={setRoute}>
       {/* ── CHALLENGE ── */}
-      <section style={{ padding: sectionPad, background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
+      <section style={{ marginTop: isMobile ? 48 : 72, padding: sectionPad, background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <SectionTitle eyebrow="The challenge" title="Beautiful hotel sites are easy to admire and hard to book" intro="Aurelia had to look premium and still answer three practical questions quickly." theme={theme} isMobile={isMobile} />
           <div style={{ display: "grid", gridTemplateColumns: cols3, gap: 16, marginTop: isMobile ? 28 : 40 }}>
@@ -395,6 +378,8 @@ export default function AureliaCaseStudy({ theme, mode, setRoute }) {
           </Reveal>
         </div>
       </section>
+
+      </CaseSummary>
 
       {/* ── NEXT CASE ── */}
       {next && next.id !== PROJECT_ID && (

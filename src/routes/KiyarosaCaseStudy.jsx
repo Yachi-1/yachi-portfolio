@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, Minus, Plus } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import CaseSummary from "../components/CaseSummary.jsx";
+import SectionRail, { RAIL_GUTTER } from "../components/SectionRail.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
@@ -358,7 +360,7 @@ const SCREEN_GROUPS = [
   ] },
   { t: "Account", d: "Sign in, keep track of orders, and leave without losing anything.", screens: [
     { name: "Sign in", url: "kiyarosa/sign-in", img: scrSignIn, h: 667, points: ["Split screen: brand image with three member benefits", "Sign in / Create account toggle; email or phone", "Show password, keep me signed in, Google and Apple"], why: "Lists the benefits so signing in doesn’t feel like a chore." },
-    { name: "Create account", url: "kiyarosa/create-account", img: scrCreateAccount, h: 787, points: ["Name, email, phone (+91), password with an 8-character hint", "Optional skin type chips: Dry, Oily, Combination, Sensitive, Normal", "Terms checkbox and an opt-in for ritual guides"], why: "Short form, with personalisation that’s clearly optional." },
+    { name: "Create account", url: "kiyarosa/create-account", img: scrCreateAccount, h: 781, points: ["Name, email, phone (+91), password with an 8-character hint", "Optional skin type chips: Dry, Oily, Combination, Sensitive, Normal", "Terms checkbox and an opt-in for ritual guides"], why: "Short form, with personalisation that’s clearly optional." },
     { name: "Account overview", url: "kiyarosa/account", img: scrAccount, h: 1152, points: ["“namaste name” greeting with counts for orders, addresses and wishlist", "Latest order with a 4-step tracker and a “Being prepared” status", "Default address and saved UPI with Manage; wishlist teaser; help card"], why: "Answers “where’s my order?” first." },
     { name: "My orders", url: "kiyarosa/account/orders", img: scrOrders, h: 1223, points: ["Tabs: All, In progress, Delivered, Cancelled", "Actions depend on status: Track, Buy again, Write a review", "Cancelled orders confirm “refund processed”"], why: "Makes reordering, Arjun’s main job, a single click." },
     { name: "Addresses", url: "kiyarosa/account/addresses", img: scrAddresses, h: 1151, points: ["Home (default) and Work cards", "Edit, Set as default, Remove; add a new address"], why: "Saved once, used at every checkout." },
@@ -494,8 +496,8 @@ function ScrollFrame({ src, h, label, theme, shadow, maxH }) {
   );
 }
 
-function Section({ id, n, eyebrow, title, intro, children, alt, theme, isMobile }) {
-  const sectionPad = isMobile ? "56px 4vw" : "96px 6vw";
+function Section({ id, n, eyebrow, title, intro, children, alt, theme, isMobile, isMobileOrTablet }) {
+  const sectionPad = isMobile ? "56px 4vw" : isMobileOrTablet ? "96px 6vw" : `96px 6vw 96px ${RAIL_GUTTER}`;
   return (
     <section id={id} aria-labelledby={`${id}-title`} style={{ padding: sectionPad, background: alt ? theme.bgAlt : "transparent", borderTop: `1px solid ${theme.line}` }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
@@ -687,6 +689,43 @@ function PackDemo({ theme, isDark, isMobile }) {
 
 /* ═══════════════════════ Page ═══════════════════════ */
 
+// Hero content for the case study page.
+const SUMMARY = {
+  oneLineTitle: true,
+  title: "Kiyarosa: an Ayurvedic store built around",
+  accent: "concerns",
+  lede: "Shoppers often know their skin or hair problem but not the product that fixes it, and they’re wary of a “natural” brand they’ve never heard of. I have designed screens that show ingredients on every product card and make checkout feel safe.",
+  meta: [
+    { k: "Role", v: "UI/UX designer" },
+    { k: "Scope", v: "20 desktop screens" },
+    { k: "Explored", v: "4 homepage directions" },
+    { k: "Catalogue", v: "59 products · 4 collections" },
+  ],
+  hero: { src: heroImg, w: 2000, h: 875, alt: "The top of the Kiyarosa homepage: a pill navigation bar with a NEW badge on Concerns, and a hero photo of brass bowls of turmeric, saffron, sandalwood and aloe." },
+  problem: {
+    title: "Shoppers know their problem, not the product",
+    text: "People buying Ayurvedic skincare meet ingredients they can’t pronounce and have to trust a “natural” claim from a brand they don’t know. The store had to feel warm and botanical, and still work as well as the marketplaces they already use.",
+    points: [
+      ["Wrong way in", "A store organised only by category makes someone with hair fall translate their problem into its labels."],
+      ["Low trust", "Without ingredients and proof up front, shoppers hesitate or leave to check reviews elsewhere."],
+      ["Payment doubt", "Many shoppers trust UPI and cash on delivery more than cards with a new brand, and look for it from the start."],
+    ],
+  },
+  approach: ["Audit and structure", "4 homepage directions", "Choose against set criteria", "20 final screens", "Test plan + heuristic review"],
+  highlights: [
+    ["Concerns as a second way in", "Concerns sit in the main nav with a NEW badge, and share one row pattern with categories, so neither path feels secondary."],
+    ["Ingredients on every card", "Shoppers compare on the grid instead of across tabs, and the “natural” claim is backed up before the product page."],
+    ["One calm offer", "A single offer with its maths spelled out (₹700 · 3 bottles), no timers, and a free-shipping meter in the cart."],
+    ["Three-step checkout", "UPI first, cash on delivery always visible, a persistent summary with Change links, and a trust strip from Home to payment."],
+  ],
+  stats: [["4", "homepage directions"], ["20", "final screens"], ["59", "products"], ["3", "checkout steps"]],
+  takeaway: "Exploring four directions early, and judging them against criteria written down first, made the final choice easy to explain. Content carried the trust: ingredients and farm-to-jar steps did more than decoration.",
+  project: "Kiyarosa",
+  screensLabel: "All screens",
+  screens: SCREEN_GROUPS.flatMap((g) => g.screens.map((s) => ({ src: s.img, w: 1000, h: s.h, label: s.name }))),
+  note: "Concept project: research and usability testing are proposed plans, not completed studies.",
+};
+
 export default function KiyarosaCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const idx = projects.findIndex((p) => p.id === PROJECT_ID);
@@ -716,52 +755,16 @@ export default function KiyarosaCaseStudy({ theme, mode, setRoute }) {
     else el.scrollIntoView({ block: "start" });
   };
 
-  const sp = { theme, isMobile };
+  const sp = { theme, isMobile, isMobileOrTablet };
 
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 48px" : "0 6vw 72px" }}>
+      <CaseSummary {...SUMMARY} theme={theme} mode={mode} setRoute={setRoute}>
+      {!isMobileOrTablet && <SectionRail sections={SECTIONS} theme={theme} onJump={scrollTo} />}
+      {isMobileOrTablet && (
+      <section style={{ padding: isMobile ? "8px 4vw 40px" : "8px 6vw 56px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal>
-            <button
-              onClick={() => setRoute("projects")}
-              data-cursor="hover"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", border: "none", fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft, cursor: "pointer", padding: "8px 6px", marginLeft: -6, marginBottom: 28, transition: "color 0.2s ease, transform 0.2s ease" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}
-            >
-              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
-            </button>
-          </Reveal>
-          <Reveal delay={0.05}><Eyebrow color={theme.inkMute}>UX/UI case study · Ayurvedic skincare e-commerce</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-              Kiyarosa: an Ayurvedic store built around{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "1.08em" }}>concerns</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p style={{ ...body, fontSize: isMobile ? 16 : 19, margin: 0, maxWidth: 820 }}>
-              The work needed a store that feels like the brand, which is warm, botanical and rooted in Ayurveda. It also had to work as well as the big marketplaces Indian shoppers already use.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: isMobile ? 20 : 32, marginTop: isMobile ? 36 : 52, paddingTop: isMobile ? 24 : 32, borderTop: `1px solid ${theme.line}` }}>
-              {META.map((m) => (
-                <div key={m.k}>
-                  <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15.5, fontWeight: 500, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <div style={{ marginTop: isMobile ? 36 : 56, borderRadius: 20, overflow: "hidden", border: `1px solid ${theme.line}`, boxShadow: shadow }}>
-              <img src={heroImg} width={2000} height={875} alt="The top of the Kiyarosa homepage: a pill navigation bar with a NEW badge on Concerns, and a hero photo of brass bowls of turmeric, saffron, sandalwood and aloe under the tagline “Nature, Refined Into Beauty.”" fetchpriority="high" decoding="async" style={{ width: "100%", height: "auto", display: "block" }} />
-            </div>
-          </Reveal>
           <Reveal delay={0.1}>
             <nav aria-label="Case study sections" style={{ marginTop: isMobile ? 28 : 40 }}>
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -778,16 +781,10 @@ export default function KiyarosaCaseStudy({ theme, mode, setRoute }) {
           </Reveal>
         </div>
       </section>
+      )}
 
       {/* 1 ── OVERVIEW */}
       <Section {...sp} n={1} id="overview" eyebrow="The brief" title="Project overview" alt>
-        <Reveal>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 24 }}>
-            <Tag kind="designs" isDark={isDark}>From the designs: seen in the screens</Tag>
-            <Tag kind="proposed" isDark={isDark}>Proposed: a plan, not yet run</Tag>
-            <Tag kind="assumption" isDark={isDark}>Assumption: filled in where the files are silent</Tag>
-          </div>
-        </Reveal>
         <div style={{ display: "grid", gridTemplateColumns: cols2, gap: 16 }}>
           <Reveal><Card theme={theme}><Tag kind="designs" isDark={isDark}>From the designs</Tag><div style={{ ...cardTitle, marginTop: 12 }}>The product</div><div style={body}>Kiyarosa sells 59 products in four collections: Oil &amp; Hair (12), Lip &amp; Make Up (16), Body Care (18) and Face Cream (13). The range is also mapped to six concerns: uneven tone, acne, oiliness, wrinkles, hair fall and dandruff. Prices run from ₹300 to ₹800. The store offers free shipping over ₹999, cash on delivery across India, and a standing Buy 2 Get 1 Free offer.</div></Card></Reveal>
           <Reveal delay={0.05}><Card theme={theme}><Tag kind="assumption" isDark={isDark}>Assumption</Tag><div style={{ ...cardTitle, marginTop: 12 }}>Background</div><div style={body}>The files don’t include a written brief. I’ve assumed a direct-to-consumer brand moving from marketplaces and social selling to its own store, with three needs: tell the Ayurvedic story, help shoppers who arrive with a skin or scalp problem, and make paying feel safe for people who often prefer cash on delivery.</div></Card></Reveal>
@@ -1172,6 +1169,8 @@ export default function KiyarosaCaseStudy({ theme, mode, setRoute }) {
           </p>
         </Reveal>
       </Section>
+
+      </CaseSummary>
 
       {/* ── NEXT CASE ── */}
       {next && next.id !== PROJECT_ID && (

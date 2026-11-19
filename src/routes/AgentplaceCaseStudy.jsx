@@ -1,5 +1,6 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import CaseSummary from "../components/CaseSummary.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
@@ -154,6 +155,47 @@ function DetailCard({ label, children, theme, mode, tint }) {
 
 /* ── Page ──────────────────────────────────────────────── */
 
+// Hero content for the case study page.
+const SUMMARY = {
+  eyebrow: "UI audit · AI SaaS dashboard",
+  title: "Agentplace Dashboard",
+  accent: "UI Audit",
+  lede: "A usability review of the Agentplace dashboard, where business owners build, connect and publish AI agents. Five problems from the real product, each explained with a Don Norman principle and paired with a redesign in Agentplace’s own look.",
+  meta: [
+    { k: "Product", v: "Agentplace dashboard" },
+    { k: "Type", v: "UI / usability audit" },
+    { k: "Framework", v: "Don Norman’s design principles" },
+    { k: "Output", v: "5 problems · 5 redesigns" },
+  ],
+  hero: { src: p1After, w: 1576, h: 975, alt: "Redesigned Agentplace builder: a go-live checklist pinned above the chat showing 0 of 4 done, with Connect, Add and Choose buttons." },
+  problem: {
+    title: "A capable builder that hides its most important state",
+    text: "Owners describe their business, an AI Builder creates the agent, and one click publishes it. But what blocks launch, what publishing does and how many credits are left are all hard to find.",
+    points: [
+      ["Status lives in prose", "Launch blockers appear as bullets inside a chat reply and scroll away."],
+      ["Goals without controls", "The dashboard says “publish” but offers only a preview."],
+      ["Empty starts", "Connections, Skills and New Project open blank, with no link to what the agent needs."],
+    ],
+  },
+  approach: ["Walk through the real product", "Log usability problems", "Match each to a Norman principle", "Redesign in the product’s style"],
+  highlightsLabel: "Five problems, five redesigns",
+  highlights: [
+    ["Go-live checklist", "Launch requirements become a pinned checklist with status and one-click Connect, Add and Choose."],
+    ["Publish where it’s promised", "A status panel with “Draft · not published”, what publishing changes, and a Publish button."],
+    ["Credits always visible", "A credits card in the sidebar shows the balance, a usage bar and Upgrade plan, with zero clicks."],
+    ["Guided connections", "Connected, Browse all apps and Suggested for your agent tabs link the Builder’s request to the fix."],
+    ["Start from a template", "New Project offers the homepage’s templates by category, keeping the marketing promise."],
+  ],
+  stats: [["5", "problems found"], ["5", "redesigns"], ["4", "Norman principles applied"]],
+  project: "Agentplace",
+  screensLabel: "Before and after",
+  screens: PROBLEMS.flatMap((p, i) => [
+    { src: p.before, w: 1576, h: 975, label: `${i + 1}. Before: ${p.title}` },
+    { src: p.after, w: 1576, h: 975, label: `${i + 1}. After: ${p.title}` },
+  ]),
+  takeaway: "Every fix makes the system’s state visible where the user already is, so the next action is one click away instead of a search through chat history and menus.",
+};
+
 export default function AgentplaceCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const idx = projects.findIndex((p) => p.id === PROJECT_ID);
@@ -166,62 +208,9 @@ export default function AgentplaceCaseStudy({ theme, mode, setRoute }) {
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 48px" : "0 6vw 72px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal>
-            <button
-              onClick={() => setRoute("projects")}
-              data-cursor="hover"
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                background: "transparent", border: "none",
-                fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft,
-                cursor: "pointer", padding: "8px 6px", marginLeft: -6, marginBottom: 28,
-                transition: "color 0.2s ease, transform 0.2s ease",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}
-            >
-              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
-            </button>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-              Agentplace Dashboard{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "1.08em" }}>UI Audit</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p style={{ fontFamily: "Inter", fontSize: isMobile ? 16 : 19, lineHeight: 1.6, color: theme.inkSoft, margin: 0, maxWidth: 820 }}>
-              A usability review of the Agentplace dashboard, where business owners build, connect and publish their AI agents.
-              Five problems taken from the real product, each explained with one of Don Norman’s design principles and paired with a redesign that keeps Agentplace’s look.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)",
-              gap: isMobile ? 20 : 32,
-              marginTop: isMobile ? 36 : 52,
-              paddingTop: isMobile ? 24 : 32,
-              borderTop: `1px solid ${theme.line}`,
-            }}>
-              {META.map((m) => (
-                <div key={m.k}>
-                  <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15.5, fontWeight: 500, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
+      <CaseSummary {...SUMMARY} theme={theme} mode={mode} setRoute={setRoute}>
       {/* ── ABOUT THE PRODUCT ── */}
-      <section style={{ padding: isMobile ? "56px 4vw" : "96px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
+      <section style={{ marginTop: isMobile ? 48 : 72, padding: isMobile ? "56px 4vw" : "96px 6vw", background: theme.bgAlt, borderTop: `1px solid ${theme.line}`, borderBottom: `1px solid ${theme.line}` }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <Reveal>
             <Eyebrow color={theme.inkMute}>The product</Eyebrow>
@@ -351,6 +340,8 @@ export default function AgentplaceCaseStudy({ theme, mode, setRoute }) {
           </div>
         </section>
       ))}
+
+      </CaseSummary>
 
       {/* ── NEXT CASE ── */}
       {next && next.id !== PROJECT_ID && (

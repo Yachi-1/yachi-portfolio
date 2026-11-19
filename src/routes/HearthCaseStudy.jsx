@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, ArrowUpRight, Minus, Plus } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import CaseSummary from "../components/CaseSummary.jsx";
+import SectionRail, { RAIL_GUTTER } from "../components/SectionRail.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
@@ -409,7 +411,7 @@ function ScrollFrame({ src, h, label, url, theme, shadow, maxH }) {
 
 function Section({ id, n, eyebrow, title, intro, tag, children, alt, theme, isMobile, isMobileOrTablet }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} style={{ padding: isMobile ? "56px 4vw" : "96px 6vw", background: alt ? theme.bgAlt : "transparent", borderTop: `1px solid ${theme.line}` }}>
+    <section id={id} aria-labelledby={`${id}-title`} style={{ padding: isMobile ? "56px 4vw" : isMobileOrTablet ? "96px 6vw" : `96px 6vw 96px ${RAIL_GUTTER}`, background: alt ? theme.bgAlt : "transparent", borderTop: `1px solid ${theme.line}` }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <Eyebrow color={theme.inkMute}>{String(n).padStart(2, "0")} · {eyebrow}</Eyebrow>
@@ -581,6 +583,43 @@ function PricingCalculator({ theme, isDark }) {
 
 /* ═══════════════════════ Page ═══════════════════════ */
 
+// Hero content for the case study page.
+const SUMMARY = {
+  eyebrow: "UX/UI case study · SaaS marketing website",
+  title: "Hearth: one calm inbox for teams who talk to",
+  accent: "customers all day",
+  lede: "A seven-page website that explains a multi-channel shared inbox to busy small-business owners, answers their price and trust questions up front, and turns that understanding into a free trial.",
+  meta: [
+    { k: "Role", v: "UX/UI designer, end to end" },
+    { k: "Platform", v: "Desktop web, 1440px, Figma" },
+    { k: "Scope", v: "7 pages, 41 sections" },
+    { k: "Type", v: "Concept project, about 4 weeks" },
+  ],
+  hero: { src: heroImg, w: 2000, h: 1389, alt: "The Hearth homepage hero on navy: the headline “One calm inbox for every customer.”, a yellow Start free trial button, and the shared inbox UI with floating message cards." },
+  problem: {
+    title: "Conversations are scattered across apps, phones and people",
+    text: "Small teams that sell and support over WhatsApp, Instagram, email and SMS have no single place to see who is waiting and what was already said. Enterprise helpdesks solve this, but feel built for call centres.",
+    points: [
+      ["Double replies", "Two people answer the same customer differently, or nobody answers at all."],
+      ["Setup fear", "“We don’t have an IT person”: owners worry connecting channels will be hard."],
+      ["Pricing anxiety", "Seat-based pricing makes owners hesitate unless they can see the total for their team."],
+    ],
+  },
+  approach: ["Research plan + hypotheses", "Personas and journey", "IA and user flows", "Wireframes → 7 pages", "Prototype + heuristic review"],
+  highlights: [
+    ["The product is the picture", "Real inbox UI in the hero, with channel cards resolving into one list, answers “what is it?” without reading."],
+    ["Price before the trial", "A seat calculator with “you never pay for viewers” turns per-seat pricing into one number for my team."],
+    ["Collision alerts up front", "The most embarrassing failure, two different answers, is named and solved on Home and Product."],
+    ["One colour means act", "Yellow is reserved for the primary action, so the page stays calm and the next step is always obvious."],
+  ],
+  stats: [["7", "pages designed"], ["41", "sections"], ["11", "issues found in review"]],
+  takeaway: "Lead with the real interface and answer cost and trust before asking for anything. The states between screens (yearly prices, limits, errors) are where trust is won or lost.",
+  project: "Hearth",
+  screensLabel: "All pages",
+  screens: PAGES.map((p) => ({ src: p.img, w: 1000, h: p.h, label: p.name })),
+  note: "Concept project: research and testing are proposed; figures in the screens are design content.",
+};
+
 export default function HearthCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const idx = projects.findIndex((p) => p.id === PROJECT_ID);
@@ -621,45 +660,10 @@ export default function HearthCaseStudy({ theme, mode, setRoute }) {
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 48px" : "0 6vw 72px" }}>
+      <CaseSummary {...SUMMARY} theme={theme} mode={mode} setRoute={setRoute}>
+      {!isMobileOrTablet && <SectionRail sections={SECTIONS} theme={theme} onJump={scrollTo} />}
+      <section style={{ padding: isMobile ? "8px 4vw 40px" : "8px 6vw 56px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal>
-            <button onClick={() => setRoute("projects")} data-cursor="hover"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", border: "none", fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft, cursor: "pointer", padding: "8px 6px", marginLeft: -6, marginBottom: 28, transition: "color 0.2s ease, transform 0.2s ease" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}>
-              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
-            </button>
-          </Reveal>
-          <Reveal delay={0.05}><Eyebrow color={theme.inkMute}>UX/UI case study · Marketing website for a SaaS shared inbox</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1, maxWidth: 1000 }}>
-              Hearth: one calm inbox for teams who talk to{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "1.08em" }}>customers all day</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p style={{ ...body, fontSize: isMobile ? 16 : 19, margin: 0, maxWidth: 820 }}>
-              How I designed a seven-page website that explains a multi-channel shared inbox to busy small-business owners, answers their price and trust questions up front, and turns that understanding into a free trial.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: isMobile ? 20 : 32, marginTop: isMobile ? 36 : 52, paddingTop: isMobile ? 24 : 32, borderTop: `1px solid ${theme.line}` }}>
-              {META.map((m) => (
-                <div key={m.k}>
-                  <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15.5, fontWeight: 500, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
-                  {m.tag && <div style={{ marginTop: 8 }}>{T("assumption", "Assumption")}</div>}
-                </div>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <div style={{ marginTop: isMobile ? 36 : 56, borderRadius: 20, overflow: "hidden", border: `1px solid ${theme.line}`, boxShadow: shadow }}>
-              <img src={heroImg} width={2000} height={1389} alt="The Hearth homepage hero on navy: the headline “One calm inbox for every customer.”, a yellow Start free trial button, and the shared inbox UI with floating cards for a WhatsApp message, an assignment and an encryption promise." fetchpriority="high" decoding="async" style={{ width: "100%", height: "auto", display: "block" }} />
-            </div>
-          </Reveal>
           <Reveal>
             <Card theme={theme} style={{ marginTop: 24 }}>
               <div style={cardTitle}>How to read this case study</div>
@@ -672,6 +676,7 @@ export default function HearthCaseStudy({ theme, mode, setRoute }) {
               </div>
             </Card>
           </Reveal>
+          {isMobileOrTablet && (
           <Reveal delay={0.1}>
             <nav aria-label="Case study sections" style={{ marginTop: 28 }}>
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -686,6 +691,7 @@ export default function HearthCaseStudy({ theme, mode, setRoute }) {
               </ul>
             </nav>
           </Reveal>
+          )}
         </div>
       </section>
 
@@ -1054,6 +1060,8 @@ export default function HearthCaseStudy({ theme, mode, setRoute }) {
         {cardGrid(FUTURE, cols3)}
         <Reveal><p style={{ ...body, fontSize: 14, color: theme.inkMute, margin: "28px 0 0" }}>Hearth is a concept product. Names, figures and testimonials in the screens are design content.</p></Reveal>
       </Section>
+
+      </CaseSummary>
 
       {/* ── NEXT CASE ── */}
       {next && next.id !== PROJECT_ID && (

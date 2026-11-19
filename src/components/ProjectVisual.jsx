@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
 import herrmannImg from "../assets/Workrooms_Cover.png?w=1200&format=webp&quality=82";
-import vegasImg from "../assets/Kiyarosa_Cover.png?w=1200&format=webp&quality=82";
+import vegasImg from "../assets/Kiyarosa_Cover.png?w=1600&format=webp&quality=92";
 import contrarianImg from "../assets/Agentplace_Cover.png?w=1200&format=webp&quality=82";
 import ironvaleImg from "../assets/Ironvale_Cover.png?w=1200&format=webp&quality=82";
 import kpImg from "../assets/Hearth_Cover.png?w=1200&format=webp&quality=82";

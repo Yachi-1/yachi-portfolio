@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import CaseSummary from "../components/CaseSummary.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
@@ -277,6 +278,44 @@ function RatingsChart({ theme, isDark, isMobile }) {
 
 /* ═══════════════════════ Page ═══════════════════════ */
 
+// Hero content for the case study page.
+const SUMMARY = {
+  eyebrow: "UX research · VR usability study",
+  title: "Horizon Workrooms:",
+  accent: "VR study analysis",
+  lede: "A moderated usability study of Meta Horizon Workrooms on the Quest Pro. We tested joining a meeting, avatars and screen sharing with five participants to find what helps and what blocks collaboration in VR.",
+  meta: [
+    { k: "Type", v: "Moderated usability study" },
+    { k: "Product", v: "Meta Horizon Workrooms" },
+    { k: "Hardware", v: "Meta Quest Pro" },
+    { k: "Team", v: "Group project · 5 researchers" },
+  ],
+  hero: { src: sessionMeeting, w: 1600, h: 899, position: "center", alt: "Inside Horizon Workrooms: two avatars sit at a virtual desk in a lakeside room while a teammate joins by video. Name tags are blurred." },
+  problem: {
+    title: "Is VR collaboration ready for everyday work?",
+    text: "Workrooms promises virtual meetings with avatars, spatial audio, shared screens and whiteboards. We set out to see how it really feels to use, and what gets in the way.",
+    points: [
+      ["User experience", "Understand how people feel using Horizon Workrooms."],
+      ["Usability", "Assess how easy core features like screen sharing are to use."],
+      ["Practical challenges", "Identify barriers that make VR collaboration difficult."],
+    ],
+  },
+  approach: ["Literature review", "Study design + consent", "5 moderated sessions, 3 tasks", "Questionnaires + interviews", "Findings + recommendations"],
+  highlightsLabel: "What we found",
+  highlights: [
+    ["Joining was easy", "Meeting setup felt intuitive for everyone, and audio between participants was clear."],
+    ["Shared screens were hard to read", "Text was small with no zoom in VR, and screen sharing lagged."],
+    ["Avatars felt unusual", "Participants enjoyed them but wanted more realism and expression to feel natural."],
+    ["Setup took longer than expected", "Fitting the headset and creating a profile slowed the first session."],
+  ],
+  stats: [["5", "participants"], ["4.5/5", "overall satisfaction"], ["100%", "screen-share success"], ["3.9/5", "immersion, lowest"]],
+  takeaway: "Workrooms already makes meetings easy to join; the gains now are in legibility and presence. We recommended zoomable shared screens, more expressive avatars, accessibility features and a focus mode.",
+  project: "Horizon Workrooms",
+  screensLabel: "From the study sessions",
+  screens: GALLERY.map((g) => ({ src: g.img, w: g.w, h: g.h, label: g.cap })),
+  note: "A group project by " + TEAM + ".",
+};
+
 export default function WorkroomsCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const idx = projects.findIndex((p) => p.id === PROJECT_ID);
@@ -308,54 +347,8 @@ export default function WorkroomsCaseStudy({ theme, mode, setRoute }) {
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 48px" : "0 6vw 72px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal>
-            <button
-              onClick={() => setRoute("projects")}
-              data-cursor="hover"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", border: "none", fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft, cursor: "pointer", padding: "8px 6px", marginLeft: -6, marginBottom: 28, transition: "color 0.2s ease, transform 0.2s ease" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}
-            >
-              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
-            </button>
-          </Reveal>
-          <Reveal delay={0.05}><Eyebrow color={theme.inkMute}>UX research · VR usability study</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1 }}>
-              Horizon Workrooms:{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "1.08em" }}>VR study analysis</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p style={{ ...body, fontSize: isMobile ? 16 : 19, margin: 0, maxWidth: 820 }}>
-              An evaluation of Meta Horizon Workrooms, a VR collaboration app. We assessed the user experience, ease of use and practical challenges, to find ways to improve engagement and functionality in virtual workspaces.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: isMobile ? 20 : 32, marginTop: isMobile ? 36 : 52, paddingTop: isMobile ? 24 : 32, borderTop: `1px solid ${theme.line}` }}>
-              {META.map((m) => (
-                <div key={m.k}>
-                  <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15.5, fontWeight: 500, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
-                </div>
-              ))}
-            </div>
-            <p style={{ ...body, fontSize: 14, color: theme.inkMute, margin: "18px 0 0" }}>A group project by {TEAM}.</p>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <figure style={{ margin: isMobile ? "36px 0 0" : "56px 0 0" }}>
-              <div style={{ borderRadius: 20, overflow: "hidden", border: `1px solid ${theme.line}`, boxShadow: shadow }}>
-                <img src={sessionMeeting} width={1600} height={899} alt={GALLERY[0].alt} fetchpriority="high" decoding="async" style={{ width: "100%", height: "auto", display: "block" }} />
-              </div>
-              <figcaption style={{ ...body, fontSize: 13.5, color: theme.inkMute, marginTop: 10 }}>From a study session inside Workrooms. The participant’s name tag is blurred.</figcaption>
-            </figure>
-          </Reveal>
-        </div>
-      </section>
-
+      <CaseSummary {...SUMMARY} theme={theme} mode={mode} setRoute={setRoute}>
+      <div aria-hidden="true" style={{ height: isMobile ? 48 : 72 }} />
       {/* 1 ── PRODUCT */}
       <Section {...sp} n={1} id="product" eyebrow="The product" title="Meta Horizon Workrooms" intro="Meta launched Horizon Workrooms in August 2021 as a free app, part of its push to build a “metaverse” for work. It offers virtual meeting spaces in VR where people can meet and work together in a more immersive environment." alt>
         <Reveal>
@@ -566,6 +559,8 @@ export default function WorkroomsCaseStudy({ theme, mode, setRoute }) {
           ))}
         </div>
       </Section>
+
+      </CaseSummary>
 
       {/* ── NEXT CASE ── */}
       {next && next.id !== PROJECT_ID && (

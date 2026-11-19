@@ -1,6 +1,8 @@
 import { useId, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import Reveal from "../components/Reveal.jsx";
+import CaseSummary from "../components/CaseSummary.jsx";
+import SectionRail, { RAIL_GUTTER } from "../components/SectionRail.jsx";
 import { useBreakpoint } from "../hooks/useBreakpoint.js";
 import { projects } from "../data/projects.js";
 
@@ -433,7 +435,7 @@ function ScrollFrame({ src, h, label, url, theme, shadow, maxH }) {
 
 function Section({ id, n, eyebrow, title, intro, tag, children, alt, theme, isMobile, isMobileOrTablet }) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} style={{ padding: isMobile ? "56px 4vw" : "96px 6vw", background: alt ? theme.bgAlt : "transparent", borderTop: `1px solid ${theme.line}` }}>
+    <section id={id} aria-labelledby={`${id}-title`} style={{ padding: isMobile ? "56px 4vw" : isMobileOrTablet ? "96px 6vw" : `96px 6vw 96px ${RAIL_GUTTER}`, background: alt ? theme.bgAlt : "transparent", borderTop: `1px solid ${theme.line}` }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <Reveal>
           <Eyebrow color={theme.inkMute}>{String(n).padStart(2, "0")} · {eyebrow}</Eyebrow>
@@ -558,6 +560,43 @@ function InquiryDemo({ theme, isDark }) {
 
 /* ═══════════════════════ Page ═══════════════════════ */
 
+// Hero content for the case study page.
+const SUMMARY = {
+  eyebrow: "UX/UI case study · Marketing website for a general contractor",
+  title: "Ironvale: a contractor site built to",
+  accent: "earn the bid",
+  lede: "A six-page website for a Midwest general contractor that makes its real advantages (self-perform crews, early pricing, a safety record) clear in seconds, and turns that trust into a quote request an estimator can act on.",
+  meta: [
+    { k: "Role", v: "UX/UI designer, end to end" },
+    { k: "Deliverable", v: "6 desktop pages, 1440px, Figma" },
+    { k: "Audience", v: "Owners, developers, trades, subs" },
+    { k: "Type", v: "Concept project, about 4 weeks" },
+  ],
+  hero: { src: heroImg, w: 1200, h: 760, bg: "#0E0E0E", position: "center bottom", alt: "The Ironvale homepage hero on near-black: the headline “Building what lasts.”, an orange Start a bid button, and a crane over a steel frame with the stats 1,240 projects, 52 years and 38M sq. ft. built." },
+  problem: {
+    title: "Owners can’t see the difference between builders",
+    text: "From a website, a contractor with its own crews and one superintendent per job looks the same as a firm that brokers every trade. Owners find out in interviews, and estimators get vague inquiries they have to chase.",
+    points: [
+      ["Same claims everywhere", "“Quality, safety, on time” is on every GC site; without numbers owners can’t compare."],
+      ["Photos without facts", "Portfolios rarely say size, type, year or what went right on schedule."],
+      ["Unscoped inquiries", "A bare message box gives estimators no budget, type or start date, and mixes in subs and job seekers."],
+    ],
+  },
+  approach: ["Research plan + hypotheses", "Personas and journey", "IA and four user flows", "Wireframes → 6 pages", "Heuristic review + iteration"],
+  highlights: [
+    ["Proof in the first screen", "1,240 projects, 52 years and 38M sq. ft. sit on a live site photo beside the headline."],
+    ["Facts on every project", "A market filter and the same facts under every card: size, method, city, year. “Showing 6 of 1,240.”"],
+    ["Safety as metrics", "EMR 0.61, ISO 45001, OSHA 30 and 1,410 days since lost time, instead of adjectives."],
+    ["A form estimators can use", "Chips for type, budget and start date, a two-day reply promise by the button, and separate desks for subs and jobs."],
+  ],
+  stats: [["6", "pages designed"], ["4", "audiences routed"], ["10", "issues found in review"]],
+  takeaway: "In B2B, credibility is content strategy before visual design: the right numbers did more than any layout. Consistency is a trust signal too; one mismatched phone number undoes a page of proof.",
+  project: "Ironvale",
+  screensLabel: "All pages",
+  screens: PAGES.map((p) => ({ src: p.img, w: 1200, h: p.h, label: p.name })),
+  note: "Concept for a fictional client: research, personas and testing are proposed or hypothetical.",
+};
+
 export default function IronvaleCaseStudy({ theme, mode, setRoute }) {
   const { isMobile, isMobileOrTablet } = useBreakpoint();
   const idx = projects.findIndex((p) => p.id === PROJECT_ID);
@@ -593,45 +632,10 @@ export default function IronvaleCaseStudy({ theme, mode, setRoute }) {
   return (
     <div style={{ paddingTop: isMobile ? 100 : 130 }}>
 
-      {/* ── HERO ── */}
-      <section style={{ padding: isMobile ? "0 4vw 48px" : "0 6vw 72px" }}>
+      <CaseSummary {...SUMMARY} theme={theme} mode={mode} setRoute={setRoute}>
+      {!isMobileOrTablet && <SectionRail sections={SECTIONS} theme={theme} onJump={scrollTo} />}
+      <section style={{ padding: isMobile ? "8px 4vw 40px" : "8px 6vw 56px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <Reveal>
-            <button onClick={() => setRoute("projects")} data-cursor="hover"
-              style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", border: "none", fontFamily: "Inter", fontSize: 13.5, color: theme.inkSoft, cursor: "pointer", padding: "8px 6px", marginLeft: -6, marginBottom: 28, transition: "color 0.2s ease, transform 0.2s ease" }}
-              onMouseEnter={(e) => { e.currentTarget.style.color = theme.accent; e.currentTarget.style.transform = "translateX(-4px)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.color = theme.inkSoft; e.currentTarget.style.transform = "translateX(0)"; }}>
-              <ArrowRight size={14} style={{ transform: "rotate(180deg)" }} /> Back to all projects
-            </button>
-          </Reveal>
-          <Reveal delay={0.05}><Eyebrow color={theme.inkMute}>UX/UI case study · Marketing website for a general contractor</Eyebrow></Reveal>
-          <Reveal delay={0.1}>
-            <h1 style={{ fontFamily: "Inter", fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 500, letterSpacing: "-0.04em", color: theme.ink, margin: "0 0 18px", lineHeight: 1.1, maxWidth: 1000 }}>
-              Ironvale: a contractor site built to{" "}
-              <span style={{ fontFamily: "'Caveat', cursive", color: theme.accent, fontSize: "1.08em" }}>earn the bid</span>
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p style={{ ...body, fontSize: isMobile ? 16 : 19, margin: 0, maxWidth: 820 }}>
-              A six-page marketing website for a Midwest general contractor and design-builder. The brief: make a 52-year-old builder’s real advantages (self-perform crews, early pricing, a safety record) clear to project owners in seconds, and turn that trust into a structured quote request an estimator can act on.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(4, 1fr)", gap: isMobile ? 20 : 32, marginTop: isMobile ? 36 : 52, paddingTop: isMobile ? 24 : 32, borderTop: `1px solid ${theme.line}` }}>
-              {META.map((m) => (
-                <div key={m.k}>
-                  <div style={{ fontFamily: "Inter", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: theme.inkMute, marginBottom: 6 }}>{m.k}</div>
-                  <div style={{ fontFamily: "Inter", fontSize: isMobile ? 14 : 15.5, fontWeight: 500, color: theme.ink, lineHeight: 1.4 }}>{m.v}</div>
-                  {m.tag && <div style={{ marginTop: 8 }}>{T("assumption", "Assumption")}</div>}
-                </div>
-              ))}
-            </div>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <div style={{ marginTop: isMobile ? 36 : 56, borderRadius: 20, overflow: "hidden", border: `1px solid ${theme.line}`, boxShadow: shadow, background: I.base }}>
-              <img src={heroImg} width={1200} height={760} alt="The Ironvale homepage hero on near-black: the headline “Building what lasts.”, an orange Start a bid button, and a crane over a steel frame with the stats 1,240 projects delivered, 52 years of service and 38M sq. ft. built." fetchpriority="high" decoding="async" style={{ width: "100%", height: "auto", display: "block" }} />
-            </div>
-          </Reveal>
           <Reveal>
             <Card theme={theme} style={{ marginTop: 24 }}>
               <div style={cardTitle}>How to read this case study</div>
@@ -644,6 +648,7 @@ export default function IronvaleCaseStudy({ theme, mode, setRoute }) {
               </div>
             </Card>
           </Reveal>
+          {isMobileOrTablet && (
           <Reveal delay={0.1}>
             <nav aria-label="Case study sections" style={{ marginTop: 28 }}>
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -658,6 +663,7 @@ export default function IronvaleCaseStudy({ theme, mode, setRoute }) {
               </ul>
             </nav>
           </Reveal>
+          )}
         </div>
       </section>
 
@@ -1107,6 +1113,8 @@ export default function IronvaleCaseStudy({ theme, mode, setRoute }) {
         </Reveal>
         <Reveal><p style={{ ...body, fontSize: 14, color: theme.inkMute, margin: "28px 0 0" }}>Ironvale, its people, clients and figures are sample content from the design file.</p></Reveal>
       </Section>
+
+      </CaseSummary>
 
       {/* ── NEXT CASE ── */}
       {next && next.id !== PROJECT_ID && (
